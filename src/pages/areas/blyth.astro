@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const town = 'Blyth';
+---
+
+<BaseLayout
+  title={`Mobile Tyre Fitting in ${town} | 24/7 A1 & A634 Tyre Service`}
+  description={`24/7 mobile tyre fitting in ${town} (Nottinghamshire) and along the A1 corridor. 35-minute average ETA from Bilsthorpe. Call 01623 325 123.`}
+>
+  <section class="area-hero">
+    <div class="container">
+      <span class="eyebrow">{town}</span>
+      <h1>Mobile Tyre Fitting in {town}</h1>
+      <p class="area-intro">
+        Blyth sits at the northern junction of the A1 and the A614 in north Nottinghamshire, and it&rsquo;s one of our most-called villages for hard-shoulder callouts. Our average ETA into Blyth from Bilsthorpe is 35 minutes. We cover Blyth itself, Hodsock, Bawtry, Ranskill, Mattersey, Torworth and Barnby Moor, plus the truck stops and service-area surroundings on both sides of the A1. The Blyth interchange and Apleyhead roundabout produce a steady flow of debris and casing-failure jobs that we attend several times a week.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container container-narrow">
+      <span class="eyebrow" style="color: var(--color-accent);">Why Choose Us in {town}</span>
+      <h2>Three reasons {town} drivers call us</h2>
+      <ul class="area-points">
+        <li class="area-point">
+          <h3>A1 hard-shoulder regulars</h3>
+          <p>The A1 from Apleyhead up to the Blyth services is part of our routine ground. We carry the cones, beacons and traffic-management kit to operate safely on a live carriageway.</p>
+        </li>
+        <li class="area-point">
+          <h3>Truckstop-friendly</h3>
+          <p>The Blyth services pull in plenty of overnight HGV traffic. We carry commercial tyre sizes and the lift gear to handle 4&times;2 and 6&times;2 trailer work.</p>
+        </li>
+        <li class="area-point">
+          <h3>Real 24/7 cover</h3>
+          <p>The phone is genuinely answered through the small hours by a real engineer. Useful when something has shed in the dark on the A1 north of the M18 split.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">Nearby Areas Also Covered</span>
+      <h2>Across the {town} catchment</h2>
+      <p class="text-muted">A short run in any direction:</p>
+      <div class="tag-cloud">
+        <a class="tag" href="/areas/worksop/">Worksop</a>
+        <a class="tag" href="/areas/retford/">Retford</a>
+        <a class="tag" href="/areas/doncaster/">Doncaster</a>
+        <a class="tag" href="/areas/tuxford/">Tuxford</a>
+        <a class="tag" href="/areas/chesterfield/">Chesterfield</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>Stuck in {town} or on the A1?</h2>
+      <p class="text-muted-dark">Phone the line and we&rsquo;ll dispatch the closest fitting van &mdash; usually one already on the A1 corridor.</p>
+      <a class="btn btn-primary btn-call" href={telHref}>
+        <span aria-hidden="true">&#9742;</span> Call {phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

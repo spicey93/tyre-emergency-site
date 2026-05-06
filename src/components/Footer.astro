@@ -1,0 +1,267 @@
+---
+export interface Props {
+  phone: string;
+}
+
+const { phone } = Astro.props as Props;
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+
+const services = [
+  { href: '/services/emergency-tyre-replacement/', label: 'Emergency Tyre Replacement' },
+  { href: '/services/mobile-tyre-fitting/', label: 'Mobile Tyre Fitting' },
+  { href: '/services/mobile-caravan-tyre-fitting/', label: 'Mobile Caravan Tyre Fitting' },
+  { href: '/services/mobile-tyre-repair/', label: 'Mobile Tyre Repair' },
+  { href: '/services/locking-wheel-nut-removal/', label: 'Locking Wheel Nut Removal' },
+  { href: '/services/tpms-sensor-replacement/', label: 'TPMS Sensor Replacement' },
+];
+
+const areas = [
+  { href: '/areas/mansfield/', label: 'Mansfield' },
+  { href: '/areas/nottingham/', label: 'Nottingham' },
+  { href: '/areas/newark/', label: 'Newark' },
+  { href: '/areas/worksop/', label: 'Worksop' },
+  { href: '/areas/chesterfield/', label: 'Chesterfield' },
+  { href: '/areas/doncaster/', label: 'Doncaster' },
+  { href: '/areas/lincoln/', label: 'Lincoln' },
+  { href: '/areas/retford/', label: 'Retford' },
+  { href: '/areas/grantham/', label: 'Grantham' },
+  { href: '/areas/southwell/', label: 'Southwell' },
+  { href: '/areas/tuxford/', label: 'Tuxford' },
+  { href: '/areas/blyth/', label: 'Blyth' },
+];
+
+const socials = [
+  { href: 'https://www.facebook.com/tyreemergency', label: 'Facebook' },
+  { href: 'https://www.instagram.com/tyreemergency', label: 'Instagram' },
+  { href: 'https://www.youtube.com/@tyreemergency', label: 'YouTube' },
+  { href: 'https://www.tiktok.com/@tyreemergency', label: 'TikTok' },
+  { href: 'https://twitter.com/tyre_emergency', label: 'X' },
+];
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo" aria-label="Tyre Emergency Ltd home">
+          <img
+            src="/logo.png"
+            alt="Tyre Emergency Ltd"
+            width="230"
+            height="70"
+            loading="lazy"
+          />
+        </a>
+        <p class="footer-tagline">
+          24/7 emergency mobile tyre fitting across Nottinghamshire and the wider East Midlands. REACT licensed, fully insured, and proudly five-star rated.
+        </p>
+        <a class="btn btn-primary" href={telHref}>Call {phone}</a>
+      </div>
+
+      <div>
+        <h3 class="footer-title">Services</h3>
+        <ul class="footer-list">
+          {services.map((s) => (
+            <li><a href={s.href}>{s.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-title">Areas Covered</h3>
+        <ul class="footer-list footer-list-cols">
+          {areas.map((a) => (
+            <li><a href={a.href}>{a.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-title">Get In Touch</h3>
+        <address class="footer-address">
+          Tyre Emergency Ltd<br />
+          Bilsthorpe, Newark<br />
+          Nottinghamshire NG22 8GA
+        </address>
+        <p class="footer-contact">
+          <a href={telHref}>{phone}</a><br />
+          <a href="mailto:contact@tyreemergency.com">contact@tyreemergency.com</a>
+        </p>
+        <ul class="footer-socials" aria-label="Social media">
+          {socials.map((s) => (
+            <li>
+              <a href={s.href} target="_blank" rel="noopener noreferrer">
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Tyre Emergency Ltd. All rights reserved. VAT: GB456597051 &middot; Company No: 15362025</p>
+      <p>
+        Website designed by
+        <a href="https://tyredigital.co.uk" target="_blank" rel="noopener noreferrer">Tyre Digital</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text);
+    padding: 4rem 0 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.1fr;
+    gap: 2.5rem;
+  }
+
+  .footer-brand {
+    max-width: 320px;
+  }
+
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    text-decoration: none;
+  }
+
+  .footer-logo img {
+    height: 70px;
+    width: auto;
+    display: block;
+  }
+
+  .footer-tagline {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-list li {
+    margin-bottom: 0.55rem;
+  }
+
+  .footer-list a {
+    color: var(--color-text-muted);
+    font-size: 0.92rem;
+    transition: color var(--transition);
+  }
+
+  .footer-list a:hover {
+    color: var(--color-accent);
+  }
+
+  .footer-list-cols {
+    columns: 2;
+    column-gap: 1.5rem;
+  }
+
+  .footer-address {
+    font-style: normal;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .footer-contact {
+    margin-bottom: 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  .footer-contact a {
+    color: var(--color-text);
+  }
+
+  .footer-contact a:hover {
+    color: var(--color-accent);
+  }
+
+  .footer-socials {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+
+  .footer-socials a {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: var(--font-display);
+  }
+
+  .footer-socials a:hover {
+    color: var(--color-accent);
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .footer-bottom p {
+    margin: 0;
+  }
+
+  .footer-bottom a {
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .footer-bottom a:hover {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .footer-brand {
+      max-width: none;
+    }
+  }
+</style>

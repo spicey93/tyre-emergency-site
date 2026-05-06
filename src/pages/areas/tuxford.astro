@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const town = 'Tuxford';
+---
+
+<BaseLayout
+  title={`Mobile Tyre Fitting in ${town} | 24/7 A1 & A57 Tyre Service`}
+  description={`24/7 mobile tyre fitting in ${town} and along the A1/A57 junction. 25-minute average ETA from our Bilsthorpe base. Call 01623 325 123.`}
+>
+  <section class="area-hero">
+    <div class="container">
+      <span class="eyebrow">{town}</span>
+      <h1>Mobile Tyre Fitting in {town}</h1>
+      <p class="area-intro">
+        Tuxford is one of our closer Nottinghamshire postcodes and sits on a junction we work several times a week &mdash; the A1 north-south meeting the A57 east-west. Average ETA into Tuxford from Bilsthorpe is 25 minutes. We cover the village itself, Markham Moor, Egmanton, East Markham, Walesby, Boughton and the lay-bys and trade premises along the A1 in both directions. This is a stretch of motorway-spec carriageway that produces a steady flow of debris-related callouts, and we&rsquo;re very used to working on it safely with full traffic management kit on board.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container container-narrow">
+      <span class="eyebrow" style="color: var(--color-accent);">Why Choose Us in {town}</span>
+      <h2>Three reasons {town} drivers stick with us</h2>
+      <ul class="area-points">
+        <li class="area-point">
+          <h3>Properly local</h3>
+          <p>Bilsthorpe to Tuxford is a 20-minute run on a clear day. We&rsquo;re a faster bet than fitters coming up from Newark or down from Doncaster.</p>
+        </li>
+        <li class="area-point">
+          <h3>A1 / A57 junction specialists</h3>
+          <p>Markham Moor roundabout sits at the centre of our coverage area. We work both carriageways every week and know the safe layby pattern in both directions.</p>
+        </li>
+        <li class="area-point">
+          <h3>Trucker- and trailer-friendly</h3>
+          <p>The Tuxford lorry parks see plenty of overnight tyre work. We carry the commercial sizes and the lift gear and we&rsquo;re happy to work an HGV trailer wheel when needed.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">Nearby Areas Also Covered</span>
+      <h2>Across the {town} catchment</h2>
+      <p class="text-muted">A short hop along the A1 in either direction:</p>
+      <div class="tag-cloud">
+        <a class="tag" href="/areas/retford/">Retford</a>
+        <a class="tag" href="/areas/newark/">Newark</a>
+        <a class="tag" href="/areas/worksop/">Worksop</a>
+        <a class="tag" href="/areas/blyth/">Blyth</a>
+        <a class="tag" href="/areas/lincoln/">Lincoln</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>Tyre emergency in {town}?</h2>
+      <p class="text-muted-dark">Phone the 24/7 line. You&rsquo;ll be talking to a real engineer about a real ETA inside two minutes.</p>
+      <a class="btn btn-primary btn-call" href={telHref}>
+        <span aria-hidden="true">&#9742;</span> Call {phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Mobile Caravan Tyre Fitting',
+  serviceType: 'Mobile Caravan and Motorhome Tyre Fitting',
+  provider: {
+    '@type': 'LocalBusiness',
+    name: 'Tyre Emergency Ltd',
+    telephone: '+441623325123',
+    url: 'https://tyreemergency.com/',
+  },
+  areaServed: 'Nottinghamshire, East Midlands',
+  description: 'On-site tyre fitting and replacement for caravans, motorhomes and trailers across Nottinghamshire and the surrounding counties.',
+  url: 'https://tyreemergency.com/services/mobile-caravan-tyre-fitting/',
+};
+---
+
+<BaseLayout
+  title="Mobile Caravan Tyre Fitting Nottinghamshire | Caravans, Motorhomes & Trailers"
+  description="Specialist mobile tyre fitting for caravans, motorhomes and trailers across Nottinghamshire. Correct sizes sourced to order, careful handling around motor movers and stabilisers. Call 01623 325 123."
+  jsonLd={JSON.stringify(serviceJsonLd)}
+>
+  <section class="service-hero">
+    <div class="container">
+      <span class="eyebrow">Specialist Service</span>
+      <h1>Mobile Caravan Tyre Fitting</h1>
+      <p class="service-intro">
+        Caravans, motorhomes and trailers have very different requirements from cars &mdash; they sit unused for months, carry near-maximum load when they move, and the tyres age out long before they wear out. Dean has fitted tyres on all types of leisure and commercial towing combinations and understands the specifics: correct load ratings, age-related replacement, and importantly, the accessories that can cause damage if you don&rsquo;t know they&rsquo;re there &mdash; motor movers, stabilising arms and leg assemblies that catch out anyone working unfamiliar with the unit. If you&rsquo;re not sure your current fitter knows what a motor mover coupling looks like, that&rsquo;s a good reason to call.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container container-narrow">
+      <span class="eyebrow" style="color: var(--color-accent);">What&rsquo;s Included</span>
+      <h2>How caravan and motorhome jobs are handled</h2>
+      <ul class="check-list">
+        <li><strong>Correct tyres sourced to order</strong> &mdash; CP-rated and reinforced sizes for caravans and motorhomes are sourced from specialist suppliers before the visit, so the right tyre arrives with the fitter.</li>
+        <li><strong>Load rating and age checked</strong> &mdash; every replacement tyre is matched to the correct load index and speed rating for the unit, not just the same size as the one coming off.</li>
+        <li><strong>Motor mover and stabiliser awareness</strong> &mdash; jacking points and clearances are checked before lifting; motor movers, A-frame couplings and stabilising legs are identified and avoided.</li>
+        <li><strong>Torque to spec</strong> &mdash; wheel nuts are tightened to the correct torque for the hub, not just run up with an impact gun.</li>
+        <li><strong>Pressure set to laden spec</strong> &mdash; inflation is set to the figure on the unit&rsquo;s weight plate or handbook, not the standard car default.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">When You Need This</span>
+      <h2>Common caravan and motorhome callouts</h2>
+      <div class="scenarios">
+        <article class="scenario">
+          <h3>Pre-season age replacement</h3>
+          <p>Your caravan tyres are five or more years old. Even with plenty of tread, aged caravan tyres are an insurance and safety issue. Dean will come to your driveway or storage site and replace them before the season starts.</p>
+        </article>
+        <article class="scenario">
+          <h3>Sidewall blowout on tow</h3>
+          <p>A blowout on the A1, A614 or M1 with the &lsquo;van on tow. Dean can come to a safe layby or recovery yard and fit a replacement so you can continue your journey rather than wait for a flatbed.</p>
+        </article>
+        <article class="scenario">
+          <h3>Flat discovered on the pitch</h3>
+          <p>You&rsquo;ve arrived at a site and found a flat tyre. Dean will come to the campsite, work on the pitch, and have you sorted without losing a day of your holiday.</p>
+        </article>
+        <article class="scenario">
+          <h3>Horsebox or trailer tyre</h3>
+          <p>Horseboxes and braked trailers need the right-rated tyre and careful handling. Dean carries the experience and can source the sizes needed for most common configurations.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>Caravan or motorhome job?</h2>
+      <p class="text-muted-dark">Call with the make, model and the tyre size from the sidewall &mdash; Dean will quote on the spot and arrange a visit that suits your schedule.</p>
+      <a class="btn btn-primary btn-call" href={telHref}>
+        <span aria-hidden="true">&#9742;</span> Call {phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

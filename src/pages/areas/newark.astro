@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const town = 'Newark';
+---
+
+<BaseLayout
+  title={`Mobile Tyre Fitting in ${town} | 24/7 A1 & A46 Tyre Service`}
+  description={`24/7 mobile tyre fitting and emergency callouts in ${town}-on-Trent and along the A1 corridor. 20-minute average ETA from Bilsthorpe. Call 01623 325 123.`}
+>
+  <section class="area-hero">
+    <div class="container">
+      <span class="eyebrow">{town}</span>
+      <h1>Mobile Tyre Fitting in {town}</h1>
+      <p class="area-intro">
+        Newark-on-Trent is on our doorstep &mdash; we&rsquo;re registered ten minutes up the road in Bilsthorpe and we cover Newark itself, the A1 corridor through Balderton and Long Bennington, the A46 across to Lincoln and Saxondale, and all the surrounding villages from Collingham down to Coddington and Farndon. Average ETA into central Newark is 20 minutes, and we&rsquo;re very used to A1 hard-shoulder callouts in both directions when something has let go at speed. Roadside, driveway, business park, hotel car park &mdash; we&rsquo;ll come to wherever you are.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container container-narrow">
+      <span class="eyebrow" style="color: var(--color-accent);">Why Choose Us in {town}</span>
+      <h2>Three reasons {town} drivers call us first</h2>
+      <ul class="area-points">
+        <li class="area-point">
+          <h3>The closest unit to {town}</h3>
+          <p>Our Bilsthorpe base is the nearest properly equipped mobile fitter to Newark. That isn&rsquo;t marketing &mdash; it&rsquo;s a postcode fact, and you&rsquo;ll feel it in the ETA.</p>
+        </li>
+        <li class="area-point">
+          <h3>A1 specialists</h3>
+          <p>The Newark stretch of the A1 generates a steady stream of debris-related blowouts. We work this carriageway weekly and know the safe laybys, the recovery network and the closure protocol cold.</p>
+        </li>
+        <li class="area-point">
+          <h3>Trusted by Newark businesses</h3>
+          <p>Several local trade businesses, fleet operators and the showground&rsquo;s exhibitor traffic use us as their first call. Account billing is available with same-day quotes.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">Nearby Areas Also Covered</span>
+      <h2>Same fast service across the {town} catchment</h2>
+      <p class="text-muted">If you&rsquo;re heading north or south on the A1, or out towards Lincoln on the A46, we&rsquo;ve got the area covered. Click any nearby town for more:</p>
+      <div class="tag-cloud">
+        <a class="tag" href="/areas/southwell/">Southwell</a>
+        <a class="tag" href="/areas/lincoln/">Lincoln</a>
+        <a class="tag" href="/areas/grantham/">Grantham</a>
+        <a class="tag" href="/areas/mansfield/">Mansfield</a>
+        <a class="tag" href="/areas/tuxford/">Tuxford</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>Stuck in {town}?</h2>
+      <p class="text-muted-dark">We&rsquo;re properly local. Phone the line and you&rsquo;ll have a real ETA and a real engineer&rsquo;s name within two minutes.</p>
+      <a class="btn btn-primary btn-call" href={telHref}>
+        <span aria-hidden="true">&#9742;</span> Call {phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

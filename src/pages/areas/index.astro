@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+
+const areas = [
+  { name: 'Mansfield', slug: 'mansfield', eta: '25 min', blurb: 'Just down the road from our Bilsthorpe HQ. Average ETA 25 minutes including Mansfield Woodhouse, Forest Town, Sutton-in-Ashfield and Kirkby.' },
+  { name: 'Nottingham', slug: 'nottingham', eta: '35 min', blurb: 'City centre, suburbs and the ring road. From West Bridgford to Bulwell, the QMC catchment to Beeston.' },
+  { name: 'Newark', slug: 'newark', eta: '20 min', blurb: 'One of our closest postcodes — Newark-on-Trent, Balderton, Long Bennington and the A1 corridor.' },
+  { name: 'Worksop', slug: 'worksop', eta: '30 min', blurb: 'A1 / A57 junction territory. Manton Wood, Carlton-in-Lindrick, Shireoaks and the surrounding villages.' },
+  { name: 'Chesterfield', slug: 'chesterfield', eta: '35 min', blurb: 'Western edge of our patch via the A617. Markham Vale, Brimington, Walton and the M1 J29-J30 stretch.' },
+  { name: 'Doncaster', slug: 'doncaster', eta: '45 min', blurb: 'Up the A1 — central Doncaster, iPort, West Moor Park and the Tickhill / Rossington approach.' },
+  { name: 'Lincoln', slug: 'lincoln', eta: '50 min', blurb: 'Out east via the A46 or A57. Uphill, downhill, North Hykeham, Bracebridge Heath and the surrounding LN postcodes.' },
+  { name: 'Retford', slug: 'retford', eta: '35 min', blurb: 'Bassetlaw country alongside our regular A1 routes. Ordsall, Babworth, the Levertons and out toward Gainsborough.' },
+  { name: 'Grantham', slug: 'grantham', eta: '50 min', blurb: 'Southern A1 reach. Central Grantham plus Barrowby, Great Gonerby, Harlaxton and Long Bennington.' },
+  { name: 'Southwell', slug: 'southwell', eta: '20 min', blurb: 'Practically on our doorstep. The Minster town and Halam, Halloughton, Upton and Farnsfield around it.' },
+  { name: 'Tuxford', slug: 'tuxford', eta: '25 min', blurb: 'Markham Moor, A1 / A57 junction, East Markham, Walesby and the Tuxford lorry parks.' },
+  { name: 'Blyth', slug: 'blyth', eta: '35 min', blurb: 'A1 / A614 junction at the top of our county patch. Bawtry, Ranskill, Mattersey and Barnby Moor.' },
+];
+---
+
+<BaseLayout
+  title="Areas Covered | Mobile Tyre Fitting Nottinghamshire & East Midlands"
+  description="Twelve towns and a wide rural catchment across Nottinghamshire and the East Midlands. Mansfield, Nottingham, Newark, Worksop, Chesterfield, Doncaster, Lincoln, Retford, Grantham, Southwell, Tuxford and Blyth."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Coverage</span>
+      <h1>Twelve towns. One county. 24/7.</h1>
+      <p class="page-hero-sub">Dean is based in Bilsthorpe at the heart of Nottinghamshire, which puts him within easy reach of every major town in the county and well into Lincolnshire, South Yorkshire and north Derbyshire. Click any area below for local detail, or just give him a call and he&rsquo;ll tell you on the spot whether he can reach you.</p>
+      <div class="cta-row" style="margin-top: 1.5rem;">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <div class="text-center">
+        <span class="eyebrow" style="color: var(--color-accent);">Pick your area</span>
+        <h2>Where we cover</h2>
+        <p class="section-lede-dark">Average ETAs from our Bilsthorpe HQ. Real times, not best-case &mdash; we&rsquo;ll always confirm the live ETA on the call.</p>
+      </div>
+
+      <div class="grid grid-3 areas-grid">
+        {areas.map((a) => (
+          <a class="area-tile" href={`/areas/${a.slug}/`}>
+            <div class="area-tile-head">
+              <h3>{a.name}</h3>
+              <span class="area-eta">~{a.eta}</span>
+            </div>
+            <p>{a.blurb}</p>
+            <span class="area-tile-link">View {a.name} <span aria-hidden="true">&rarr;</span></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow text-center">
+      <span class="eyebrow">Not on the list?</span>
+      <h2>Phone us anyway.</h2>
+      <p class="text-muted">If you&rsquo;re close to one of the areas above, the answer is almost certainly yes. If we genuinely can&rsquo;t reach you fast enough we&rsquo;ll point you to a trusted local who can &mdash; we&rsquo;d rather you get sorted than sit in limbo.</p>
+      <div class="cta-row" style="justify-content: center; margin-top: 1rem;">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-lede-dark {
+    max-width: 60ch;
+    margin: 0 auto 3rem;
+    font-size: 1.1rem;
+    color: var(--color-text-muted-dark);
+  }
+
+  .areas-grid {
+    margin-top: 1rem;
+  }
+
+  .area-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.6rem 1.4rem;
+    background-color: var(--color-bg-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+    color: var(--color-text-dark);
+    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    height: 100%;
+  }
+
+  .area-tile:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-accent);
+    color: var(--color-text-dark);
+    box-shadow: 0 18px 36px -22px rgba(255, 45, 45, 0.45);
+  }
+
+  .area-tile-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .area-tile-head h3 {
+    font-size: 1.4rem;
+    margin: 0;
+    color: var(--color-text-dark);
+  }
+
+  .area-eta {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.55rem;
+    background-color: rgba(255, 45, 45, 0.1);
+    color: var(--color-accent);
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+
+  .area-tile p {
+    color: var(--color-text-muted-dark);
+    font-size: 0.95rem;
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .area-tile-link {
+    color: var(--color-accent);
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+</style>

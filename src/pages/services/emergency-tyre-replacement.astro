@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Emergency Tyre Replacement',
+  serviceType: 'Emergency Mobile Tyre Replacement',
+  provider: {
+    '@type': 'LocalBusiness',
+    name: 'Tyre Emergency Ltd',
+    telephone: '+441623325123',
+    url: 'https://tyreemergency.com/',
+  },
+  areaServed: 'Nottinghamshire, East Midlands',
+  description: 'Round-the-clock emergency tyre replacement on the roadside, on the driveway or anywhere in between, across Nottinghamshire and the surrounding counties.',
+  url: 'https://tyreemergency.com/services/emergency-tyre-replacement/',
+};
+---
+
+<BaseLayout
+  title="Emergency Tyre Replacement Nottinghamshire | 24/7 Mobile Service"
+  description="24/7 emergency tyre replacement across Nottinghamshire. 30-minute average ETA, REACT licensed, fixed pricing quoted before we leave. Call 01623 325 123."
+  jsonLd={JSON.stringify(serviceJsonLd)}
+>
+  <section class="service-hero">
+    <div class="container">
+      <span class="eyebrow">Emergency Service</span>
+      <h1>Emergency Tyre Replacement</h1>
+      <p class="service-intro">
+        A blowout, a sidewall split, a tyre that&rsquo;s come apart on the motorway &mdash; these don&rsquo;t happen at convenient times. Dean operates around the clock across Nottinghamshire and the surrounding counties, with a 30-minute average ETA and a real person answering the phone whatever time you call. The right tyre for your vehicle is sourced and fitted on the spot, torqued to spec, so you get off the roadside without having to set foot in a garage.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call Now: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container">
+      <div class="service-split">
+        <div class="service-split-image">
+          <img
+            src="/images/emergency-tyre-fitting.webp"
+            alt="Dean Spicer crouching down and fitting a tyre using a torque wrench"
+            width="1600"
+            height="900"
+            loading="lazy"
+          />
+        </div>
+        <div class="service-split-content">
+          <span class="eyebrow">What&rsquo;s Included</span>
+          <h2>Everything we do on a callout</h2>
+          <ul class="check-list">
+            <li><strong>The correct tyre for your vehicle</strong> &mdash; size, load rating and speed rating all matched to your car before Dean sets off, sourced from local suppliers.</li>
+            <li><strong>Old tyre removed and disposed of</strong> at a licensed tyre recycler &mdash; included in the quoted price, no separate disposal fee.</li>
+            <li><strong>Torque-checked to manufacturer spec</strong> with a torque wrench on every job &mdash; never just an impact gun alone.</li>
+            <li><strong>TPMS reset and confirmed</strong> if your vehicle has tyre pressure sensors, so the warning light is clear before the car moves.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">When You Need This</span>
+      <h2>Common situations we&rsquo;re called to</h2>
+      <p>Some real callouts from a typical week. If yours sounds anything like these, ring us &mdash; we&rsquo;ve done it before.</p>
+      <div class="scenarios">
+        <article class="scenario">
+          <h3>Sidewall blowout on the A1</h3>
+          <p>You&rsquo;ve hit a piece of debris and the tyre has gone flat instantly with a visible bulge or split in the sidewall. A repair isn&rsquo;t safe and a roadside replacement is the only legal option.</p>
+        </article>
+        <article class="scenario">
+          <h3>Flat on the school run</h3>
+          <p>Tyre is empty on the driveway at 7:45am with thirty minutes until you have to be somewhere. We can usually have you back on the road inside that window.</p>
+        </article>
+        <article class="scenario">
+          <h3>Tyre that&rsquo;s gone completely flat</h3>
+          <p>You&rsquo;ve been losing pressure gradually and it&rsquo;s now completely deflated in a car park or on the roadside. Dean will come to wherever you are, assess whether it can be repaired or needs replacing, and get it sorted.</p>
+        </article>
+        <article class="scenario">
+          <h3>Kerbed wheel with split tyre</h3>
+          <p>A clipped kerb at speed has cracked the tyre internally. Often invisible from outside but unsafe to drive on. We can fit a fresh tyre in the place you&rsquo;ve stopped.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>Stuck right now?</h2>
+      <p class="text-muted-dark">Don&rsquo;t wait. The phone is answered 24/7 by a real person and the engineer is usually on their way within ten minutes of your call.</p>
+      <a class="btn btn-primary btn-call" href={telHref}>
+        <span aria-hidden="true">&#9742;</span> Call {phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+

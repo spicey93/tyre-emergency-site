@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const town = 'Lincoln';
+---
+
+<BaseLayout
+  title={`Mobile Tyre Fitting in ${town} | 24/7 A46 & A57 Tyre Service`}
+  description={`24/7 mobile tyre fitting throughout ${town} and along the A46 and A57. 50-minute average ETA from our Bilsthorpe base. Call 01623 325 123.`}
+>
+  <section class="area-hero">
+    <div class="container">
+      <span class="eyebrow">{town}</span>
+      <h1>Mobile Tyre Fitting in {town}</h1>
+      <p class="area-intro">
+        Lincoln sits on the eastern reach of our regular catchment, served via the A46 from Newark or the A57 from Tuxford. Our average ETA into central LN1 is 50 minutes, and we&rsquo;re very used to the unique mix of medieval city-centre access and rural A-road work the area demands. We cover uphill and downhill Lincoln, the LN postcodes around Branston, Bracebridge Heath, North Hykeham and Skellingthorpe, and the trade estates along the A46 ringway. Roadside, driveway, university car park, supermarket lay-by &mdash; we come to where you are.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container container-narrow">
+      <span class="eyebrow" style="color: var(--color-accent);">Why Choose Us in {town}</span>
+      <h2>Three reasons {town} drivers call us</h2>
+      <ul class="area-points">
+        <li class="area-point">
+          <h3>Familiar with uphill {town}&rsquo;s tight streets</h3>
+          <p>The cobbled streets and steep gradients above Castle Hill aren&rsquo;t standard fitting territory. We know which residential streets are workable and which need the car moving 100 yards first.</p>
+        </li>
+        <li class="area-point">
+          <h3>A46 and A57 specialists</h3>
+          <p>Both A-roads in and out of Lincoln see regular roadside callouts. We carry the kit and the safety equipment to fit on these single-carriageway A-roads correctly.</p>
+        </li>
+        <li class="area-point">
+          <h3>Honest pricing across the county</h3>
+          <p>The same fixed-price model whether you&rsquo;re in central Lincoln or out in a rural Lincolnshire village. No mileage charges, no postcode loading.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">Nearby Areas Also Covered</span>
+      <h2>Across the {town} region</h2>
+      <p class="text-muted">From Lincoln we serve a wide rural catchment. Some popular nearby areas:</p>
+      <div class="tag-cloud">
+        <a class="tag" href="/areas/newark/">Newark</a>
+        <a class="tag" href="/areas/grantham/">Grantham</a>
+        <a class="tag" href="/areas/retford/">Retford</a>
+        <a class="tag" href="/areas/tuxford/">Tuxford</a>
+        <a class="tag" href="/areas/southwell/">Southwell</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>Need a fitter in {town}?</h2>
+      <p class="text-muted-dark">Phone the 24/7 line. You&rsquo;ll have a fixed price and an ETA before the call ends.</p>
+      <a class="btn btn-primary btn-call" href={telHref}>
+        <span aria-hidden="true">&#9742;</span> Call {phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

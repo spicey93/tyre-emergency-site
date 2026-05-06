@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const town = 'Grantham';
+---
+
+<BaseLayout
+  title={`Mobile Tyre Fitting in ${town} | 24/7 A1 & A52 Tyre Service`}
+  description={`24/7 mobile tyre fitting throughout ${town} and along the A1 south corridor. 50-minute average ETA from Bilsthorpe. Call 01623 325 123.`}
+>
+  <section class="area-hero">
+    <div class="container">
+      <span class="eyebrow">{town}</span>
+      <h1>Mobile Tyre Fitting in {town}</h1>
+      <p class="area-intro">
+        Grantham is the southern boundary of our routine catchment, served via the A1 from Newark or the A52 from Nottingham. Our average ETA into central NG31 is 50 minutes. We cover Grantham itself, the surrounding villages of Barrowby, Great Gonerby, Harlaxton and Manthorpe, the trade estates along the A1 either side of town, plus the route up to Long Bennington that sees a steady flow of motorway-speed callouts. Whether you&rsquo;re on the southbound A1 hard shoulder, parked at the showground, or stuck on a residential street in the centre, we&rsquo;ll be with you with the kit to finish the job.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container container-narrow">
+      <span class="eyebrow" style="color: var(--color-accent);">Why Choose Us in {town}</span>
+      <h2>Three reasons {town} drivers call us</h2>
+      <ul class="area-points">
+        <li class="area-point">
+          <h3>A1 specialists</h3>
+          <p>The Grantham stretch of the A1 from Long Bennington down to Stretton is one of the busier carriageways in the country. We work it most weeks and know the safe layby network.</p>
+        </li>
+        <li class="area-point">
+          <h3>Honest pricing across the county</h3>
+          <p>The same fixed-price model whether you&rsquo;re in NG31 or NG22 &mdash; no postcode loading, no per-mile charges. You&rsquo;ll know the price before the van leaves.</p>
+        </li>
+        <li class="area-point">
+          <h3>Caravan and trailer competent</h3>
+          <p>A52 traffic includes a steady flow of caravan and trade trailer movements. We carry CP-rated and reinforced sizes and we&rsquo;re used to working safely on combinations.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">Nearby Areas Also Covered</span>
+      <h2>Across the {town} region</h2>
+      <p class="text-muted">If you&rsquo;re anywhere along the A1 south of Newark or out east on the A52:</p>
+      <div class="tag-cloud">
+        <a class="tag" href="/areas/newark/">Newark</a>
+        <a class="tag" href="/areas/lincoln/">Lincoln</a>
+        <a class="tag" href="/areas/southwell/">Southwell</a>
+        <a class="tag" href="/areas/nottingham/">Nottingham</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>Tyre trouble in {town}?</h2>
+      <p class="text-muted-dark">Phone the line for an honest ETA and a fixed quote on the spot.</p>
+      <a class="btn btn-primary btn-call" href={telHref}>
+        <span aria-hidden="true">&#9742;</span> Call {phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

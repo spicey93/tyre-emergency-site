@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const town = 'Doncaster';
+---
+
+<BaseLayout
+  title={`Mobile Tyre Fitting in ${town} | 24/7 A1(M) & M18 Tyre Service`}
+  description={`24/7 mobile tyre fitting and emergency replacement throughout ${town} and along the A1(M)/M18. 45-minute average ETA. Call 01623 325 123.`}
+>
+  <section class="area-hero">
+    <div class="container">
+      <span class="eyebrow">{town}</span>
+      <h1>Mobile Tyre Fitting in {town}</h1>
+      <p class="area-intro">
+        Doncaster is the northern edge of our regular run, reached via the A1 from Blyth and Bawtry. Average ETA into central DN1 is 45 minutes, and we&rsquo;re a routine presence on the A1(M) and M18 between Wadworth and Thorne for motorway callouts. We cover the centre of Doncaster, the racecourse and Lakeside areas, Bessacarr, Cantley, Bentley and the trade estates around iPort and West Moor Park &mdash; plus the surrounding villages of Tickhill and Rossington which sit right on our usual route in.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container container-narrow">
+      <span class="eyebrow" style="color: var(--color-accent);">Why Choose Us in {town}</span>
+      <h2>Three reasons {town} drivers call us out</h2>
+      <ul class="area-points">
+        <li class="area-point">
+          <h3>iPort and Doncaster Sheffield Airport</h3>
+          <p>Logistics traffic and airport runs both produce predictable tyre work. We carry the commercial sizes and we&rsquo;re happy on these big sites with security and access control.</p>
+        </li>
+        <li class="area-point">
+          <h3>Properly priced for {town}</h3>
+          <p>Even at the further edge of our catchment, we don&rsquo;t inflate the quote. Same fixed-price model as a job in Mansfield &mdash; no per-mile charges, ever.</p>
+        </li>
+        <li class="area-point">
+          <h3>A1(M) and M18 ready</h3>
+          <p>Both motorways are part of our routine ground. We carry full traffic management kit and can operate safely with Highways officers on a live carriageway.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">Nearby Areas Also Covered</span>
+      <h2>Across the {town} region</h2>
+      <p class="text-muted">If you&rsquo;re heading south on the A1 or coming down the M18, we&rsquo;re in your route:</p>
+      <div class="tag-cloud">
+        <a class="tag" href="/areas/blyth/">Blyth</a>
+        <a class="tag" href="/areas/retford/">Retford</a>
+        <a class="tag" href="/areas/worksop/">Worksop</a>
+        <a class="tag" href="/areas/chesterfield/">Chesterfield</a>
+        <a class="tag" href="/areas/tuxford/">Tuxford</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>Tyre emergency in {town}?</h2>
+      <p class="text-muted-dark">Phone the line and we&rsquo;ll dispatch the closest engineer with a fixed quoted price for the job.</p>
+      <a class="btn btn-primary btn-call" href={telHref}>
+        <span aria-hidden="true">&#9742;</span> Call {phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

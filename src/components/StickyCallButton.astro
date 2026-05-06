@@ -1,0 +1,88 @@
+---
+export interface Props {
+  phone: string;
+}
+
+const { phone } = Astro.props as Props;
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+---
+
+<div class="sticky-call" aria-hidden="false">
+  <a href={telHref} class="sticky-call-btn">
+    <span class="phone-glyph" aria-hidden="true">&#9742;</span>
+    <span class="sticky-call-text">
+      <strong>Call 24/7</strong>
+      <span>{phone}</span>
+    </span>
+  </a>
+</div>
+
+<style>
+  .sticky-call {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 80;
+    padding: 0.6rem 0.75rem 0.85rem;
+    background:
+      linear-gradient(to top, rgba(14, 14, 14, 0.96) 60%, rgba(14, 14, 14, 0));
+    pointer-events: none;
+  }
+
+  .sticky-call-btn {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1rem 1.25rem;
+    background-color: var(--color-accent);
+    color: var(--color-text);
+    border-radius: var(--radius);
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: 0 -4px 22px rgba(0, 0, 0, 0.5);
+    min-height: 56px;
+  }
+
+  .sticky-call-btn:hover,
+  .sticky-call-btn:focus-visible {
+    background-color: var(--color-accent-dark);
+    color: var(--color-text);
+  }
+
+  .phone-glyph {
+    font-size: 1.4rem;
+  }
+
+  .sticky-call-text {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1.1;
+    align-items: flex-start;
+  }
+
+  .sticky-call-text strong {
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .sticky-call-text span {
+    font-size: 1.15rem;
+  }
+
+  @media (max-width: 768px) {
+    .sticky-call {
+      display: block;
+    }
+  }
+</style>

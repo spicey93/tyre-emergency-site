@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const town = 'Mansfield';
+---
+
+<BaseLayout
+  title={`Mobile Tyre Fitting in ${town} | 24/7 Emergency Service`}
+  description={`24/7 mobile tyre fitting and emergency replacement in ${town} and surrounding villages. 25-minute average ETA from our Bilsthorpe base. Call 01623 325 123.`}
+>
+  <section class="area-hero">
+    <div class="container">
+      <span class="eyebrow">{town}</span>
+      <h1>Mobile Tyre Fitting in {town}</h1>
+      <p class="area-intro">
+        We&rsquo;re based just down the road in Bilsthorpe, which makes Mansfield one of the fastest postcodes we cover &mdash; a typical ETA from call to wheel-up is 25 minutes, and significantly less if you&rsquo;re in central NG18 or NG19. We respond around the clock to roadside emergencies on the A60, A617 and A6075, plus pre-booked fitting at homes and workplaces from Mansfield Woodhouse and Forest Town through to Sutton-in-Ashfield, Kirkby and Pleasley. Whatever&rsquo;s happened &mdash; blowout, slow puncture, MOT advisory, locking nut, TPMS fault &mdash; the van turns up kitted out to finish the job.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container container-narrow">
+      <span class="eyebrow" style="color: var(--color-accent);">Why Choose Us in {town}</span>
+      <h2>Three reasons drivers in {town} call us first</h2>
+      <ul class="area-points">
+        <li class="area-point">
+          <h3>Fastest local response</h3>
+          <p>Our Bilsthorpe HQ is roughly 15 minutes from central Mansfield in light traffic. We&rsquo;re one of the few mobile fitters that can genuinely make a 25-minute average promise here.</p>
+        </li>
+        <li class="area-point">
+          <h3>Local roads, local knowledge</h3>
+          <p>We work the A60 between Mansfield and Worksop every day, the A617 across to Newark, and the back routes around Forest Town and Rainworth. We know which laybys are safe to fit in and which aren&rsquo;t.</p>
+        </li>
+        <li class="area-point">
+          <h3>Hours that match real life</h3>
+          <p>The first job of most days is a Mansfield driveway with a flat. We answer the phone at 5am and 11pm the same way &mdash; with a real engineer, not an answering service.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">Nearby Areas Also Covered</span>
+      <h2>Same fast response across surrounding towns</h2>
+      <p class="text-muted">If you&rsquo;re just outside Mansfield, we&rsquo;ll still be with you fast. Click any nearby area for more detail or simply phone &mdash; we cover all of Nottinghamshire and beyond.</p>
+      <div class="tag-cloud">
+        <a class="tag" href="/areas/southwell/">Southwell</a>
+        <a class="tag" href="/areas/newark/">Newark</a>
+        <a class="tag" href="/areas/worksop/">Worksop</a>
+        <a class="tag" href="/areas/nottingham/">Nottingham</a>
+        <a class="tag" href="/areas/chesterfield/">Chesterfield</a>
+        <a class="tag" href="/areas/tuxford/">Tuxford</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>Stuck in {town}?</h2>
+      <p class="text-muted-dark">We&rsquo;ll be with you faster than you think. Phone the line and we&rsquo;ll have an engineer rolling within minutes.</p>
+      <a class="btn btn-primary btn-call" href={telHref}>
+        <span aria-hidden="true">&#9742;</span> Call {phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

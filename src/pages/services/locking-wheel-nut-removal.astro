@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Locking Wheel Nut Removal',
+  serviceType: 'Mobile Locking Wheel Nut Removal',
+  provider: {
+    '@type': 'LocalBusiness',
+    name: 'Tyre Emergency Ltd',
+    telephone: '+441623325123',
+    url: 'https://tyreemergency.com/',
+  },
+  areaServed: 'Nottinghamshire, East Midlands',
+  description: 'On-site removal of damaged, seized or missing-key locking wheel nuts using non-destructive extraction tools.',
+  url: 'https://tyreemergency.com/services/locking-wheel-nut-removal/',
+};
+---
+
+<BaseLayout
+  title="Locking Wheel Nut Removal Nottinghamshire | Lost Key, Seized Nuts"
+  description="Lost the key or stripped a seized locking wheel nut? We remove damaged and missing-key locking nuts on-site without damaging your alloy. Across Nottinghamshire 24/7. Call 01623 325 123."
+  jsonLd={JSON.stringify(serviceJsonLd)}
+>
+  <section class="service-hero">
+    <div class="container">
+      <span class="eyebrow">Specialist Extraction</span>
+      <h1>Locking Wheel Nut Removal</h1>
+      <p class="service-intro">
+        A lost key. A stripped, rounded-off lock. A previous owner who never handed the key over. It happens on all makes and models, and it always seems to happen the moment you actually need to change a wheel. Dean uses professional specialist tools to remove damaged, seized and missing-key locking wheel nuts across all makes and models. The success rate is high, and the work is always as uninvasive as possible &mdash; but if for any reason removal isn&rsquo;t possible, there is no charge. You only pay when the job is done.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container">
+      <div class="service-split">
+        <div class="service-split-image">
+          <img
+            src="/images/locking-wheel-nut-removal.webp"
+            alt="Close-up of a severely stripped and damaged locking wheel nut on an alloy wheel"
+            width="1182"
+            height="665"
+            loading="lazy"
+          />
+        </div>
+        <div class="service-split-content">
+          <span class="eyebrow">What&rsquo;s Included</span>
+          <h2>How the job is done</h2>
+          <ul class="check-list">
+            <li><strong>Professional specialist tools</strong> &mdash; dedicated extraction equipment covering all car makes and models, not a general workshop set.</li>
+            <li><strong>Minimal-damage approach</strong> &mdash; the work is always as uninvasive as possible; Dean takes care around the alloy face and surrounding area throughout.</li>
+            <li><strong>Replacement nut fitted to torque</strong> &mdash; once the locking nut is out, a standard replacement is torque-tightened so the wheel is properly secure before the car moves.</li>
+            <li><strong>No charge if it can&rsquo;t be removed</strong> &mdash; if extraction genuinely isn&rsquo;t possible, there is no fee. You only pay when the job is complete.</li>
+            <li><strong>Fully mobile</strong> &mdash; Dean comes to wherever the vehicle is: driveway, car park, roadside, or workplace.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">When You Need This</span>
+      <h2>Typical situations we extract for</h2>
+      <div class="scenarios">
+        <article class="scenario">
+          <h3>Lost or missing locking key</h3>
+          <p>Your locking nut key has gone missing somewhere between the dealership and now. Without it, no garage will touch the wheel. We carry the kit to make that no longer be your problem.</p>
+        </article>
+        <article class="scenario">
+          <h3>Stripped or rounded lock</h3>
+          <p>A previous garage has put an air gun on the locking nut and chewed the pattern off. The original key now spins freely. Our graded extractors are designed for exactly this.</p>
+        </article>
+        <article class="scenario">
+          <h3>Seized lock, key intact</h3>
+          <p>The key fits but the nut won&rsquo;t move &mdash; corroded onto the stud over many winters. We can usually heat, penetrate and turn without going to extraction.</p>
+        </article>
+        <article class="scenario">
+          <h3>Mid-puncture nightmare</h3>
+          <p>You&rsquo;re trying to fit the spare or call out recovery and the locking nut is the one thing standing in the way. We can come on top of a roadside callout to get you moving.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>Need a lock off?</h2>
+      <p class="text-muted-dark">Phone us with your make, model and a quick description of what&rsquo;s happened to the lock. We&rsquo;ll quote up front and book you in fast.</p>
+      <a class="btn btn-primary btn-call" href={telHref}>
+        <span aria-hidden="true">&#9742;</span> Call {phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

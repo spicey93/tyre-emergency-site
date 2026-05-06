@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const town = 'Retford';
+---
+
+<BaseLayout
+  title={`Mobile Tyre Fitting in ${town} | 24/7 A1 & A638 Tyre Service`}
+  description={`24/7 mobile tyre fitting throughout ${town} and along the A1 corridor. 35-minute average ETA from Bilsthorpe. Call 01623 325 123.`}
+>
+  <section class="area-hero">
+    <div class="container">
+      <span class="eyebrow">{town}</span>
+      <h1>Mobile Tyre Fitting in {town}</h1>
+      <p class="area-intro">
+        Retford and the surrounding Bassetlaw villages sit on a stretch of the A1 we travel several times a week. From our Bilsthorpe base we&rsquo;re typically with you in 35 minutes, and we cover the centre of Retford, Ordsall, Babworth, North and South Leverton, plus the trade and industrial premises out along the A638 and the A620 to Gainsborough. The Retford stretch of the A1 generates plenty of motorway-speed debris jobs and we&rsquo;re very used to the laybys and emergency phones along it.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container container-narrow">
+      <span class="eyebrow" style="color: var(--color-accent);">Why Choose Us in {town}</span>
+      <h2>Three reasons {town} drivers stick with us</h2>
+      <ul class="area-points">
+        <li class="area-point">
+          <h3>Local Bassetlaw response</h3>
+          <p>Bilsthorpe to Retford is a 30-minute run on a clear day. We&rsquo;re a faster bet than fitters coming up from Nottingham or down from Doncaster for most callouts.</p>
+        </li>
+        <li class="area-point">
+          <h3>A1 callout veterans</h3>
+          <p>The Retford stretch is one of the busiest debris zones north of the Newark bypass. We respond to roadside calls here weekly and know the safe layby network in both directions.</p>
+        </li>
+        <li class="area-point">
+          <h3>Rural Bassetlaw familiarity</h3>
+          <p>We know the deep-lane village postcodes, the tight farmyard turning circles and the safe places to fit out on a country B-road. Local knowledge that saves time.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">Nearby Areas Also Covered</span>
+      <h2>Across the {town} catchment</h2>
+      <p class="text-muted">If you&rsquo;re anywhere along the A1 north of Newark or out into rural Bassetlaw:</p>
+      <div class="tag-cloud">
+        <a class="tag" href="/areas/blyth/">Blyth</a>
+        <a class="tag" href="/areas/worksop/">Worksop</a>
+        <a class="tag" href="/areas/tuxford/">Tuxford</a>
+        <a class="tag" href="/areas/doncaster/">Doncaster</a>
+        <a class="tag" href="/areas/lincoln/">Lincoln</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>Stuck in {town} or on the A1?</h2>
+      <p class="text-muted-dark">Phone the line and we&rsquo;ll have a real engineer rolling in minutes.</p>
+      <a class="btn btn-primary btn-call" href={telHref}>
+        <span aria-hidden="true">&#9742;</span> Call {phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

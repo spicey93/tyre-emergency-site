@@ -1,0 +1,72 @@
+---
+export interface Props {
+  name: string;
+  location: string;
+  text: string;
+  rating: number;
+}
+
+const { name, location, text, rating } = Astro.props as Props;
+const stars = Array.from({ length: 5 }, (_, i) => i < rating);
+---
+
+<figure class="review-card">
+  <div class="review-stars" aria-label={`${rating} out of 5 stars`}>
+    {stars.map((filled) => (
+      <span class={filled ? 'star filled' : 'star'} aria-hidden="true">&#9733;</span>
+    ))}
+  </div>
+  <blockquote class="review-text">&ldquo;{text}&rdquo;</blockquote>
+  <figcaption class="review-author">
+    <strong>{name}</strong>
+    <span>{location}</span>
+  </figcaption>
+</figure>
+
+<style>
+  .review-card {
+    margin: 0;
+    padding: 1.75rem;
+    background-color: var(--color-bg-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+  }
+
+  .review-stars {
+    display: inline-flex;
+    gap: 2px;
+    color: #ddd;
+    font-size: 1.1rem;
+  }
+
+  .review-stars .filled {
+    color: var(--color-star);
+  }
+
+  .review-text {
+    margin: 0;
+    color: var(--color-text-dark);
+    font-size: 1rem;
+    line-height: 1.6;
+    flex-grow: 1;
+  }
+
+  .review-author {
+    display: flex;
+    flex-direction: column;
+    color: var(--color-text-muted-dark);
+    font-size: 0.9rem;
+  }
+
+  .review-author strong {
+    color: var(--color-text-dark);
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+</style>

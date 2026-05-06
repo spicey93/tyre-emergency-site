@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+
+const services = [
+  {
+    title: 'Emergency Tyre Replacement',
+    description: 'Stranded with a blowout? We\'ll be with you fast with a fitted replacement, day or night.',
+    href: '/services/emergency-tyre-replacement/',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><circle cx="12" cy="12" r="3"/></svg>',
+  },
+  {
+    title: 'Mobile Tyre Fitting',
+    description: 'Pre-booked tyre fitting at your home or workplace — no driving across town, no waiting room.',
+    href: '/services/mobile-tyre-fitting/',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/></svg>',
+  },
+  {
+    title: 'Mobile Caravan Tyre Fitting',
+    description: 'On-site tyre service for caravans, motorhomes and trailers. Specialist sizes carried as standard.',
+    href: '/services/mobile-caravan-tyre-fitting/',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2"/><circle cx="9" cy="19" r="2"/><path d="M18 12h4l-2 5h-2"/></svg>',
+  },
+  {
+    title: 'Mobile Tyre Repair',
+    description: 'Punctures plugged or patched to British Standard AU159 — quicker and cheaper than a new tyre.',
+    href: '/services/mobile-tyre-repair/',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a3 3 0 1 1 4.2 4.2l-9.9 9.9-5.7 1.5 1.5-5.7Z"/><path d="m13 8 3 3"/></svg>',
+  },
+  {
+    title: 'Locking Wheel Nut Removal',
+    description: 'Lost the key? We extract seized and missing locking nuts on the roadside without damaging your wheel.',
+    href: '/services/locking-wheel-nut-removal/',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="12" height="9" rx="2"/><path d="M9 11V7a3 3 0 0 1 6 0v4"/></svg>',
+  },
+  {
+    title: 'TPMS Sensor Replacement',
+    description: 'Diagnostic, replacement and reprogramming of tyre pressure sensors for all makes and models.',
+    href: '/services/tpms-sensor-replacement/',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  },
+];
+---
+
+<BaseLayout
+  title="Our Services | Tyre Emergency Ltd Mobile Tyre Fitting Nottinghamshire"
+  description="Six mobile tyre services across Nottinghamshire: emergency replacement, planned fitting, caravan tyres, BS AU159 repair, locking nut removal and TPMS sensors. 24/7 callout."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Services</span>
+      <h1>Everything we do, all under one roof.</h1>
+      <p class="page-hero-sub">From a 3am roadside blowout to a planned set of four on the office driveway, every job we handle is finished on-site by an experienced REACT licensed engineer with the right kit on the van.</p>
+      <div class="cta-row" style="margin-top: 1.5rem;">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <div class="text-center">
+        <span class="eyebrow" style="color: var(--color-accent);">Choose a service</span>
+        <h2>Six services, one phone number</h2>
+        <p class="section-lede-dark">Click any service for full details on what&rsquo;s included, when you&rsquo;d need it and how it&rsquo;s delivered.</p>
+      </div>
+
+      <div class="grid grid-3 services-grid">
+        {services.map((s) => (
+          <ServiceCard title={s.title} description={s.description} icon={s.icon} href={s.href} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow text-center">
+      <h2>Not sure which service you need?</h2>
+      <p class="text-muted">Phone us and tell us what&rsquo;s happened. We&rsquo;ll work out the right job over the phone, give you a fixed price, and dispatch the right engineer with the right kit.</p>
+      <div class="cta-row" style="justify-content: center; margin-top: 1rem;">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-lede-dark {
+    max-width: 60ch;
+    margin: 0 auto 3rem;
+    font-size: 1.1rem;
+    color: var(--color-text-muted-dark);
+  }
+  .services-grid {
+    margin-top: 1rem;
+  }
+</style>

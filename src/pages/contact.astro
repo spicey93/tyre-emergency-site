@@ -1,0 +1,314 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+---
+
+<BaseLayout
+  title="Contact Tyre Emergency Ltd | 24/7 Phone, Email & Address"
+  description="Get in touch with Tyre Emergency Ltd, Nottinghamshire's 24/7 mobile tyre service. Call 01623 325 123 for emergencies. Email contact@tyreemergency.com for quotes and bookings."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Contact</span>
+      <h1>Get in touch.</h1>
+      <p class="page-hero-sub">If you&rsquo;re stuck right now, call us. The phone is answered by a real person, every hour of every day. For non-urgent enquiries, the form below or an email will get a response inside the hour during the working day.</p>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <a class="contact-phone" href={telHref}>
+            <span aria-hidden="true" class="phone-glyph">&#9742;</span>
+            <span>
+              <small>24/7 Emergency Line</small>
+              <strong>{phone}</strong>
+            </span>
+          </a>
+
+          <ul class="contact-list">
+            <li>
+              <h3>Email</h3>
+              <a href="mailto:contact@tyreemergency.com">contact@tyreemergency.com</a>
+            </li>
+            <li>
+              <h3>Address</h3>
+              <address>
+                Tyre Emergency Ltd<br />
+                Bilsthorpe<br />
+                Newark<br />
+                Nottinghamshire<br />
+                NG22 8GA
+              </address>
+            </li>
+            <li>
+              <h3>Hours</h3>
+              <p>24 hours a day, 7 days a week.<br />Including bank holidays and Christmas Day.</p>
+            </li>
+            <li>
+              <h3>Company</h3>
+              <p>Registered in England &amp; Wales<br />Company No: 15362025<br />VAT: GB456597051</p>
+            </li>
+          </ul>
+
+          <p class="contact-note">
+            <strong>If you&rsquo;re on a hard shoulder or smart motorway right now</strong>, please get out of your vehicle behind the barrier and call the police on 101 (or 999 if you feel in danger) before you call us. Highways officers can close a lane to make the roadside safer for our engineer to work.
+          </p>
+        </div>
+
+        <div class="contact-form-card">
+          <h2>Send us a message</h2>
+          <p>Use this form for non-urgent enquiries, planned bookings, fleet quotes or feedback.</p>
+
+          <form
+            class="contact-form"
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            netlify
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p class="honeypot-field">
+              <label>
+                Do not fill this out if you are human
+                <input name="bot-field" tabindex="-1" autocomplete="off" />
+              </label>
+            </p>
+
+            <div class="field">
+              <label for="cf-name">Full name</label>
+              <input id="cf-name" name="name" type="text" required autocomplete="name" />
+            </div>
+
+            <div class="field">
+              <label for="cf-email">Email</label>
+              <input id="cf-email" name="email" type="email" required autocomplete="email" />
+            </div>
+
+            <div class="field">
+              <label for="cf-phone">Phone (optional)</label>
+              <input id="cf-phone" name="phone" type="tel" autocomplete="tel" />
+            </div>
+
+            <div class="field">
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" name="message" rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Send message</button>
+
+            <p class="contact-form-disclaimer">
+              In an emergency, please call <a href={telHref}><strong>{phone}</strong></a> &mdash; do not use this form.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: 5rem 0 3rem;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
+    background-image:
+      radial-gradient(900px 500px at 20% 30%, rgba(255, 45, 45, 0.18), transparent 60%);
+  }
+
+  .page-hero h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+  }
+
+  .page-hero-sub {
+    color: var(--color-text-muted);
+    max-width: 60ch;
+    font-size: 1.1rem;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 3rem;
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  .contact-info {
+    color: var(--color-text-dark);
+  }
+
+  .contact-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.4rem 1.6rem;
+    background-color: var(--color-text-dark);
+    color: var(--color-text);
+    border-radius: var(--radius);
+    margin-bottom: 2rem;
+    transition: background-color var(--transition);
+  }
+
+  .contact-phone:hover {
+    background-color: var(--color-accent);
+    color: var(--color-text);
+  }
+
+  .contact-phone .phone-glyph {
+    font-size: 1.8rem;
+    color: var(--color-accent);
+  }
+
+  .contact-phone:hover .phone-glyph {
+    color: var(--color-text);
+  }
+
+  .contact-phone small {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-phone:hover small {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .contact-phone strong {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.7rem;
+    letter-spacing: 0.02em;
+  }
+
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .contact-list h3 {
+    font-size: 0.9rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-text-muted-dark);
+    margin-bottom: 0.4rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+
+  .contact-list a {
+    color: var(--color-text-dark);
+    font-size: 1.05rem;
+  }
+
+  .contact-list a:hover {
+    color: var(--color-accent);
+  }
+
+  .contact-list address {
+    font-style: normal;
+    color: var(--color-text-dark);
+    line-height: 1.7;
+  }
+
+  .contact-list p {
+    color: var(--color-text-dark);
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  .contact-note {
+    padding: 1rem 1.25rem;
+    background-color: rgba(255, 45, 45, 0.06);
+    border-left: 3px solid var(--color-accent);
+    color: var(--color-text-muted-dark);
+    font-size: 0.95rem;
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+
+  .contact-form-card {
+    background-color: var(--color-bg-light);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+    padding: 2rem;
+  }
+
+  .contact-form-card h2 {
+    color: var(--color-text-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-form-card > p {
+    color: var(--color-text-muted-dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-form .field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.1rem;
+  }
+
+  .contact-form label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-dark);
+    margin-bottom: 0.45rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 0.85rem 0.95rem;
+    background-color: var(--color-bg-white);
+    color: var(--color-text-dark);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-family: var(--font-body);
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(255, 45, 45, 0.18);
+  }
+
+  .contact-form textarea {
+    resize: vertical;
+    min-height: 130px;
+  }
+
+  .contact-form-disclaimer {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    text-align: center;
+    color: var(--color-text-muted-dark);
+    font-size: 0.9rem;
+  }
+
+  .contact-form-disclaimer a {
+    color: var(--color-accent);
+  }
+</style>

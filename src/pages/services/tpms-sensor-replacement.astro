@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'TPMS Sensor Replacement',
+  serviceType: 'Mobile TPMS Sensor Diagnostic and Replacement',
+  provider: {
+    '@type': 'LocalBusiness',
+    name: 'Tyre Emergency Ltd',
+    telephone: '+441623325123',
+    url: 'https://tyreemergency.com/',
+  },
+  areaServed: 'Nottinghamshire, East Midlands',
+  description: 'Diagnostic, replacement and reprogramming of TPMS sensors for cars, vans and commercial vehicles, carried out on-site.',
+  url: 'https://tyreemergency.com/services/tpms-sensor-replacement/',
+};
+---
+
+<BaseLayout
+  title="TPMS Sensor Replacement Nottinghamshire | Mobile Diagnostic & Reprogramming"
+  description="Mobile TPMS sensor replacement, programming and cloning across Nottinghamshire. We diagnose, fit and reprogram on-site for all makes. Call 01623 325 123."
+  jsonLd={JSON.stringify(serviceJsonLd)}
+>
+  <section class="service-hero">
+    <div class="container">
+      <span class="eyebrow">Diagnostic Service</span>
+      <h1>TPMS Sensor Replacement</h1>
+      <p class="service-intro">
+        Tyre pressure sensors are mandatory on every car sold in the UK since 2014, and a failed sensor will fail your MOT outright. Sensors typically last seven to ten years before the battery (which is sealed inside the unit) gives up &mdash; usually announced by an amber TPMS warning light that won&rsquo;t go away after a reset. We diagnose with a professional TPMS scan tool, identify which sensor has failed, fit a like-for-like programmable replacement, and either clone the old ID or write a fresh ID to the vehicle&rsquo;s ECU. All on-site, all on the same visit, all included in one quoted price.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container container-narrow">
+      <span class="eyebrow" style="color: var(--color-accent);">What&rsquo;s Included</span>
+      <h2>From scan to drive-away</h2>
+      <ul class="check-list">
+        <li><strong>Professional TPMS scan</strong> on every wheel to confirm which sensor has failed and check the others for low battery before we replace.</li>
+        <li><strong>Programmable universal sensors</strong> covering virtually every make on UK roads &mdash; we don&rsquo;t need to wait for a dealer-only part to arrive.</li>
+        <li><strong>Clone or fresh ID</strong> &mdash; we either copy the old sensor&rsquo;s ID to save you a relearn, or write a fresh ID and complete the relearn drive cycle if needed.</li>
+        <li><strong>New rubber or metal valve stem</strong> fitted with every sensor &mdash; rubber snap-in or metal bolt-in depending on what your wheels require &mdash; so the unit seals correctly and won&rsquo;t weep air.</li>
+        <li><strong>Confirmation drive-test</strong> with the scan tool reading live data &mdash; the warning light is properly off before we leave.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">When You Need This</span>
+      <h2>Common TPMS callouts</h2>
+      <div class="scenarios">
+        <article class="scenario">
+          <h3>TPMS warning light won&rsquo;t go off</h3>
+          <p>Pressures are correct, you&rsquo;ve done a reset, and the amber light is still on. Almost always one of the sensors has reached end-of-life. We diagnose which one in minutes.</p>
+        </article>
+        <article class="scenario">
+          <h3>Pre-MOT failure prevention</h3>
+          <p>Permanently lit TPMS lights are an MOT failure on cars first registered after 1 January 2012. We&rsquo;ll diagnose and fix before the test rather than after.</p>
+        </article>
+        <article class="scenario">
+          <h3>Sensor damaged at fitting</h3>
+          <p>Another fitter has snapped a sensor stem or stripped the nut while changing your tyre. We can fit a programmable replacement and clone the original ID.</p>
+        </article>
+        <article class="scenario">
+          <h3>Winter wheels with no sensors</h3>
+          <p>You&rsquo;ve bought a separate set of winter alloys without TPMS sensors. We can supply, fit and program four matching sensors so the system continues to function.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>TPMS warning on?</h2>
+      <p class="text-muted-dark">Don&rsquo;t risk an MOT fail. Phone us with the registration and we&rsquo;ll quote on the spot &mdash; in most cases we can be at you the same day.</p>
+      <a class="btn btn-primary btn-call" href={telHref}>
+        <span aria-hidden="true">&#9742;</span> Call {phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

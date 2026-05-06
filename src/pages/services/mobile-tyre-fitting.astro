@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Mobile Tyre Fitting',
+  serviceType: 'Pre-booked Mobile Tyre Fitting',
+  provider: {
+    '@type': 'LocalBusiness',
+    name: 'Tyre Emergency Ltd',
+    telephone: '+441623325123',
+    url: 'https://tyreemergency.com/',
+  },
+  areaServed: 'Nottinghamshire, East Midlands',
+  description: 'Pre-booked mobile tyre fitting at your home, workplace or anywhere else convenient, across Nottinghamshire and the surrounding counties.',
+  url: 'https://tyreemergency.com/services/mobile-tyre-fitting/',
+};
+---
+
+<BaseLayout
+  title="Mobile Tyre Fitting Nottinghamshire | We Come To You"
+  description="Pre-booked mobile tyre fitting at your home or workplace across Nottinghamshire. Same-day appointments, fixed pricing, calibrated balancing on-site. Call 01623 325 123."
+  jsonLd={JSON.stringify(serviceJsonLd)}
+>
+  <section class="service-hero">
+    <div class="container">
+      <span class="eyebrow">Pre-booked Service</span>
+      <h1>Mobile Tyre Fitting</h1>
+      <p class="service-intro">
+        New tyres without ever stepping into a garage. Book a 90-minute window, give us your registration and the address, and we&rsquo;ll arrive at your home, your office car park or any other safe location with your tyres on board, the kit to fit them and a card machine. Most jobs take under 45 minutes start to finish, the wheels are balanced on-site with our calibrated mobile balancer, and we tidy up before we leave. No driving across town, no waiting room, no afternoon written off.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Book Online</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container">
+      <div class="service-split">
+        <div class="service-split-image">
+          <img
+            src="/images/mobile-tyre-fitting.webp"
+            alt="A freshly fitted tyre with the Tyre Emergency service van visible in the background"
+            width="1600"
+            height="1200"
+            loading="lazy"
+          />
+        </div>
+        <div class="service-split-content">
+          <span class="eyebrow">What&rsquo;s Included</span>
+          <h2>What you get with every booking</h2>
+          <ul class="check-list">
+            <li><strong>A clear quote over the phone</strong> before a slot is confirmed &mdash; brand, model, size and all-in price. If you need it in writing, a message or email can be arranged.</li>
+            <li><strong>Premium, mid-range and budget options</strong> for every popular size, from Continental and Michelin down to value brands like Avon and Davanti.</li>
+            <li><strong>Calibrated wheel balancing</strong> on every wheel we touch, included as standard &mdash; never a separate add-on.</li>
+            <li><strong>Old tyres collected and recycled</strong> at a licensed facility &mdash; no disposal charge.</li>
+            <li><strong>TPMS reset, valve replacement and torque check</strong> finished and confirmed before we hand back the keys.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">When You Need This</span>
+      <h2>Booking situations we cover every day</h2>
+      <p>Mobile fitting suits most non-urgent jobs. A few of the typical reasons people book us in:</p>
+      <div class="scenarios">
+        <article class="scenario">
+          <h3>MOT advisory tyres</h3>
+          <p>Your MOT has flagged a worn or perished tyre. We&rsquo;ll match the size, brand and load rating, fit them on your driveway, and email you the receipt to file with the certificate.</p>
+        </article>
+        <article class="scenario">
+          <h3>Two or four new tyres at home</h3>
+          <p>You need a full set replacing before a long drive. Pick a 90-minute window, leave the keys, get on with your day &mdash; we&rsquo;ll text when we&rsquo;re finished.</p>
+        </article>
+        <article class="scenario">
+          <h3>At the office during the working day</h3>
+          <p>We come to your work car park while you&rsquo;re inside. Most clients don&rsquo;t even need to step outside until we hand the keys back.</p>
+        </article>
+        <article class="scenario">
+          <h3>Seasonal swap onto winter tyres</h3>
+          <p>If you keep a separate set of winter or all-season tyres on alloys or steels, we&rsquo;ll do the swap (and store-versus-fit balance) on-site.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>Ready to book a slot?</h2>
+      <p class="text-muted-dark">Phone us with your registration and address for a same-day quote, or fill in the online quote form for non-urgent jobs.</p>
+      <div class="cta-row" style="justify-content: center;">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call {phone}
+        </a>
+        <a class="btn btn-outline-dark" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const town = 'Southwell';
+---
+
+<BaseLayout
+  title={`Mobile Tyre Fitting in ${town} | 24/7 A612 Tyre Service`}
+  description={`24/7 mobile tyre fitting throughout ${town} and surrounding villages. 20-minute average ETA from our Bilsthorpe HQ. Call 01623 325 123.`}
+>
+  <section class="area-hero">
+    <div class="container">
+      <span class="eyebrow">{town}</span>
+      <h1>Mobile Tyre Fitting in {town}</h1>
+      <p class="area-intro">
+        Southwell is one of our closest postcodes &mdash; just a short hop down the A617 and B6386 from our Bilsthorpe base, and a typical ETA of 20 minutes door to door. We cover the centre of Southwell around the Minster, plus Halam, Halloughton, Upton, Edingley, Farnsfield and the rural roads down towards Lowdham. The A612 between Southwell and Nottingham is part of our daily route, and we know the surrounding country lanes &mdash; including which farm tracks are workable for a fitting van and which need the car bringing out to a verge.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container container-narrow">
+      <span class="eyebrow" style="color: var(--color-accent);">Why Choose Us in {town}</span>
+      <h2>Three reasons {town} drivers call us first</h2>
+      <ul class="area-points">
+        <li class="area-point">
+          <h3>One of our fastest postcodes</h3>
+          <p>NG25 is on our doorstep. We&rsquo;ve done jobs in central Southwell where the engineer was at the door before the kettle boiled.</p>
+        </li>
+        <li class="area-point">
+          <h3>Equestrian-friendly &mdash; trailers and 4&times;4s</h3>
+          <p>The Southwell area generates plenty of horsebox and 4&times;4 callouts. We carry the load-rated sizes for both and we&rsquo;re used to working in stable yards and on grass.</p>
+        </li>
+        <li class="area-point">
+          <h3>Local for a reason</h3>
+          <p>Dean is based in Bilsthorpe, just a short drive from Southwell. He knows the lanes, the postcodes and which villages have a usable phone signal &mdash; local knowledge that actually matters at 2am on an unlit B-road.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">Nearby Areas Also Covered</span>
+      <h2>Across the {town} catchment</h2>
+      <p class="text-muted">A short drive in any direction and we&rsquo;ve got you:</p>
+      <div class="tag-cloud">
+        <a class="tag" href="/areas/mansfield/">Mansfield</a>
+        <a class="tag" href="/areas/newark/">Newark</a>
+        <a class="tag" href="/areas/nottingham/">Nottingham</a>
+        <a class="tag" href="/areas/tuxford/">Tuxford</a>
+        <a class="tag" href="/areas/grantham/">Grantham</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>Tyre trouble in {town}?</h2>
+      <p class="text-muted-dark">We&rsquo;re your closest properly equipped mobile fitter. Phone the line for a real ETA.</p>
+      <a class="btn btn-primary btn-call" href={telHref}>
+        <span aria-hidden="true">&#9742;</span> Call {phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

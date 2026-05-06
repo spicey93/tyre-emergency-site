@@ -1,0 +1,94 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StickyCallButton from '../components/StickyCallButton.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  jsonLd?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = '/og-image.jpg',
+  jsonLd,
+} = Astro.props as Props;
+
+const siteUrl = 'https://tyreemergency.com';
+const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).toString();
+const phone = '01623 325 123';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ff2d2d" />
+    <meta name="format-detection" content="telephone=yes" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:site_name" content="Tyre Emergency Ltd" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={new URL(ogImage, siteUrl).toString()} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@tyre_emergency" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, siteUrl).toString()} />
+
+    <meta name="author" content="Tyre Emergency Ltd" />
+    <meta name="robots" content="index, follow" />
+    <meta name="geo.region" content="GB-NTT" />
+    <meta name="geo.placename" content="Bilsthorpe, Newark" />
+
+    {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+
+    <!-- Google Tag Manager (placeholder) -->
+    <!--
+    <script>
+      // Replace GTM-XXXXXXX with your actual GTM container ID before launch.
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-XXXXXXX');
+    </script>
+    -->
+    <!-- End Google Tag Manager -->
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) placeholder -->
+    <!--
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    -->
+
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <Header phone={phone} />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer phone={phone} />
+
+    <StickyCallButton phone={phone} />
+  </body>
+</html>

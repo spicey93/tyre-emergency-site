@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const town = 'Worksop';
+---
+
+<BaseLayout
+  title={`Mobile Tyre Fitting in ${town} | 24/7 A57 & A1 Tyre Service`}
+  description={`24/7 mobile tyre fitting and emergency replacement throughout ${town} and along the A57 and A1. 30-minute average ETA from Bilsthorpe. Call 01623 325 123.`}
+>
+  <section class="area-hero">
+    <div class="container">
+      <span class="eyebrow">{town}</span>
+      <h1>Mobile Tyre Fitting in {town}</h1>
+      <p class="area-intro">
+        Worksop sits at the junction of two of our busiest carriageways &mdash; the A57 east-west and the A1 north-south &mdash; so we&rsquo;re on the road through here most days of the week. Our average ETA into the centre of Worksop is 30 minutes from Bilsthorpe, and we cover the surrounding areas of Carlton-in-Lindrick, Manton, Kilton, Shireoaks and Rhodesia plus the trade estates around Manton Wood and Sandy Lane. Whether the call is from a driveway in S80 or the southbound A1 hard shoulder, we turn up with the kit, the tyres and a card machine.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container container-narrow">
+      <span class="eyebrow" style="color: var(--color-accent);">Why Choose Us in {town}</span>
+      <h2>Three reasons {town} drivers stick with us</h2>
+      <ul class="area-points">
+        <li class="area-point">
+          <h3>A1 corridor experts</h3>
+          <p>Worksop&rsquo;s stretch of the A1 sees a lot of HGV-shed-debris callouts. We are very used to operating safely on this carriageway, including with Highways officers in attendance.</p>
+        </li>
+        <li class="area-point">
+          <h3>Light commercial specialists</h3>
+          <p>The Manton Wood logistics estate generates plenty of van and small-truck callouts. We carry C-rated and CP-rated commercial tyres on every fitting van.</p>
+        </li>
+        <li class="area-point">
+          <h3>Out-of-hours, every hour</h3>
+          <p>The phone is answered through the small hours and on weekends &mdash; useful when the early-shift crew at Manton Wood discovers a flat at 4:30am.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">Nearby Areas Also Covered</span>
+      <h2>Across the {town} catchment</h2>
+      <p class="text-muted">A short hop in any direction and we&rsquo;ve got you covered:</p>
+      <div class="tag-cloud">
+        <a class="tag" href="/areas/retford/">Retford</a>
+        <a class="tag" href="/areas/blyth/">Blyth</a>
+        <a class="tag" href="/areas/mansfield/">Mansfield</a>
+        <a class="tag" href="/areas/doncaster/">Doncaster</a>
+        <a class="tag" href="/areas/chesterfield/">Chesterfield</a>
+        <a class="tag" href="/areas/tuxford/">Tuxford</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>Tyre trouble in {town}?</h2>
+      <p class="text-muted-dark">Phone the line. You&rsquo;ll get a real ETA, a fixed quoted price and an engineer&rsquo;s name &mdash; all on the first call.</p>
+      <a class="btn btn-primary btn-call" href={telHref}>
+        <span aria-hidden="true">&#9742;</span> Call {phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Mobile Tyre Repair',
+  serviceType: 'Mobile Tyre Puncture Repair',
+  provider: {
+    '@type': 'LocalBusiness',
+    name: 'Tyre Emergency Ltd',
+    telephone: '+441623325123',
+    url: 'https://tyreemergency.com/',
+  },
+  areaServed: 'Nottinghamshire, East Midlands',
+  description: 'On-site puncture repair carried out to British Standard AU159 across Nottinghamshire and the surrounding counties.',
+  url: 'https://tyreemergency.com/services/mobile-tyre-repair/',
+};
+---
+
+<BaseLayout
+  title="Mobile Tyre Repair Nottinghamshire | BS AU159 Puncture Repair"
+  description="On-site puncture repair carried out to British Standard AU159 across Nottinghamshire. We come to you, plug-and-patch from the inside, fully guaranteed. Call 01623 325 123."
+  jsonLd={JSON.stringify(serviceJsonLd)}
+>
+  <section class="service-hero">
+    <div class="container">
+      <span class="eyebrow">Repair Service</span>
+      <h1>Mobile Tyre Repair</h1>
+      <p class="service-intro">
+        A repair, properly done, is quicker, cheaper and safer than a replacement &mdash; and most punctures in the central tread area of a tyre with adequate remaining depth can be repaired safely. We carry out every repair to British Standard AU159, which means the tyre is removed from the rim, the inside is inspected for hidden damage, and a combined plug-and-patch is applied from the inside. We will only ever offer a repair if the puncture genuinely qualifies; if it doesn&rsquo;t, we&rsquo;ll tell you straight and quote a replacement instead. No upselling, no scare tactics.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container">
+      <div class="service-split">
+        <div class="service-split-image">
+          <img
+            src="/images/puncture-repair.webp"
+            alt="A Ford alloy wheel with a Bridgestone tyre ready to be inspected and repaired"
+            width="1600"
+            height="1200"
+            loading="lazy"
+          />
+        </div>
+        <div class="service-split-content">
+          <span class="eyebrow">What&rsquo;s Included</span>
+          <h2>Every repair, done by the book</h2>
+          <ul class="check-list">
+            <li><strong>BS AU159 standard from start to finish</strong> &mdash; tyre off the rim, inside inspection, combined plug-and-patch from the inside, never a string-and-glue exterior fix.</li>
+            <li><strong>Full inside inspection</strong> for secondary damage, casing breakdown, run-flat scuffing or hidden ply separation that an exterior plug would miss.</li>
+            <li><strong>Re-balance after repair</strong> using our calibrated mobile balancer &mdash; included as standard.</li>
+            <li><strong>Pressure set to manufacturer spec</strong> with a digital gauge, plus TPMS reset and confirmation if your vehicle uses sensors.</li>
+            <li><strong>Honest assessment first</strong> &mdash; if the puncture is in the shoulder, sidewall, or the tyre is below the legal limit, we&rsquo;ll quote a replacement and tell you why.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">When You Need This</span>
+      <h2>Typical repair callouts</h2>
+      <div class="scenarios">
+        <article class="scenario">
+          <h3>Screw or nail in the central tread</h3>
+          <p>You&rsquo;ve seen the head of a screw embedded in the tread or pulled one out and the tyre&rsquo;s gone soft. The classic candidate for a clean BS AU159 repair.</p>
+        </article>
+        <article class="scenario">
+          <h3>Slow puncture you&rsquo;ve been topping up</h3>
+          <p>The tyre needs air every couple of days. We&rsquo;ll come out, find the leak (often a tiny shard of glass), and decide on repair or replace based on the actual damage.</p>
+        </article>
+        <article class="scenario">
+          <h3>Puncture from a fleet driver</h3>
+          <p>Your driver&rsquo;s parked up at a customer site with a flat. We come to wherever they are and turn the job around fast so the route can continue.</p>
+        </article>
+        <article class="scenario">
+          <h3>Pre-MOT or pre-trip check</h3>
+          <p>Tyre&rsquo;s deflating gradually before a long drive. We&rsquo;ll diagnose and repair (or replace) on the driveway so you can leave with confidence.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>Got a puncture?</h2>
+      <p class="text-muted-dark">If we can repair it, we will. If we can&rsquo;t, we&rsquo;ll tell you why and offer a fair price on a replacement instead. Phone us with the registration and we&rsquo;ll quote.</p>
+      <a class="btn btn-primary btn-call" href={telHref}>
+        <span aria-hidden="true">&#9742;</span> Call {phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+---
+
+<BaseLayout
+  title="About Tyre Emergency Ltd | Dean Spicer, REACT Licensed Mobile Tyre Fitter"
+  description="Tyre Emergency Ltd is a sole-operator mobile tyre service run by Dean Spicer from Bilsthorpe, Nottinghamshire. REACT licensed, in the tyre trade since his teens, and doing every job himself."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">About</span>
+      <h1>The person who won&rsquo;t leave you stranded.</h1>
+      <p class="page-hero-sub">Tyre Emergency Ltd is a sole-operator business run by Dean Spicer from Bilsthorpe, Nottinghamshire. Every call, every quote and every job is done by Dean personally &mdash; which means you always get someone who&rsquo;s been in the tyre trade since before he could drive.</p>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container container-narrow">
+      <span class="eyebrow" style="color: var(--color-accent);">The Story</span>
+      <h2>In the tyre trade since his teens</h2>
+      <p>Dean Spicer has been working in the tyre industry since he was a teenager &mdash; starting on the shop floor at a national tyre chain, moving through independent garages, spending time in management and going back to being a hands-on technician. Along the way he built up mechanical experience across a wide range of vehicles, but tyres are what he knows best and what he&rsquo;s always come back to.</p>
+      <p>In December 2023 he set up Tyre Emergency Ltd to do things his way: honest prices given over the phone before he goes anywhere, a real ETA that he actually keeps, and a phone he answers himself, twenty-four hours a day. Because the business is entirely run by Dean, every customer gets the same experienced fitter regardless of whether they call at noon or midnight. There&rsquo;s no delegation, no rota, no agency cover &mdash; just one person who cares about doing the job properly.</p>
+      <p>He works on cars, vans, SUVs, caravans, motorhomes and trailers, and has built up over 450 five-star reviews in under two years &mdash; every one of them earned by turning up quickly, doing the job correctly and being straight with people about what it costs.</p>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">REACT Licensing</span>
+      <h2>What &ldquo;REACT licensed&rdquo; actually means</h2>
+      <p>REACT licensing is about one specific thing: working safely at the roadside. It covers how to manage your vehicle and equipment on A-roads and motorways, how to use cones and beacons correctly, how to assess a scene dynamically before you start work, and how to keep yourself and the customer safe when traffic is passing at speed. It is not a basic course &mdash; your van has to meet certain standards, and you need a meaningful amount of real-world roadside experience before you&rsquo;re eligible to attend.</p>
+      <p>For customers, the practical difference is this: when Dean turns up on the M1 hard shoulder or the verge of an A-road at 2am, he&rsquo;s not improvising. He knows exactly how to set up safely, what to do if the situation changes, and when the right answer is to wait for a lane closure rather than work in a dangerous position. That makes the job safer for you, for passing traffic, and for him.</p>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container">
+      <div class="text-center">
+        <span class="eyebrow" style="color: var(--color-accent);">How It Works</span>
+        <h2>What to expect when you call</h2>
+      </div>
+      <div class="grid grid-3 values-grid">
+        <article class="value-card">
+          <h3>A straight price on the phone</h3>
+          <p>Every job gets a verbal quote before Dean goes anywhere. The price is all-in &mdash; no call-out fees, no per-mile charges, no VAT added at the end. What you&rsquo;re told is what you pay.</p>
+        </article>
+        <article class="value-card">
+          <h3>An ETA that means something</h3>
+          <p>Dean gives a real ETA based on where he actually is, not a best-case figure. If something changes, he calls. If he genuinely can&rsquo;t reach you fast enough, he&rsquo;ll say so and point you to someone who can.</p>
+        </article>
+        <article class="value-card">
+          <h3>The right tyre, fitted correctly</h3>
+          <p>Every tyre is matched to the vehicle &mdash; correct size, load rating and speed rating. Dean uses a torque wrench on every job, not just an impact gun, and resets TPMS sensors before he leaves.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">The Philosophy</span>
+      <h2>An emergency is a bad enough day already.</h2>
+      <p>Most people who call are stressed. They&rsquo;re late for work, late for the airport, or sitting with the kids in the back of a cold car at the side of an unlit lane. They don&rsquo;t want a sales pitch, and they don&rsquo;t want the experience to drag on longer than it has to.</p>
+      <p>So the call is kept short. Dean needs three things: where you are, what you&rsquo;re driving and what&rsquo;s happened. He gives a price and an ETA, and you decide. When he arrives, he gets straight to work and gets you moving. That&rsquo;s the entire service model &mdash; and it&rsquo;s what five hundred reviews consistently say back.</p>
+      <div class="cta-row about-cta">
+        <a class="btn btn-primary" href={telHref}>Call {phone}</a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: 5rem 0 3rem;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
+    background-image:
+      radial-gradient(900px 500px at 80% 20%, rgba(255, 45, 45, 0.18), transparent 60%);
+  }
+
+  .page-hero h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    max-width: 22ch;
+    margin-bottom: 1rem;
+  }
+
+  .page-hero-sub {
+    color: var(--color-text-muted);
+    max-width: 60ch;
+    font-size: 1.1rem;
+  }
+
+  .values-grid {
+    margin-top: 1rem;
+  }
+
+  .value-card {
+    padding: 1.75rem;
+    background-color: var(--color-bg-light);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+    height: 100%;
+  }
+
+  .value-card h3 {
+    font-size: 1.3rem;
+    color: var(--color-text-dark);
+    margin-bottom: 0.6rem;
+  }
+
+  .value-card p {
+    color: var(--color-text-muted-dark);
+    margin: 0;
+  }
+
+  .about-cta {
+    margin-top: 1.5rem;
+    justify-content: flex-start;
+  }
+</style>

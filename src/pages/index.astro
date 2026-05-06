@@ -1,0 +1,471 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import ReviewCard from '../components/ReviewCard.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+
+const phone = '01623 325 123';
+
+const reviews = [
+  {
+    name: 'Joe Rowe',
+    location: 'Nottinghamshire',
+    rating: 5,
+    text: 'Noticed a gouge out of my side wall while 250 miles from home on a Saturday with garages all shut by 1pm. Dean was out within 15 minutes and the tyre was refitted almost immediately. Fair and up front pricing and all agreed in advance. Absolutely perfect service. If you are unlucky enough to need an emergency tyre, and you\'re within range of Dean, you\'re in luck!',
+  },
+  {
+    name: 'Nick Panton',
+    location: 'A1, Nottinghamshire',
+    rating: 5,
+    text: 'Can\'t praise the service from Dean at Tyre Emergency enough. Had a puncture on the A1 at approx 7.30am, call to Tyre Emergency answered straight away and within 10 minutes had a quote. Just over an hour later new tyre was fitted and I was on my way.',
+  },
+  {
+    name: 'Chantelle W',
+    location: 'Newark',
+    rating: 5,
+    text: 'Hitting a pothole and getting a flat tyre after a 12 hour shift was a nightmare. Especially when RAC was going to be 4 hours, so decided to try elsewhere instead. Dean came, had it fixed and I was on my way within half an hour of calling. Friendly & efficient. Highly recommended!',
+  },
+  {
+    name: 'Lesley Park',
+    location: 'Newark',
+    rating: 5,
+    text: 'Travelled home late Friday night from work and had a burst tyre. I initially booked a refit with a company who said they could do next day — however the job was still waiting to be farmed out early the next morning. I checked Google again and found Dean. I called him and he was with me within the hour, all sorted and road worthy again. I would absolutely recommend this young man, who is a complete professional in his field, mannerly and genuine.',
+  },
+];
+
+const services = [
+  {
+    title: 'Emergency Tyre Replacement',
+    description: 'Stranded with a blowout? We\'ll be with you fast with a fitted replacement, day or night.',
+    href: '/services/emergency-tyre-replacement/',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6"/><path d="m4.93 10.93 4.24 4.24"/><path d="M2 18h6"/><path d="m4.93 25.07 4.24-4.24" transform="translate(0 -7)"/><circle cx="12" cy="12" r="9"/></svg>',
+  },
+  {
+    title: 'Mobile Tyre Fitting',
+    description: 'Pre-booked tyre fitting at your home or workplace — no driving across town, no waiting room.',
+    href: '/services/mobile-tyre-fitting/',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/></svg>',
+  },
+  {
+    title: 'Mobile Caravan Tyre Fitting',
+    description: 'On-site tyre service for caravans, motorhomes and trailers. Specialist sizes carried as standard.',
+    href: '/services/mobile-caravan-tyre-fitting/',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2"/><circle cx="9" cy="19" r="2"/><path d="M18 12h4l-2 5h-2"/></svg>',
+  },
+  {
+    title: 'Mobile Tyre Repair',
+    description: 'Punctures plugged or patched to British Standard AU159 — quicker and cheaper than a new tyre.',
+    href: '/services/mobile-tyre-repair/',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a3 3 0 1 1 4.2 4.2l-9.9 9.9-5.7 1.5 1.5-5.7Z"/><path d="m13 8 3 3"/></svg>',
+  },
+  {
+    title: 'Locking Wheel Nut Removal',
+    description: 'Lost the key? We extract seized and missing locking nuts on the roadside without damaging your wheel.',
+    href: '/services/locking-wheel-nut-removal/',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="12" height="9" rx="2"/><path d="M9 11V7a3 3 0 0 1 6 0v4"/></svg>',
+  },
+  {
+    title: 'TPMS Sensor Replacement',
+    description: 'Diagnostic, replacement and reprogramming of tyre pressure sensors for all makes and models.',
+    href: '/services/tpms-sensor-replacement/',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  },
+];
+
+const areas = [
+  'Mansfield', 'Nottingham', 'Newark', 'Worksop', 'Chesterfield', 'Doncaster',
+  'Lincoln', 'Retford', 'Grantham', 'Southwell', 'Tuxford', 'Blyth',
+];
+
+const faqs = [
+  {
+    question: 'How quickly can you reach me?',
+    answer: 'In our core coverage area across Nottinghamshire, our average ETA is 30 minutes. We commit to a 60-minute maximum response time anywhere within our service zone, and we will give you an honest, accurate ETA over the phone the moment we know your location and the closest available technician.',
+  },
+  {
+    question: 'Do you operate 24 hours a day, 7 days a week?',
+    answer: 'Yes. We are a genuine 24/7 service — that includes nights, weekends, Christmas Day, bank holidays and every other day of the year. There is always a REACT licensed technician on call. The phone is answered by a real person, not a recorded message or a callback service.',
+  },
+  {
+    question: 'What if you don\'t have my tyre size in stock?',
+    answer: 'Every job is sourced before Dean sets off — he confirms your tyre size on the phone, checks it against your vehicle\'s requirements and collects from one of his local suppliers before heading to you. For genuine emergencies he\'ll give an honest ETA that includes any supplier collection time, and will explore every option to get to you as quickly as possible.',
+  },
+  {
+    question: 'Is it safe to wait by my vehicle while you come?',
+    answer: 'On a motorway hard shoulder or smart motorway, no — get out of the vehicle, behind the barrier where possible, and call the police on 101 (or 999 if you feel in danger) before calling us. On A-roads, B-roads and at home, stay in the vehicle with hazards on if traffic is moving, or move to a safe verge. We will talk you through the safest option when you call.',
+  },
+  {
+    question: 'How much does emergency tyre fitting cost?',
+    answer: 'The price depends on a few things: how urgently you need the job done, the tyre size, the brand you choose, and how far away you are. Dean always gives a fixed all-in price over the phone before setting off — no hidden extras on arrival. Across over 3,000 jobs the average all-in price works out at around £177, which gives a rough guide, but your quote could be higher or lower depending on the factors above.',
+  },
+  {
+    question: 'Do you cover my area?',
+    answer: 'We cover the whole of Nottinghamshire and the surrounding areas including Mansfield, Nottingham, Newark, Worksop, Chesterfield, Doncaster, Lincoln, Retford, Grantham, Southwell, Tuxford and Blyth, plus the A1, A614 and M1 corridors. Not sure if you\'re in range? Just give us a call — if we can\'t reach you, we\'ll point you to a trusted local who can.',
+  },
+  {
+    question: 'Can you help with caravans and vans, not just cars?',
+    answer: 'Absolutely. Dean fits tyres for cars, SUVs, light commercial vans, caravans, motorhomes and trailers. Specialist sizes are sourced to order from suppliers before the visit. He\'s particularly experienced with caravans and understands the things that can go wrong if you don\'t know what you\'re doing — motor movers, stabilising arms and correct load ratings for the unit.',
+  },
+  {
+    question: 'What payment methods do you accept?',
+    answer: 'We take all major debit and credit cards on the roadside via contactless and chip-and-pin, plus Apple Pay and Google Pay. We can also invoice fleet, business and insurance customers on agreed account terms. We do not require any payment up front — you only pay once the work is done and you\'re happy.',
+  },
+];
+---
+
+<BaseLayout
+  title="Tyre Emergency Ltd | 24/7 Mobile Tyre Fitting Nottinghamshire"
+  description="Emergency mobile tyre fitting and repair across Nottinghamshire and the East Midlands. 30-minute average ETA, REACT licensed technicians, 5.0 stars on Google. Call 01623 325 123."
+  jsonLd={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': 'https://tyreemergency.com/#business',
+    name: 'Tyre Emergency Ltd',
+    description: '24/7 emergency mobile tyre fitting, replacement and repair across Nottinghamshire and the wider East Midlands.',
+    url: 'https://tyreemergency.com/',
+    telephone: '+441623325123',
+    email: 'contact@tyreemergency.com',
+    image: 'https://tyreemergency.com/og-image.jpg',
+    priceRange: '££',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Bilsthorpe',
+      addressLocality: 'Newark',
+      addressRegion: 'Nottinghamshire',
+      postalCode: 'NG22 8GA',
+      addressCountry: 'GB',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 53.182,
+      longitude: -1.012,
+    },
+    areaServed: areas.map((a) => ({ '@type': 'City', name: a })),
+    openingHoursSpecification: [{
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+      opens: '00:00',
+      closes: '23:59',
+    }],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5.0',
+      reviewCount: '478',
+      bestRating: '5',
+      worstRating: '1',
+    },
+    sameAs: [
+      'https://www.facebook.com/tyreemergency',
+      'https://www.instagram.com/tyreemergency',
+      'https://www.youtube.com/@tyreemergency',
+      'https://www.tiktok.com/@tyreemergency',
+      'https://twitter.com/tyre_emergency',
+    ],
+  })}
+>
+  <HeroSection
+    title="Flat Tyre? We&rsquo;ll Be There in 60 Minutes."
+    subtitle="Mobile tyre fitting and emergency replacement across Nottinghamshire. We come to you — at home, work, or on the roadside."
+    ctaPhone={phone}
+    bgImage="/images/tyre-emergency-ltd.webp"
+    bgImageAlt="Tyre Emergency Ltd service van open on a motorway hard shoulder with equipment ready"
+  />
+
+  <!-- Section 2: Social proof -->
+  <section class="section section-white">
+    <div class="container">
+      <div class="text-center">
+        <span class="eyebrow" style="color: var(--color-accent);">Trusted by Drivers</span>
+        <h2>Five Stars. Hundreds of Drivers Rescued.</h2>
+        <p class="section-lede">A few words from real customers we&rsquo;ve fixed up roadside, on the drive, and in the office car park.</p>
+      </div>
+
+      <div class="reviews-grid">
+        {reviews.map((r) => (
+          <ReviewCard name={r.name} location={r.location} text={r.text} rating={r.rating} />
+        ))}
+      </div>
+
+      <div class="google-rating">
+        <span class="google-logo" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09 0-.73.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+        </span>
+        <span class="google-rating-text">
+          <strong>5.0</strong>
+          <span>Rated on Google from 478 reviews</span>
+        </span>
+        <span class="rating-stars" aria-hidden="true">
+          <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: How it works -->
+  <section class="section section-darker">
+    <div class="container">
+      <div class="text-center">
+        <span class="eyebrow">How It Works</span>
+        <h2>Back on the road in three steps</h2>
+      </div>
+
+      <ol class="steps">
+        <li class="step">
+          <span class="step-num">01</span>
+          <h3>Call or request a quote online</h3>
+          <p>Phone us 24/7 on <a href={`tel:${phone.replace(/\s+/g, '')}`}>{phone}</a> or use the quote form below for non-urgent jobs.</p>
+        </li>
+        <li class="step">
+          <span class="step-num">02</span>
+          <h3>We confirm your location and dispatch a technician</h3>
+          <p>You get a fixed price, an accurate ETA and the name of the engineer heading your way.</p>
+        </li>
+        <li class="step">
+          <span class="step-num">03</span>
+          <h3>Fitted and back on the road — usually within the hour</h3>
+          <p>Roadside tyre fitting carried out to manufacturer torque specs, paid by card on the spot.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Section 4: Services -->
+  <section class="section section-light">
+    <div class="container">
+      <div class="text-center">
+        <span class="eyebrow" style="color: var(--color-accent);">Services</span>
+        <h2>What We Do</h2>
+        <p class="section-lede">From a single screw in a tyre to a full caravan rescue, we are kitted out for the lot — and we come to you.</p>
+      </div>
+
+      <div class="grid grid-3 services-grid">
+        {services.map((s) => (
+          <ServiceCard title={s.title} description={s.description} icon={s.icon} href={s.href} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Coverage -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="text-center">
+        <span class="eyebrow">Coverage</span>
+        <h2>Covering Nottinghamshire and Beyond</h2>
+        <p class="section-lede">
+          Dean is based in Bilsthorpe at the heart of Nottinghamshire, which puts him within a 25-minute strike radius of every major town in the county. He routinely covers the A1 from Grantham up to Doncaster, the A614 and M1 corridors, and will happily quote on jobs further afield in Lincolnshire, South Yorkshire and north Derbyshire &mdash; just call.
+        </p>
+      </div>
+
+      <div class="tag-cloud coverage-tags">
+        {areas.map((area) => (
+          <a class="tag" href={`/areas/${area.toLowerCase()}/`}>{area}</a>
+        ))}
+      </div>
+
+      <p class="coverage-roads text-center">
+        Key roads served: <strong>A1</strong> &middot; <strong>A614</strong> &middot; <strong>M1</strong> &middot; <strong>A60</strong> &middot; <strong>A38</strong> &middot; <strong>A52</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 6: About -->
+  <section class="section section-white">
+    <div class="container">
+      <div class="about-split">
+        <div class="about-split-text">
+          <span class="eyebrow" style="color: var(--color-accent);">About</span>
+          <h2>Founded by Dean Spicer &mdash; A Decade of Roadside Experience</h2>
+          <p class="about-bio">
+            Dean Spicer has been in the tyre trade since he was a teenager &mdash; working his way through national chains, independent garages, management and back to being a hands-on technician. He started Tyre Emergency Ltd in December 2023 with a straightforward goal: fast, efficient service at a fair price, done properly every single time. Because it&rsquo;s a sole-operator business, Dean takes every call himself, quotes every job himself and fits every tyre himself &mdash; so every customer gets someone with years of experience, not a rota. Over 450 five-star reviews in under two years say the rest.
+          </p>
+          <div class="badge-row about-badges">
+            <span class="badge">REACT Licensed</span>
+            <span class="badge">In the Trade Since His Teens</span>
+            <span class="badge">Fully Insured</span>
+          </div>
+        </div>
+        <div class="about-split-image">
+          <img
+            src="/images/emergency-tyre-fitting.webp"
+            alt="Dean Spicer fitting a tyre using a torque wrench on a customer's vehicle"
+            width="1600"
+            height="900"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: FAQ -->
+  <section class="section section-darker">
+    <div class="container">
+      <div class="text-center">
+        <span class="eyebrow">FAQ</span>
+        <h2>Common Questions</h2>
+      </div>
+      <FAQAccordion items={faqs} />
+    </div>
+  </section>
+
+  <!-- Section 8: Quote form -->
+  <section class="section section-light" id="quote">
+    <div class="container">
+      <div class="text-center">
+        <span class="eyebrow" style="color: var(--color-accent);">Get a Quote</span>
+        <h2>Request a Quote</h2>
+      </div>
+      <QuoteForm />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-lede {
+    max-width: 60ch;
+    margin: 0 auto 3rem;
+    font-size: 1.1rem;
+    color: inherit;
+    opacity: 0.85;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: 1100px) {
+    .reviews-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .reviews-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .google-rating {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    padding: 1.1rem 1.5rem;
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .google-rating-text {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    color: var(--color-text-dark);
+  }
+
+  .google-rating-text strong {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--color-text-dark);
+  }
+
+  .rating-stars {
+    color: var(--color-star);
+    letter-spacing: 0.1em;
+    font-size: 1.1rem;
+  }
+
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .step {
+    background-color: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .step-num {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 4rem;
+    color: var(--color-accent);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .step h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .step p {
+    color: var(--color-text-muted);
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .step a {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 900px) {
+    .steps {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  .services-grid {
+    margin-top: 1rem;
+  }
+
+  .coverage-tags {
+    margin-bottom: 2.5rem;
+  }
+
+  .coverage-roads {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .coverage-roads strong {
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+  }
+
+  .about-bio {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--color-text-muted-dark);
+    margin-bottom: 2rem;
+  }
+
+  .about-badges {
+    justify-content: flex-start;
+  }
+</style>

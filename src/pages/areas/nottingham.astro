@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const town = 'Nottingham';
+---
+
+<BaseLayout
+  title={`Mobile Tyre Fitting in ${town} | 24/7 Emergency Tyre Service`}
+  description={`24/7 mobile tyre fitting and emergency replacement throughout ${town} city centre and suburbs. 35-minute average ETA, fixed pricing, REACT licensed. Call 01623 325 123.`}
+>
+  <section class="area-hero">
+    <div class="container">
+      <span class="eyebrow">{town}</span>
+      <h1>Mobile Tyre Fitting in {town}</h1>
+      <p class="area-intro">
+        Nottingham is one of our busiest patches: city centre offices, the QMC and City hospital catchments, the trade estates around Bulwell and Colwick, and the residential streets of West Bridgford, Mapperley and Carlton. From our Bilsthorpe base we&rsquo;re typically with you in 35 minutes via the A60 or A614, and we work the A52, A453 and A6514 ring road every single day. Whether you&rsquo;ve hit a pothole on the inner city, picked up a screw at a Beeston supermarket or just want four new tyres fitted at the office while you&rsquo;re in a meeting, we&rsquo;ll handle it on the spot.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call: {phone}
+        </a>
+        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container container-narrow">
+      <span class="eyebrow" style="color: var(--color-accent);">Why Choose Us in {town}</span>
+      <h2>Three reasons {town} drivers stick with us</h2>
+      <ul class="area-points">
+        <li class="area-point">
+          <h3>City-centre access without the city-centre wait</h3>
+          <p>Multi-storey car parks, residents&rsquo; parking, lay-bys around Lace Market and the Old Market Square &mdash; we know where we can fit and how to get there fast.</p>
+        </li>
+        <li class="area-point">
+          <h3>Fleet-friendly service</h3>
+          <p>We work with several Nottingham-based fleets, taxis and trade vans. Account billing available; no setup hassle, just a same-day turnaround when a driver goes down.</p>
+        </li>
+        <li class="area-point">
+          <h3>Honest pricing, no city-centre tax</h3>
+          <p>The same fixed-price quote whether you&rsquo;re in NG1 or NG22. No surge pricing for evenings, weekends or the occasional Forest match-day callout.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-darker">
+    <div class="container container-narrow">
+      <span class="eyebrow">Nearby Areas Also Covered</span>
+      <h2>Beyond the {town} ring road</h2>
+      <p class="text-muted">We cover the whole NG postcode area and well beyond. Common nearby areas:</p>
+      <div class="tag-cloud">
+        <a class="tag" href="/areas/southwell/">Southwell</a>
+        <a class="tag" href="/areas/mansfield/">Mansfield</a>
+        <a class="tag" href="/areas/newark/">Newark</a>
+        <a class="tag" href="/areas/grantham/">Grantham</a>
+        <a class="tag" href="/areas/chesterfield/">Chesterfield</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light service-cta-section">
+    <div class="container container-narrow text-center">
+      <h2>Need a fitter in {town} right now?</h2>
+      <p class="text-muted-dark">We&rsquo;re probably already on a job a few miles from you. Phone the line and we&rsquo;ll redirect the nearest engineer.</p>
+      <a class="btn btn-primary btn-call" href={telHref}>
+        <span aria-hidden="true">&#9742;</span> Call {phone}
+      </a>
+    </div>
+  </section>
+</BaseLayout>
