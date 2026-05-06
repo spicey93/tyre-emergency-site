@@ -100,7 +100,10 @@ const telHref = `tel:${phone.replace(/\s+/g, '')}`;
               <textarea id="cf-message" name="message" rows="5" required></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block">Send message</button>
+            <button type="submit" class="btn btn-primary btn-block">
+              <span class="btn-label">Send message</span>
+              <span class="btn-sending" aria-hidden="true" style="display:none">Sending&hellip;</span>
+            </button>
 
             <p class="contact-form-disclaimer">
               In an emergency, please call <a href={telHref}><strong>{phone}</strong></a> &mdash; do not use this form.
@@ -111,6 +114,34 @@ const telHref = `tel:${phone.replace(/\s+/g, '')}`;
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('.contact-form');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector<HTMLButtonElement>('[type="submit"]');
+      const label = btn?.querySelector<HTMLElement>('.btn-label');
+      const sending = btn?.querySelector<HTMLElement>('.btn-sending');
+      if (btn) btn.disabled = true;
+      if (label) label.style.display = 'none';
+      if (sending) sending.style.display = '';
+      try {
+        await fetch('/contact/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(form) as any).toString(),
+        });
+        window.location.href = '/thank-you/';
+      } catch {
+        if (btn) btn.disabled = false;
+        if (label) label.style.display = '';
+        if (sending) sending.style.display = 'none';
+        alert('Something went wrong. Please call us on 01623 325 123 or try again.');
+      }
+    });
+  }
+</script>
 
 <style>
   .page-hero {

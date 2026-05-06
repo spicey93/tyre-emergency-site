@@ -81,13 +81,43 @@ const services = [
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary btn-block">Request a Quote</button>
+    <button type="submit" class="btn btn-primary btn-block">
+      <span class="btn-label">Request a Quote</span>
+      <span class="btn-sending" aria-hidden="true" style="display:none">Sending&hellip;</span>
+    </button>
 
     <p class="quote-disclaimer">
       For emergencies, please call <a href="tel:01623325123"><strong>01623 325 123</strong></a> directly &mdash; do not use this form.
     </p>
   </form>
 </div>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-netlify="true"]').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector<HTMLButtonElement>('[type="submit"]');
+      const label = btn?.querySelector<HTMLElement>('.btn-label');
+      const sending = btn?.querySelector<HTMLElement>('.btn-sending');
+      if (btn) btn.disabled = true;
+      if (label) label.style.display = 'none';
+      if (sending) sending.style.display = '';
+      try {
+        await fetch(window.location.pathname, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(form) as any).toString(),
+        });
+        window.location.href = '/thank-you/';
+      } catch {
+        if (btn) btn.disabled = false;
+        if (label) label.style.display = '';
+        if (sending) sending.style.display = 'none';
+        alert('Something went wrong. Please call us on 01623 325 123 or try again.');
+      }
+    });
+  });
+</script>
 
 <style>
   .quote-form-wrap {
