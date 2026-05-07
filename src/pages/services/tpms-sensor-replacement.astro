@@ -13,25 +13,25 @@ const serviceJsonLd = {
     '@type': 'LocalBusiness',
     name: 'Tyre Emergency Ltd',
     telephone: '+441623325123',
-    url: 'https://tyreemergency.com/',
+    url: 'https://tyreemergencyltd.co.uk/',
   },
   areaServed: 'Nottinghamshire, East Midlands',
   description: 'Diagnostic, replacement and reprogramming of TPMS sensors for cars, vans and commercial vehicles, carried out on-site.',
-  url: 'https://tyreemergency.com/services/tpms-sensor-replacement/',
+  url: 'https://tyreemergencyltd.co.uk/services/tpms-sensor-replacement/',
 };
 ---
 
 <BaseLayout
   title="TPMS Sensor Replacement Nottinghamshire | Mobile Diagnostic & Reprogramming"
-  description="Mobile TPMS sensor replacement, programming and cloning across Nottinghamshire. We diagnose, fit and reprogram on-site for all makes. Call 01623 325 123."
+  description="Mobile TPMS sensor replacement and programming across Nottinghamshire. IMI certified, with the diagnostic and programming tools on board to fit and pair a new sensor to your vehicle on-site. Call 01623 325 123."
   jsonLd={JSON.stringify(serviceJsonLd)}
 >
-  <section class="service-hero">
+  <section class="service-hero" style="background-image: url('/images/emergency-tyre-fitting.webp');">
     <div class="container">
       <span class="eyebrow">Diagnostic Service</span>
       <h1>TPMS Sensor Replacement</h1>
       <p class="service-intro">
-        On-site TPMS diagnostic, sensor replacement and reprogramming for all makes and models. From warning light on to warning light off &mdash; diagnosed, fitted and confirmed in a single visit.
+        TPMS work is one of those jobs a lot of mobile fitters won&rsquo;t touch &mdash; we&rsquo;re IMI certified for it, with the tools on board to take the old sensor out, fit a new one and program it to your vehicle there and then. From warning light on to warning light off in a single visit.
       </p>
       <div class="cta-row">
         <a class="btn btn-primary btn-call" href={telHref}>
@@ -44,14 +44,20 @@ const serviceJsonLd = {
 
   <section class="section section-white">
     <div class="container container-narrow">
-      <span class="eyebrow" style="color: var(--color-accent);">What&rsquo;s Included</span>
-      <h2>From scan to drive-away</h2>
+      <span class="eyebrow" style="color: var(--color-accent);">Read your warning light first</span>
+      <h2>What that amber light is actually telling you</h2>
+      <p>Knowing what the light is doing can save you a callout &mdash; or tell you to book one in:</p>
       <ul class="check-list">
-        <li><strong>Professional TPMS scan</strong> on every wheel to confirm which sensor has failed and check the others for low battery before we replace.</li>
-        <li><strong>Programmable universal sensors</strong> covering virtually every make on UK roads &mdash; we don&rsquo;t need to wait for a dealer-only part to arrive.</li>
-        <li><strong>Clone or fresh ID</strong> &mdash; we either copy the old sensor&rsquo;s ID to save you a relearn, or write a fresh ID and complete the relearn drive cycle if needed.</li>
-        <li><strong>New rubber or metal valve stem</strong> fitted with every sensor &mdash; rubber snap-in or metal bolt-in depending on what your wheels require &mdash; so the unit seals correctly and won&rsquo;t weep air.</li>
-        <li><strong>Confirmation drive-test</strong> with the scan tool reading live data &mdash; the warning light is properly off before we leave.</li>
+        <li><strong>Solid amber light</strong> &mdash; that&rsquo;s a tyre pressure issue, not a faulty sensor. Top your tyres up to the figure on the door pillar and the light should clear within a few miles. If it doesn&rsquo;t, give us a call.</li>
+        <li><strong>Flashing for about 60 seconds and then going solid</strong> &mdash; that&rsquo;s a fault in the system. Most often it&rsquo;s a sensor with a flat battery (they last around 7&ndash;10 years). That&rsquo;s the one to call us out for.</li>
+      </ul>
+      <h2 style="margin-top: 2rem;">What you get when we come out</h2>
+      <ul class="check-list">
+        <li><strong>Full TPMS scan on every wheel</strong> so we know exactly which sensor has gone &mdash; and we check the others for low battery while we&rsquo;re there, so the same problem doesn&rsquo;t reappear next month.</li>
+        <li><strong>Programmable sensors that cover virtually every make</strong> on UK roads &mdash; no waiting for a dealer-only part to land.</li>
+        <li><strong>Cloned or freshly programmed</strong> &mdash; we either copy the old sensor&rsquo;s ID across to save you a relearn, or program a new one in and complete the relearn cycle.</li>
+        <li><strong>New valve stem fitted with every sensor</strong> &mdash; rubber or metal to suit the wheel &mdash; so it seals properly and doesn&rsquo;t weep air later.</li>
+        <li><strong>Light confirmed off before we leave</strong>, with the scan tool reading live data from all four wheels.</li>
       </ul>
     </div>
   </section>
@@ -59,23 +65,23 @@ const serviceJsonLd = {
   <section class="section section-darker">
     <div class="container container-narrow">
       <span class="eyebrow">When You Need This</span>
-      <h2>Common TPMS callouts</h2>
+      <h2>The kind of TPMS calls we get</h2>
       <div class="scenarios">
         <article class="scenario">
-          <h3>TPMS warning light won&rsquo;t go off</h3>
-          <p>Pressures are correct, you&rsquo;ve done a reset, and the amber light is still on. Almost always one of the sensors has reached end-of-life. We diagnose which one in minutes.</p>
+          <h3>Light flashes for 60 seconds, then stays on</h3>
+          <p>Classic dead-battery sensor symptom. Pressures are fine but the system thinks something is wrong. We&rsquo;ll diagnose which sensor has died and replace it on the spot.</p>
         </article>
         <article class="scenario">
-          <h3>Pre-MOT failure prevention</h3>
-          <p>Permanently lit TPMS lights are an MOT failure on cars first registered after 1 January 2012. We&rsquo;ll diagnose and fix before the test rather than after.</p>
+          <h3>MOT round the corner</h3>
+          <p>Permanently lit TPMS lights are an MOT failure on most cars first registered after 1 January 2012. Get it sorted before the test rather than after &mdash; saves a re-test fee and a wasted morning.</p>
         </article>
         <article class="scenario">
-          <h3>Sensor damaged at fitting</h3>
-          <p>Another fitter has snapped a sensor stem or stripped the nut while changing your tyre. We can fit a programmable replacement and clone the original ID.</p>
+          <h3>Sensor damaged at the last fitting</h3>
+          <p>Another fitter has snapped a sensor stem or stripped the nut while changing a tyre. We can fit a programmable replacement and clone the original ID so the car doesn&rsquo;t need a relearn.</p>
         </article>
         <article class="scenario">
           <h3>Winter wheels with no sensors</h3>
-          <p>You&rsquo;ve bought a separate set of winter alloys without TPMS sensors. We can supply, fit and program four matching sensors so the system continues to function.</p>
+          <p>You&rsquo;ve picked up a separate set of winter alloys with no sensors in them. We&rsquo;ll supply, fit and program four matching sensors so the system carries on working through the swap.</p>
         </article>
       </div>
     </div>
@@ -84,7 +90,7 @@ const serviceJsonLd = {
   <section class="section section-light service-cta-section">
     <div class="container container-narrow text-center">
       <h2>TPMS warning on?</h2>
-      <p class="text-muted-dark">Don&rsquo;t risk an MOT fail. Phone us with the registration and we&rsquo;ll quote on the spot &mdash; in most cases we can be at you the same day.</p>
+      <p class="text-muted-dark">Tell us your registration and what the light&rsquo;s doing &mdash; we&rsquo;ll quote on the spot and in most cases get to you the same day. Don&rsquo;t risk an MOT fail.</p>
       <a class="btn btn-primary btn-call" href={telHref}>
         <span aria-hidden="true">&#9742;</span> Call {phone}
       </a>

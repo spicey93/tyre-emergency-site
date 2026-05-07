@@ -5,18 +5,18 @@ const phone = '01623 325 123';
 const telHref = `tel:${phone.replace(/\s+/g, '')}`;
 
 const areas = [
-  { name: 'Mansfield', slug: 'mansfield', eta: '25 min', blurb: 'Just down the road from our Bilsthorpe HQ. Average ETA 25 minutes including Mansfield Woodhouse, Forest Town, Sutton-in-Ashfield and Kirkby.' },
-  { name: 'Nottingham', slug: 'nottingham', eta: '35 min', blurb: 'City centre, suburbs and the ring road. From West Bridgford to Bulwell, the QMC catchment to Beeston.' },
-  { name: 'Newark', slug: 'newark', eta: '20 min', blurb: 'One of our closest postcodes — Newark-on-Trent, Balderton, Long Bennington and the A1 corridor.' },
-  { name: 'Worksop', slug: 'worksop', eta: '30 min', blurb: 'A1 / A57 junction territory. Manton Wood, Carlton-in-Lindrick, Shireoaks and the surrounding villages.' },
-  { name: 'Chesterfield', slug: 'chesterfield', eta: '35 min', blurb: 'Western edge of our patch via the A617. Markham Vale, Brimington, Walton and the M1 J29-J30 stretch.' },
-  { name: 'Doncaster', slug: 'doncaster', eta: '45 min', blurb: 'Up the A1 — central Doncaster, iPort, West Moor Park and the Tickhill / Rossington approach.' },
-  { name: 'Lincoln', slug: 'lincoln', eta: '50 min', blurb: 'Out east via the A46 or A57. City centre and surrounding LN postcodes including North Hykeham, Bracebridge Heath and Skellingthorpe.' },
-  { name: 'Retford', slug: 'retford', eta: '35 min', blurb: 'Bassetlaw country alongside our regular A1 routes. Ordsall, Babworth, the Levertons and out toward Gainsborough.' },
-  { name: 'Grantham', slug: 'grantham', eta: '50 min', blurb: 'Southern A1 reach. Central Grantham plus Barrowby, Great Gonerby, Harlaxton and Long Bennington.' },
-  { name: 'Southwell', slug: 'southwell', eta: '20 min', blurb: 'Practically on our doorstep. The Minster town and Halam, Halloughton, Upton and Farnsfield around it.' },
-  { name: 'Tuxford', slug: 'tuxford', eta: '25 min', blurb: 'Markham Moor, A1 / A57 junction, East Markham, Walesby and the Tuxford lorry parks.' },
-  { name: 'Blyth', slug: 'blyth', eta: '35 min', blurb: 'A1 / A614 junction at the top of our county patch. Bawtry, Ranskill, Mattersey and Barnby Moor.' },
+  { name: 'Mansfield', slug: 'mansfield', eta: '25 min', blurb: 'Full mobile service across Mansfield and the surrounding NG18/NG19 villages — emergency callouts, planned fitting, repairs, caravans, the lot.' },
+  { name: 'Nottingham', slug: 'nottingham', eta: '35 min', blurb: 'Mobile fitting across the whole NG postcode. We come to homes, workplaces and roadside callouts right across the city and suburbs.' },
+  { name: 'Newark', slug: 'newark', eta: '20 min', blurb: 'One of our closest postcodes. We cover Newark-on-Trent and the surrounding villages for everything from a planned set of four to a 2am roadside emergency.' },
+  { name: 'Worksop', slug: 'worksop', eta: '30 min', blurb: 'Full mobile tyre service across S80 — at home, at work or on the roadside. Cars, vans, caravans and TPMS work all sorted on-site.' },
+  { name: 'Chesterfield', slug: 'chesterfield', eta: '35 min', blurb: 'We come to you across Chesterfield and the surrounding area for emergency callouts, planned fitting and everything in between.' },
+  { name: 'Doncaster', slug: 'doncaster', eta: '45 min', blurb: 'Full mobile tyre service across the DN postcode — homes, workplaces, fleet sites and roadside emergencies.' },
+  { name: 'Lincoln', slug: 'lincoln', eta: '50 min', blurb: 'Mobile fitting across Lincoln and the surrounding LN postcodes. Whatever the job, we bring it all with us.' },
+  { name: 'Retford', slug: 'retford', eta: '35 min', blurb: 'Across Retford and the wider Bassetlaw area. Fitting at home, on the roadside or at the workplace, day or night.' },
+  { name: 'Grantham', slug: 'grantham', eta: '50 min', blurb: 'Full mobile tyre service across Grantham and the surrounding villages. Particularly handy for caravans and motorhomes you don\'t want to tow anywhere.' },
+  { name: 'Southwell', slug: 'southwell', eta: '20 min', blurb: 'Practically on our doorstep. The full mobile service for cars, vans, caravans and trailers without you moving an inch.' },
+  { name: 'Tuxford', slug: 'tuxford', eta: '25 min', blurb: 'Mobile tyre fitting across Tuxford and the surrounding villages — homes, workplaces, roadside callouts, all of it.' },
+  { name: 'Blyth', slug: 'blyth', eta: '35 min', blurb: 'Full mobile tyre service across Blyth and the surrounding north Notts villages, 24/7.' },
 ];
 ---
 
@@ -28,7 +28,7 @@ const areas = [
     <div class="container">
       <span class="eyebrow">Coverage</span>
       <h1>Twelve towns. One county. 24/7.</h1>
-      <p class="page-hero-sub">Dean is based in Bilsthorpe at the heart of Nottinghamshire, which puts him within easy reach of every major town in the county and well into Lincolnshire, South Yorkshire and north Derbyshire. Click any area below for local detail, or just give him a call and he&rsquo;ll tell you on the spot whether he can reach you.</p>
+      <p class="page-hero-sub">We&rsquo;re based in Bilsthorpe right in the middle of Nottinghamshire, so the whole county is on our doorstep &mdash; plus a fair chunk of Lincolnshire, South Yorkshire and north Derbyshire. Pick your town below, or just give us a call and we&rsquo;ll tell you straight whether we can get to you.</p>
       <div class="cta-row" style="margin-top: 1.5rem;">
         <a class="btn btn-primary btn-call" href={telHref}>
           <span aria-hidden="true">&#9742;</span> Call: {phone}
@@ -43,7 +43,7 @@ const areas = [
       <div class="text-center">
         <span class="eyebrow" style="color: var(--color-accent);">Pick your area</span>
         <h2>Where we cover</h2>
-        <p class="section-lede-dark">Average ETAs from our Bilsthorpe HQ. Real times, not best-case &mdash; we&rsquo;ll always confirm the live ETA on the call.</p>
+        <p class="section-lede-dark">Typical ETAs from our Bilsthorpe base &mdash; honest figures, not best-case ones. We&rsquo;ll always confirm a realistic live ETA when you ring.</p>
       </div>
 
       <div class="grid grid-3 areas-grid">
@@ -64,8 +64,8 @@ const areas = [
   <section class="section section-darker">
     <div class="container container-narrow text-center">
       <span class="eyebrow">Not on the list?</span>
-      <h2>Phone us anyway.</h2>
-      <p class="text-muted">If you&rsquo;re close to one of the areas above, the answer is almost certainly yes. If we genuinely can&rsquo;t reach you fast enough we&rsquo;ll point you to a trusted local who can &mdash; we&rsquo;d rather you get sorted than sit in limbo.</p>
+      <h2>Give us a call anyway.</h2>
+      <p class="text-muted">If you&rsquo;re anywhere near one of these towns, the answer&rsquo;s almost certainly yes. And if we genuinely can&rsquo;t reach you fast enough, we&rsquo;ll point you to someone reliable who can &mdash; we&rsquo;d rather you get sorted than sat in limbo.</p>
       <div class="cta-row" style="justify-content: center; margin-top: 1rem;">
         <a class="btn btn-primary btn-call" href={telHref}>
           <span aria-hidden="true">&#9742;</span> Call {phone}

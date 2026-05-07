@@ -13,25 +13,25 @@ const serviceJsonLd = {
     '@type': 'LocalBusiness',
     name: 'Tyre Emergency Ltd',
     telephone: '+441623325123',
-    url: 'https://tyreemergency.com/',
+    url: 'https://tyreemergencyltd.co.uk/',
   },
   areaServed: 'Nottinghamshire, East Midlands',
   description: 'On-site puncture repair carried out to British Standard AU159 across Nottinghamshire and the surrounding counties.',
-  url: 'https://tyreemergency.com/services/mobile-tyre-repair/',
+  url: 'https://tyreemergencyltd.co.uk/services/mobile-tyre-repair/',
 };
 ---
 
 <BaseLayout
   title="Mobile Tyre Repair Nottinghamshire | BS AU159 Puncture Repair"
-  description="On-site puncture repair carried out to British Standard AU159 across Nottinghamshire. We come to you, plug-and-patch from the inside, fully guaranteed. Call 01623 325 123."
+  description="Mobile puncture repair carried out to British Standard AU159 within ~10 miles of Bilsthorpe, Nottinghamshire. We bring a replacement tyre too, just in case, so you&rsquo;re not stuck. Call 01623 325 123."
   jsonLd={JSON.stringify(serviceJsonLd)}
 >
-  <section class="service-hero">
+  <section class="service-hero" style="background-image: url('/images/puncture-repair.webp');">
     <div class="container">
       <span class="eyebrow">Repair Service</span>
       <h1>Mobile Tyre Repair</h1>
       <p class="service-intro">
-        On-site puncture repair carried out to British Standard AU159. If it can be repaired safely, we&rsquo;ll repair it &mdash; and if it can&rsquo;t, we&rsquo;ll tell you straight and quote a replacement instead.
+        A puncture repair is the smart option when you&rsquo;ve still got plenty of life left in the tyre and don&rsquo;t want to throw money at a brand new one. We do them properly to British Standard AU159 &mdash; and if the damage means a repair isn&rsquo;t safe, we&rsquo;ve already brought a replacement tyre with us so you&rsquo;re not stuck.
       </p>
       <div class="cta-row">
         <a class="btn btn-primary btn-call" href={telHref}>
@@ -55,14 +55,14 @@ const serviceJsonLd = {
           />
         </div>
         <div class="service-split-content">
-          <span class="eyebrow">What&rsquo;s Included</span>
-          <h2>Every repair, done by the book</h2>
+          <span class="eyebrow">A few things worth knowing</span>
+          <h2>How we handle puncture repairs</h2>
           <ul class="check-list">
-            <li><strong>BS AU159 standard from start to finish</strong> &mdash; tyre off the rim, inside inspection, combined plug-and-patch from the inside, never a string-and-glue exterior fix.</li>
-            <li><strong>Full inside inspection</strong> for secondary damage, casing breakdown, run-flat scuffing or hidden ply separation that an exterior plug would miss.</li>
-            <li><strong>Re-balance after repair</strong> using our calibrated mobile balancer &mdash; included as standard.</li>
-            <li><strong>Pressure set to manufacturer spec</strong> with a digital gauge, plus TPMS reset and confirmation if your vehicle uses sensors.</li>
-            <li><strong>Honest assessment first</strong> &mdash; if the puncture is in the shoulder, sidewall, or the tyre is below the legal limit, we&rsquo;ll quote a replacement and tell you why.</li>
+            <li><strong>Within around 10 miles of Bilsthorpe (NG22)</strong> &mdash; puncture repairs are priced from &pound;50 upwards. Outside that radius the maths stops working for both of us, so we&rsquo;ll let you know on the call rather than waste your time.</li>
+            <li><strong>We bring a replacement tyre too, just in case.</strong> Not every puncture is repairable &mdash; if it&rsquo;s in the sidewall, shoulder, or the tyre&rsquo;s below the limit, we&rsquo;ve already got a fresh one on the van so we don&rsquo;t leave you with an empty wheel.</li>
+            <li><strong>Done to BS AU159</strong> &mdash; tyre off the rim, full inside inspection and a combined plug-and-patch from the inside, not a string-and-glue job stuck in from the outside.</li>
+            <li><strong>Re-balanced after the repair</strong> on the mobile balancer, pressures set to the manufacturer&rsquo;s figure, TPMS reset if your vehicle uses sensors.</li>
+            <li><strong>Honest call on whether it&rsquo;s worth repairing</strong> &mdash; if the tyre&rsquo;s near the end of its life anyway, we&rsquo;ll tell you straight rather than charge you for a repair that&rsquo;s only going to last weeks.</li>
           </ul>
         </div>
       </div>
@@ -72,23 +72,23 @@ const serviceJsonLd = {
   <section class="section section-darker">
     <div class="container container-narrow">
       <span class="eyebrow">When You Need This</span>
-      <h2>Typical repair callouts</h2>
+      <h2>Typical repair jobs</h2>
       <div class="scenarios">
         <article class="scenario">
-          <h3>Screw or nail in the central tread</h3>
-          <p>You&rsquo;ve seen the head of a screw embedded in the tread or pulled one out and the tyre&rsquo;s gone soft. The classic candidate for a clean BS AU159 repair.</p>
+          <h3>Screw or nail in the tread</h3>
+          <p>You&rsquo;ve spotted the head of a screw in the tyre or pulled one out and it&rsquo;s now going down. If it&rsquo;s in the central tread area, this is exactly the sort of puncture we can repair properly and give you years more out of the tyre.</p>
         </article>
         <article class="scenario">
-          <h3>Slow puncture you&rsquo;ve been topping up</h3>
-          <p>The tyre needs air every couple of days. We&rsquo;ll come out, find the leak (often a tiny shard of glass), and decide on repair or replace based on the actual damage.</p>
+          <h3>Slow puncture you keep topping up</h3>
+          <p>You&rsquo;ve been pumping it up every few days and it&rsquo;s starting to get annoying. We&rsquo;ll get the tyre off, find the leak (often a tiny shard of glass) and tell you whether to repair it or replace it.</p>
         </article>
         <article class="scenario">
-          <h3>Puncture from a fleet driver</h3>
-          <p>Your driver&rsquo;s parked up at a customer site with a flat. We come to wherever they are and turn the job around fast so the route can continue.</p>
+          <h3>Plenty of tread left, don&rsquo;t want to bin it</h3>
+          <p>The tyre is fairly new, the tread is good, and you don&rsquo;t want to spend money on a fresh one if a proper repair will do. If it&rsquo;s safely repairable, that&rsquo;s the call we&rsquo;ll make.</p>
         </article>
         <article class="scenario">
-          <h3>Pre-MOT or pre-trip check</h3>
-          <p>Tyre&rsquo;s deflating gradually before a long drive. We&rsquo;ll diagnose and repair (or replace) on the driveway so you can leave with confidence.</p>
+          <h3>Pre-trip check before a long drive</h3>
+          <p>Tyre&rsquo;s losing air slowly and you&rsquo;ve got a long journey coming up. We&rsquo;ll get it sorted on the driveway so you can leave without it nagging at the back of your mind.</p>
         </article>
       </div>
     </div>
@@ -97,7 +97,7 @@ const serviceJsonLd = {
   <section class="section section-light service-cta-section">
     <div class="container container-narrow text-center">
       <h2>Got a puncture?</h2>
-      <p class="text-muted-dark">If we can repair it, we will. If we can&rsquo;t, we&rsquo;ll tell you why and offer a fair price on a replacement instead. Phone us with the registration and we&rsquo;ll quote.</p>
+      <p class="text-muted-dark">Give us a call with your registration and your location. If we can repair it we will &mdash; and if we can&rsquo;t, we&rsquo;ve got a replacement tyre with us so you&rsquo;re still going home that day.</p>
       <a class="btn btn-primary btn-call" href={telHref}>
         <span aria-hidden="true">&#9742;</span> Call {phone}
       </a>

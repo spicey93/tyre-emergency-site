@@ -38,37 +38,37 @@ const reviews = [
 const services = [
   {
     title: 'Emergency Tyre Replacement',
-    description: 'Stranded with a blowout? We\'ll be with you fast with a fitted replacement, day or night.',
+    description: 'Stuck with a flat at the worst possible time? We\'ll be there at a moment\'s notice with a fitted replacement, day or night.',
     href: '/services/emergency-tyre-replacement/',
     icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6"/><path d="m4.93 10.93 4.24 4.24"/><path d="M2 18h6"/><path d="m4.93 25.07 4.24-4.24" transform="translate(0 -7)"/><circle cx="12" cy="12" r="9"/></svg>',
   },
   {
     title: 'Mobile Tyre Fitting',
-    description: 'Pre-booked tyre fitting at your home or workplace — no driving across town, no waiting room.',
+    description: 'Everything a tyre shop does — properly fitted, balanced and torqued — done from the comfort of your own home.',
     href: '/services/mobile-tyre-fitting/',
     icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/></svg>',
   },
   {
     title: 'Mobile Caravan Tyre Fitting',
-    description: 'On-site tyre service for caravans, motorhomes and trailers. Specialist sizes carried as standard.',
+    description: 'No towing the ‘van anywhere. We come to you and handle motor movers, Tyron bands and the rest with care.',
     href: '/services/mobile-caravan-tyre-fitting/',
     icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2"/><circle cx="9" cy="19" r="2"/><path d="M18 12h4l-2 5h-2"/></svg>',
   },
   {
     title: 'Mobile Tyre Repair',
-    description: 'Punctures plugged or patched to British Standard AU159 — quicker and cheaper than a new tyre.',
+    description: 'Plenty of life left in the tyre? A proper BS AU159 repair saves you fitting a new one. We bring a spare just in case.',
     href: '/services/mobile-tyre-repair/',
     icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a3 3 0 1 1 4.2 4.2l-9.9 9.9-5.7 1.5 1.5-5.7Z"/><path d="m13 8 3 3"/></svg>',
   },
   {
     title: 'Locking Wheel Nut Removal',
-    description: 'Lost the key? We extract seized and missing locking nuts on the roadside without damaging your wheel.',
+    description: 'Damaged or missing locker stopping you getting other work done? Don\'t make it worse — give us a call.',
     href: '/services/locking-wheel-nut-removal/',
     icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="12" height="9" rx="2"/><path d="M9 11V7a3 3 0 0 1 6 0v4"/></svg>',
   },
   {
     title: 'TPMS Sensor Replacement',
-    description: 'Diagnostic, replacement and reprogramming of tyre pressure sensors for all makes and models.',
+    description: 'IMI certified for TPMS work. Diagnostic, sensor swap and programming — done on your driveway in one visit.',
     href: '/services/tpms-sensor-replacement/',
     icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
   },
@@ -81,36 +81,40 @@ const areas = [
 
 const faqs = [
   {
-    question: 'How quickly can you reach me?',
-    answer: 'In our core coverage area across Nottinghamshire, our average ETA is 30 minutes. We commit to a 60-minute maximum response time anywhere within our service zone, and we will give you an honest, accurate ETA over the phone the moment we know your location and the closest available technician.',
+    question: 'How quickly can you get to me?',
+    answer: 'Across most of Nottinghamshire we average around 30 minutes. We always give you a realistic ETA over the phone — not a best-case figure to get you off the call. If we can\'t get to you fast enough, we\'ll tell you straight away rather than have you waiting around.',
   },
   {
-    question: 'Do you operate 24 hours a day, 7 days a week?',
-    answer: 'Yes. We are a genuine 24/7 service — that includes nights, weekends, Christmas Day, bank holidays and every other day of the year. There is always a REACT licensed technician on call. The phone is answered by a real person, not a recorded message or a callback service.',
+    question: 'Are you really 24/7?',
+    answer: 'Yes — nights, weekends, Christmas Day, bank holidays, all of it. The phone is answered by a real person every time, not a voicemail or a callback service. Turning up when other people won\'t is a big part of what we do.',
   },
   {
-    question: 'What if you don\'t have my tyre size in stock?',
-    answer: 'Every job is sourced before Dean sets off — he confirms your tyre size on the phone, checks it against your vehicle\'s requirements and collects from one of his local suppliers before heading to you. For genuine emergencies he\'ll give an honest ETA that includes any supplier collection time, and will explore every option to get to you as quickly as possible.',
+    question: 'Will you have my tyre size?',
+    answer: 'We source the right tyre for your vehicle before we set off — confirmed against your reg on the phone and collected from one of our local suppliers on the way. If a particular size needs ordering in we\'ll tell you upfront how that affects the timing.',
   },
   {
-    question: 'Is it safe to wait by my vehicle while you come?',
-    answer: 'On a motorway hard shoulder or smart motorway, no — get out of the vehicle, behind the barrier where possible, and call the police on 101 (or 999 if you feel in danger) before calling us. On A-roads, B-roads and at home, stay in the vehicle with hazards on if traffic is moving, or move to a safe verge. We will talk you through the safest option when you call.',
+    question: 'I don\'t know exactly where I am — is that a problem?',
+    answer: 'Not at all. We\'ll send you a quick text and you can share your location straight from your phone. We\'ll see exactly where you are and head over.',
   },
   {
-    question: 'How much does emergency tyre fitting cost?',
-    answer: 'The price depends on a few things: how urgently you need the job done, the tyre size, the brand you choose, and how far away you are. Dean always gives a fixed all-in price over the phone before setting off — no hidden extras on arrival. Across over 3,000 jobs the average all-in price works out at around £177, which gives a rough guide, but your quote could be higher or lower depending on the factors above.',
+    question: 'Is it safe to wait in my car?',
+    answer: 'On a motorway hard shoulder or smart motorway, no — get out of the vehicle, behind the barrier if you can, and call the police on 101 (or 999 if you feel in danger) before you call us. On A-roads, B-roads and at home, stay in the car with hazards on if traffic is moving, or move to a safe verge. We\'ll talk you through it when you ring.',
+  },
+  {
+    question: 'How much does it cost?',
+    answer: 'The price depends on the tyre, your vehicle, where you are and how urgent it is. We\'re not the cheapest — we\'re built around speed, convenience and turning up when we say we will. You\'ll get an exact, all-in price on the phone before we set off, with no hidden extras when we arrive. As a rough guide, our average all-in price across 3,000+ jobs is around £177, but yours could be higher or lower depending on the factors above.',
   },
   {
     question: 'Do you cover my area?',
-    answer: 'We cover the whole of Nottinghamshire and the surrounding areas including Mansfield, Nottingham, Newark, Worksop, Chesterfield, Doncaster, Lincoln, Retford, Grantham, Southwell, Tuxford and Blyth, plus the A1, A614 and M1 corridors. Not sure if you\'re in range? Just give us a call — if we can\'t reach you, we\'ll point you to a trusted local who can.',
+    answer: 'We cover the whole of Nottinghamshire and the surrounding counties — Mansfield, Nottingham, Newark, Worksop, Chesterfield, Doncaster, Lincoln, Retford, Grantham, Southwell, Tuxford, Blyth and everywhere in between. Not sure if you\'re in range? Just give us a call. If we genuinely can\'t reach you we\'ll point you towards someone reliable who can.',
   },
   {
-    question: 'Can you help with caravans and vans, not just cars?',
-    answer: 'Absolutely. Dean fits tyres for cars, SUVs, light commercial vans, caravans, motorhomes and trailers. Specialist sizes are sourced to order from suppliers before the visit. He\'s particularly experienced with caravans and understands the things that can go wrong if you don\'t know what you\'re doing — motor movers, stabilising arms and correct load ratings for the unit.',
+    question: 'Cars only, or do you do caravans and vans too?',
+    answer: 'All of it — cars, SUVs, vans, caravans, motorhomes and trailers. Caravans in particular are made for mobile fitting: no towing the \'van anywhere and no risk of an inexperienced fitter damaging your motor mover or Tyron bands.',
   },
   {
-    question: 'What payment methods do you accept?',
-    answer: 'We take all major debit and credit cards on the roadside via contactless and chip-and-pin, plus Apple Pay and Google Pay. We can also invoice fleet, business and insurance customers on agreed account terms. We do not require any payment up front — you only pay once the work is done and you\'re happy.',
+    question: 'How do I pay?',
+    answer: 'All major debit and credit cards via contactless or chip-and-pin, plus Apple Pay and Google Pay. We can also invoice fleet, business and insurance customers on account. Nothing is paid up front — you pay once the work\'s done and you\'re happy.',
   },
 ];
 ---
@@ -121,13 +125,13 @@ const faqs = [
   jsonLd={JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    '@id': 'https://tyreemergency.com/#business',
+    '@id': 'https://tyreemergencyltd.co.uk/#business',
     name: 'Tyre Emergency Ltd',
     description: '24/7 emergency mobile tyre fitting, replacement and repair across Nottinghamshire and the wider East Midlands.',
-    url: 'https://tyreemergency.com/',
+    url: 'https://tyreemergencyltd.co.uk/',
     telephone: '+441623325123',
     email: 'contact@tyreemergency.com',
-    image: 'https://tyreemergency.com/og-image.jpg',
+    image: 'https://tyreemergencyltd.co.uk/og-image.jpg',
     priceRange: '££',
     address: {
       '@type': 'PostalAddress',
@@ -168,7 +172,7 @@ const faqs = [
 >
   <HeroSection
     title="Flat Tyre? We&rsquo;ll Be There in 60 Minutes."
-    subtitle="Mobile tyre fitting and emergency replacement across Nottinghamshire. We come to you — at home, work, or on the roadside."
+    subtitle="Mobile tyre fitting and emergency replacement across Nottinghamshire. We come to you — at home, at work or on the roadside — with everything we need to get the job done first time."
     ctaPhone={phone}
     bgImage="/images/tyre-emergency-ltd.webp"
     bgImageAlt="Tyre Emergency Ltd service van open on a motorway hard shoulder with equipment ready"
@@ -180,7 +184,7 @@ const faqs = [
       <div class="text-center">
         <span class="eyebrow" style="color: var(--color-accent);">Trusted by Drivers</span>
         <h2>Five Stars. Hundreds of Drivers Rescued.</h2>
-        <p class="section-lede">A few words from real customers we&rsquo;ve fixed up roadside, on the drive, and in the office car park.</p>
+        <p class="section-lede">A few words from real customers we&rsquo;ve sorted out &mdash; on the roadside, on the driveway and in the office car park.</p>
       </div>
 
       <div class="reviews-grid">
@@ -220,18 +224,18 @@ const faqs = [
       <ol class="steps">
         <li class="step">
           <span class="step-num">01</span>
-          <h3>Call or request a quote online</h3>
-          <p>Phone us 24/7 on <a href={`tel:${phone.replace(/\s+/g, '')}`}>{phone}</a> or use the quote form below for non-urgent jobs.</p>
+          <h3>Pick up the phone</h3>
+          <p>Ring us 24/7 on <a href={`tel:${phone.replace(/\s+/g, '')}`}>{phone}</a> or use the quote form below if it&rsquo;s not urgent. A real person picks up &mdash; no menus, no callback queue.</p>
         </li>
         <li class="step">
           <span class="step-num">02</span>
-          <h3>We confirm your location and dispatch a technician</h3>
-          <p>You get a fixed price, an accurate ETA and the name of the engineer heading your way.</p>
+          <h3>Exact price, realistic ETA</h3>
+          <p>Tell us your reg and your location (we&rsquo;ll text if you&rsquo;re not sure where you are) and we&rsquo;ll give you the all-in price and an honest ETA on the spot.</p>
         </li>
         <li class="step">
           <span class="step-num">03</span>
-          <h3>Fitted and back on the road — usually within the hour</h3>
-          <p>Roadside tyre fitting carried out to manufacturer torque specs, paid by card on the spot.</p>
+          <h3>Fitted and back on the road</h3>
+          <p>We arrive with everything we need, fit it properly to manufacturer torque, and you tap your card when we&rsquo;re done.</p>
         </li>
       </ol>
     </div>
@@ -243,7 +247,7 @@ const faqs = [
       <div class="text-center">
         <span class="eyebrow" style="color: var(--color-accent);">Services</span>
         <h2>What We Do</h2>
-        <p class="section-lede">From a single screw in a tyre to a full caravan rescue, we are kitted out for the lot — and we come to you.</p>
+        <p class="section-lede">From a single screw in a tyre to a full caravan job, we&rsquo;re kitted out for the lot &mdash; and we come to you.</p>
       </div>
 
       <div class="grid grid-3 services-grid">
@@ -261,7 +265,7 @@ const faqs = [
         <span class="eyebrow">Coverage</span>
         <h2>Covering Nottinghamshire and Beyond</h2>
         <p class="section-lede">
-          Dean is based in Bilsthorpe at the heart of Nottinghamshire, which puts him within a 25-minute strike radius of every major town in the county. He routinely covers the A1 from Grantham up to Doncaster, the A614 and M1 corridors, and will happily quote on jobs further afield in Lincolnshire, South Yorkshire and north Derbyshire &mdash; just call.
+          We&rsquo;re based in Bilsthorpe right in the middle of Nottinghamshire, so most of the county is on our doorstep. We regularly run out into Lincolnshire, South Yorkshire and north Derbyshire too &mdash; if you&rsquo;re not sure whether we&rsquo;ll come to you, just give us a ring and we&rsquo;ll tell you straight.
         </p>
       </div>
 
@@ -285,7 +289,7 @@ const faqs = [
           <span class="eyebrow" style="color: var(--color-accent);">About</span>
           <h2>Founded by Dean Spicer &mdash; A Decade of Roadside Experience</h2>
           <p class="about-bio">
-            Dean Spicer has been in the tyre trade since he was a teenager &mdash; working his way through national chains, independent garages, management and back to being a hands-on technician. He started Tyre Emergency Ltd in December 2023 with a straightforward goal: fast, efficient service at a fair price, done properly every single time. Because it&rsquo;s a sole-operator business, Dean takes every call himself, quotes every job himself and fits every tyre himself &mdash; so every customer gets someone with years of experience, not a rota. Over 450 five-star reviews in under two years say the rest.
+            Dean has been in the tyre trade since he was a teenager &mdash; national chains, independent garages, time in management, and back to being hands-on with the tools. Tyre Emergency Ltd was set up in December 2023 with a simple idea: build a business around speed, convenience and being properly straight with people. Because it&rsquo;s a sole-operator outfit, Dean answers every call, gives every quote and fits every tyre himself. No rota, no agency cover &mdash; the same experienced fitter whether you ring at noon or midnight. Over 450 five-star reviews in under two years say the rest.
           </p>
           <div class="badge-row about-badges">
             <span class="badge">REACT Licensed</span>

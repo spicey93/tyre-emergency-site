@@ -7,15 +7,16 @@ const town = 'Southwell';
 ---
 
 <BaseLayout
-  title={`Mobile Tyre Fitting in ${town} | 24/7 A612 Tyre Service`}
-  description={`24/7 mobile tyre fitting throughout ${town} and surrounding villages. 20-minute average ETA from our Bilsthorpe HQ. Call 01623 325 123.`}
+  title={`Mobile Tyre Fitting in ${town} | 24/7 Emergency Service`}
+  description={`Mobile tyre fitting, emergency replacement, puncture repair, caravan tyres, locking wheel nut removal and TPMS in ${town}. We come to you, 24/7. Call 01623 325 123.`}
 >
   <section class="area-hero">
     <div class="container">
       <span class="eyebrow">{town}</span>
       <h1>Mobile Tyre Fitting in {town}</h1>
       <p class="area-intro">
-        24/7 mobile tyre fitting across Southwell and the surrounding villages. 20-minute average ETA from our Bilsthorpe base.      </p>
+        Yes, we cover Southwell. We come to you for emergency callouts, planned tyre fitting, puncture repairs and more &mdash; 24/7.
+      </p>
       <div class="cta-row">
         <a class="btn btn-primary btn-call" href={telHref}>
           <span aria-hidden="true">&#9742;</span> Call: {phone}
@@ -27,20 +28,28 @@ const town = 'Southwell';
 
   <section class="section section-white">
     <div class="container container-narrow">
-      <span class="eyebrow" style="color: var(--color-accent);">Why Choose Us in {town}</span>
-      <h2>Three reasons {town} drivers call us first</h2>
+      <span class="eyebrow" style="color: var(--color-accent);">What we do in {town}</span>
+      <h2>The full mobile tyre service, on your driveway or wherever you&rsquo;ve stopped</h2>
       <ul class="area-points">
         <li class="area-point">
-          <h3>One of our fastest postcodes</h3>
-          <p>NG25 is on our doorstep. We&rsquo;ve done jobs in central Southwell where we were at the door before the kettle boiled.</p>
+          <h3>Emergency tyre replacement</h3>
+          <p>Stranded with a flat at the worst possible time? We&rsquo;re ready to go at a moment&rsquo;s notice with the right tyre and the kit to fit it on the spot.</p>
         </li>
         <li class="area-point">
-          <h3>Cars, vans and caravans all covered</h3>
-          <p>Whatever you&rsquo;re driving, we source the right tyre before setting off. Cars, SUVs, light vans and caravans all handled on-site.</p>
+          <h3>Mobile tyre fitting at home or work</h3>
+          <p>Everything a tyre shop does &mdash; fitted, balanced and torqued correctly &mdash; without you driving anywhere or sitting in a waiting room.</p>
         </li>
         <li class="area-point">
-          <h3>Local for a reason</h3>
-          <p>Being based in Bilsthorpe means Southwell and the surrounding villages are on our doorstep. Short response times, honest pricing and a service built around getting you back on the road quickly.</p>
+          <h3>Puncture repairs</h3>
+          <p>If your tyre still has plenty of life in it, a proper BS AU159 repair saves you fitting a new one. We bring a replacement tyre too, just in case.</p>
+        </li>
+        <li class="area-point">
+          <h3>Caravans, motorhomes and trailers</h3>
+          <p>No towing the &lsquo;van anywhere &mdash; we come to you and handle motor movers, Tyron bands and the rest with care.</p>
+        </li>
+        <li class="area-point">
+          <h3>Locking wheel nut removal &amp; TPMS</h3>
+          <p>Damaged locker stopping you getting other work done? TPMS warning light flashing for 60 seconds before going solid? Both jobs handled on-site.</p>
         </li>
       </ul>
     </div>
@@ -48,9 +57,30 @@ const town = 'Southwell';
 
   <section class="section section-darker">
     <div class="container container-narrow">
-      <span class="eyebrow">Nearby Areas Also Covered</span>
-      <h2>Across the {town} catchment</h2>
-      <p class="text-muted">A short drive in any direction and we&rsquo;ve got you:</p>
+      <span class="eyebrow">Why drivers in {town} choose us</span>
+      <h2>Built for speed, convenience and turning up on time</h2>
+      <ul class="area-points">
+        <li class="area-point">
+          <h3>An exact price, an honest ETA</h3>
+          <p>We give you the all-in price and a realistic ETA on the phone before we set off &mdash; no hidden costs and no best-case promises that don&rsquo;t happen.</p>
+        </li>
+        <li class="area-point">
+          <h3>We arrive on time</h3>
+          <p>Important when you need the car for work or the school run. The cheaper mobile fitters can be unreliable and let people down &mdash; that&rsquo;s the gap we&rsquo;re built to fill.</p>
+        </li>
+        <li class="area-point">
+          <h3>Every job done by the same experienced fitter</h3>
+          <p>It&rsquo;s a sole-operator business &mdash; the same person who answers the phone is the one who turns up at your door.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container container-narrow">
+      <span class="eyebrow" style="color: var(--color-accent);">Nearby areas also covered</span>
+      <h2>Just outside {town}? We&rsquo;ve still got you</h2>
+      <p>Plenty of our regulars are in the surrounding villages and towns. Tap any of these for more, or just give us a call.</p>
       <div class="tag-cloud">
         <a class="tag" href="/areas/mansfield/">Mansfield</a>
         <a class="tag" href="/areas/newark/">Newark</a>
@@ -64,7 +94,7 @@ const town = 'Southwell';
   <section class="section section-light service-cta-section">
     <div class="container container-narrow text-center">
       <h2>Tyre trouble in {town}?</h2>
-      <p class="text-muted-dark">We&rsquo;re your closest properly equipped mobile fitter. Phone the line for a real ETA.</p>
+      <p class="text-muted-dark">Pick up the phone and you&rsquo;ll have an exact price and a realistic ETA within minutes.</p>
       <a class="btn btn-primary btn-call" href={telHref}>
         <span aria-hidden="true">&#9742;</span> Call {phone}
       </a>

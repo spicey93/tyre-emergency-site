@@ -13,25 +13,25 @@ const serviceJsonLd = {
     '@type': 'LocalBusiness',
     name: 'Tyre Emergency Ltd',
     telephone: '+441623325123',
-    url: 'https://tyreemergency.com/',
+    url: 'https://tyreemergencyltd.co.uk/',
   },
   areaServed: 'Nottinghamshire, East Midlands',
   description: 'Pre-booked mobile tyre fitting at your home, workplace or anywhere else convenient, across Nottinghamshire and the surrounding counties.',
-  url: 'https://tyreemergency.com/services/mobile-tyre-fitting/',
+  url: 'https://tyreemergencyltd.co.uk/services/mobile-tyre-fitting/',
 };
 ---
 
 <BaseLayout
   title="Mobile Tyre Fitting Nottinghamshire | We Come To You"
-  description="Pre-booked mobile tyre fitting at your home or workplace across Nottinghamshire. Same-day appointments, fixed pricing, calibrated balancing on-site. Call 01623 325 123."
+  description="Mobile tyre fitting at your home or workplace across Nottinghamshire. Everything a tyre shop does &mdash; properly fitted, balanced and torqued &mdash; without you having to drive anywhere. Call 01623 325 123."
   jsonLd={JSON.stringify(serviceJsonLd)}
 >
-  <section class="service-hero">
+  <section class="service-hero" style="background-image: url('/images/mobile-tyre-fitting.webp');">
     <div class="container">
       <span class="eyebrow">Pre-booked Service</span>
       <h1>Mobile Tyre Fitting</h1>
       <p class="service-intro">
-        Pre-booked mobile tyre fitting at your home or workplace. No driving to a garage, no waiting room &mdash; we come to you with the tyres and the kit, and have most jobs done in under 45 minutes.
+        You can&rsquo;t always get to a garage &mdash; and even when you can, it&rsquo;s a chunk of your day gone. We come to you instead. Everything a tyre shop does, done from the comfort of your own home: tyres fitted properly, wheels balanced and nuts torqued correctly. No mess, no hassle, and just as quick.
       </p>
       <div class="cta-row">
         <a class="btn btn-primary btn-call" href={telHref}>
@@ -55,14 +55,14 @@ const serviceJsonLd = {
           />
         </div>
         <div class="service-split-content">
-          <span class="eyebrow">What&rsquo;s Included</span>
-          <h2>What you get with every booking</h2>
+          <span class="eyebrow">What you get</span>
+          <h2>The full tyre-shop job, on your driveway</h2>
           <ul class="check-list">
-            <li><strong>A clear quote over the phone</strong> before a slot is confirmed &mdash; brand, model, size and all-in price. If you need it in writing, a message or email can be arranged.</li>
-            <li><strong>Premium, mid-range and budget options</strong> for every popular size, from Continental and Michelin down to value brands like Avon and Davanti.</li>
-            <li><strong>Calibrated wheel balancing</strong> on every wheel we touch, included as standard &mdash; never a separate add-on.</li>
-            <li><strong>Old tyres collected and recycled</strong> at a licensed facility &mdash; no disposal charge.</li>
-            <li><strong>TPMS reset, valve replacement and torque check</strong> finished and confirmed before we hand back the keys.</li>
+            <li><strong>An exact, all-in price over the phone</strong> &mdash; brand, model, size and the total you&rsquo;ll pay, with no hidden costs added on the day.</li>
+            <li><strong>Tyres fitted to manufacturer spec</strong> &mdash; not just slapped on. New valves, calibrated balancing and a torque-wrench finish on every wheel.</li>
+            <li><strong>TPMS reset and confirmed</strong> if your vehicle has sensors, so the warning light is off before we hand the keys back.</li>
+            <li><strong>Old tyres taken away</strong> and recycled at a licensed facility &mdash; no mess left on your drive and no disposal charge.</li>
+            <li><strong>An ETA you can plan around</strong> &mdash; we turn up when we say we will, which matters when you need the car for work or the school run later.</li>
           </ul>
         </div>
       </div>
@@ -72,24 +72,24 @@ const serviceJsonLd = {
   <section class="section section-darker">
     <div class="container container-narrow">
       <span class="eyebrow">When You Need This</span>
-      <h2>Booking situations we cover every day</h2>
-      <p>Mobile fitting suits most non-urgent jobs. A few of the typical reasons people book us in:</p>
+      <h2>Why people book us in</h2>
+      <p>Mobile fitting just makes life easier. A few of the common reasons people get us out:</p>
       <div class="scenarios">
         <article class="scenario">
-          <h3>MOT advisory tyres</h3>
-          <p>Your MOT has flagged a worn or perished tyre. We&rsquo;ll match the size, brand and load rating, fit them on your driveway, and email you the receipt to file with the certificate.</p>
+          <h3>MOT advisories to deal with</h3>
+          <p>The MOT has flagged a worn or perished tyre. We&rsquo;ll match the size, brand and load rating and fit them on your driveway &mdash; receipt emailed across to file with the certificate.</p>
         </article>
         <article class="scenario">
-          <h3>Two or four new tyres at home</h3>
-          <p>You need a full set replacing before a long drive. Pick a 90-minute window, leave the keys, get on with your day &mdash; we&rsquo;ll text when we&rsquo;re finished.</p>
+          <h3>A full set before a long drive</h3>
+          <p>Holiday, road trip, motorway-heavy week ahead. Pick a slot, leave the keys, get on with your day &mdash; we&rsquo;ll text when we&rsquo;re done.</p>
         </article>
         <article class="scenario">
-          <h3>At the office during the working day</h3>
-          <p>We come to your work car park while you&rsquo;re inside. Most clients don&rsquo;t even need to step outside until we hand the keys back.</p>
+          <h3>At work during the day</h3>
+          <p>We come to the office car park while you&rsquo;re at your desk. Most people don&rsquo;t even need to step outside until we hand the keys back over.</p>
         </article>
         <article class="scenario">
-          <h3>Seasonal swap onto winter tyres</h3>
-          <p>If you keep a separate set of winter or all-season tyres on alloys or steels, we&rsquo;ll do the swap (and store-versus-fit balance) on-site.</p>
+          <h3>Seasonal swap onto winters</h3>
+          <p>If you keep a separate set of winter or all-season tyres on their own wheels, we&rsquo;ll swap them on-site &mdash; balanced and torqued exactly as they should be.</p>
         </article>
       </div>
     </div>
@@ -97,8 +97,8 @@ const serviceJsonLd = {
 
   <section class="section section-light service-cta-section">
     <div class="container container-narrow text-center">
-      <h2>Ready to book a slot?</h2>
-      <p class="text-muted-dark">Phone us with your registration and address for a same-day quote, or fill in the online quote form for non-urgent jobs.</p>
+      <h2>Ready to book in?</h2>
+      <p class="text-muted-dark">Give us a call with your registration and address and you&rsquo;ll have an exact, all-in price on the spot. Quote form below if it&rsquo;s not urgent.</p>
       <div class="cta-row" style="justify-content: center;">
         <a class="btn btn-primary btn-call" href={telHref}>
           <span aria-hidden="true">&#9742;</span> Call {phone}

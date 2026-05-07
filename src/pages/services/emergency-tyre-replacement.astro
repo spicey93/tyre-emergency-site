@@ -13,25 +13,25 @@ const serviceJsonLd = {
     '@type': 'LocalBusiness',
     name: 'Tyre Emergency Ltd',
     telephone: '+441623325123',
-    url: 'https://tyreemergency.com/',
+    url: 'https://tyreemergencyltd.co.uk/',
   },
   areaServed: 'Nottinghamshire, East Midlands',
   description: 'Round-the-clock emergency tyre replacement on the roadside, on the driveway or anywhere in between, across Nottinghamshire and the surrounding counties.',
-  url: 'https://tyreemergency.com/services/emergency-tyre-replacement/',
+  url: 'https://tyreemergencyltd.co.uk/services/emergency-tyre-replacement/',
 };
 ---
 
 <BaseLayout
   title="Emergency Tyre Replacement Nottinghamshire | 24/7 Mobile Service"
-  description="24/7 emergency tyre replacement across Nottinghamshire. 30-minute average ETA, REACT licensed, fixed pricing quoted before we leave. Call 01623 325 123."
+  description="24/7 emergency mobile tyre replacement across Nottinghamshire. Exact price over the phone, realistic ETA, and everything on the van to get you back on the road first time. Call 01623 325 123."
   jsonLd={JSON.stringify(serviceJsonLd)}
 >
-  <section class="service-hero">
+  <section class="service-hero" style="background-image: url('/images/emergency-tyre-fitting.webp');">
     <div class="container">
       <span class="eyebrow">Emergency Service</span>
       <h1>Emergency Tyre Replacement</h1>
       <p class="service-intro">
-        24/7 emergency tyre replacement across Nottinghamshire. We come to you &mdash; on the roadside, on the driveway, or anywhere in between &mdash; with the right tyre already sourced and the kit to fit it on the spot.
+        A flat tyre always happens at the worst possible time &mdash; on your way to the airport, on the school run, or stuck somewhere in the middle of nowhere. We&rsquo;re ready to go at a moment&rsquo;s notice and we come to you with the right tyre and the kit to fit it on the spot.
       </p>
       <div class="cta-row">
         <a class="btn btn-primary btn-call" href={telHref}>
@@ -55,13 +55,14 @@ const serviceJsonLd = {
           />
         </div>
         <div class="service-split-content">
-          <span class="eyebrow">What&rsquo;s Included</span>
-          <h2>Everything we do on a callout</h2>
+          <span class="eyebrow">How it works</span>
+          <h2>Built to be fast and streamlined</h2>
           <ul class="check-list">
-            <li><strong>The correct tyre for your vehicle</strong> &mdash; size, load rating and speed rating all matched to your car before Dean sets off, sourced from local suppliers.</li>
-            <li><strong>Old tyre removed and disposed of</strong> at a licensed tyre recycler &mdash; included in the quoted price, no separate disposal fee.</li>
-            <li><strong>Torque-checked to manufacturer spec</strong> with a torque wrench on every job &mdash; never just an impact gun alone.</li>
-            <li><strong>TPMS reset and confirmed</strong> if your vehicle has tyre pressure sensors, so the warning light is clear before the car moves.</li>
+            <li><strong>An exact price over the phone</strong> &mdash; you&rsquo;ll know what you&rsquo;re paying before we set off, with no hidden costs or extras tacked on when we arrive.</li>
+            <li><strong>A realistic ETA, not a best-case one</strong> &mdash; we tell you when we&rsquo;ll genuinely be with you so you can plan around it.</li>
+            <li><strong>Don&rsquo;t know exactly where you are?</strong> We&rsquo;ll send you a quick text and pick up your location from your phone &mdash; no postcode-guessing on either side.</li>
+            <li><strong>Everything we need is on the van</strong> &mdash; the right tyre sourced before we leave, balancer, torque wrench, TPMS tools and disposal sorted, so you&rsquo;re back on the road first time.</li>
+            <li><strong>Friendly, experienced and unflustered</strong> &mdash; you&rsquo;ll be talking to someone who has done this thousands of times and won&rsquo;t make a stressful day worse.</li>
           </ul>
         </div>
       </div>
@@ -71,24 +72,24 @@ const serviceJsonLd = {
   <section class="section section-darker">
     <div class="container container-narrow">
       <span class="eyebrow">When You Need This</span>
-      <h2>Common situations we&rsquo;re called to</h2>
-      <p>Some real callouts from a typical week. If yours sounds anything like these, ring us &mdash; we&rsquo;ve done it before.</p>
+      <h2>The kind of calls we get every day</h2>
+      <p>If any of these sound like you, just give us a ring &mdash; we&rsquo;ve been there before and we&rsquo;ll get you moving.</p>
       <div class="scenarios">
         <article class="scenario">
-          <h3>Sidewall blowout on the A1</h3>
-          <p>You&rsquo;ve hit a piece of debris and the tyre has gone flat instantly with a visible bulge or split in the sidewall. A repair isn&rsquo;t safe and a roadside replacement is the only legal option.</p>
+          <h3>Blowout on the way to the airport</h3>
+          <p>Suitcases packed, flight booked, and a tyre lets go on the dual carriageway. We&rsquo;ll be on our way within minutes and have a fresh tyre fitted on the spot &mdash; usually quicker than waiting for recovery to even arrive.</p>
         </article>
         <article class="scenario">
-          <h3>Flat on the school run</h3>
-          <p>Tyre is empty on the driveway at 7:45am with thirty minutes until you have to be somewhere. We can usually have you back on the road inside that window.</p>
+          <h3>Flat on the driveway before the school run</h3>
+          <p>You&rsquo;ve walked out at 7:45am to find a tyre on the deck. Phone us, get a fixed price, and we&rsquo;ll do everything we can to have you sorted before you need to be anywhere.</p>
         </article>
         <article class="scenario">
-          <h3>Tyre that&rsquo;s gone completely flat</h3>
-          <p>You&rsquo;ve been losing pressure gradually and it&rsquo;s now completely deflated in a car park or on the roadside. Dean will come to wherever you are, assess whether it can be repaired or needs replacing, and get it sorted.</p>
+          <h3>Stranded somewhere remote</h3>
+          <p>Country lane, layby, supermarket car park &mdash; if you don&rsquo;t know exactly where you are, we&rsquo;ll send you a text to grab your location, then come straight to you.</p>
         </article>
         <article class="scenario">
-          <h3>Kerbed wheel with split tyre</h3>
-          <p>A clipped kerb at speed has cracked the tyre internally. Often invisible from outside but unsafe to drive on. We can fit a fresh tyre in the place you&rsquo;ve stopped.</p>
+          <h3>Kerbed wheel with a split tyre</h3>
+          <p>You&rsquo;ve clipped a kerb and cracked the tyre internally. Often invisible from outside but not safe to drive on. We&rsquo;ll fit a fresh one wherever you&rsquo;ve stopped.</p>
         </article>
       </div>
     </div>
@@ -97,7 +98,7 @@ const serviceJsonLd = {
   <section class="section section-light service-cta-section">
     <div class="container container-narrow text-center">
       <h2>Stuck right now?</h2>
-      <p class="text-muted-dark">Don&rsquo;t wait. The phone is answered 24/7 by a real person and the engineer is usually on their way within ten minutes of your call.</p>
+      <p class="text-muted-dark">Pick up the phone &mdash; we answer 24/7 and we&rsquo;ll have a price, an honest ETA and a van on the way within minutes.</p>
       <a class="btn btn-primary btn-call" href={telHref}>
         <span aria-hidden="true">&#9742;</span> Call {phone}
       </a>

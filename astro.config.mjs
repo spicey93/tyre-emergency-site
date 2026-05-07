@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://tyreemergency.com',
+  site: 'https://tyreemergencyltd.co.uk',
   output: 'static',
   trailingSlash: 'ignore',
   build: {
