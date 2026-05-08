@@ -182,7 +182,7 @@ const faqs = [
   <section class="section section-white">
     <div class="container">
       <div class="text-center">
-        <span class="eyebrow" style="color: var(--color-accent);">Trusted by Drivers</span>
+        <span class="eyebrow">Trusted by Drivers</span>
         <h2>Five Stars. Hundreds of Drivers Rescued.</h2>
         <p class="section-lede">A few words from real customers we&rsquo;ve sorted out &mdash; on the roadside, on the driveway and in the office car park.</p>
       </div>
@@ -245,7 +245,7 @@ const faqs = [
   <section class="section section-light">
     <div class="container">
       <div class="text-center">
-        <span class="eyebrow" style="color: var(--color-accent);">Services</span>
+        <span class="eyebrow">Services</span>
         <h2>What We Do</h2>
         <p class="section-lede">From a single screw in a tyre to a full caravan job, we&rsquo;re kitted out for the lot &mdash; and we come to you.</p>
       </div>
@@ -286,7 +286,7 @@ const faqs = [
     <div class="container">
       <div class="about-split">
         <div class="about-split-text">
-          <span class="eyebrow" style="color: var(--color-accent);">About</span>
+          <span class="eyebrow">About</span>
           <h2>Founded by Dean Spicer &mdash; A Decade of Roadside Experience</h2>
           <p class="about-bio">
             Dean has been in the tyre trade since he was a teenager &mdash; national chains, independent garages, time in management, and back to being hands-on with the tools. Tyre Emergency Ltd was set up in December 2023 with a simple idea: build a business around speed, convenience and being properly straight with people. Because it&rsquo;s a sole-operator outfit, Dean answers every call, gives every quote and fits every tyre himself. No rota, no agency cover &mdash; the same experienced fitter whether you ring at noon or midnight. Over 450 five-star reviews in under two years say the rest.
@@ -325,7 +325,7 @@ const faqs = [
   <section class="section section-light" id="quote">
     <div class="container">
       <div class="text-center">
-        <span class="eyebrow" style="color: var(--color-accent);">Get a Quote</span>
+        <span class="eyebrow">Get a Quote</span>
         <h2>Request a Quote</h2>
       </div>
       <QuoteForm />
@@ -416,7 +416,8 @@ const faqs = [
     font-family: var(--font-display);
     font-weight: 900;
     font-size: 4rem;
-    color: var(--color-accent);
+    color: var(--color-text);
+    opacity: 0.18;
     line-height: 1;
     margin-bottom: 1rem;
   }
@@ -433,6 +434,12 @@ const faqs = [
   }
 
   .step a {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .step a:hover {
     color: var(--color-accent);
   }
 

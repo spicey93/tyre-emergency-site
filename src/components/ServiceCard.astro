@@ -32,8 +32,8 @@ const { title, description, icon, href } = Astro.props as Props;
 
   .service-card:hover {
     transform: translateY(-4px);
-    border-color: var(--color-accent);
-    box-shadow: 0 18px 40px -22px rgba(255, 45, 45, 0.45);
+    border-color: var(--color-text-dark);
+    box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.35);
     color: var(--color-text-dark);
   }
 
@@ -44,8 +44,8 @@ const { title, description, icon, href } = Astro.props as Props;
     width: 56px;
     height: 56px;
     border-radius: var(--radius);
-    background-color: rgba(255, 45, 45, 0.1);
-    color: var(--color-accent);
+    background-color: rgba(0, 0, 0, 0.06);
+    color: var(--color-text-dark);
     margin-bottom: 1.25rem;
   }
 
@@ -68,11 +68,15 @@ const { title, description, icon, href } = Astro.props as Props;
   }
 
   .service-link {
-    color: var(--color-accent);
+    color: var(--color-text-dark);
     font-weight: 700;
     font-family: var(--font-display);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-size: 0.9rem;
+  }
+
+  .service-card:hover .service-link {
+    color: var(--color-accent);
   }
 </style>

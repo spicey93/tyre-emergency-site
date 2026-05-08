@@ -41,7 +41,7 @@ const areas = [
   <section class="section section-light">
     <div class="container">
       <div class="text-center">
-        <span class="eyebrow" style="color: var(--color-accent);">Pick your area</span>
+        <span class="eyebrow">Pick your area</span>
         <h2>Where we cover</h2>
         <p class="section-lede-dark">Typical ETAs from our Bilsthorpe base &mdash; honest figures, not best-case ones. We&rsquo;ll always confirm a realistic live ETA when you ring.</p>
       </div>
@@ -103,9 +103,9 @@ const areas = [
 
   .area-tile:hover {
     transform: translateY(-3px);
-    border-color: var(--color-accent);
+    border-color: var(--color-text-dark);
     color: var(--color-text-dark);
-    box-shadow: 0 18px 36px -22px rgba(255, 45, 45, 0.45);
+    box-shadow: 0 18px 36px -22px rgba(0, 0, 0, 0.35);
   }
 
   .area-tile-head {
@@ -128,8 +128,8 @@ const areas = [
     letter-spacing: 0.06em;
     text-transform: uppercase;
     padding: 0.25rem 0.55rem;
-    background-color: rgba(255, 45, 45, 0.1);
-    color: var(--color-accent);
+    background-color: rgba(0, 0, 0, 0.06);
+    color: var(--color-text-dark);
     border-radius: 999px;
     flex-shrink: 0;
   }
@@ -142,12 +142,16 @@ const areas = [
   }
 
   .area-tile-link {
-    color: var(--color-accent);
+    color: var(--color-text-dark);
     font-family: var(--font-display);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-size: 0.85rem;
     margin-top: 0.5rem;
+  }
+
+  .area-tile:hover .area-tile-link {
+    color: var(--color-accent);
   }
 </style>

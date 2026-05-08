@@ -50,6 +50,7 @@ const buttonClass = variant === 'light' ? 'btn btn-outline-dark' : 'btn btn-outl
     text-transform: uppercase;
     letter-spacing: 0.06em;
     min-height: 52px;
+    max-width: 220px;
     transition: border-color var(--transition), background-color var(--transition);
   }
 
@@ -86,11 +87,23 @@ const buttonClass = variant === 'light' ? 'btn btn-outline-dark' : 'btn btn-outl
 
   @media (max-width: 600px) {
     .booking-form {
-      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 0.5rem;
     }
-    .booking-form .booking-vrm,
+    .booking-vrm {
+      flex: 1 1 auto;
+      max-width: none;
+      min-height: 44px;
+      padding: 0 0.75rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      border-width: 1px;
+    }
     .booking-form .btn {
-      width: 100%;
+      flex: 0 0 auto;
+      min-height: 44px;
+      padding: 0.65rem 1rem;
+      font-size: 0.95rem;
     }
   }
 </style>
