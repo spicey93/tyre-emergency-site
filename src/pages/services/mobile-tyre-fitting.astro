@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import BookingForm from '../../components/BookingForm.astro';
 
 const phone = '01623 325 123';
 const telHref = `tel:${phone.replace(/\s+/g, '')}`;
@@ -33,11 +34,11 @@ const serviceJsonLd = {
       <p class="service-intro">
         You can&rsquo;t always get to a garage &mdash; and even when you can, it&rsquo;s a chunk of your day gone. We come to you instead. Everything a tyre shop does, done from the comfort of your own home: tyres fitted properly, wheels balanced and nuts torqued correctly. No mess, no hassle, and just as quick.
       </p>
-      <div class="cta-row">
+      <div class="cta-row hero-cta-row">
         <a class="btn btn-primary btn-call" href={telHref}>
           <span aria-hidden="true">&#9742;</span> Call: {phone}
         </a>
-        <a class="btn btn-outline" href="/#quote">Book Online</a>
+        <BookingForm variant="dark" buttonLabel="Book online" />
       </div>
     </div>
   </section>
@@ -98,12 +99,12 @@ const serviceJsonLd = {
   <section class="section section-light service-cta-section">
     <div class="container container-narrow text-center">
       <h2>Ready to book in?</h2>
-      <p class="text-muted-dark">Give us a call with your registration and address and you&rsquo;ll have an exact, all-in price on the spot. Quote form below if it&rsquo;s not urgent.</p>
+      <p class="text-muted-dark">Give us a call with your registration and address for an exact, all-in price on the spot &mdash; or pop your reg in below to book online.</p>
       <div class="cta-row" style="justify-content: center;">
         <a class="btn btn-primary btn-call" href={telHref}>
           <span aria-hidden="true">&#9742;</span> Call {phone}
         </a>
-        <a class="btn btn-outline-dark" href="/#quote">Get a Quote</a>
+        <BookingForm variant="light" buttonLabel="Book online" />
       </div>
     </div>
   </section>

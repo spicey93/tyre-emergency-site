@@ -37,7 +37,12 @@ const serviceJsonLd = {
         <a class="btn btn-primary btn-call" href={telHref}>
           <span aria-hidden="true">&#9742;</span> Call: {phone}
         </a>
-        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+        <a
+          class="btn btn-outline"
+          href="https://garage-bookings.com/?clientID=537"
+          target="_blank"
+          rel="noopener"
+        >Book online</a>
       </div>
     </div>
   </section>
@@ -84,10 +89,18 @@ const serviceJsonLd = {
   <section class="section section-light service-cta-section">
     <div class="container container-narrow text-center">
       <h2>Caravan or motorhome job?</h2>
-      <p class="text-muted-dark">Give us a call with the make, model and the tyre size from the sidewall and we&rsquo;ll quote on the spot. We&rsquo;ll book a visit that fits around you &mdash; the &lsquo;van doesn&rsquo;t move.</p>
-      <a class="btn btn-primary btn-call" href={telHref}>
-        <span aria-hidden="true">&#9742;</span> Call {phone}
-      </a>
+      <p class="text-muted-dark">Give us a call with the make, model and the tyre size from the sidewall and we&rsquo;ll quote on the spot &mdash; or book online and we&rsquo;ll be in touch to confirm. The &lsquo;van doesn&rsquo;t move either way.</p>
+      <div class="cta-row" style="justify-content: center;">
+        <a class="btn btn-primary btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Call {phone}
+        </a>
+        <a
+          class="btn btn-outline-dark"
+          href="https://garage-bookings.com/?clientID=537"
+          target="_blank"
+          rel="noopener"
+        >Book online</a>
+      </div>
     </div>
   </section>
 </BaseLayout>
