@@ -1,0 +1,687 @@
+---
+import LandingLayout from '../layouts/LandingLayout.astro';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+
+const areas = [
+  'Mansfield', 'Nottingham', 'Newark', 'Worksop', 'Chesterfield', 'Doncaster',
+  'Lincoln', 'Retford', 'Grantham', 'Southwell', 'Tuxford', 'Blyth',
+];
+
+const roads = ['A1', 'A614', 'M1', 'A60', 'A38', 'A52'];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'EmergencyService',
+  name: 'Tyre Emergency Ltd — Emergency Mobile Tyre Replacement',
+  description: '24/7 emergency mobile tyre replacement at the roadside, on the driveway or wherever you are stuck across Nottinghamshire and the East Midlands. Around 30 minute average ETA.',
+  telephone: '+441623325123',
+  url: 'https://tyreemergencyltd.co.uk/emergency/',
+  image: 'https://tyreemergencyltd.co.uk/og-image.jpg',
+  priceRange: '££',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Bilsthorpe',
+    addressLocality: 'Newark',
+    addressRegion: 'Nottinghamshire',
+    postalCode: 'NG22 8GA',
+    addressCountry: 'GB',
+  },
+  areaServed: areas.map((a) => ({ '@type': 'City', name: a })),
+  openingHoursSpecification: [{
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+    opens: '00:00',
+    closes: '23:59',
+  }],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    reviewCount: '478',
+    bestRating: '5',
+    worstRating: '1',
+  },
+};
+---
+
+<LandingLayout
+  title="Flat Tyre? Roadside in 30 Minutes | Tyre Emergency Ltd"
+  description="Stuck with a flat tyre? Mobile emergency tyre replacement across Nottinghamshire, 24/7. Around 30 minute average ETA. REACT licensed. 478 ★ Google reviews. Call 01623 325 123 now."
+  jsonLd={JSON.stringify(jsonLd)}
+>
+  <!-- Slim brand bar — no nav, just logo + click-to-call -->
+  <header class="lp-bar">
+    <div class="lp-bar-inner">
+      <a href="/" class="lp-logo" aria-label="Tyre Emergency Ltd home">
+        <img src="/logo.png" alt="Tyre Emergency Ltd" width="160" height="48" loading="eager" fetchpriority="high" />
+      </a>
+      <a class="lp-bar-call" href={telHref} data-call="bar">
+        <span aria-hidden="true">&#9742;</span>
+        <span class="lp-bar-call-number">{phone}</span>
+        <span class="lp-bar-call-short">Call now</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="lp-hero">
+    <img
+      class="lp-hero-bg"
+      src="/images/tyre-emergency-ltd.webp"
+      alt="Tyre Emergency Ltd service van at the roadside with equipment ready"
+      width="1600"
+      height="900"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="container lp-hero-inner">
+      <span class="lp-eyebrow">24/7 Emergency Mobile Tyre Fitting &middot; Nottinghamshire</span>
+      <h1>Flat Tyre?<br />We&rsquo;re There In <span class="lp-eta">30 Minutes</span>.</h1>
+      <p class="lp-sub">
+        We come to you &mdash; roadside or driveway, day or night &mdash; with the right tyre fitted properly and an exact all-in price agreed on the call. No surprises when we arrive.
+      </p>
+
+      <a class="lp-call-primary" href={telHref} data-call="hero">
+        <span class="lp-call-icon" aria-hidden="true">&#9742;</span>
+        <span class="lp-call-stack">
+          <small>Call 24/7 &mdash; we set off now</small>
+          <strong>{phone}</strong>
+        </span>
+      </a>
+
+      <ul class="lp-trust">
+        <li><strong>478</strong> &#9733;&#9733;&#9733;&#9733;&#9733; Google reviews</li>
+        <li><strong>REACT</strong> licensed &amp; fully insured</li>
+        <li><strong>30 min</strong> average ETA</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="lp-block lp-light">
+    <div class="container container-narrow">
+      <h2 class="lp-block-title">When you call, here&rsquo;s what happens</h2>
+      <ol class="lp-steps">
+        <li>
+          <span class="lp-step-num" aria-hidden="true">1</span>
+          <div>
+            <h3>We answer the phone</h3>
+            <p>A real person, every time &mdash; not a callback service, not a voicemail. Tell us your reg and roughly where you are; we&rsquo;ll text you a location-share link if you&rsquo;re not sure.</p>
+          </div>
+        </li>
+        <li>
+          <span class="lp-step-num" aria-hidden="true">2</span>
+          <div>
+            <h3>Exact, all-in price &amp; honest ETA</h3>
+            <p>Tyre brand, model, size and the total you&rsquo;ll pay &mdash; agreed on the call. No hidden extras when we arrive. Average all-in across 3,000+ jobs is around &pound;177; yours could be more or less.</p>
+          </div>
+        </li>
+        <li>
+          <span class="lp-step-num" aria-hidden="true">3</span>
+          <div>
+            <h3>Fitted properly, you tap your card</h3>
+            <p>Manufacturer torque, calibrated balance, TPMS reset, old tyre taken away. Card, Apple Pay or Google Pay when the job&rsquo;s done.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ONE STRONG REVIEW -->
+  <section class="lp-block lp-dark">
+    <div class="container container-narrow">
+      <figure class="lp-review">
+        <div class="lp-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>
+          <p>&ldquo;Had a puncture on the A1 at approx 7.30am &mdash; call to Tyre Emergency answered straight away and within 10 minutes had a quote. Just over an hour later, new tyre was fitted and I was on my way.&rdquo;</p>
+        </blockquote>
+        <figcaption>
+          <strong>Nick Panton</strong> &middot; A1, Nottinghamshire &middot; via Google
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- LOCATION REASSURANCE -->
+  <section class="lp-block lp-light">
+    <div class="container container-narrow">
+      <div class="lp-card">
+        <h2>Don&rsquo;t know exactly where you are?</h2>
+        <p>Happens all the time. We&rsquo;ll send you a quick text &mdash; tap the link, share your location, and we&rsquo;ll see exactly where you&rsquo;ve stopped. Then we&rsquo;re on the way.</p>
+        <p class="lp-card-safety">
+          <strong>If you&rsquo;re on a motorway hard shoulder or smart motorway:</strong> get out of the vehicle and behind the barrier if you can, then call <a href="tel:101">101</a> (or <a href="tel:999">999</a> if you feel in danger) before you ring us. We&rsquo;ll wait until Highways England can get to you safely first.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COVERAGE -->
+  <section class="lp-block lp-dark">
+    <div class="container">
+      <h2 class="lp-block-title text-center">Covering Nottinghamshire &amp; the East Midlands</h2>
+      <p class="lp-coverage-lede text-center">
+        Based in Bilsthorpe, NG22 &mdash; right in the middle of the county. We&rsquo;re kitted out and ready to roll 24/7.
+      </p>
+      <ul class="lp-area-list">
+        {areas.map((a) => <li>{a}</li>)}
+      </ul>
+      <p class="lp-roads text-center">
+        Regular runs along {roads.map((r, i) => (
+          <>
+            <strong>{r}</strong>{i < roads.length - 1 ? ' · ' : ''}
+          </>
+        ))}
+      </p>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="lp-block lp-cta">
+    <div class="container container-narrow text-center">
+      <h2>Stuck right now? Pick up the phone.</h2>
+      <p>One call, one all-in price, one job done properly &mdash; from a roadside tyre to a full set on the driveway.</p>
+      <a class="lp-call-primary lp-call-primary-large" href={telHref} data-call="footer">
+        <span class="lp-call-icon" aria-hidden="true">&#9742;</span>
+        <span class="lp-call-stack">
+          <small>Call 24/7</small>
+          <strong>{phone}</strong>
+        </span>
+      </a>
+      <p class="lp-fineprint">Tyre Emergency Ltd &middot; Bilsthorpe NG22 8GA &middot; Company No. 15362025 &middot; VAT GB456597051</p>
+    </div>
+  </section>
+
+  <!-- STICKY MOBILE CALL BAR -->
+  <a class="lp-sticky-call" href={telHref} data-call="sticky">
+    <span class="lp-call-icon" aria-hidden="true">&#9742;</span>
+    <span class="lp-call-stack">
+      <small>Call 24/7</small>
+      <strong>{phone}</strong>
+    </span>
+  </a>
+</LandingLayout>
+
+<style>
+  /* ============================================================
+     Slim brand bar (replaces full site header)
+     ============================================================ */
+  .lp-bar {
+    background-color: var(--color-bg-dark);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .lp-bar-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0.6rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 60px;
+  }
+
+  .lp-logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+  }
+
+  .lp-bar-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.95rem;
+    background-color: var(--color-accent);
+    color: var(--color-text);
+    border-radius: var(--radius);
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    font-size: 1rem;
+    transition: background-color var(--transition);
+  }
+
+  .lp-bar-call:hover,
+  .lp-bar-call:focus-visible {
+    background-color: var(--color-accent-dark);
+    color: var(--color-text);
+  }
+
+  .lp-bar-call-short {
+    display: none;
+  }
+
+  @media (max-width: 480px) {
+    .lp-logo img {
+      height: 34px;
+    }
+    .lp-bar-call-number {
+      display: none;
+    }
+    .lp-bar-call-short {
+      display: inline;
+    }
+  }
+
+  /* ============================================================
+     Hero
+     ============================================================ */
+  .lp-hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    padding: 3.5rem 0 4rem;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .lp-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center right;
+    z-index: -2;
+  }
+
+  .lp-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      100deg,
+      rgba(26, 26, 29, 0.96) 0%,
+      rgba(26, 26, 29, 0.9) 30%,
+      rgba(26, 26, 29, 0.62) 60%,
+      rgba(26, 26, 29, 0.25) 90%
+    );
+  }
+
+  .lp-hero-inner {
+    max-width: 880px;
+  }
+
+  .lp-eyebrow {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .lp-hero h1 {
+    font-size: clamp(2.5rem, 7.5vw, 5.4rem);
+    line-height: 0.98;
+    margin: 0 0 1.25rem;
+    max-width: 16ch;
+  }
+
+  .lp-eta {
+    color: var(--color-accent);
+    white-space: nowrap;
+  }
+
+  .lp-sub {
+    font-size: clamp(1rem, 1.7vw, 1.2rem);
+    color: var(--color-text-muted);
+    max-width: 56ch;
+    margin: 0 0 2rem;
+    line-height: 1.6;
+  }
+
+  /* ============================================================
+     Big call CTA (used in hero + final CTA + sticky)
+     ============================================================ */
+  .lp-call-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.95rem;
+    padding: 1rem 1.5rem;
+    background-color: var(--color-accent);
+    color: var(--color-text);
+    border-radius: var(--radius);
+    text-decoration: none;
+    box-shadow: 0 14px 32px -16px rgba(255, 45, 45, 0.7);
+    transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    min-height: 64px;
+  }
+
+  .lp-call-primary:hover,
+  .lp-call-primary:focus-visible {
+    background-color: var(--color-accent-dark);
+    color: var(--color-text);
+    transform: translateY(-1px);
+    box-shadow: 0 18px 38px -16px rgba(255, 45, 45, 0.8);
+  }
+
+  .lp-call-primary-large {
+    padding: 1.15rem 1.8rem;
+    min-height: 72px;
+  }
+
+  .lp-call-icon {
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  .lp-call-stack {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.05;
+  }
+
+  .lp-call-stack small {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    opacity: 0.85;
+    margin-bottom: 0.25rem;
+  }
+
+  .lp-call-stack strong {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.55rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* ============================================================
+     Trust strip
+     ============================================================ */
+  .lp-trust {
+    list-style: none;
+    padding: 0;
+    margin: 1.75rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.25rem;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+
+  .lp-trust li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .lp-trust strong {
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    margin-right: 0.15rem;
+  }
+
+  /* ============================================================
+     Section blocks
+     ============================================================ */
+  .lp-block {
+    padding: 4rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .lp-block {
+      padding: 3rem 0;
+    }
+  }
+
+  .lp-light {
+    background-color: var(--color-bg-light);
+    color: var(--color-text-dark);
+  }
+
+  .lp-light h2,
+  .lp-light h3 {
+    color: var(--color-text-dark);
+  }
+
+  .lp-dark {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .lp-block-title {
+    font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+    margin: 0 0 1.5rem;
+  }
+
+  /* ============================================================
+     Steps
+     ============================================================ */
+  .lp-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .lp-steps li {
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+  }
+
+  .lp-step-num {
+    flex: 0 0 auto;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--color-text-dark);
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.15rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.15rem;
+  }
+
+  .lp-steps h3 {
+    font-size: 1.15rem;
+    margin: 0 0 0.4rem;
+  }
+
+  .lp-steps p {
+    margin: 0;
+    color: var(--color-text-muted-dark);
+    line-height: 1.65;
+    font-size: 1rem;
+  }
+
+  /* ============================================================
+     Review
+     ============================================================ */
+  .lp-review {
+    margin: 0;
+    padding: 2rem;
+    background-color: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    text-align: center;
+  }
+
+  .lp-stars {
+    color: var(--color-star);
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.85rem;
+  }
+
+  .lp-review blockquote {
+    margin: 0 0 1rem;
+  }
+
+  .lp-review p {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .lp-review figcaption {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+
+  .lp-review figcaption strong {
+    color: var(--color-text);
+  }
+
+  /* ============================================================
+     Reassurance card
+     ============================================================ */
+  .lp-card {
+    padding: 2rem;
+    background-color: var(--color-bg-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+  }
+
+  .lp-card h2 {
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    margin: 0 0 0.75rem;
+  }
+
+  .lp-card p {
+    color: var(--color-text-muted-dark);
+    line-height: 1.7;
+    margin: 0 0 0.85rem;
+  }
+
+  .lp-card-safety {
+    padding: 0.9rem 1.1rem;
+    border-left: 3px solid var(--color-accent);
+    background-color: rgba(255, 45, 45, 0.06);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 0.95rem;
+  }
+
+  /* ============================================================
+     Coverage strip
+     ============================================================ */
+  .lp-coverage-lede {
+    color: var(--color-text-muted);
+    max-width: 60ch;
+    margin: 0 auto 2rem;
+  }
+
+  .lp-area-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .lp-area-list li {
+    padding: 0.5rem 0.95rem;
+    background-color: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    font-size: 0.92rem;
+    color: var(--color-text);
+  }
+
+  .lp-roads {
+    color: var(--color-text-muted);
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .lp-roads strong {
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* ============================================================
+     Final CTA
+     ============================================================ */
+  .lp-cta {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text);
+    padding: 4.5rem 0 3.5rem;
+  }
+
+  .lp-cta h2 {
+    color: var(--color-text);
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    margin: 0 0 0.85rem;
+  }
+
+  .lp-cta p {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    margin: 0 0 2rem;
+  }
+
+  .lp-cta .lp-call-primary {
+    margin: 0 auto;
+  }
+
+  .lp-fineprint {
+    margin-top: 2rem !important;
+    font-size: 0.8rem !important;
+    color: var(--color-text-muted) !important;
+    opacity: 0.7;
+  }
+
+  /* ============================================================
+     Sticky mobile call bar
+     ============================================================ */
+  .lp-sticky-call {
+    display: none;
+    position: fixed;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    z-index: 80;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    padding: 0.95rem 1.1rem;
+    background-color: var(--color-accent);
+    color: var(--color-text);
+    border-radius: var(--radius);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.45), 0 12px 26px -10px rgba(255, 45, 45, 0.6);
+    text-decoration: none;
+    min-height: 60px;
+  }
+
+  .lp-sticky-call:hover,
+  .lp-sticky-call:focus-visible {
+    background-color: var(--color-accent-dark);
+    color: var(--color-text);
+  }
+
+  @media (max-width: 768px) {
+    .lp-sticky-call {
+      display: inline-flex;
+    }
+    /* Make sure final CTA is not hidden behind sticky bar */
+    .lp-cta {
+      padding-bottom: 6.5rem;
+    }
+  }
+</style>

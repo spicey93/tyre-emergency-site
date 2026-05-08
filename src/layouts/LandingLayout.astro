@@ -1,0 +1,104 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  jsonLd?: string;
+  /** Set to false on ads-only landing pages so it doesn't compete with the organic service page in search. */
+  index?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = '/og-image.jpg',
+  jsonLd,
+  index = false,
+} = Astro.props as Props;
+
+const siteUrl = 'https://tyreemergencyltd.co.uk';
+const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).toString();
+const robots = index ? 'index, follow' : 'noindex, nofollow';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ff2d2d" />
+    <meta name="format-detection" content="telephone=yes" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Inter:wght@400;500;700&display=swap"
+    />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:site_name" content="Tyre Emergency Ltd" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={new URL(ogImage, siteUrl).toString()} />
+
+    <meta name="geo.region" content="GB-NTT" />
+    <meta name="geo.placename" content="Bilsthorpe, Newark" />
+
+    {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KFM4G4RT');</script>
+    <!-- End Google Tag Manager -->
+  </head>
+  <body class="lp-body">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KFM4G4RT"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <script is:inline>
+      // Push a conversion event to dataLayer whenever a phone link is tapped.
+      // In GTM, fire a Google Ads "Phone Calls" conversion on `event = phone_click`.
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest('a[href^="tel:"]');
+        if (!a) return;
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'phone_click',
+          phone_number: a.getAttribute('href').replace('tel:', ''),
+          page_path: window.location.pathname,
+          source: 'landing_page',
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  .lp-body main {
+    padding-bottom: 0;
+  }
+</style>
