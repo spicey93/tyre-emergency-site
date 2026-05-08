@@ -34,11 +34,25 @@ const serviceJsonLd = {
       <p class="service-intro">
         You can&rsquo;t always get to a garage &mdash; and even when you can, it&rsquo;s a chunk of your day gone. We come to you instead. Everything a tyre shop does, done from the comfort of your own home: tyres fitted properly, wheels balanced and nuts torqued correctly. No mess, no hassle, and just as quick.
       </p>
-      <div class="cta-row hero-cta-row">
+      <div class="cta-row">
         <a class="btn btn-primary btn-call" href={telHref}>
           <span aria-hidden="true">&#9742;</span> Call: {phone}
         </a>
-        <BookingForm variant="dark" buttonLabel="Book online" />
+      </div>
+    </div>
+  </section>
+
+  <section class="booking-banner">
+    <div class="container">
+      <div class="booking-banner-inner">
+        <div class="booking-banner-text">
+          <span class="eyebrow">Book online</span>
+          <h2>Book your tyres online in a couple of minutes</h2>
+          <p>Enter your registration and we&rsquo;ll show you tyres for your vehicle and the appointment slots we&rsquo;ve got open. No phone call needed.</p>
+        </div>
+        <div class="booking-banner-form">
+          <BookingForm variant="dark" buttonLabel="Book online" />
+        </div>
       </div>
     </div>
   </section>
@@ -109,3 +123,45 @@ const serviceJsonLd = {
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .booking-banner {
+    background-color: var(--color-bg-elevated);
+    border-top: 1px solid var(--color-accent);
+    border-bottom: 1px solid var(--color-accent);
+    padding: 2.5rem 0;
+    color: var(--color-text);
+  }
+
+  .booking-banner-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .booking-banner-text .eyebrow {
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .booking-banner-text h2 {
+    margin: 0 0 0.6rem;
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    color: var(--color-text);
+  }
+
+  .booking-banner-text p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    max-width: 50ch;
+  }
+
+  @media (max-width: 800px) {
+    .booking-banner-inner {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+  }
+</style>
