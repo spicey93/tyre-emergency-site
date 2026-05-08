@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ReviewsSection from '../../components/ReviewsSection.astro';
 
 const phone = '01623 325 123';
 const telHref = `tel:${phone.replace(/\s+/g, '')}`;
@@ -25,6 +26,8 @@ const town = 'Chesterfield';
       </div>
     </div>
   </section>
+
+  <ReviewsSection />
 
   <section class="section section-white">
     <div class="container container-narrow">

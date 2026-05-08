@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BookingForm from '../../components/BookingForm.astro';
+import ReviewsSection from '../../components/ReviewsSection.astro';
 
 const phone = '01623 325 123';
 const telHref = `tel:${phone.replace(/\s+/g, '')}`;
@@ -56,6 +57,8 @@ const serviceJsonLd = {
       </div>
     </div>
   </section>
+
+  <ReviewsSection />
 
   <section class="section section-white">
     <div class="container">

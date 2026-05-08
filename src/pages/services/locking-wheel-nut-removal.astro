@@ -1,8 +1,24 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ReviewsSection from '../../components/ReviewsSection.astro';
 
 const phone = '01623 325 123';
 const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+
+// Locking wheel nut quote pricing — adjust here as needed.
+//   - perLocker: flat price for the job by number of lockers
+//   - distanceFreeMiles: included in the base price
+//   - distanceExtraPerMile: applied to each mile over the free amount
+//   - sameDaySurcharge: added when the customer needs it today
+const lwnrPricing = {
+  perLocker: { '1': 48, '2': 72, '3': 84, '4': 96 },
+  distanceFreeMiles: 5,
+  distanceExtraPerMile: 2.40,
+  sameDaySurcharge: 30,
+};
+
+// HQ coords for distance calc — verified via postcodes.io for NG22 8GA.
+const lwnrOrigin = { lat: 53.136909, lon: -1.033037 };
 
 const serviceJsonLd = {
   '@context': 'https://schema.org',
@@ -23,7 +39,7 @@ const serviceJsonLd = {
 
 <BaseLayout
   title="Locking Wheel Nut Removal Nottinghamshire | Lost Key, Seized Nuts"
-  description="Lost or damaged the locking wheel nut? Don&rsquo;t make it worse trying to DIY it &mdash; we remove damaged, seized and missing-key locking nuts on-site or at your garage. Across Nottinghamshire 24/7. Call 01623 325 123."
+  description="Mobile locking wheel nut removal across Nottinghamshire. Lost keys, stripped patterns, seized nuts &mdash; we deal with all of them, on your driveway or at the garage. Specialist extraction tools, minimal wheel damage, fast turnaround. Get an instant guide price online or call 01623 325 123."
   jsonLd={JSON.stringify(serviceJsonLd)}
 >
   <section class="service-hero" style="background-image: url('/images/locking-wheel-nut-removal.webp');">
@@ -31,16 +47,18 @@ const serviceJsonLd = {
       <span class="eyebrow">Specialist Extraction</span>
       <h1>Locking Wheel Nut Removal</h1>
       <p class="service-intro">
-        A locking wheel nut problem is one of those situations that&rsquo;s a lot more stressful than it needs to be. Most people only realise the locker is damaged or the key is missing when they&rsquo;ve already booked the car in for tyres or other work, and now suddenly nothing can happen until it&rsquo;s sorted. The good news is that&rsquo;s exactly what we do &mdash; just give us a call before you try to attack it yourself.
+        Lost the key, stripped the pattern, seized on the stud &mdash; we deal with every kind of locking wheel nut problem, on every make and model. Specialist extraction tools, hundreds of jobs under our belt, and a clean finish around the alloy. Most lock-offs are sorted on the driveway in 15&ndash;30 minutes once we&rsquo;re with you.
       </p>
       <div class="cta-row">
         <a class="btn btn-primary btn-call" href={telHref}>
           <span aria-hidden="true">&#9742;</span> Call: {phone}
         </a>
-        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
+        <a class="btn btn-outline" href="#lwnr-quote">Get an instant price</a>
       </div>
     </div>
   </section>
+
+  <ReviewsSection />
 
   <section class="section section-white">
     <div class="container">
@@ -55,14 +73,14 @@ const serviceJsonLd = {
           />
         </div>
         <div class="service-split-content">
-          <span class="eyebrow">How we help</span>
-          <h2>Call us before you make it worse</h2>
+          <span class="eyebrow">What we do</span>
+          <h2>Built for this exact job</h2>
           <ul class="check-list">
-            <li><strong>Don&rsquo;t try to DIY it.</strong> We get a steady stream of customers who&rsquo;ve had a go themselves and ended up making the job harder &mdash; and more expensive &mdash; than it needed to be. Phone us instead.</li>
-            <li><strong>Fully mobile</strong> &mdash; we come to you at home, the workplace or the roadside. If your car&rsquo;s already stuck at a garage waiting on this, we&rsquo;ll come to the garage and unblock the job there.</li>
-            <li><strong>Specialist extraction tools</strong> covering all car makes and models, designed for exactly this job &mdash; not a general workshop set.</li>
-            <li><strong>Careful around your alloys</strong> &mdash; we work as cleanly as possible around the wheel face and the rest of the hub.</li>
-            <li><strong>A proper replacement nut fitted</strong> &mdash; once the locker is out, a standard nut is torqued up to spec before the car moves anywhere.</li>
+            <li><strong>Every type of locker, every make of car.</strong> Lost keys, stripped patterns, snapped keys, seized nuts, slipping keys &mdash; we&rsquo;ve come across yours before and we carry the kit to handle it.</li>
+            <li><strong>The right extractor for your wheel.</strong> A full set of size-specific extraction sockets rather than a one-size-fits-all kit, which means a faster job and a much cleaner finish.</li>
+            <li><strong>Minimal wheel damage.</strong> Done properly, an extraction leaves the alloy face untouched. We work slowly and carefully around the wheel and the hub so you aren&rsquo;t left with cosmetic damage.</li>
+            <li><strong>Fast on the driveway.</strong> Most lock-off jobs are 15&ndash;30 minutes door-to-door once we&rsquo;re with you. Same-day slots most days of the week.</li>
+            <li><strong>Replacement nut fitted to spec.</strong> Once the locker is out, a standard nut goes on, torqued to the manufacturer&rsquo;s figure, so the wheel is safe to drive on the moment we hand the keys back.</li>
           </ul>
         </div>
       </div>
@@ -94,13 +112,858 @@ const serviceJsonLd = {
     </div>
   </section>
 
-  <section class="section section-light service-cta-section">
-    <div class="container container-narrow text-center">
-      <h2>Need a lock off?</h2>
-      <p class="text-muted-dark">Pick up the phone before you reach for the breaker bar. Tell us the make, model and what&rsquo;s happened to the lock and we&rsquo;ll give you a price and an ETA on the spot.</p>
-      <a class="btn btn-primary btn-call" href={telHref}>
-        <span aria-hidden="true">&#9742;</span> Call {phone}
-      </a>
+  <section class="section section-light service-cta-section" id="lwnr-quote">
+    <div class="container container-narrow">
+      <div class="text-center">
+        <span class="eyebrow">Instant price</span>
+        <h2>Get a price for your locking nut job</h2>
+        <p class="text-muted-dark lwnr-lede">
+          Six quick questions and we&rsquo;ll show you a guide price. The final number is confirmed on the call &mdash; this is just to give you a sensible idea before you ring.
+        </p>
+      </div>
+
+      <div class="lwnr-wizard" id="lwnr-wizard">
+        <div class="lwnr-progress" aria-hidden="true">
+          <div class="lwnr-progress-bar" id="lwnr-progress-bar" style="width: 0%"></div>
+        </div>
+
+        <!-- Step 1: postcode -->
+        <section class="lwnr-step is-active" data-step="postcode">
+          <p class="lwnr-step-num">Step 1 of 6</p>
+          <h3>What&rsquo;s your postcode?</h3>
+          <p class="lwnr-step-help">So we can work out the distance from us. We need the full postcode for an accurate distance.</p>
+          <form class="lwnr-form" id="lwnr-postcode-form" novalidate>
+            <label class="visually-hidden" for="lwnr-postcode">Your postcode</label>
+            <input
+              id="lwnr-postcode"
+              class="lwnr-input"
+              type="text"
+              autocomplete="postal-code"
+              inputmode="text"
+              required
+            />
+            <div class="lwnr-step-actions">
+              <button type="submit" class="btn btn-primary lwnr-next" id="lwnr-postcode-submit">Next</button>
+            </div>
+          </form>
+          <p class="lwnr-error" id="lwnr-postcode-error" hidden></p>
+        </section>
+
+        <!-- Step 2: vehicle reg -->
+        <section class="lwnr-step" data-step="vrm" hidden>
+          <p class="lwnr-step-num">Step 2 of 6</p>
+          <h3>What&rsquo;s the vehicle registration?</h3>
+          <p class="lwnr-step-help">Just so we know the make, model and the right locker pattern to bring.</p>
+          <form class="lwnr-form" id="lwnr-vrm-form" novalidate>
+            <label class="visually-hidden" for="lwnr-vrm">Vehicle registration</label>
+            <input
+              id="lwnr-vrm"
+              class="lwnr-input lwnr-input--reg"
+              type="text"
+              autocomplete="off"
+              required
+            />
+            <div class="lwnr-step-actions">
+              <button type="button" class="btn btn-outline-dark lwnr-back" data-back="postcode">Back</button>
+              <button type="submit" class="btn btn-primary lwnr-next">Next</button>
+            </div>
+          </form>
+          <p class="lwnr-error" id="lwnr-vrm-error" hidden></p>
+        </section>
+
+        <!-- Step 3: how many lockers -->
+        <section class="lwnr-step" data-step="lockers" hidden>
+          <p class="lwnr-step-num">Step 3 of 6</p>
+          <h3>How many lockers need removing?</h3>
+          <p class="lwnr-step-help">Most cars have one locker per wheel, so the answer is usually 1 or 4 &mdash; but pick whatever you&rsquo;ve got.</p>
+          <form class="lwnr-form lwnr-form--choices" id="lwnr-lockers-form" novalidate>
+            <label class="lwnr-choice"><input type="radio" name="lockers" value="1" required /><span>1 locker</span></label>
+            <label class="lwnr-choice"><input type="radio" name="lockers" value="2" /><span>2 lockers</span></label>
+            <label class="lwnr-choice"><input type="radio" name="lockers" value="3" /><span>3 lockers</span></label>
+            <label class="lwnr-choice"><input type="radio" name="lockers" value="4" /><span>4 lockers</span></label>
+            <div class="lwnr-step-actions">
+              <button type="button" class="btn btn-outline-dark lwnr-back" data-back="vrm">Back</button>
+              <button type="submit" class="btn btn-primary lwnr-next">Next</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Step 4: how soon -->
+        <section class="lwnr-step" data-step="urgency" hidden>
+          <p class="lwnr-step-num">Step 4 of 6</p>
+          <h3>How soon do you need it sorting?</h3>
+          <p class="lwnr-step-help">Same-day jobs cost a bit more &mdash; we&rsquo;ll let you know straight away.</p>
+          <form class="lwnr-form lwnr-form--choices" id="lwnr-urgency-form" novalidate>
+            <label class="lwnr-choice"><input type="radio" name="urgency" value="today" required /><span>Today</span></label>
+            <label class="lwnr-choice"><input type="radio" name="urgency" value="this-week" /><span>This week</span></label>
+            <label class="lwnr-choice"><input type="radio" name="urgency" value="next-week-or-later" /><span>Next week or later</span></label>
+            <label class="lwnr-choice"><input type="radio" name="urgency" value="flexible" /><span>I&rsquo;m flexible</span></label>
+            <div class="lwnr-step-actions">
+              <button type="button" class="btn btn-outline-dark lwnr-back" data-back="lockers">Back</button>
+              <button type="submit" class="btn btn-primary lwnr-next">Next</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Step 5: nature of issue -->
+        <section class="lwnr-step" data-step="issue" hidden>
+          <p class="lwnr-step-num">Step 5 of 6</p>
+          <h3>What&rsquo;s the issue with the locker?</h3>
+          <p class="lwnr-step-help">Pick whichever is closest. Some answers we can quote for, others are best handled on the phone.</p>
+          <form class="lwnr-form lwnr-form--choices" id="lwnr-issue-form" novalidate>
+            <label class="lwnr-choice"><input type="radio" name="issue" value="lost-key" required /><span>The locker key is lost / missing</span></label>
+            <label class="lwnr-choice"><input type="radio" name="issue" value="slipping-key" /><span>The key&rsquo;s there but it&rsquo;s slipping / not gripping</span></label>
+            <label class="lwnr-choice"><input type="radio" name="issue" value="snapped-key" /><span>The key has snapped</span></label>
+            <label class="lwnr-choice"><input type="radio" name="issue" value="snapped-bolt" /><span>The bolt itself has snapped</span></label>
+            <label class="lwnr-choice"><input type="radio" name="issue" value="other" /><span>Something else</span></label>
+            <div class="lwnr-step-actions">
+              <button type="button" class="btn btn-outline-dark lwnr-back" data-back="urgency">Back</button>
+              <button type="submit" class="btn btn-primary lwnr-next">Next</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Step 6: tried before -->
+        <section class="lwnr-step" data-step="tried" hidden>
+          <p class="lwnr-step-num">Step 6 of 6</p>
+          <h3>Has anyone already tried to remove it?</h3>
+          <p class="lwnr-step-help">A previous attempt can change the state of the locker, so we&rsquo;d rather chat that one through on the phone.</p>
+          <form class="lwnr-form lwnr-form--choices" id="lwnr-tried-form" novalidate>
+            <label class="lwnr-choice"><input type="radio" name="tried" value="no" required /><span>No, untouched</span></label>
+            <label class="lwnr-choice"><input type="radio" name="tried" value="yes" /><span>Yes, someone&rsquo;s had a go</span></label>
+            <div class="lwnr-step-actions">
+              <button type="button" class="btn btn-outline-dark lwnr-back" data-back="issue">Back</button>
+              <button type="submit" class="btn btn-primary lwnr-next">See my price</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Step 7: quote display + callback form -->
+        <section class="lwnr-step lwnr-step--quote" data-step="quote" hidden>
+          <p class="lwnr-step-num">Your guide price</p>
+          <div class="lwnr-quote-card" id="lwnr-quote-card">
+            <p class="lwnr-quote-total" id="lwnr-quote-total">&pound;0</p>
+            <p class="lwnr-quote-caveat">
+              This is a <strong>guide price</strong> &mdash; the final number depends on what we find when we get there. Give us a call to confirm and book in.
+            </p>
+          </div>
+
+          <div class="lwnr-quote-cta">
+            <a class="btn btn-primary btn-call" href={telHref}>
+              <span aria-hidden="true">&#9742;</span> Call to confirm: {phone}
+            </a>
+            <button type="button" class="btn btn-outline-dark lwnr-restart">Start again</button>
+          </div>
+
+          <hr class="lwnr-divider" />
+
+          <div class="lwnr-callback-intro">
+            <h4>Or send your details and we&rsquo;ll call you back</h4>
+            <p>Pop your name and number in and we&rsquo;ll ring to confirm the price and book it in. We send everything you&rsquo;ve told us above so you don&rsquo;t have to repeat yourself.</p>
+          </div>
+
+          <form
+            class="lwnr-callback contact-form"
+            id="lwnr-callback-form"
+            name="lwnr-quote"
+            method="POST"
+            action="/thank-you/"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            netlify
+          >
+            <input type="hidden" name="form-name" value="lwnr-quote" />
+            <p class="honeypot-field">
+              <label>
+                Do not fill this out if you are human
+                <input name="bot-field" tabindex="-1" autocomplete="off" />
+              </label>
+            </p>
+
+            <input type="hidden" name="postcode" id="lwnr-cb-postcode" />
+            <input type="hidden" name="distance_miles" id="lwnr-cb-miles" />
+            <input type="hidden" name="vrm" id="lwnr-cb-vrm" />
+            <input type="hidden" name="lockers" id="lwnr-cb-lockers" />
+            <input type="hidden" name="urgency" id="lwnr-cb-urgency" />
+            <input type="hidden" name="issue" id="lwnr-cb-issue" />
+            <input type="hidden" name="tried_before" id="lwnr-cb-tried" />
+            <input type="hidden" name="quoted_price" id="lwnr-cb-price" />
+            <input type="hidden" name="quoted_breakdown" id="lwnr-cb-breakdown" />
+
+            <div class="field">
+              <label for="lwnr-cb-name">Your name</label>
+              <input id="lwnr-cb-name" name="name" type="text" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="lwnr-cb-phone">Phone number</label>
+              <input id="lwnr-cb-phone" name="phone" type="tel" required autocomplete="tel" />
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              <span class="btn-label">Send my details</span>
+              <span class="btn-sending" aria-hidden="true" style="display:none">Sending&hellip;</span>
+            </button>
+          </form>
+        </section>
+
+        <!-- Exit: please call us -->
+        <section class="lwnr-step lwnr-step--exit" data-step="exit-call" hidden>
+          <p class="lwnr-step-num lwnr-step-num--neutral">Best to give us a quick call</p>
+          <h3 id="lwnr-exit-call-title">Give us a ring &mdash; we can&rsquo;t price this one online</h3>
+          <p id="lwnr-exit-call-body">
+            We&rsquo;ll need to ask a couple of quick questions about the state of the locker before we can quote sensibly. It&rsquo;ll take all of two minutes on the phone.
+          </p>
+          <div class="lwnr-quote-cta">
+            <a class="btn btn-primary btn-call" href={telHref}>
+              <span aria-hidden="true">&#9742;</span> Call: {phone}
+            </a>
+            <button type="button" class="btn btn-outline-dark lwnr-restart">Start again</button>
+          </div>
+        </section>
+
+        <!-- Exit: snapped bolt — can't help -->
+        <section class="lwnr-step lwnr-step--exit" data-step="exit-cant-help" hidden>
+          <p class="lwnr-step-num lwnr-step-num--neutral">Sorry &mdash; not one for us</p>
+          <h3>A snapped bolt isn&rsquo;t something we can sort</h3>
+          <p>
+            Our extraction tools are built for getting <em>intact</em> locking nuts off &mdash; if the bolt itself has sheared, the job moves into hub-stripping territory and you&rsquo;ll want a workshop or a recovery service that can take the wheel off the road.
+          </p>
+          <p>
+            If you&rsquo;re stuck and not sure what&rsquo;s actually broken, give us a ring and we&rsquo;ll talk you through what to look for &mdash; happy to help even when we can&rsquo;t take the job.
+          </p>
+          <div class="lwnr-quote-cta">
+            <a class="btn btn-primary btn-call" href={telHref}>
+              <span aria-hidden="true">&#9742;</span> Call: {phone}
+            </a>
+            <button type="button" class="btn btn-outline-dark lwnr-restart">Start again</button>
+          </div>
+        </section>
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<script
+  is:inline
+  define:vars={{
+    phone,
+    telHref,
+    pricing: lwnrPricing,
+    origin: lwnrOrigin,
+  }}
+>
+  (function () {
+    var STEPS_FOR_PROGRESS = ['postcode','vrm','lockers','urgency','issue','tried'];
+    var POSTCODE_RE = /^([A-Z]{1,2}\d{1,2}[A-Z]?)\s*(\d[A-Z]{2})$/i;
+    var OUTCODE_RE  = /^([A-Z]{1,2}\d{1,2}[A-Z]?)$/i;
+
+    var state = {
+      postcode: '',
+      miles: 0,
+      vrm: '',
+      lockers: null,
+      urgency: '',
+      issue: '',
+      tried: '',
+      total: 0,
+      breakdownLines: [],
+    };
+
+    var wiz = document.getElementById('lwnr-wizard');
+    if (!wiz) return;
+
+    function $(sel, root) { return (root || wiz).querySelector(sel); }
+    function $$(sel, root) { return Array.prototype.slice.call((root || wiz).querySelectorAll(sel)); }
+
+    function show(stepName) {
+      $$('.lwnr-step').forEach(function (el) {
+        var match = el.getAttribute('data-step') === stepName;
+        el.hidden = !match;
+        el.classList.toggle('is-active', match);
+      });
+      var idx = STEPS_FOR_PROGRESS.indexOf(stepName);
+      var pct;
+      if (stepName === 'quote') pct = 100;
+      else if (idx === -1) pct = 0;
+      else pct = Math.round((idx / STEPS_FOR_PROGRESS.length) * 100);
+      var bar = document.getElementById('lwnr-progress-bar');
+      if (bar) bar.style.width = pct + '%';
+
+      // Keep keyboard focus on the new step's first interactive control
+      // for accessibility, but don't move the viewport — the wizard card
+      // stays put while the inner content swaps in place.
+      var active = document.querySelector('.lwnr-step.is-active');
+      if (active) {
+        var first = active.querySelector('input, button[type="submit"]');
+        if (first) try { first.focus({ preventScroll: true }); } catch (e) {}
+      }
+    }
+
+    function showError(id, msg) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (msg) {
+        el.textContent = msg;
+        el.hidden = false;
+      } else {
+        el.textContent = '';
+        el.hidden = true;
+      }
+    }
+
+    // Haversine in miles.
+    function milesBetween(lat1, lon1, lat2, lon2) {
+      var R = 3958.8;
+      var toRad = function (d) { return d * Math.PI / 180; };
+      var dLat = toRad(lat2 - lat1);
+      var dLon = toRad(lon2 - lon1);
+      var a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+            + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2))
+              * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    // ---- Step 1: postcode --------------------------------------------------
+    var pcForm = document.getElementById('lwnr-postcode-form');
+    var pcInput = document.getElementById('lwnr-postcode');
+    var pcSubmit = document.getElementById('lwnr-postcode-submit');
+
+    pcForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      showError('lwnr-postcode-error');
+      var raw = (pcInput.value || '').trim().toUpperCase().replace(/\s+/g, ' ');
+      if (!raw) {
+        showError('lwnr-postcode-error', 'Please enter your postcode.');
+        return;
+      }
+      var m = raw.match(POSTCODE_RE);
+      if (!m) {
+        if (OUTCODE_RE.test(raw)) {
+          showError('lwnr-postcode-error', 'We need the full postcode (e.g. NG18 1AA), not just the first part.');
+        } else {
+          showError('lwnr-postcode-error', 'That doesn’t look like a UK postcode. Try something like NG18 1AA.');
+        }
+        return;
+      }
+      var pretty = (m[1] + ' ' + m[2]).toUpperCase();
+      pcSubmit.disabled = true;
+      pcSubmit.textContent = 'Checking…';
+      try {
+        var res = await fetch('https://api.postcodes.io/postcodes/' + encodeURIComponent(pretty));
+        if (res.status === 404) {
+          showError('lwnr-postcode-error', 'We couldn’t find that postcode — double-check the spelling.');
+          return;
+        }
+        if (!res.ok) {
+          showError('lwnr-postcode-error', 'Couldn’t check your postcode just now. Try again in a moment, or give us a ring on ' + phone + '.');
+          return;
+        }
+        var data = await res.json();
+        var r = data && data.result;
+        if (!r || typeof r.latitude !== 'number') {
+          showError('lwnr-postcode-error', 'We couldn’t find that postcode — double-check the spelling.');
+          return;
+        }
+        state.postcode = r.postcode || pretty;
+        state.miles = milesBetween(origin.lat, origin.lon, r.latitude, r.longitude);
+        show('vrm');
+      } catch (err) {
+        showError('lwnr-postcode-error', 'Couldn’t check your postcode just now. Try again in a moment, or give us a ring on ' + phone + '.');
+      } finally {
+        pcSubmit.disabled = false;
+        pcSubmit.textContent = 'Next';
+      }
+    });
+
+    // ---- Step 2: vrm -------------------------------------------------------
+    var vrmForm = document.getElementById('lwnr-vrm-form');
+    var vrmInput = document.getElementById('lwnr-vrm');
+    vrmForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = (vrmInput.value || '').trim().toUpperCase().replace(/\s+/g, '');
+      if (v.length < 2) {
+        showError('lwnr-vrm-error', 'Please enter the registration so we know what we’re dealing with.');
+        return;
+      }
+      showError('lwnr-vrm-error');
+      state.vrm = v;
+      show('lockers');
+    });
+
+    // ---- Step 3: lockers ---------------------------------------------------
+    var lockersForm = document.getElementById('lwnr-lockers-form');
+    lockersForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var checked = lockersForm.querySelector('input[name="lockers"]:checked');
+      if (!checked) return;
+      state.lockers = checked.value;
+      show('urgency');
+    });
+
+    // ---- Step 4: urgency ---------------------------------------------------
+    var urgencyForm = document.getElementById('lwnr-urgency-form');
+    urgencyForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var checked = urgencyForm.querySelector('input[name="urgency"]:checked');
+      if (!checked) return;
+      state.urgency = checked.value;
+      show('issue');
+    });
+
+    // ---- Step 5: issue -----------------------------------------------------
+    // Routing rules:
+    //   lost-key, slipping-key  → continue to step 6
+    //   snapped-key, other      → exit-call (need to chat first)
+    //   snapped-bolt            → exit-cant-help (we can’t do this one)
+    var issueForm = document.getElementById('lwnr-issue-form');
+    issueForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var checked = issueForm.querySelector('input[name="issue"]:checked');
+      if (!checked) return;
+      state.issue = checked.value;
+      if (state.issue === 'snapped-bolt') {
+        show('exit-cant-help');
+        return;
+      }
+      if (state.issue === 'snapped-key' || state.issue === 'other') {
+        var title = document.getElementById('lwnr-exit-call-title');
+        var body = document.getElementById('lwnr-exit-call-body');
+        if (state.issue === 'snapped-key') {
+          if (title) title.textContent = 'Snapped key — best to chat that one through';
+          if (body) body.textContent = 'A snapped key changes what we’re working with — sometimes the broken piece is still in the lock and that affects the approach. Quick phone call and we’ll talk you through the options and the price.';
+        } else {
+          if (title) title.textContent = 'Best to give us a quick call on this one';
+          if (body) body.textContent = '“Something else” needs a couple of quick questions before we can price it sensibly. Give us a ring — it’ll take all of two minutes.';
+        }
+        show('exit-call');
+        return;
+      }
+      show('tried');
+    });
+
+    // ---- Step 6: tried-before ---------------------------------------------
+    // Yes → exit-call. No → quote.
+    var triedForm = document.getElementById('lwnr-tried-form');
+    triedForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var checked = triedForm.querySelector('input[name="tried"]:checked');
+      if (!checked) return;
+      state.tried = checked.value;
+      if (state.tried === 'yes') {
+        var title = document.getElementById('lwnr-exit-call-title');
+        var body = document.getElementById('lwnr-exit-call-body');
+        if (title) title.textContent = 'Already had a go? Best to talk first';
+        if (body) body.textContent = 'Once someone’s had a go, the state of the locker is hard to predict — we’d rather hear what happened and quote you honestly on the phone than guess at it here.';
+        show('exit-call');
+        return;
+      }
+      buildQuote();
+      show('quote');
+    });
+
+    // ---- Pricing -----------------------------------------------------------
+    function fmt(n) {
+      return '£' + (Math.round(n * 100) / 100).toFixed(2).replace(/\.00$/, '');
+    }
+
+    function buildQuote() {
+      var lockers = state.lockers;
+      var base = pricing.perLocker[lockers] || 0;
+      var lines = [];
+      lines.push({ label: lockers + ' ' + (lockers === '1' ? 'locker' : 'lockers') + ' removed', amount: base });
+
+      var raw = base;
+
+      if (state.miles > pricing.distanceFreeMiles) {
+        var over = state.miles - pricing.distanceFreeMiles;
+        var distExtra = Math.round(over * pricing.distanceExtraPerMile * 100) / 100;
+        raw += distExtra;
+        lines.push({
+          label: 'Distance (' + over.toFixed(1) + ' miles over the first 5)',
+          amount: distExtra,
+        });
+      } else if (state.miles > 0) {
+        lines.push({
+          label: 'Distance (' + state.miles.toFixed(1) + ' miles, within the first 5)',
+          amount: 0,
+        });
+      }
+
+      if (state.urgency === 'today') {
+        raw += pricing.sameDaySurcharge;
+        lines.push({ label: 'Same-day surcharge', amount: pricing.sameDaySurcharge });
+      }
+
+      // Round the customer-facing total UP to the nearest £5 so the
+      // figure looks like a guide price rather than a precise quote.
+      var total = Math.ceil(raw / 5) * 5;
+
+      state.total = total;
+      state.breakdownLines = lines;
+
+      var totalEl = document.getElementById('lwnr-quote-total');
+      if (totalEl) totalEl.textContent = '~£' + total;
+
+      // populate hidden callback fields — Dean still gets the full
+      // breakdown via email, even though the customer doesn't see it.
+      var setHidden = function (id, val) {
+        var el = document.getElementById(id);
+        if (el) el.value = val;
+      };
+      setHidden('lwnr-cb-postcode', state.postcode);
+      setHidden('lwnr-cb-miles', state.miles.toFixed(2));
+      setHidden('lwnr-cb-vrm', state.vrm);
+      setHidden('lwnr-cb-lockers', state.lockers);
+      setHidden('lwnr-cb-urgency', state.urgency);
+      setHidden('lwnr-cb-issue', state.issue);
+      setHidden('lwnr-cb-tried', state.tried);
+      setHidden('lwnr-cb-price', '£' + total + ' (raw ' + fmt(raw) + ')');
+      setHidden('lwnr-cb-breakdown', lines.map(function (l) {
+        return l.label + ': ' + (l.amount === 0 ? 'Included' : fmt(l.amount));
+      }).join(' | '));
+    }
+
+    // ---- Back / restart ----------------------------------------------------
+    $$('.lwnr-back').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var to = btn.getAttribute('data-back');
+        if (to) show(to);
+      });
+    });
+
+    $$('.lwnr-restart').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        // reset state
+        state = {
+          postcode: '', miles: 0, vrm: '', lockers: null,
+          urgency: '', issue: '', tried: '', total: 0, breakdownLines: [],
+        };
+        // clear inputs
+        if (pcInput) pcInput.value = '';
+        if (vrmInput) vrmInput.value = '';
+        $$('input[type="radio"]').forEach(function (r) { r.checked = false; });
+        showError('lwnr-postcode-error');
+        showError('lwnr-vrm-error');
+        show('postcode');
+      });
+    });
+
+    // ---- Callback form: keep behaviour consistent with /contact/ ----------
+    var cb = document.getElementById('lwnr-callback-form');
+    if (cb) {
+      cb.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var btn = cb.querySelector('[type="submit"]');
+        var label = btn ? btn.querySelector('.btn-label') : null;
+        var sending = btn ? btn.querySelector('.btn-sending') : null;
+        if (btn) btn.disabled = true;
+        if (label) label.style.display = 'none';
+        if (sending) sending.style.display = '';
+        try {
+          await fetch('/services/locking-wheel-nut-removal/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(new FormData(cb)).toString(),
+          });
+          window.location.href = '/thank-you/';
+        } catch (err) {
+          if (btn) btn.disabled = false;
+          if (label) label.style.display = '';
+          if (sending) sending.style.display = 'none';
+          alert('Something went wrong sending that. Please call us on ' + phone + ' or try again.');
+        }
+      });
+    }
+  })();
+</script>
+
+<style is:global>
+  .lwnr-lede {
+    max-width: 56ch;
+    margin: 0 auto 2rem;
+  }
+
+  .lwnr-wizard {
+    max-width: 640px;
+    margin: 0 auto;
+    background-color: var(--color-bg-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+    padding: 2rem 1.75rem;
+    box-shadow: 0 18px 36px -22px rgba(0, 0, 0, 0.18);
+  }
+
+  @media (max-width: 600px) {
+    .lwnr-wizard {
+      padding: 1.5rem 1.25rem;
+    }
+  }
+
+  .lwnr-progress {
+    height: 4px;
+    background-color: var(--color-border-light);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .lwnr-progress-bar {
+    height: 100%;
+    background-color: var(--color-text-dark);
+    transition: width 220ms ease-out;
+  }
+
+  .lwnr-step[hidden] {
+    display: none;
+  }
+
+  .lwnr-step-num {
+    margin: 0 0 0.5rem;
+    color: var(--color-text-muted-dark);
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.78rem;
+  }
+
+  .lwnr-step-num--neutral {
+    color: var(--color-accent-dark);
+  }
+
+  .lwnr-step h3,
+  .lwnr-step h4 {
+    color: var(--color-text-dark);
+    margin: 0 0 0.5rem;
+    font-size: clamp(1.2rem, 2.6vw, 1.5rem);
+  }
+
+  .lwnr-step-help {
+    color: var(--color-text-muted-dark);
+    margin: 0 0 1.5rem;
+    line-height: 1.6;
+    font-size: 0.97rem;
+  }
+
+  .lwnr-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .lwnr-input {
+    padding: 0.85rem 1rem;
+    background-color: var(--color-bg-white);
+    color: var(--color-text-dark);
+    border: 2px solid var(--color-text-dark);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    min-height: 52px;
+  }
+
+  .lwnr-input--reg {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+
+  .lwnr-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(255, 45, 45, 0.18);
+  }
+
+  .lwnr-error {
+    margin: 0.75rem 0 0;
+    color: var(--color-accent-dark);
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .lwnr-form--choices {
+    gap: 0.6rem;
+  }
+
+  .lwnr-choice {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.95rem 1.1rem;
+    background-color: var(--color-bg-white);
+    border: 1.5px solid var(--color-border-light);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: border-color var(--transition), background-color var(--transition);
+  }
+
+  .lwnr-choice:hover {
+    border-color: var(--color-text-dark);
+  }
+
+  .lwnr-choice input[type="radio"] {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    accent-color: var(--color-accent);
+  }
+
+  .lwnr-choice input[type="radio"]:checked + span {
+    font-weight: 700;
+  }
+
+  .lwnr-choice:has(input[type="radio"]:checked) {
+    border-color: var(--color-accent);
+    background-color: rgba(255, 45, 45, 0.05);
+  }
+
+  .lwnr-choice span {
+    color: var(--color-text-dark);
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .lwnr-step-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .lwnr-step-actions .btn {
+    flex: 1 1 auto;
+    min-width: 120px;
+  }
+
+  .lwnr-next {
+    flex: 1 1 60% !important;
+  }
+
+  /* ---- Quote step ---- */
+
+  .lwnr-quote-card {
+    background-color: var(--color-bg-light);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+    padding: 1.75rem 1.4rem 1.4rem;
+    text-align: center;
+  }
+
+  .lwnr-quote-total {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    color: var(--color-text-dark);
+    margin: 0 0 0.85rem;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  .lwnr-quote-breakdown {
+    list-style: none;
+    margin: 0 auto 1.25rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--color-border-light);
+    border-bottom: 1px solid var(--color-border-light);
+    text-align: left;
+    max-width: 420px;
+  }
+
+  .lwnr-quote-breakdown li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.45rem 0;
+    color: var(--color-text-muted-dark);
+    font-size: 0.95rem;
+  }
+
+  .lwnr-quote-amount {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--color-text-dark);
+    white-space: nowrap;
+  }
+
+  .lwnr-quote-caveat {
+    margin: 0;
+    color: var(--color-text-muted-dark);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .lwnr-quote-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.5rem 0 0;
+    justify-content: center;
+  }
+
+  .lwnr-quote-cta .btn {
+    flex: 1 1 auto;
+  }
+
+  .lwnr-divider {
+    border: 0;
+    border-top: 1px solid var(--color-border-light);
+    margin: 2rem 0 1.5rem;
+  }
+
+  .lwnr-callback-intro h4 {
+    margin: 0 0 0.4rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 1.1rem;
+  }
+
+  .lwnr-callback-intro p {
+    margin: 0 0 1.25rem;
+    color: var(--color-text-muted-dark);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .lwnr-callback .field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  .lwnr-callback .field label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-dark);
+    margin-bottom: 0.4rem;
+  }
+
+  .lwnr-callback .field input {
+    padding: 0.85rem 0.95rem;
+    background-color: var(--color-bg-white);
+    color: var(--color-text-dark);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-family: var(--font-body);
+  }
+
+  .lwnr-callback .field input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(255, 45, 45, 0.18);
+  }
+
+  /* ---- Exit screens ---- */
+
+  .lwnr-step--exit p {
+    color: var(--color-text-muted-dark);
+    line-height: 1.65;
+  }
+</style>

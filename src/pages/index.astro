@@ -2,38 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import ServiceCard from '../components/ServiceCard.astro';
-import ReviewCard from '../components/ReviewCard.astro';
+import ReviewsSection from '../components/ReviewsSection.astro';
 import FAQAccordion from '../components/FAQAccordion.astro';
 import QuoteForm from '../components/QuoteForm.astro';
 
 const phone = '01623 325 123';
-
-const reviews = [
-  {
-    name: 'Joe Rowe',
-    location: 'Nottinghamshire',
-    rating: 5,
-    text: 'Noticed a gouge out of my side wall while 250 miles from home on a Saturday with garages all shut by 1pm. Dean was out within 15 minutes and the tyre was refitted almost immediately. Fair and up front pricing and all agreed in advance. Absolutely perfect service. If you are unlucky enough to need an emergency tyre, and you\'re within range of Dean, you\'re in luck!',
-  },
-  {
-    name: 'Nick Panton',
-    location: 'A1, Nottinghamshire',
-    rating: 5,
-    text: 'Can\'t praise the service from Dean at Tyre Emergency enough. Had a puncture on the A1 at approx 7.30am, call to Tyre Emergency answered straight away and within 10 minutes had a quote. Just over an hour later new tyre was fitted and I was on my way.',
-  },
-  {
-    name: 'Chantelle W',
-    location: 'Newark',
-    rating: 5,
-    text: 'Hitting a pothole and getting a flat tyre after a 12 hour shift was a nightmare. Especially when RAC was going to be 4 hours, so decided to try elsewhere instead. Dean came, had it fixed and I was on my way within half an hour of calling. Friendly & efficient. Highly recommended!',
-  },
-  {
-    name: 'Lesley Park',
-    location: 'Newark',
-    rating: 5,
-    text: 'Travelled home late Friday night from work and had a burst tyre. I initially booked a refit with a company who said they could do next day — however the job was still waiting to be farmed out early the next morning. I checked Google again and found Dean. I called him and he was with me within the hour, all sorted and road worthy again. I would absolutely recommend this young man, who is a complete professional in his field, mannerly and genuine.',
-  },
-];
 
 const services = [
   {
@@ -179,39 +152,10 @@ const faqs = [
   />
 
   <!-- Section 2: Social proof -->
-  <section class="section section-white">
-    <div class="container">
-      <div class="text-center">
-        <span class="eyebrow">Trusted by Drivers</span>
-        <h2>Five Stars. Hundreds of Drivers Rescued.</h2>
-        <p class="section-lede">A few words from real customers we&rsquo;ve sorted out &mdash; on the roadside, on the driveway and in the office car park.</p>
-      </div>
-
-      <div class="reviews-grid">
-        {reviews.map((r) => (
-          <ReviewCard name={r.name} location={r.location} text={r.text} rating={r.rating} />
-        ))}
-      </div>
-
-      <div class="google-rating">
-        <span class="google-logo" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09 0-.73.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-          </svg>
-        </span>
-        <span class="google-rating-text">
-          <strong>5.0</strong>
-          <span>Rated on Google from 478 reviews</span>
-        </span>
-        <span class="rating-stars" aria-hidden="true">
-          <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-        </span>
-      </div>
-    </div>
-  </section>
+  <ReviewsSection
+    title="Five Stars. Hundreds of Drivers Rescued."
+    lede="A few words from real customers we&rsquo;ve sorted out &mdash; on the roadside, on the driveway and in the office car park."
+  />
 
   <!-- Section 3: How it works -->
   <section class="section section-darker">
@@ -340,57 +284,6 @@ const faqs = [
     font-size: 1.1rem;
     color: inherit;
     opacity: 0.85;
-  }
-
-  .reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.25rem;
-    margin-bottom: 2.5rem;
-  }
-
-  @media (max-width: 1100px) {
-    .reviews-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 600px) {
-    .reviews-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .google-rating {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 0.85rem;
-    padding: 1.1rem 1.5rem;
-    border: 1px solid var(--color-border-light);
-    border-radius: var(--radius);
-    max-width: 540px;
-    margin: 0 auto;
-  }
-
-  .google-rating-text {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.5rem;
-    color: var(--color-text-dark);
-  }
-
-  .google-rating-text strong {
-    font-family: var(--font-display);
-    font-size: 1.6rem;
-    color: var(--color-text-dark);
-  }
-
-  .rating-stars {
-    color: var(--color-star);
-    letter-spacing: 0.1em;
-    font-size: 1.1rem;
   }
 
   .steps {

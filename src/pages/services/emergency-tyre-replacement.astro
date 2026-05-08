@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ReviewsSection from '../../components/ReviewsSection.astro';
 
 const phone = '01623 325 123';
 const telHref = `tel:${phone.replace(/\s+/g, '')}`;
@@ -41,6 +42,12 @@ const serviceJsonLd = {
       </div>
     </div>
   </section>
+
+  <ReviewsSection
+    eyebrow="Real customers"
+    title="Hundreds of drivers, sorted out roadside."
+    lede="Five-star reviews from real customers we&rsquo;ve helped &mdash; on the hard shoulder, in the supermarket car park and at home."
+  />
 
   <section class="section section-white">
     <div class="container">
