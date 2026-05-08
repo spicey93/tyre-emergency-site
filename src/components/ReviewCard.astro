@@ -11,7 +11,7 @@ const stars = Array.from({ length: 5 }, (_, i) => i < rating);
 ---
 
 <figure class="review-card">
-  <div class="review-stars" aria-label={`${rating} out of 5 stars`}>
+  <div class="review-stars" role="img" aria-label={`${rating} out of 5 stars`}>
     {stars.map((filled) => (
       <span class={filled ? 'star filled' : 'star'} aria-hidden="true">&#9733;</span>
     ))}
