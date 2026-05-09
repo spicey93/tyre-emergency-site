@@ -27,11 +27,11 @@ const telHref = `tel:${phone.replace(/\s+/g, '')}`;
     </div>
   </section>
 
-  <section class="section section-darker">
+  <section class="section section-light">
     <div class="container container-narrow">
       <span class="eyebrow">REACT Licensing</span>
       <h2>What &ldquo;REACT licensed&rdquo; actually means</h2>
-      <p>REACT licensing is about one specific thing: working safely at the roadside. It covers how to set up a vehicle and equipment on A-roads and motorways, how to use cones and beacons properly, how to assess a scene before starting work, and how to keep yourself and the customer safe with traffic passing at speed. It&rsquo;s not a tick-box course either &mdash; your van has to meet certain standards and you need real roadside experience under your belt before you&rsquo;re even eligible.</p>
+      <p>REACT licensing is about one specific thing: working safely at the roadside. It covers how to set up a vehicle and equipment on A-roads and motorways, how to use cones and beacons properly, how to assess a scene before starting work, and how to keep yourself and the customer safe with traffic passing at speed. It&rsquo;s not a tick-box course either &mdash; your van has to meet certain standards and you need real roadside experience before you&rsquo;re even eligible.</p>
       <p>The practical difference for you: when we turn up on the M1 hard shoulder or the verge of an A-road at 2am, nobody&rsquo;s improvising. We know exactly how to set up, what to do if conditions change, and when the right answer is to wait for a lane closure rather than work somewhere dangerous. That makes the job safer for you, for passing traffic and for us.</p>
     </div>
   </section>
@@ -53,13 +53,13 @@ const telHref = `tel:${phone.replace(/\s+/g, '')}`;
         </article>
         <article class="value-card">
           <h3>The right tyre, fitted properly</h3>
-          <p>Tyres matched to the vehicle &mdash; correct size, load rating and speed rating &mdash; balanced, torque-wrenched and TPMS reset before we leave. Not just slapped on with an impact gun.</p>
+          <p>Tyres matched to the vehicle &mdash; correct size, load rating and speed rating &mdash; balanced and torque-wrenched before we leave. Not just slapped on with an impact gun.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="section section-darker">
+  <section class="section section-light">
     <div class="container container-narrow">
       <span class="eyebrow">The Philosophy</span>
       <h2>An emergency is a bad enough day already.</h2>
@@ -67,7 +67,6 @@ const telHref = `tel:${phone.replace(/\s+/g, '')}`;
       <p>So the call is kept short. We need three things: where you are, what you&rsquo;re driving and what&rsquo;s happened. We give you the price and the ETA, and you decide. When we arrive, we get straight to work and get you moving. That&rsquo;s the whole service model &mdash; and it&rsquo;s what five hundred reviews consistently say back.</p>
       <div class="cta-row about-cta">
         <a class="btn btn-primary" href={telHref}>Call {phone}</a>
-        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
       </div>
     </div>
   </section>
@@ -76,21 +75,22 @@ const telHref = `tel:${phone.replace(/\s+/g, '')}`;
 <style>
   .page-hero {
     padding: 5rem 0 3rem;
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-bg-white);
+    color: var(--color-text-dark);
+    border-bottom: 1px solid var(--color-border-light);
     background-image:
-      radial-gradient(900px 500px at 80% 20%, rgba(255, 45, 45, 0.18), transparent 60%);
+      radial-gradient(900px 500px at 80% 20%, rgba(255, 45, 45, 0.08), transparent 60%);
   }
 
   .page-hero h1 {
     font-size: clamp(2.4rem, 5vw, 4rem);
     max-width: 22ch;
     margin-bottom: 1rem;
+    color: var(--color-text-dark);
   }
 
   .page-hero-sub {
-    color: var(--color-text-muted);
+    color: var(--color-text-muted-dark);
     max-width: 60ch;
     font-size: 1.1rem;
   }

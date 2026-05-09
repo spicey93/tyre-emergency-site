@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroSection from '../../components/HeroSection.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import ReviewsSection from '../../components/ReviewsSection.astro';
 
@@ -37,35 +38,22 @@ const services = [
     href: '/services/locking-wheel-nut-removal/',
     icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="12" height="9" rx="2"/><path d="M9 11V7a3 3 0 0 1 6 0v4"/></svg>',
   },
-  {
-    title: 'TPMS Sensor Replacement',
-    description: 'IMI certified for TPMS work. Diagnostic, sensor swap and programming — done on your driveway in one visit.',
-    href: '/services/tpms-sensor-replacement/',
-    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
-  },
 ];
 ---
 
 <BaseLayout
   title="Our Services | Tyre Emergency Ltd Mobile Tyre Fitting Nottinghamshire"
-  description="Six mobile tyre services across Nottinghamshire: emergency replacement, fitting at home, caravan tyres, puncture repair, locking nut removal and TPMS sensors. We come to you, 24/7."
+  description="Five mobile tyre services across Nottinghamshire: emergency replacement, fitting at home, caravan tyres, puncture repair and locking nut removal. We come to you, 24/7."
 >
-  <section class="page-hero">
-    <div class="container">
-      <span class="eyebrow">Services</span>
-      <h1>Everything we do, all from one van.</h1>
-      <p class="page-hero-sub">Whether it&rsquo;s a 3am blowout on the A1 or a quiet set of four on your driveway on a Saturday morning, we come to you with the kit to finish the job first time. Built to be fast, streamlined and easy to deal with.</p>
-      <div class="cta-row" style="margin-top: 1.5rem;">
-        <a class="btn btn-primary btn-call" href={telHref}>
-          <span aria-hidden="true">&#9742;</span> Call: {phone}
-        </a>
-        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
-      </div>
-    </div>
-  </section>
-
-  <ReviewsSection />
-
+  <HeroSection
+    eyebrow="Services · Nottinghamshire"
+    title="Everything we do, all from one van."
+    subtitle="From a 3am blowout on the A1 to a quiet set of four on a Saturday morning. We bring it all with us."
+    ctaPhone={phone}
+    ctaCallLabel="Call 24/7"
+    bgImage="/images/tyre-emergency-ltd.webp"
+    bgImageAlt="Tyre Emergency Ltd service van fully kitted out for mobile fitting"
+  />
   <section class="section section-light">
     <div class="container">
       <div class="text-center">
@@ -82,7 +70,10 @@ const services = [
     </div>
   </section>
 
-  <section class="section section-darker">
+  
+  <ReviewsSection />
+
+  <section class="section section-light">
     <div class="container container-narrow text-center">
       <h2>Not sure which one you need?</h2>
       <p class="text-muted">Just give us a ring and tell us what&rsquo;s happened. We&rsquo;ll work out the right job over the phone, give you an exact price, and turn up with everything we need to sort it.</p>
@@ -90,7 +81,6 @@ const services = [
         <a class="btn btn-primary btn-call" href={telHref}>
           <span aria-hidden="true">&#9742;</span> Call {phone}
         </a>
-        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
       </div>
     </div>
   </section>

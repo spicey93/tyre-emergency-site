@@ -12,7 +12,6 @@ const services = [
   { href: '/services/mobile-caravan-tyre-fitting/', label: 'Mobile Caravan Tyre Fitting' },
   { href: '/services/mobile-tyre-repair/', label: 'Mobile Tyre Repair' },
   { href: '/services/locking-wheel-nut-removal/', label: 'Locking Wheel Nut Removal' },
-  { href: '/services/tpms-sensor-replacement/', label: 'TPMS Sensor Replacement' },
 ];
 
 const areas = [
@@ -109,6 +108,7 @@ const areas = [
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
   const menu = document.getElementById('primary-menu');
+  const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
 
   if (toggle && menu) {
     toggle.addEventListener('click', () => {
@@ -120,6 +120,9 @@ const areas = [
 
     menu.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => {
       link.addEventListener('click', () => {
+        // On mobile, the parent (.nav-parent) toggles the dropdown rather
+        // than navigating, so we mustn't close the whole menu when it's tapped.
+        if (link.classList.contains('nav-parent') && isMobile()) return;
         toggle.setAttribute('aria-expanded', 'false');
         menu.classList.remove('is-open');
         document.body.classList.remove('nav-open');
@@ -127,7 +130,22 @@ const areas = [
     });
   }
 
-  // Mobile / keyboard dropdown toggling
+  // On mobile, tapping the parent link ("Services" / "Areas") expands the
+  // dropdown in place instead of navigating — saves users from hunting for
+  // the small caret button.
+  document.querySelectorAll<HTMLAnchorElement>('.nav-parent').forEach((parent) => {
+    parent.addEventListener('click', (event) => {
+      if (!isMobile()) return;
+      event.preventDefault();
+      const wrapper = parent.closest('.has-dropdown');
+      if (!wrapper) return;
+      const isOpen = wrapper.classList.toggle('is-open');
+      const tog = wrapper.querySelector<HTMLButtonElement>('.dropdown-toggle');
+      if (tog) tog.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+
+  // Caret button still works for keyboard users and for explicit toggling.
   document.querySelectorAll<HTMLButtonElement>('.dropdown-toggle').forEach((btn) => {
     btn.addEventListener('click', (event) => {
       event.preventDefault();

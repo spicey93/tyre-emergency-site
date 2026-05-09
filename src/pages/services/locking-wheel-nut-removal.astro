@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroSection from '../../components/HeroSection.astro';
 import ReviewsSection from '../../components/ReviewsSection.astro';
 
 const phone = '01623 325 123';
@@ -42,24 +43,21 @@ const serviceJsonLd = {
   description="Mobile locking wheel nut removal across Nottinghamshire. Lost keys, stripped patterns, seized nuts &mdash; we deal with all of them, on your driveway or at the garage. Specialist extraction tools, minimal wheel damage, fast turnaround. Get an instant guide price online or call 01623 325 123."
   jsonLd={JSON.stringify(serviceJsonLd)}
 >
-  <section class="service-hero" style="background-image: url('/images/locking-wheel-nut-removal.webp');">
-    <div class="container">
-      <span class="eyebrow">Specialist Extraction</span>
-      <h1>Locking Wheel Nut Removal</h1>
-      <p class="service-intro">
-        Lost the key, stripped the pattern, seized on the stud &mdash; we deal with every kind of locking wheel nut problem, on every make and model. Specialist extraction tools, hundreds of jobs under our belt, and a clean finish around the alloy. Most lock-offs are sorted on the driveway in 15&ndash;30 minutes once we&rsquo;re with you.
-      </p>
-      <div class="cta-row">
-        <a class="btn btn-primary btn-call" href={telHref}>
-          <span aria-hidden="true">&#9742;</span> Call: {phone}
-        </a>
-        <a class="btn btn-outline" href="#lwnr-quote">Get an instant price</a>
-      </div>
-    </div>
-  </section>
-
-  <ReviewsSection />
-
+  <HeroSection
+    eyebrow="Specialist Extraction · Nottinghamshire"
+    title="Locking Wheel Nut Removal"
+    subtitle="Lost the key, stripped the pattern, seized on the stud &mdash; we get them off. Most jobs sorted in 15&ndash;30 minutes."
+    ctaPhone={phone}
+    ctaCallLabel="Call for a price"
+    secondaryCta={{ label: 'Get an instant price', href: '#lwnr-quote' }}
+    bgImage="/images/locking-wheel-nut-removal.webp"
+    bgImageAlt="Close-up of a stripped locking wheel nut being extracted on an alloy wheel"
+    trustItems={[
+      { strong: '478', label: '★★★★★ Google reviews' },
+      { strong: 'Specialist', label: 'extraction kit on the van' },
+      { strong: '15–30 min', label: 'typical job time' },
+    ]}
+  />
   <section class="section section-white">
     <div class="container">
       <div class="service-split">
@@ -77,9 +75,8 @@ const serviceJsonLd = {
           <h2>Built for this exact job</h2>
           <ul class="check-list">
             <li><strong>Every type of locker, every make of car.</strong> Lost keys, stripped patterns, snapped keys, seized nuts, slipping keys &mdash; we&rsquo;ve come across yours before and we carry the kit to handle it.</li>
-            <li><strong>The right extractor for your wheel.</strong> A full set of size-specific extraction sockets rather than a one-size-fits-all kit, which means a faster job and a much cleaner finish.</li>
-            <li><strong>Minimal wheel damage.</strong> Done properly, an extraction leaves the alloy face untouched. We work slowly and carefully around the wheel and the hub so you aren&rsquo;t left with cosmetic damage.</li>
-            <li><strong>Fast on the driveway.</strong> Most lock-off jobs are 15&ndash;30 minutes door-to-door once we&rsquo;re with you. Same-day slots most days of the week.</li>
+            <li><strong>A range of specialist extraction kits on the van.</strong> Not a one-size-fits-all gadget &mdash; a proper set of professional extractors so we&rsquo;ve got the right tool for whatever&rsquo;s on the wheel when we get there.</li>
+            <li><strong>Fast on the driveway.</strong> Most jobs are 15&ndash;30 minutes door-to-door once we&rsquo;re with you. Same-day slots most days of the week.</li>
             <li><strong>Replacement nut fitted to spec.</strong> Once the locker is out, a standard nut goes on, torqued to the manufacturer&rsquo;s figure, so the wheel is safe to drive on the moment we hand the keys back.</li>
           </ul>
         </div>
@@ -87,18 +84,18 @@ const serviceJsonLd = {
     </div>
   </section>
 
-  <section class="section section-darker">
+  <section class="section section-light">
     <div class="container container-narrow">
       <span class="eyebrow">When You Need This</span>
       <h2>The kind of situations we get called for</h2>
       <div class="scenarios">
         <article class="scenario">
           <h3>Booked in for tyres and the locker key is missing</h3>
-          <p>Classic one. You&rsquo;ve gone to get tyres or other work done and only then realised the key isn&rsquo;t in the car. Without it, no garage will touch the wheel and the job stalls. We come out, get the locker off, and the rest of the work can carry on.</p>
+          <p>You&rsquo;ve gone to get tyres or other work done and only then realised the key isn&rsquo;t in the car. Without it, no garage will touch the wheel and the job stalls. We come out, get the locker off, and the rest of the work can carry on.</p>
         </article>
         <article class="scenario">
           <h3>Stripped or rounded locking nut</h3>
-          <p>A previous garage has put an air gun on the locker and chewed the pattern. The key now spins freely. Our extractors are made for exactly this &mdash; we&rsquo;ll have it out without scarring the alloy.</p>
+          <p>A previous garage has put an air gun on the locker and chewed the pattern. The key now spins freely. Our extractors are made for exactly this &mdash; we&rsquo;ll have it out and a standard nut back on.</p>
         </article>
         <article class="scenario">
           <h3>Stuck at a garage, can&rsquo;t move on</h3>
@@ -111,6 +108,9 @@ const serviceJsonLd = {
       </div>
     </div>
   </section>
+
+  
+  <ReviewsSection />
 
   <section class="section section-light service-cta-section" id="lwnr-quote">
     <div class="container container-narrow">
@@ -244,7 +244,7 @@ const serviceJsonLd = {
           <div class="lwnr-quote-card" id="lwnr-quote-card">
             <p class="lwnr-quote-total" id="lwnr-quote-total">&pound;0</p>
             <p class="lwnr-quote-caveat">
-              This is a <strong>guide price</strong> &mdash; the final number depends on what we find when we get there. Give us a call to confirm and book in.
+              This is a <strong>guide price</strong> &mdash; the final number depends on what we find when we get there. Give us a call and we&rsquo;ll firm it up.
             </p>
           </div>
 

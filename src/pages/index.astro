@@ -39,12 +39,6 @@ const services = [
     href: '/services/locking-wheel-nut-removal/',
     icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="12" height="9" rx="2"/><path d="M9 11V7a3 3 0 0 1 6 0v4"/></svg>',
   },
-  {
-    title: 'TPMS Sensor Replacement',
-    description: 'IMI certified for TPMS work. Diagnostic, sensor swap and programming — done on your driveway in one visit.',
-    href: '/services/tpms-sensor-replacement/',
-    icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
-  },
 ];
 
 const areas = [
@@ -144,21 +138,18 @@ const faqs = [
   })}
 >
   <HeroSection
-    title="Flat Tyre? We&rsquo;ll Be There in 60 Minutes."
-    subtitle="Mobile tyre fitting and emergency replacement across Nottinghamshire. We come to you — at home, at work or on the roadside — with everything we need to get the job done first time."
+    eyebrow="24/7 Mobile Tyre Fitting · Nottinghamshire"
+    title="Flat Tyre?<br />We&rsquo;ll Be There In <span class='accent'>60 Minutes</span>."
+    subtitle="Mobile tyre fitting across Nottinghamshire. We come to you, day or night."
     ctaPhone={phone}
+    ctaCallLabel="Call 24/7"
     bgImage="/images/tyre-emergency-ltd.webp"
     bgImageAlt="Tyre Emergency Ltd service van open on a motorway hard shoulder with equipment ready"
   />
 
   <!-- Section 2: Social proof -->
-  <ReviewsSection
-    title="Five Stars. Hundreds of Drivers Rescued."
-    lede="A few words from real customers we&rsquo;ve sorted out &mdash; on the roadside, on the driveway and in the office car park."
-  />
-
   <!-- Section 3: How it works -->
-  <section class="section section-darker">
+  <section class="section section-light">
     <div class="container">
       <div class="text-center">
         <span class="eyebrow">How It Works</span>
@@ -186,7 +177,7 @@ const faqs = [
   </section>
 
   <!-- Section 4: Services -->
-  <section class="section section-light">
+  <section class="section section-white">
     <div class="container">
       <div class="text-center">
         <span class="eyebrow">Services</span>
@@ -203,7 +194,7 @@ const faqs = [
   </section>
 
   <!-- Section 5: Coverage -->
-  <section class="section section-dark">
+  <section class="section section-light">
     <div class="container">
       <div class="text-center">
         <span class="eyebrow">Coverage</span>
@@ -254,8 +245,11 @@ const faqs = [
     </div>
   </section>
 
+
+  <ReviewsSection variant="light" title="Five Stars. Hundreds of Drivers Rescued." lede="A few words from real customers we&rsquo;ve sorted out &mdash; on the roadside, on the driveway and in the office car park." />
+
   <!-- Section 7: FAQ -->
-  <section class="section section-darker">
+  <section class="section section-white">
     <div class="container">
       <div class="text-center">
         <span class="eyebrow">FAQ</span>
@@ -296,8 +290,8 @@ const faqs = [
   }
 
   .step {
-    background-color: var(--color-bg-elevated);
-    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-white);
+    border: 1px solid var(--color-border-light);
     border-radius: var(--radius);
     padding: 2rem;
     position: relative;
@@ -309,8 +303,8 @@ const faqs = [
     font-family: var(--font-display);
     font-weight: 900;
     font-size: 4rem;
-    color: var(--color-text);
-    opacity: 0.18;
+    color: var(--color-text-dark);
+    opacity: 0.15;
     line-height: 1;
     margin-bottom: 1rem;
   }
@@ -318,16 +312,17 @@ const faqs = [
   .step h3 {
     font-size: 1.2rem;
     margin-bottom: 0.6rem;
+    color: var(--color-text-dark);
   }
 
   .step p {
-    color: var(--color-text-muted);
+    color: var(--color-text-muted-dark);
     margin: 0;
     font-size: 0.95rem;
   }
 
   .step a {
-    color: var(--color-text);
+    color: var(--color-text-dark);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
@@ -352,13 +347,13 @@ const faqs = [
   }
 
   .coverage-roads {
-    color: var(--color-text-muted);
+    color: var(--color-text-muted-dark);
     font-size: 1rem;
     margin: 0;
   }
 
   .coverage-roads strong {
-    color: var(--color-text);
+    color: var(--color-text-dark);
     font-family: var(--font-display);
     font-size: 1.1rem;
   }

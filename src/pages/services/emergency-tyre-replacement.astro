@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroSection from '../../components/HeroSection.astro';
 import ReviewsSection from '../../components/ReviewsSection.astro';
 
 const phone = '01623 325 123';
@@ -27,28 +28,15 @@ const serviceJsonLd = {
   description="24/7 emergency mobile tyre replacement across Nottinghamshire. Exact price over the phone, realistic ETA, and everything on the van to get you back on the road first time. Call 01623 325 123."
   jsonLd={JSON.stringify(serviceJsonLd)}
 >
-  <section class="service-hero" style="background-image: url('/images/roadside-tyre-change.jpeg');">
-    <div class="container">
-      <span class="eyebrow">Emergency Service</span>
-      <h1>Emergency Tyre Replacement</h1>
-      <p class="service-intro">
-        A flat tyre always happens at the worst possible time &mdash; on your way to the airport, on the school run, or stuck somewhere in the middle of nowhere. We&rsquo;re ready to go at a moment&rsquo;s notice and we come to you with the right tyre and the kit to fit it on the spot.
-      </p>
-      <div class="cta-row">
-        <a class="btn btn-primary btn-call" href={telHref}>
-          <span aria-hidden="true">&#9742;</span> Call Now: {phone}
-        </a>
-        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
-      </div>
-    </div>
-  </section>
-
-  <ReviewsSection
-    eyebrow="Real customers"
-    title="Hundreds of drivers, sorted out roadside."
-    lede="Five-star reviews from real customers we&rsquo;ve helped &mdash; on the hard shoulder, in the supermarket car park and at home."
+  <HeroSection
+    eyebrow="24/7 Emergency Service · Nottinghamshire"
+    title="Emergency Tyre Replacement"
+    subtitle="Stuck with a flat? We come to you, fit a new tyre on the spot, and get you moving."
+    ctaPhone={phone}
+    ctaCallLabel="Call 24/7"
+    bgImage="/images/roadside-tyre-change.jpeg"
+    bgImageAlt="A tyre being changed at the roadside next to the Tyre Emergency Ltd service van"
   />
-
   <section class="section section-white">
     <div class="container">
       <div class="service-split">
@@ -68,7 +56,7 @@ const serviceJsonLd = {
             <li><strong>An exact price over the phone</strong> &mdash; you&rsquo;ll know what you&rsquo;re paying before we set off, with no hidden costs or extras tacked on when we arrive.</li>
             <li><strong>A realistic ETA, not a best-case one</strong> &mdash; we tell you when we&rsquo;ll genuinely be with you so you can plan around it.</li>
             <li><strong>Don&rsquo;t know exactly where you are?</strong> We&rsquo;ll send you a quick text and pick up your location from your phone &mdash; no postcode-guessing on either side.</li>
-            <li><strong>Everything we need is on the van</strong> &mdash; the right tyre sourced before we leave, balancer, torque wrench, TPMS tools and disposal sorted, so you&rsquo;re back on the road first time.</li>
+            <li><strong>Everything we need is on the van</strong> &mdash; the right tyre sourced before we leave, balancer, torque wrench and disposal sorted, so you&rsquo;re back on the road first time.</li>
             <li><strong>Friendly, experienced and unflustered</strong> &mdash; you&rsquo;ll be talking to someone who has done this thousands of times and won&rsquo;t make a stressful day worse.</li>
           </ul>
         </div>
@@ -76,7 +64,7 @@ const serviceJsonLd = {
     </div>
   </section>
 
-  <section class="section section-darker">
+  <section class="section section-light">
     <div class="container container-narrow">
       <span class="eyebrow">When You Need This</span>
       <h2>The kind of calls we get every day</h2>
@@ -84,7 +72,7 @@ const serviceJsonLd = {
       <div class="scenarios">
         <article class="scenario">
           <h3>Blowout on the way to the airport</h3>
-          <p>Suitcases packed, flight booked, and a tyre lets go on the dual carriageway. We&rsquo;ll be on our way within minutes and have a fresh tyre fitted on the spot &mdash; usually quicker than waiting for recovery to even arrive.</p>
+          <p>Suitcases packed, flight booked, and a tyre lets go on the dual carriageway. We&rsquo;ll be on our way within minutes and have a new tyre fitted on the spot &mdash; usually quicker than waiting for recovery to even arrive.</p>
         </article>
         <article class="scenario">
           <h3>Flat on the driveway before the school run</h3>
@@ -96,11 +84,14 @@ const serviceJsonLd = {
         </article>
         <article class="scenario">
           <h3>Kerbed wheel with a split tyre</h3>
-          <p>You&rsquo;ve clipped a kerb and cracked the tyre internally. Often invisible from outside but not safe to drive on. We&rsquo;ll fit a fresh one wherever you&rsquo;ve stopped.</p>
+          <p>You&rsquo;ve clipped a kerb and cracked the tyre internally. Often invisible from outside but not safe to drive on. We&rsquo;ll fit a new one wherever you&rsquo;ve stopped.</p>
         </article>
       </div>
     </div>
   </section>
+
+  
+  <ReviewsSection />
 
   <section class="section section-light service-cta-section">
     <div class="container container-narrow text-center">

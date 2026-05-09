@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroSection from '../../components/HeroSection.astro';
 import ReviewsSection from '../../components/ReviewsSection.astro';
 
 const phone = '01623 325 123';
@@ -9,7 +10,7 @@ const areas = [
   { name: 'Mansfield', slug: 'mansfield', eta: '25 min', blurb: 'Full mobile service across Mansfield and the surrounding NG18/NG19 villages — emergency callouts, planned fitting, repairs, caravans, the lot.' },
   { name: 'Nottingham', slug: 'nottingham', eta: '35 min', blurb: 'Mobile fitting across the whole NG postcode. We come to homes, workplaces and roadside callouts right across the city and suburbs.' },
   { name: 'Newark', slug: 'newark', eta: '20 min', blurb: 'One of our closest postcodes. We cover Newark-on-Trent and the surrounding villages for everything from a planned set of four to a 2am roadside emergency.' },
-  { name: 'Worksop', slug: 'worksop', eta: '30 min', blurb: 'Full mobile tyre service across S80 — at home, at work or on the roadside. Cars, vans, caravans and TPMS work all sorted on-site.' },
+  { name: 'Worksop', slug: 'worksop', eta: '30 min', blurb: 'Full mobile tyre service across S80 — at home, at work or on the roadside. Cars, vans and caravans all sorted on-site.' },
   { name: 'Chesterfield', slug: 'chesterfield', eta: '35 min', blurb: 'We come to you across Chesterfield and the surrounding area for emergency callouts, planned fitting and everything in between.' },
   { name: 'Doncaster', slug: 'doncaster', eta: '45 min', blurb: 'Full mobile tyre service across the DN postcode — homes, workplaces and roadside emergencies, day or night.' },
   { name: 'Lincoln', slug: 'lincoln', eta: '50 min', blurb: 'Mobile fitting across Lincoln and the surrounding LN postcodes. Whatever the job, we bring it all with us.' },
@@ -17,7 +18,7 @@ const areas = [
   { name: 'Grantham', slug: 'grantham', eta: '50 min', blurb: 'Full mobile tyre service across Grantham and the surrounding villages. Particularly handy for caravans and motorhomes you don\'t want to tow anywhere.' },
   { name: 'Southwell', slug: 'southwell', eta: '20 min', blurb: 'Practically on our doorstep. The full mobile service for cars, vans, caravans and trailers without you moving an inch.' },
   { name: 'Tuxford', slug: 'tuxford', eta: '25 min', blurb: 'Mobile tyre fitting across Tuxford and the surrounding villages — homes, workplaces, roadside callouts, all of it.' },
-  { name: 'Blyth', slug: 'blyth', eta: '35 min', blurb: 'Full mobile tyre service across Blyth and the surrounding north Notts villages, 24/7.' },
+  { name: 'Blyth', slug: 'blyth', eta: '35 min', blurb: 'Full mobile tyre service across Blyth and the surrounding north Notts villages.' },
 ];
 ---
 
@@ -25,22 +26,15 @@ const areas = [
   title="Areas Covered | Mobile Tyre Fitting Nottinghamshire & East Midlands"
   description="Twelve towns and a wide rural catchment across Nottinghamshire and the East Midlands. Mansfield, Nottingham, Newark, Worksop, Chesterfield, Doncaster, Lincoln, Retford, Grantham, Southwell, Tuxford and Blyth."
 >
-  <section class="page-hero">
-    <div class="container">
-      <span class="eyebrow">Coverage</span>
-      <h1>Twelve towns. One county. 24/7.</h1>
-      <p class="page-hero-sub">We&rsquo;re based in Bilsthorpe right in the middle of Nottinghamshire, so the whole county is on our doorstep &mdash; plus a fair chunk of Lincolnshire, South Yorkshire and north Derbyshire. Pick your town below, or just give us a call and we&rsquo;ll tell you straight whether we can get to you.</p>
-      <div class="cta-row" style="margin-top: 1.5rem;">
-        <a class="btn btn-primary btn-call" href={telHref}>
-          <span aria-hidden="true">&#9742;</span> Call: {phone}
-        </a>
-        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
-      </div>
-    </div>
-  </section>
-
-  <ReviewsSection />
-
+  <HeroSection
+    eyebrow="Coverage · Nottinghamshire & East Midlands"
+    title="Twelve towns. One county."
+    subtitle="Based in Bilsthorpe, smack in the middle of Notts. Whole county on our doorstep, plus a fair chunk of Lincs, South Yorks and Derbyshire."
+    ctaPhone={phone}
+    ctaCallLabel="Call us"
+    bgImage="/images/tyre-emergency-ltd.webp"
+    bgImageAlt="Tyre Emergency Ltd service van ready to head out across the East Midlands"
+  />
   <section class="section section-light">
     <div class="container">
       <div class="text-center">
@@ -64,7 +58,10 @@ const areas = [
     </div>
   </section>
 
-  <section class="section section-darker">
+  
+  <ReviewsSection />
+
+  <section class="section section-light">
     <div class="container container-narrow text-center">
       <span class="eyebrow">Not on the list?</span>
       <h2>Give us a call anyway.</h2>
@@ -73,7 +70,6 @@ const areas = [
         <a class="btn btn-primary btn-call" href={telHref}>
           <span aria-hidden="true">&#9742;</span> Call {phone}
         </a>
-        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
       </div>
     </div>
   </section>

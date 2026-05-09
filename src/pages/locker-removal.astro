@@ -9,32 +9,29 @@ const areas = [
   'Lincoln', 'Retford', 'Grantham', 'Southwell', 'Tuxford', 'Blyth',
 ];
 
-const roads = ['A1', 'A614', 'M1', 'A60', 'A38', 'A52'];
-
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'EmergencyService',
-  name: 'Tyre Emergency Ltd — Emergency Mobile Tyre Replacement',
-  description: '24/7 emergency mobile tyre replacement at the roadside, on the driveway or wherever you are stuck across Nottinghamshire and the East Midlands. Around 30 minute average ETA.',
-  telephone: '+441623325123',
-  url: 'https://tyreemergencyltd.co.uk/emergency/',
-  image: 'https://tyreemergencyltd.co.uk/og-image.jpg',
-  priceRange: '££',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Bilsthorpe',
-    addressLocality: 'Newark',
-    addressRegion: 'Nottinghamshire',
-    postalCode: 'NG22 8GA',
-    addressCountry: 'GB',
+  '@type': 'Service',
+  name: 'Mobile Locking Wheel Nut Removal',
+  serviceType: 'Locking Wheel Nut Removal',
+  provider: {
+    '@type': 'LocalBusiness',
+    name: 'Tyre Emergency Ltd',
+    telephone: '+441623325123',
+    url: 'https://tyreemergencyltd.co.uk/',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Bilsthorpe',
+      addressLocality: 'Newark',
+      addressRegion: 'Nottinghamshire',
+      postalCode: 'NG22 8GA',
+      addressCountry: 'GB',
+    },
   },
+  description: 'Mobile locking wheel nut removal across Nottinghamshire and the East Midlands. Lost keys, stripped patterns, seized nuts — non-destructive specialist extraction on your driveway or at the garage. Same-day slots most days.',
+  url: 'https://tyreemergencyltd.co.uk/locker-removal/',
+  image: 'https://tyreemergencyltd.co.uk/images/locking-wheel-nut-removal.webp',
   areaServed: areas.map((a) => ({ '@type': 'City', name: a })),
-  openingHoursSpecification: [{
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
-    opens: '00:00',
-    closes: '23:59',
-  }],
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '5.0',
@@ -46,8 +43,8 @@ const jsonLd = {
 ---
 
 <LandingLayout
-  title="Flat Tyre? Roadside in 30 Minutes | Tyre Emergency Ltd"
-  description="Stuck with a flat tyre? Mobile emergency tyre replacement across Nottinghamshire, 24/7. Around 30 minute average ETA. REACT licensed. 478 ★ Google reviews. Call 01623 325 123 now."
+  title="Locking Wheel Nut Removal Nottinghamshire | Lost Key, Stripped Locker"
+  description="Lost the locker key, stripped the pattern, seized on the stud — we get them off. Mobile locking wheel nut removal across Nottinghamshire, same-day slots most days. Specialist extraction kit, hundreds of jobs done. Call 01623 325 123."
   jsonLd={JSON.stringify(jsonLd)}
 >
   <!-- Slim brand bar — no nav, just logo + click-to-call -->
@@ -68,8 +65,8 @@ const jsonLd = {
   <section class="lp-hero">
     <img
       class="lp-hero-bg"
-      src="/images/tyre-emergency-ltd.webp"
-      alt="Tyre Emergency Ltd service van at the roadside with equipment ready"
+      src="/images/locking-wheel-nut-removal.webp"
+      alt="Close-up of a stripped locking wheel nut being extracted on an alloy wheel"
       width="1600"
       height="900"
       loading="eager"
@@ -77,24 +74,24 @@ const jsonLd = {
       decoding="async"
     />
     <div class="container lp-hero-inner">
-      <span class="lp-eyebrow">24/7 Emergency Mobile Tyre Fitting &middot; Nottinghamshire</span>
-      <h1>Flat Tyre?<br />We&rsquo;re There In <span class="lp-eta">30 Minutes</span>.</h1>
+      <span class="lp-eyebrow">Mobile Locking Wheel Nut Removal &middot; Nottinghamshire</span>
+      <h1>Lost the key?<br />Stripped the locker?<br /><span class="lp-eta">We&rsquo;ll get it off.</span></h1>
       <p class="lp-sub">
-        Roadside or driveway, day or night. Exact all-in price agreed on the call &mdash; no surprises when we arrive.
+        Lost keys, stripped patterns, seized nuts &mdash; we get them off. Most jobs sorted in 15&ndash;30 minutes once we&rsquo;re with you.
       </p>
 
       <a class="lp-call-primary" href={telHref} data-call="hero">
         <span class="lp-call-icon" aria-hidden="true">&#9742;</span>
         <span class="lp-call-stack">
-          <small>Call 24/7 &mdash; we set off now</small>
+          <small>Call for a price &mdash; same-day slots most days</small>
           <strong>{phone}</strong>
         </span>
       </a>
 
       <ul class="lp-trust">
         <li><strong>478</strong> &#9733;&#9733;&#9733;&#9733;&#9733; Google reviews</li>
-        <li><strong>REACT</strong> licensed &amp; fully insured</li>
-        <li><strong>30 min</strong> average ETA</li>
+        <li><strong>Specialist</strong> extraction kit on the van</li>
+        <li><strong>15&ndash;30 min</strong> typical job time</li>
       </ul>
     </div>
   </section>
@@ -108,21 +105,21 @@ const jsonLd = {
           <span class="lp-step-num" aria-hidden="true">1</span>
           <div>
             <h3>We answer the phone</h3>
-            <p>A real person, every time &mdash; not a callback service, not a voicemail. Tell us your reg and roughly where you are; we&rsquo;ll text you a location-share link if you&rsquo;re not sure.</p>
+            <p>A real person, every time. Tell us your reg, where the car is (driveway, garage, work car park) and what&rsquo;s up with the locker &mdash; lost key, stripped pattern, seized on the stud. We&rsquo;ll know straight away whether it&rsquo;s a job we can take.</p>
           </div>
         </li>
         <li>
           <span class="lp-step-num" aria-hidden="true">2</span>
           <div>
-            <h3>Exact, all-in price &amp; honest ETA</h3>
-            <p>Tyre brand, model, size and the total you&rsquo;ll pay &mdash; agreed on the call. No hidden extras when we arrive. Average all-in across 3,000+ jobs is around &pound;177; yours could be more or less.</p>
+            <h3>Honest price agreed up front</h3>
+            <p>Total you&rsquo;ll pay &mdash; agreed on the call, no surprises when we arrive. We&rsquo;ll book you a slot that suits, often same-day. If the locker has had a previous attempt at it, we&rsquo;d rather chat that one through first so the price stays honest.</p>
           </div>
         </li>
         <li>
           <span class="lp-step-num" aria-hidden="true">3</span>
           <div>
-            <h3>Fitted properly, you tap your card</h3>
-            <p>Manufacturer torque, calibrated balance, old tyre taken away. Card, Apple Pay or Google Pay when the job&rsquo;s done.</p>
+            <h3>Lockers off, standard nuts on, you tap your card</h3>
+            <p>The right extractor out of the kit, locker off, replacement nut torqued to the manufacturer&rsquo;s figure. Card, Apple Pay or Google Pay when the job&rsquo;s done.</p>
           </div>
         </li>
       </ol>
@@ -135,57 +132,75 @@ const jsonLd = {
       <figure class="lp-review">
         <div class="lp-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <blockquote>
-          <p>&ldquo;Had a puncture on the A1 at approx 7.30am &mdash; call to Tyre Emergency answered straight away and within 10 minutes had a quote. Just over an hour later, new tyre was fitted and I was on my way.&rdquo;</p>
+          <p>&ldquo;I called him and he was with me within the hour, all sorted and road worthy again. I would absolutely recommend this young man, who is a complete professional in his field, mannerly and genuine.&rdquo;</p>
         </blockquote>
         <figcaption>
-          <strong>Nick Panton</strong> &middot; A1, Nottinghamshire &middot; via Google
+          <strong>Lesley Park</strong> &middot; Newark &middot; via Google
         </figcaption>
       </figure>
     </div>
   </section>
 
-  <!-- LOCATION REASSURANCE -->
+  <!-- WHEN PEOPLE CALL US -->
   <section class="lp-block lp-light">
     <div class="container container-narrow">
-      <div class="lp-card">
-        <h2>Don&rsquo;t know exactly where you are?</h2>
-        <p>Happens all the time. We&rsquo;ll send you a quick text &mdash; tap the link, share your location, and we&rsquo;ll see exactly where you&rsquo;ve stopped. Then we&rsquo;re on the way.</p>
-        <p class="lp-card-safety">
-          <strong>If you&rsquo;re on a motorway hard shoulder or smart motorway:</strong> get out of the vehicle and behind the barrier if you can, then call <a href="tel:101">101</a> (or <a href="tel:999">999</a> if you feel in danger) before you ring us. We&rsquo;ll wait until Highways England can get to you safely first.
+      <h2 class="lp-block-title">The kind of jobs we get called for</h2>
+      <div class="lp-scenarios">
+        <article class="lp-scenario">
+          <h3>Booked in for tyres &mdash; locker key&rsquo;s missing</h3>
+          <p>You&rsquo;ve gone to get tyres or other work done and the key isn&rsquo;t in the car. Without it, no garage will touch the wheel and the job stalls. We come out, get the locker off, the rest of the work carries on.</p>
+        </article>
+        <article class="lp-scenario">
+          <h3>Stripped or rounded pattern</h3>
+          <p>A previous garage put an air gun on it and chewed the pattern. The key now spins freely. Our extractors are made for exactly this &mdash; we&rsquo;ll get it off and a standard nut back on.</p>
+        </article>
+        <article class="lp-scenario">
+          <h3>Stuck on a ramp at the garage</h3>
+          <p>Car&rsquo;s sitting on a ramp somewhere and the whole job is paused waiting on a locking nut. We&rsquo;ll come to the garage, get it sorted, and let them carry on.</p>
+        </article>
+        <article class="lp-scenario">
+          <h3>Seized on the stud, key still fits</h3>
+          <p>Key fits but the nut won&rsquo;t move &mdash; corroded after a few winters of salt. We can usually heat, penetrate and turn it without going to full extraction.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- REASSURANCE -->
+  <section class="lp-block lp-dark">
+    <div class="container container-narrow">
+      <div class="lp-card lp-card-dark">
+        <h2>Not sure exactly what&rsquo;s wrong?</h2>
+        <p>Most people aren&rsquo;t &mdash; locking nuts only get noticed when something&rsquo;s gone wrong with them. Tell us what you can see and we&rsquo;ll talk you through it on the call. Two minutes on the phone and we&rsquo;ll know whether it&rsquo;s a five-minute job or one we&rsquo;d rather take a proper look at.</p>
+        <p class="lp-card-note">
+          <strong>One we can&rsquo;t do:</strong> if the bolt itself has snapped (not the locker, the stud underneath), that&rsquo;s a workshop job &mdash; we&rsquo;ll tell you straight rather than waste your time.
         </p>
       </div>
     </div>
   </section>
 
   <!-- COVERAGE -->
-  <section class="lp-block lp-dark">
+  <section class="lp-block lp-light">
     <div class="container">
       <h2 class="lp-block-title text-center">Covering Nottinghamshire &amp; the East Midlands</h2>
-      <p class="lp-coverage-lede text-center">
-        Based in Bilsthorpe, NG22 &mdash; right in the middle of the county. We&rsquo;re kitted out and ready to roll 24/7.
+      <p class="lp-coverage-lede lp-coverage-lede-light text-center">
+        Based in Bilsthorpe, NG22 &mdash; right in the middle of the county. Booked jobs across the region, every day of the week.
       </p>
-      <ul class="lp-area-list">
+      <ul class="lp-area-list lp-area-list-light">
         {areas.map((a) => <li>{a}</li>)}
       </ul>
-      <p class="lp-roads text-center">
-        Regular runs along {roads.map((r, i) => (
-          <>
-            <strong>{r}</strong>{i < roads.length - 1 ? ' · ' : ''}
-          </>
-        ))}
-      </p>
     </div>
   </section>
 
   <!-- FINAL CTA -->
   <section class="lp-block lp-cta">
     <div class="container container-narrow text-center">
-      <h2>Stuck right now? Pick up the phone.</h2>
-      <p>One call, one all-in price, one job done properly &mdash; from a roadside tyre to a full set on the driveway.</p>
+      <h2>Ready to get the locker off? Pick up the phone.</h2>
+      <p>One call, one honest price, one job done properly.</p>
       <a class="lp-call-primary lp-call-primary-large" href={telHref} data-call="footer">
         <span class="lp-call-icon" aria-hidden="true">&#9742;</span>
         <span class="lp-call-stack">
-          <small>Call 24/7</small>
+          <small>Call us</small>
           <strong>{phone}</strong>
         </span>
       </a>
@@ -197,7 +212,7 @@ const jsonLd = {
   <a class="lp-sticky-call" href={telHref} data-call="sticky">
     <span class="lp-call-icon" aria-hidden="true">&#9742;</span>
     <span class="lp-call-stack">
-      <small>Call 24/7</small>
+      <small>Call us</small>
       <strong>{phone}</strong>
     </span>
   </a>
@@ -322,10 +337,10 @@ const jsonLd = {
   }
 
   .lp-hero h1 {
-    font-size: clamp(2.5rem, 7.5vw, 5.4rem);
-    line-height: 0.98;
+    font-size: clamp(2.2rem, 6.5vw, 4.6rem);
+    line-height: 1;
     margin: 0 0 1.25rem;
-    max-width: 16ch;
+    max-width: 18ch;
   }
 
   .lp-eta {
@@ -546,6 +561,35 @@ const jsonLd = {
   }
 
   /* ============================================================
+     Scenarios grid
+     ============================================================ */
+  .lp-scenarios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin: 0;
+  }
+
+  .lp-scenario {
+    padding: 1.5rem 1.4rem;
+    background-color: var(--color-bg-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+  }
+
+  .lp-scenario h3 {
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .lp-scenario p {
+    margin: 0;
+    color: var(--color-text-muted-dark);
+    line-height: 1.6;
+    font-size: 0.97rem;
+  }
+
+  /* ============================================================
      Reassurance card
      ============================================================ */
   .lp-card {
@@ -555,9 +599,19 @@ const jsonLd = {
     border-radius: var(--radius);
   }
 
+  .lp-card-dark {
+    background-color: var(--color-bg-elevated);
+    border-color: var(--color-border);
+    color: var(--color-text);
+  }
+
   .lp-card h2 {
     font-size: clamp(1.4rem, 3vw, 1.9rem);
     margin: 0 0 0.75rem;
+  }
+
+  .lp-card-dark h2 {
+    color: var(--color-text);
   }
 
   .lp-card p {
@@ -566,10 +620,14 @@ const jsonLd = {
     margin: 0 0 0.85rem;
   }
 
-  .lp-card-safety {
+  .lp-card-dark p {
+    color: var(--color-text-muted);
+  }
+
+  .lp-card-note {
     padding: 0.9rem 1.1rem;
     border-left: 3px solid var(--color-accent);
-    background-color: rgba(255, 45, 45, 0.06);
+    background-color: rgba(255, 45, 45, 0.08);
     border-radius: 0 var(--radius) var(--radius) 0;
     font-size: 0.95rem;
   }
@@ -581,6 +639,10 @@ const jsonLd = {
     color: var(--color-text-muted);
     max-width: 60ch;
     margin: 0 auto 2rem;
+  }
+
+  .lp-coverage-lede-light {
+    color: var(--color-text-muted-dark);
   }
 
   .lp-area-list {
@@ -602,17 +664,10 @@ const jsonLd = {
     color: var(--color-text);
   }
 
-  .lp-roads {
-    color: var(--color-text-muted);
-    margin: 0;
-    font-size: 1rem;
-  }
-
-  .lp-roads strong {
-    color: var(--color-text);
-    font-family: var(--font-display);
-    font-size: 1.05rem;
-    letter-spacing: 0.02em;
+  .lp-area-list-light li {
+    background-color: var(--color-bg-white);
+    border-color: var(--color-border-light);
+    color: var(--color-text-dark);
   }
 
   /* ============================================================

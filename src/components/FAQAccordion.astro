@@ -36,8 +36,8 @@ const { items } = Astro.props as Props;
   }
 
   .faq-item {
-    background-color: var(--color-bg-elevated);
-    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-white);
+    border: 1px solid var(--color-border-light);
     border-radius: var(--radius);
     overflow: hidden;
     transition: border-color var(--transition);
@@ -59,7 +59,7 @@ const { items } = Astro.props as Props;
     font-weight: 700;
     font-size: 1.1rem;
     letter-spacing: 0.02em;
-    color: var(--color-text);
+    color: var(--color-text-dark);
     text-transform: uppercase;
   }
 
@@ -82,7 +82,7 @@ const { items } = Astro.props as Props;
   .faq-icon::after {
     content: '';
     position: absolute;
-    background-color: var(--color-text);
+    background-color: var(--color-text-dark);
     transition: transform var(--transition);
   }
 
@@ -108,7 +108,7 @@ const { items } = Astro.props as Props;
 
   .faq-a {
     padding: 0 1.5rem 1.4rem;
-    color: var(--color-text-muted);
+    color: var(--color-text-muted-dark);
     font-size: 1rem;
     line-height: 1.7;
   }

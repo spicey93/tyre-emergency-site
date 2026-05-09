@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroSection from '../../components/HeroSection.astro';
 import ReviewsSection from '../../components/ReviewsSection.astro';
 
 const phone = '01623 325 123';
@@ -37,24 +38,21 @@ const serviceJsonLd = {
   description="Mobile puncture repair carried out to British Standard AU159 within ~10 miles of Bilsthorpe, Nottinghamshire. We bring a replacement tyre too, just in case, so you&rsquo;re not stuck. Call 01623 325 123."
   jsonLd={JSON.stringify(serviceJsonLd)}
 >
-  <section class="service-hero" style="background-image: url('/images/puncture-repair.webp');">
-    <div class="container">
-      <span class="eyebrow">Repair Service</span>
-      <h1>Mobile Tyre Repair</h1>
-      <p class="service-intro">
-        A puncture repair is the smart option when you&rsquo;ve still got plenty of life left in the tyre and don&rsquo;t want to throw money at a brand new one. We do them properly to British Standard AU159 &mdash; and if the damage means a repair isn&rsquo;t safe, we&rsquo;ve already brought a replacement tyre with us so you&rsquo;re not stuck.
-      </p>
-      <div class="cta-row">
-        <a class="btn btn-primary btn-call" href={telHref}>
-          <span aria-hidden="true">&#9742;</span> Call: {phone}
-        </a>
-        <a class="btn btn-outline" href="#repair-area-check">Check my postcode</a>
-      </div>
-    </div>
-  </section>
-
-  <ReviewsSection />
-
+  <HeroSection
+    eyebrow="Repair Service · Nottinghamshire"
+    title="Mobile Tyre Repair"
+    subtitle="Proper puncture repair done right on your driveway. Replacement tyre on the van too, just in case."
+    ctaPhone={phone}
+    ctaCallLabel="Call for a price"
+    secondaryCta={{ label: 'Check my postcode', href: '#repair-area-check' }}
+    bgImage="/images/puncture-repair.webp"
+    bgImageAlt="Tyre puncture being repaired with a plug-and-patch by Tyre Emergency Ltd"
+    trustItems={[
+      { strong: '478', label: '★★★★★ Google reviews' },
+      { strong: 'Same-day', label: 'slots most days' },
+      { strong: 'Replacement tyre', label: 'always on the van' },
+    ]}
+  />
   <section class="section section-white">
     <div class="container">
       <div class="service-split">
@@ -72,9 +70,9 @@ const serviceJsonLd = {
           <h2>How we handle puncture repairs</h2>
           <ul class="check-list">
             <li><strong>Within around 10 miles of Bilsthorpe (NG22)</strong> &mdash; puncture repairs are priced from &pound;50 upwards. Outside that radius the maths stops working for both of us, so we&rsquo;ll let you know on the call rather than waste your time.</li>
-            <li><strong>We bring a replacement tyre too, just in case.</strong> Not every puncture is repairable &mdash; if it&rsquo;s in the sidewall, shoulder, or the tyre&rsquo;s below the limit, we&rsquo;ve already got a fresh one on the van so we don&rsquo;t leave you with an empty wheel.</li>
+            <li><strong>We bring a replacement tyre too, just in case.</strong> Not every puncture is repairable &mdash; if it&rsquo;s in the sidewall, shoulder, or the tyre&rsquo;s below the limit, we&rsquo;ve already got a new one on the van so we don&rsquo;t leave you with an empty wheel.</li>
             <li><strong>Done to BS AU159</strong> &mdash; tyre off the rim, full inside inspection and a combined plug-and-patch from the inside, not a string-and-glue job stuck in from the outside.</li>
-            <li><strong>Re-balanced after the repair</strong> on the mobile balancer, pressures set to the manufacturer&rsquo;s figure, TPMS reset if your vehicle uses sensors.</li>
+            <li><strong>Re-balanced after the repair</strong> on the mobile balancer, pressures set to the manufacturer&rsquo;s figure.</li>
             <li><strong>Honest call on whether it&rsquo;s worth repairing</strong> &mdash; if the tyre&rsquo;s near the end of its life anyway, we&rsquo;ll tell you straight rather than charge you for a repair that&rsquo;s only going to last weeks.</li>
           </ul>
         </div>
@@ -82,7 +80,7 @@ const serviceJsonLd = {
     </div>
   </section>
 
-  <section class="section section-darker">
+  <section class="section section-light">
     <div class="container container-narrow">
       <span class="eyebrow">When You Need This</span>
       <h2>Typical repair jobs</h2>
@@ -97,7 +95,7 @@ const serviceJsonLd = {
         </article>
         <article class="scenario">
           <h3>Plenty of tread left, don&rsquo;t want to bin it</h3>
-          <p>The tyre is fairly new, the tread is good, and you don&rsquo;t want to spend money on a fresh one if a proper repair will do. If it&rsquo;s safely repairable, that&rsquo;s the call we&rsquo;ll make.</p>
+          <p>The tyre is fairly new, the tread is good, and you don&rsquo;t want to spend money on a new one if a proper repair will do. If it&rsquo;s safely repairable, that&rsquo;s the call we&rsquo;ll make.</p>
         </article>
         <article class="scenario">
           <h3>Pre-trip check before a long drive</h3>
@@ -106,6 +104,9 @@ const serviceJsonLd = {
       </div>
     </div>
   </section>
+
+  
+  <ReviewsSection />
 
   <section class="section section-light service-cta-section" id="repair-area-check">
     <div class="container container-narrow text-center">

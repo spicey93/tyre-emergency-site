@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroSection from '../../components/HeroSection.astro';
 import ReviewsSection from '../../components/ReviewsSection.astro';
 
 const phone = '01623 325 123';
@@ -8,26 +9,19 @@ const town = 'Mansfield';
 ---
 
 <BaseLayout
-  title={`Mobile Tyre Fitting in ${town} | 24/7 Emergency Service`}
-  description={`Mobile tyre fitting, emergency replacement, puncture repair, caravan tyres, locking wheel nut removal and TPMS in ${town}. We come to you, 24/7. Call 01623 325 123.`}
+  title={`Mobile Tyre Fitting in ${town}`}
+  description={`Mobile tyre fitting, emergency replacement, puncture repair, caravan tyres, locking wheel nut removal in ${town}. We come to you. Call 01623 325 123.`}
 >
-  <section class="area-hero">
-    <div class="container">
-      <span class="eyebrow">{town}</span>
-      <h1>Mobile Tyre Fitting in {town}</h1>
-      <p class="area-intro">
-        Yes, we cover Mansfield. We come to you for emergency callouts, planned tyre fitting, puncture repairs and more &mdash; 24/7.
-      </p>
-      <div class="cta-row">
-        <a class="btn btn-primary btn-call" href={telHref}>
-          <span aria-hidden="true">&#9742;</span> Call: {phone}
-        </a>
-        <a class="btn btn-outline" href="/#quote">Get a Quote</a>
-      </div>
-    </div>
-  </section>
+  <HeroSection
+    eyebrow={town}
+    title={`Mobile Tyre Fitting in ${town}`}
+    subtitle="Yes, we cover Mansfield. Mobile tyre service including puncture repairs."
+    ctaPhone={phone}
+    ctaCallLabel="Call us"
+    bgImage="/images/tyre-emergency-ltd.webp"
+    bgImageAlt="Tyre Emergency Ltd service van ready for callouts"
+  />
 
-  <ReviewsSection />
 
   <section class="section section-white">
     <div class="container container-narrow">
@@ -51,14 +45,14 @@ const town = 'Mansfield';
           <p>No towing the &lsquo;van anywhere &mdash; we come to you and handle motor movers, Tyron bands and the rest with care.</p>
         </li>
         <li class="area-point">
-          <h3>Locking wheel nut removal &amp; TPMS</h3>
-          <p>Damaged locker stopping you getting other work done? TPMS warning light flashing for 60 seconds before going solid? Both jobs handled on-site.</p>
+          <h3>Locking wheel nut removal</h3>
+          <p>Damaged locker stopping you getting other work done? Lost the key, stripped the pattern, seized on the stud &mdash; we get them off and a standard nut back on.</p>
         </li>
       </ul>
     </div>
   </section>
 
-  <section class="section section-darker">
+  <section class="section section-light">
     <div class="container container-narrow">
       <span class="eyebrow">Why drivers in {town} choose us</span>
       <h2>Built for speed, convenience and turning up on time</h2>
@@ -94,6 +88,8 @@ const town = 'Mansfield';
       </div>
     </div>
   </section>
+
+  <ReviewsSection variant="light" />
 
   <section class="section section-light service-cta-section">
     <div class="container container-narrow text-center">

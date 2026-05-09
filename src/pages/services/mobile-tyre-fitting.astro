@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BookingForm from '../../components/BookingForm.astro';
+import HeroSection from '../../components/HeroSection.astro';
 import ReviewsSection from '../../components/ReviewsSection.astro';
 
 const phone = '01623 325 123';
@@ -28,37 +29,21 @@ const serviceJsonLd = {
   description="Mobile tyre fitting at your home or workplace across Nottinghamshire. Everything a tyre shop does &mdash; properly fitted, balanced and torqued &mdash; without you having to drive anywhere. Call 01623 325 123."
   jsonLd={JSON.stringify(serviceJsonLd)}
 >
-  <section class="service-hero" style="background-image: url('/images/mobile-tyre-fitting.webp');">
-    <div class="container">
-      <span class="eyebrow">Pre-booked Service</span>
-      <h1>Mobile Tyre Fitting</h1>
-      <p class="service-intro">
-        You can&rsquo;t always get to a garage &mdash; and even when you can, it&rsquo;s a chunk of your day gone. We come to you instead. Everything a tyre shop does, done from the comfort of your own home: tyres fitted properly, wheels balanced and nuts torqued correctly. No mess, no hassle, and just as quick.
-      </p>
-      <div class="cta-row">
-        <a class="btn btn-primary btn-call" href={telHref}>
-          <span aria-hidden="true">&#9742;</span> Call: {phone}
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="booking-banner">
-    <div class="container">
-      <div class="booking-banner-inner">
-        <div class="booking-banner-text">
-          <span class="eyebrow">Book online</span>
-          <h2>Book your tyres online in a couple of minutes</h2>
-          <p>Enter your registration and we&rsquo;ll show you tyres for your vehicle and the appointment slots we&rsquo;ve got open. No phone call needed.</p>
-        </div>
-        <div class="booking-banner-form">
-          <BookingForm variant="dark" buttonLabel="Book online" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <ReviewsSection />
+  <HeroSection
+    eyebrow="Pre-booked Service · Nottinghamshire"
+    title="Mobile Tyre Fitting"
+    subtitle="Everything a tyre shop does, done on your driveway. No waiting room, no half-day off work."
+    ctaPhone={phone}
+    ctaCallLabel="Call for a price"
+    secondaryCta={{ label: 'Book online', href: 'https://garage-bookings.com/?clientID=537' }}
+    bgImage="/images/mobile-tyre-fitting.webp"
+    bgImageAlt="Tyre being fitted on a car wheel by a mobile tyre fitter"
+    trustItems={[
+      { strong: '478', label: '★★★★★ Google reviews' },
+      { strong: 'REACT', label: 'licensed & fully insured' },
+      { strong: 'We come', label: 'to you, fully equipped' },
+    ]}
+  />
 
   <section class="section section-white">
     <div class="container">
@@ -66,7 +51,7 @@ const serviceJsonLd = {
         <div class="service-split-image">
           <img
             src="/images/mobile-tyre-fitting.webp"
-            alt="A freshly fitted tyre with the Tyre Emergency service van visible in the background"
+            alt="A newly fitted tyre with the Tyre Emergency service van visible in the background"
             width="1600"
             height="1200"
             loading="lazy"
@@ -78,7 +63,6 @@ const serviceJsonLd = {
           <ul class="check-list">
             <li><strong>An exact, all-in price over the phone</strong> &mdash; brand, model, size and the total you&rsquo;ll pay, with no hidden costs added on the day.</li>
             <li><strong>Tyres fitted to manufacturer spec</strong> &mdash; not just slapped on. New valves, calibrated balancing and a torque-wrench finish on every wheel.</li>
-            <li><strong>TPMS reset and confirmed</strong> if your vehicle has sensors, so the warning light is off before we hand the keys back.</li>
             <li><strong>Old tyres taken away</strong> and recycled at a licensed facility &mdash; no mess left on your drive and no disposal charge.</li>
             <li><strong>An ETA you can plan around</strong> &mdash; we turn up when we say we will, which matters when you need the car for work or the school run later.</li>
           </ul>
@@ -87,7 +71,7 @@ const serviceJsonLd = {
     </div>
   </section>
 
-  <section class="section section-darker">
+  <section class="section section-light">
     <div class="container container-narrow">
       <span class="eyebrow">When You Need This</span>
       <h2>Why people book us in</h2>
@@ -113,10 +97,13 @@ const serviceJsonLd = {
     </div>
   </section>
 
+  
+  <ReviewsSection />
+
   <section class="section section-light service-cta-section">
     <div class="container container-narrow text-center">
-      <h2>Ready to book in?</h2>
-      <p class="text-muted-dark">Give us a call with your registration and address for an exact, all-in price on the spot &mdash; or pop your reg in below to book online.</p>
+      <h2>Want a price for your tyres?</h2>
+      <p class="text-muted-dark">Give us a call with your registration and address for an exact, all-in price on the spot &mdash; or pop your reg in below to see prices and slots online.</p>
       <div class="cta-row" style="justify-content: center;">
         <a class="btn btn-primary btn-call" href={telHref}>
           <span aria-hidden="true">&#9742;</span> Call {phone}
@@ -127,44 +114,3 @@ const serviceJsonLd = {
   </section>
 </BaseLayout>
 
-<style>
-  .booking-banner {
-    background-color: var(--color-bg-elevated);
-    border-top: 1px solid var(--color-accent);
-    border-bottom: 1px solid var(--color-accent);
-    padding: 2.5rem 0;
-    color: var(--color-text);
-  }
-
-  .booking-banner-inner {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 2.5rem;
-    align-items: center;
-  }
-
-  .booking-banner-text .eyebrow {
-    color: var(--color-accent);
-    margin-bottom: 0.5rem;
-  }
-
-  .booking-banner-text h2 {
-    margin: 0 0 0.6rem;
-    font-size: clamp(1.6rem, 3vw, 2rem);
-    color: var(--color-text);
-  }
-
-  .booking-banner-text p {
-    margin: 0;
-    color: var(--color-text-muted);
-    font-size: 1rem;
-    max-width: 50ch;
-  }
-
-  @media (max-width: 800px) {
-    .booking-banner-inner {
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
-    }
-  }
-</style>
