@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroSection from '../../components/HeroSection.astro';
 import ReviewsSection from '../../components/ReviewsSection.astro';
 
-const phone = '01623 325 123';
+const phone = '0330 133 9311';
 const telHref = `tel:${phone.replace(/\s+/g, '')}`;
 
 const serviceJsonLd = {
@@ -14,7 +14,7 @@ const serviceJsonLd = {
   provider: {
     '@type': 'LocalBusiness',
     name: 'Tyre Emergency Ltd',
-    telephone: '+441623325123',
+    telephone: '+443301339311',
     url: 'https://tyreemergencyltd.co.uk/',
   },
   areaServed: 'Nottinghamshire, East Midlands',
@@ -25,7 +25,7 @@ const serviceJsonLd = {
 
 <BaseLayout
   title="Emergency Tyre Replacement Nottinghamshire | 24/7 Mobile Service"
-  description="24/7 emergency mobile tyre replacement across Nottinghamshire. Exact price over the phone, realistic ETA, and everything on the van to get you back on the road first time. Call 01623 325 123."
+  description="24/7 emergency mobile tyre replacement across Nottinghamshire. Exact price over the phone, realistic ETA, and everything on the van to get you back on the road first time. Call 0330 133 9311."
   jsonLd={JSON.stringify(serviceJsonLd)}
 >
   <HeroSection
@@ -34,8 +34,8 @@ const serviceJsonLd = {
     subtitle="Stuck with a flat? We come to you, fit a new tyre on the spot, and get you moving."
     ctaPhone={phone}
     ctaCallLabel="Call 24/7"
-    bgImage="/images/mobile-tyre-fitting-in-van.webp"
-    bgImageAlt="A tyre being mounted on the tyre changer inside the Tyre Emergency Ltd service van"
+    bgImage="/images/tyre-emergency-action.webp"
+    bgImageAlt="Tyre Emergency Ltd service van pulled up next to a car with a flat tyre on a wet roadside"
   />
   <section class="section section-white">
     <div class="container">

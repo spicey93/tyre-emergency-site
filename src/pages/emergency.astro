@@ -1,7 +1,7 @@
 ---
 import LandingLayout from '../layouts/LandingLayout.astro';
 
-const phone = '01623 325 123';
+const phone = '0330 133 9311';
 const telHref = `tel:${phone.replace(/\s+/g, '')}`;
 
 const areas = [
@@ -16,7 +16,7 @@ const jsonLd = {
   '@type': 'EmergencyService',
   name: 'Tyre Emergency Ltd — Emergency Mobile Tyre Replacement',
   description: '24/7 emergency mobile tyre replacement at the roadside, on the driveway or wherever you are stuck across Nottinghamshire and the East Midlands. Around 30 minute average ETA.',
-  telephone: '+441623325123',
+  telephone: '+443301339311',
   url: 'https://tyreemergencyltd.co.uk/emergency/',
   image: 'https://tyreemergencyltd.co.uk/og-image.jpg',
   priceRange: '££',
@@ -47,7 +47,7 @@ const jsonLd = {
 
 <LandingLayout
   title="Flat Tyre? Roadside in 30 Minutes | Tyre Emergency Ltd"
-  description="Stuck with a flat tyre? Mobile emergency tyre replacement across Nottinghamshire, 24/7. Around 30 minute average ETA. REACT licensed. 478 ★ Google reviews. Call 01623 325 123 now."
+  description="Stuck with a flat tyre? Mobile emergency tyre replacement across Nottinghamshire, 24/7. Around 30 minute average ETA. REACT licensed. 478 ★ Google reviews. Call 0330 133 9311 now."
   jsonLd={JSON.stringify(jsonLd)}
 >
   <!-- Slim brand bar — no nav, just logo + click-to-call -->
@@ -68,10 +68,10 @@ const jsonLd = {
   <section class="lp-hero">
     <img
       class="lp-hero-bg"
-      src="/images/mobile-tyre-fitting-in-van.webp"
-      alt="A tyre being mounted on the tyre changer inside the Tyre Emergency Ltd service van"
-      width="1600"
-      height="1200"
+      src="/images/tyre-emergency-action.webp"
+      alt="Tyre Emergency Ltd service van pulled up next to a car with a flat tyre on a wet roadside"
+      width="1584"
+      height="672"
       loading="eager"
       fetchpriority="high"
       decoding="async"

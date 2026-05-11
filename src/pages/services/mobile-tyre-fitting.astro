@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroSection from '../../components/HeroSection.astro';
 import ReviewsSection from '../../components/ReviewsSection.astro';
 
-const phone = '01623 325 123';
+const phone = '0330 133 9311';
 const telHref = `tel:${phone.replace(/\s+/g, '')}`;
 
 const serviceJsonLd = {
@@ -14,7 +14,7 @@ const serviceJsonLd = {
   provider: {
     '@type': 'LocalBusiness',
     name: 'Tyre Emergency Ltd',
-    telephone: '+441623325123',
+    telephone: '+443301339311',
     url: 'https://tyreemergencyltd.co.uk/',
   },
   areaServed: 'Nottinghamshire, East Midlands',
@@ -25,7 +25,7 @@ const serviceJsonLd = {
 
 <BaseLayout
   title="Mobile Tyre Fitting Nottinghamshire | We Come To You"
-  description="Mobile tyre fitting at your home or workplace across Nottinghamshire. Everything a tyre shop does &mdash; properly fitted, balanced and torqued &mdash; without you having to drive anywhere. Call 01623 325 123."
+  description="Mobile tyre fitting at your home or workplace across Nottinghamshire. Everything a tyre shop does &mdash; properly fitted, balanced and torqued &mdash; without you having to drive anywhere. Call 0330 133 9311."
   jsonLd={JSON.stringify(serviceJsonLd)}
 >
   <HeroSection
@@ -35,8 +35,8 @@ const serviceJsonLd = {
     ctaPhone={phone}
     ctaCallLabel="Call for a price"
     secondaryCta={{ label: 'Get an instant price', href: '/quote/?service=mobile-fitting' }}
-    bgImage="/images/mobile-tyre-fitting.webp"
-    bgImageAlt="Tyre being fitted on a car wheel by a mobile tyre fitter"
+    bgImage="/images/mobile-tyre-fitting-in-van.webp"
+    bgImageAlt="A tyre being mounted on the tyre changer inside the Tyre Emergency Ltd service van"
     trustItems={[
       { strong: '478', label: '★★★★★ Google reviews' },
       { strong: 'REACT', label: 'licensed & fully insured' },
