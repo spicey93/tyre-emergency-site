@@ -1,17 +1,12 @@
 ---
-// Slim trust strip under the navbar. Intentionally not a phone CTA —
-// the hero, sticky call button and header already cover that. This
-// strip just reassures the visitor before they've started reading.
+// Slim promo strip under the navbar.
 ---
 
 <div class="site-banner" role="presentation">
   <span class="site-banner-text">
-    <span class="site-banner-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-    <span><strong>478</strong> Google reviews</span>
-    <span class="site-banner-sep" aria-hidden="true">·</span>
-    <span>REACT licensed &amp; fully insured</span>
-    <span class="site-banner-sep" aria-hidden="true">·</span>
-    <span>Mobile tyre fitting across Nottinghamshire</span>
+    <span class="site-banner-tag" aria-hidden="true">%</span>
+    Save 10% on 2+ tyres with code
+    <strong class="site-banner-code">2TYRES10</strong>
   </span>
 </div>
 
@@ -20,16 +15,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.55rem 1rem;
-    background-color: var(--color-bg-white);
-    color: var(--color-text-dark);
-    border-bottom: 1px solid var(--color-border-light);
+    padding: 0.85rem 1rem;
+    background:
+      linear-gradient(90deg, var(--color-accent-dark) 0%, var(--color-accent) 50%, var(--color-accent-dark) 100%);
+    color: var(--color-text);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.85rem;
-    letter-spacing: 0.06em;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
     line-height: 1.3;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+    position: relative;
+    z-index: 1;
   }
 
   .site-banner-text {
@@ -40,29 +39,59 @@
     justify-content: center;
   }
 
-  .site-banner-stars {
-    color: var(--color-star);
-    letter-spacing: 0.05em;
-    font-size: 0.95rem;
-  }
-
-  .site-banner strong {
+  .site-banner-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: var(--color-text);
+    color: var(--color-accent-dark);
     font-weight: 900;
-    letter-spacing: 0.02em;
+    font-size: 0.95rem;
+    line-height: 1;
+    letter-spacing: 0;
   }
 
-  .site-banner-sep {
-    opacity: 0.45;
+  .site-banner-code {
+    display: inline-block;
+    padding: 0.3rem 0.75rem;
+    background-color: var(--color-text);
+    color: var(--color-accent-dark);
+    border-radius: var(--radius);
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    font-size: 1.05rem;
+    line-height: 1.1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    animation: site-banner-pulse 1.4s ease-in-out 1s 2;
+    transform-origin: center;
+  }
+
+  @keyframes site-banner-pulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25); }
+    50% { transform: scale(1.07); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-banner-code { animation: none; }
   }
 
   @media (max-width: 720px) {
     .site-banner {
-      padding: 0.5rem 0.85rem;
-      font-size: 0.78rem;
-      letter-spacing: 0.04em;
+      padding: 0.7rem 0.85rem;
+      font-size: 0.86rem;
+      letter-spacing: 0.06em;
     }
-    .site-banner-text > *:nth-child(n+3) {
-      display: none;
+    .site-banner-code {
+      font-size: 0.92rem;
+      padding: 0.24rem 0.6rem;
+    }
+    .site-banner-tag {
+      width: 1.3rem;
+      height: 1.3rem;
+      font-size: 0.85rem;
     }
   }
 </style>

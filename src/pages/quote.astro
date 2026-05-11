@@ -27,6 +27,14 @@ const pricing = {
     ],
     maxMiles: 15,
   },
+  // Mobile fitting + caravan: we just gate on max distance. The fee
+  // schedule (0–5mi free, 5–10mi £24, 10–15mi £48) is shown statically
+  // on the fee-info step — the actual charge is calculated by the
+  // booking site at checkout, so we don't quote a per-customer figure
+  // and risk it disagreeing with their system.
+  mobileFitting: {
+    maxMiles: 15,
+  },
 };
 
 const bookingDaysAhead = 7;
@@ -153,49 +161,123 @@ const bookingSiteClient = '537';
         </section>
 
         <!-- ============================================================== -->
-        <!-- Mobile fitting: ask reg, redirect to garage-bookings            -->
+        <!-- Mobile fitting / caravan: postcode (shared gate)                -->
         <!-- ============================================================== -->
-        <section class="qw-step" data-step="mf-vrm" hidden>
-          <p class="qw-step-num">Mobile tyre fitting</p>
-          <h2>Pop in your registration</h2>
-          <p class="qw-step-help">We&rsquo;ll send you straight to our online booking system where you can see live prices and pick a slot.</p>
-          <form class="qw-form" id="qw-mf-form" novalidate>
-            <label class="visually-hidden" for="qw-mf-vrm">Vehicle registration</label>
+        <section class="qw-step" data-step="mf-postcode" hidden>
+          <p class="qw-step-num" id="qw-mf-postcode-eyebrow">Mobile tyre fitting &middot; Step 1 of 2</p>
+          <h2>What&rsquo;s your postcode?</h2>
+          <p class="qw-step-help">Our online booking system covers up to 15 miles from us. A small mobile fee may be added over 5 miles &mdash; we&rsquo;ll show you before you carry on.</p>
+          <form class="qw-form" id="qw-mf-postcode-form" novalidate>
+            <label class="visually-hidden" for="qw-mf-postcode">Your postcode</label>
             <input
-              id="qw-mf-vrm"
-              class="qw-input qw-input--reg"
+              id="qw-mf-postcode"
+              class="qw-input"
               type="text"
-              autocomplete="off"
-              placeholder="e.g. AB12 CDE"
+              autocomplete="postal-code"
+              inputmode="text"
               required
             />
-            <p class="qw-error" id="qw-mf-error" hidden></p>
+            <p class="qw-error" id="qw-mf-postcode-error" hidden></p>
             <div class="qw-step-actions">
               <button type="button" class="btn btn-outline-dark qw-back-to-start">Back</button>
-              <button type="submit" class="btn btn-primary">Continue to booking</button>
+              <button type="submit" class="btn btn-primary" id="qw-mf-postcode-submit">Next</button>
             </div>
           </form>
         </section>
 
         <!-- ============================================================== -->
-        <!-- Caravan: confirm + redirect to garage-bookings                  -->
+        <!-- Mobile fitting / caravan: fee warning + redirect                -->
         <!-- ============================================================== -->
-        <section class="qw-step" data-step="caravan-redirect" hidden>
-          <p class="qw-step-num">Caravan tyres</p>
-          <h2>Caravan tyres book through our online system</h2>
-          <p class="qw-step-help">Tyre sizes for caravans and trailers are listed in the same booking system as cars and vans &mdash; you&rsquo;ll see prices and slots once you&rsquo;re in.</p>
+        <section class="qw-step qw-step--quote" data-step="mf-fee-warning" hidden>
+          <p class="qw-step-num" id="qw-mf-warn-eyebrow">Mobile tyre fitting &middot; Step 2 of 2</p>
+          <h2>How the mobile fee works</h2>
+          <div class="qw-quote-card">
+            <p class="qw-mf-warn-distance" id="qw-mf-warn-distance">&mdash;</p>
+            <ul class="qw-mf-fee-table">
+              <li><span class="qw-mf-fee-range">0&ndash;5 miles</span><span class="qw-mf-fee-amount">No mobile fee</span></li>
+              <li><span class="qw-mf-fee-range">5&ndash;10 miles</span><span class="qw-mf-fee-amount">&pound;24 mobile fee</span></li>
+              <li><span class="qw-mf-fee-range">10&ndash;15 miles</span><span class="qw-mf-fee-amount">&pound;48 mobile fee</span></li>
+            </ul>
+            <p class="qw-quote-caveat">Your exact fee is worked out at checkout on the booking site, based on the address you give them &mdash; this is just so you know what to expect.</p>
+          </div>
           <div class="qw-step-actions">
-            <button type="button" class="btn btn-outline-dark qw-back-to-start">Back</button>
+            <button type="button" class="btn btn-outline-dark qw-back" data-back="mf-postcode">Back</button>
             <a
               class="btn btn-primary"
-              id="qw-caravan-link"
+              id="qw-mf-continue"
               href={`${bookingSiteBase}?clientID=${bookingSiteClient}`}
               target="_blank"
               rel="noopener"
             >
-              Open online booking
+              Continue to booking
             </a>
           </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- Mobile fitting: out of area lead form                           -->
+        <!-- ============================================================== -->
+        <section class="qw-step" data-step="mf-out-of-area" hidden>
+          <p class="qw-step-num qw-step-num--neutral">Outside online booking</p>
+          <h2>You&rsquo;re a bit far for online booking</h2>
+          <p class="qw-step-help">Our online booking system only handles jobs within 15 miles of Bilsthorpe (NG22). Pop your details in and Dean will ring back with a price and check whether we can travel out to you.</p>
+
+          <form
+            class="qw-form qw-form--contact"
+            id="qw-mf-ooa-form"
+            name="quote-out-of-area"
+            method="POST"
+            action="/thank-you/"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            netlify
+          >
+            <input type="hidden" name="form-name" value="quote-out-of-area" />
+            <p class="honeypot-field">
+              <label>Do not fill this out if you are human <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+            </p>
+
+            <input type="hidden" name="service" id="qw-mf-ooa-service" value="Mobile tyre fitting (out of area)" />
+            <input type="hidden" name="postcode" id="qw-mf-ooa-postcode" />
+            <input type="hidden" name="distance_miles" id="qw-mf-ooa-miles" />
+
+            <div class="qw-fields">
+              <div class="field"><label for="qw-mf-ooa-name">Your name</label><input id="qw-mf-ooa-name" name="name" type="text" required autocomplete="name" /></div>
+              <div class="field"><label for="qw-mf-ooa-phone">Phone number</label><input id="qw-mf-ooa-phone" name="phone" type="tel" required autocomplete="tel" /></div>
+              <div class="field"><label for="qw-mf-ooa-email">Email</label><input id="qw-mf-ooa-email" name="email" type="email" required autocomplete="email" /></div>
+              <div class="field"><label for="qw-mf-ooa-reg">Vehicle registration</label><input id="qw-mf-ooa-reg" name="registration" type="text" required autocomplete="off" placeholder="e.g. AB12 CDE" /></div>
+              <div class="field field-full"><label for="qw-mf-ooa-size">Tyre size</label><input id="qw-mf-ooa-size" name="tyre_size" type="text" required autocomplete="off" placeholder={'e.g. 205/55R16 — or "not sure"'} /></div>
+              <div class="field">
+                <label for="qw-mf-ooa-qty">How many tyres?</label>
+                <select id="qw-mf-ooa-qty" name="tyre_quantity" required>
+                  <option value="">Pick one</option>
+                  <option value="1">1 tyre</option>
+                  <option value="2">2 tyres</option>
+                  <option value="3">3 tyres</option>
+                  <option value="4">4 tyres</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="qw-mf-ooa-pref">Brand / quality preference</label>
+                <select id="qw-mf-ooa-pref" name="brand_preference" required>
+                  <option value="">Pick one</option>
+                  <option value="premium">Premium (Michelin, Continental, Bridgestone…)</option>
+                  <option value="mid-range">Mid-range</option>
+                  <option value="budget">Budget</option>
+                  <option value="no-preference">No preference</option>
+                </select>
+              </div>
+              <div class="field field-full"><label for="qw-mf-ooa-notes">Specific brand or anything else (optional)</label><textarea id="qw-mf-ooa-notes" name="notes" rows="3" placeholder="e.g. happy with whatever the dealer fits, or stick to one brand across the axle."></textarea></div>
+            </div>
+
+            <div class="qw-step-actions">
+              <button type="button" class="btn btn-outline-dark qw-back-to-start">Back</button>
+              <button type="submit" class="btn btn-primary">
+                <span class="btn-label">Send my details</span>
+                <span class="btn-sending" aria-hidden="true" style="display:none">Sending&hellip;</span>
+              </button>
+            </div>
+          </form>
         </section>
 
         <!-- ============================================================== -->
@@ -594,6 +676,18 @@ const bookingSiteClient = '537';
     var wiz = document.getElementById('qw-wizard');
     if (!wiz) return;
 
+    // GTM/dataLayer instrumentation. Events are passive — they fire into
+    // window.dataLayer where GTM tags pick them up. No PII (postcodes,
+    // names, regs etc.) is sent — only service / step / price.
+    function track(name, params) {
+      try {
+        (window.dataLayer = window.dataLayer || []).push(
+          Object.assign({ event: name }, params || {})
+        );
+      } catch (e) {}
+    }
+    track('quote_started');
+
     var state = {
       service: '',
       postcode: '',
@@ -614,7 +708,9 @@ const bookingSiteClient = '537';
     var progressMap = {
       'service-select': 5,
       'e-form': 50,
-      'mf-vrm': 50,
+      'mf-postcode': 35,
+      'mf-fee-warning': 70,
+      'mf-out-of-area': 60,
       'caravan-redirect': 50,
       'p-postcode': 25,
       'p-quote': 60,
@@ -711,9 +807,12 @@ const bookingSiteClient = '537';
 
     function startService(svc) {
       state.service = svc;
+      track('quote_service_selected', { service: svc });
       if (svc === 'emergency') return show('e-form');
-      if (svc === 'mobile-fitting') return show('mf-vrm');
-      if (svc === 'caravan') return show('caravan-redirect');
+      if (svc === 'mobile-fitting' || svc === 'caravan') {
+        updateMfPostcodeEyebrow();
+        return show('mf-postcode');
+      }
       if (svc === 'puncture') return show('p-postcode');
       if (svc === 'lwnr') return show('l-postcode');
     }
@@ -750,20 +849,64 @@ const bookingSiteClient = '537';
       $$('.qw-slot-btn.is-selected').forEach(function (b) { b.classList.remove('is-selected'); });
     }
 
-    // ---- Mobile fitting: redirect with VRM ------------------------------
-    var mfForm = $('qw-mf-form');
-    if (mfForm) {
-      mfForm.addEventListener('submit', function (e) {
+    // ---- Mobile fitting + Caravan: shared postcode → fee-warning flow ----
+    // Both services use the same external booking system and the same
+    // distance-based mobile fee tiers, so they share these steps. The
+    // service-specific labels are swapped in when the step is shown.
+    function isBookingFlow() {
+      return state.service === 'mobile-fitting' || state.service === 'caravan';
+    }
+
+    function serviceCopy() {
+      if (state.service === 'caravan') {
+        return {
+          label: 'Caravan tyres',
+          ooaService: 'Caravan tyre fitting (out of area)',
+        };
+      }
+      return {
+        label: 'Mobile tyre fitting',
+        ooaService: 'Mobile tyre fitting (out of area)',
+      };
+    }
+
+    var mfPcForm = $('qw-mf-postcode-form');
+    if (mfPcForm) {
+      mfPcForm.addEventListener('submit', async function (e) {
         e.preventDefault();
-        var v = ($('qw-mf-vrm').value || '').trim().toUpperCase().replace(/\s+/g, '');
-        if (v.length < 2) {
-          showError('qw-mf-error', 'Pop your reg in so the booking site knows what tyres to show.');
+        var raw = $('qw-mf-postcode').value;
+        var result = await lookupPostcode(raw, 'qw-mf-postcode-error', $('qw-mf-postcode-submit'));
+        if (!result) return;
+        state.postcode = result.postcode;
+        state.miles = result.miles;
+        var copy = serviceCopy();
+        if (state.miles > pricing.mobileFitting.maxMiles) {
+          $('qw-mf-ooa-postcode').value = state.postcode;
+          $('qw-mf-ooa-miles').value = state.miles.toFixed(2);
+          $('qw-mf-ooa-service').value = copy.ooaService;
+          track('quote_postcode_out_of_area', { service: state.service });
+          show('mf-out-of-area');
           return;
         }
-        showError('qw-mf-error');
-        var url = bookingSiteBase + '?clientID=' + encodeURIComponent(bookingSiteClient) + '&vrm=' + encodeURIComponent(v);
-        window.location.href = url;
+        track('quote_postcode_in_area', { service: state.service });
+        renderFeeWarning();
+        show('mf-fee-warning');
       });
+    }
+
+    // Populate the eyebrow on the postcode step when entering it.
+    function updateMfPostcodeEyebrow() {
+      var el = $('qw-mf-postcode-eyebrow');
+      if (!el) return;
+      el.textContent = serviceCopy().label + ' · Step 1 of 2';
+    }
+
+    function renderFeeWarning() {
+      var copy = serviceCopy();
+      var eyebrow = $('qw-mf-warn-eyebrow');
+      var dist = $('qw-mf-warn-distance');
+      if (eyebrow) eyebrow.textContent = copy.label + ' · Step 2 of 2';
+      if (dist) dist.textContent = 'You’re about ' + state.miles.toFixed(1) + ' miles from us.';
     }
 
     // ---- Puncture: postcode ---------------------------------------------
@@ -781,9 +924,11 @@ const bookingSiteClient = '537';
           var mEl = $('qw-p-ooa-miles');
           if (pcEl) pcEl.value = state.postcode;
           if (mEl) mEl.value = state.miles.toFixed(2);
+          track('quote_postcode_out_of_area', { service: 'puncture' });
           show('p-out-of-area');
           return;
         }
+        track('quote_postcode_in_area', { service: 'puncture' });
         buildPunctureQuote();
         show('p-quote');
       });
@@ -817,6 +962,7 @@ const bookingSiteClient = '537';
       if (caveatEl) caveatEl.textContent = fmt(co.amount) + ' callout fee';
       var ackEl = $('qw-p-callout-ack');
       if (ackEl) ackEl.textContent = fmt(co.amount) + ' callout fee';
+      track('quote_price_shown', { service: 'puncture', total: state.total });
     }
 
     function renderBreakdown(id, lines) {
@@ -842,9 +988,11 @@ const bookingSiteClient = '537';
           var mEl = $('qw-l-ooa-miles');
           if (pcEl) pcEl.value = state.postcode;
           if (mEl) mEl.value = state.miles.toFixed(2);
+          track('quote_postcode_out_of_area', { service: 'lwnr' });
           show('l-out-of-area');
           return;
         }
+        track('quote_postcode_in_area', { service: 'lwnr' });
         show('l-lockers');
       });
     }
@@ -875,6 +1023,7 @@ const bookingSiteClient = '537';
       renderBreakdown('qw-l-breakdown', state.breakdown);
       var totalEl = $('qw-l-total');
       if (totalEl) totalEl.textContent = fmt(state.total);
+      track('quote_price_shown', { service: 'lwnr', total: state.total });
     }
 
     // ---- Booking step: build slot list & wire same-day -----------------
@@ -964,6 +1113,7 @@ const bookingSiteClient = '537';
           // Clear scheduled slots if user opts for same-day.
           state.slots = [];
           $$('.qw-slot-btn.is-selected').forEach(function (b) { b.classList.remove('is-selected'); });
+          track('quote_same_day_selected', { service: state.service });
         }
       });
     }
@@ -982,11 +1132,15 @@ const bookingSiteClient = '537';
           var ack = $('qw-p-ack');
           if (!ack || !ack.checked) {
             showError('qw-p-ack-error', 'Please tick the box to confirm you understand the callout terms.');
+            track('quote_ack_blocked', { service: 'puncture' });
             return;
           }
           showError('qw-p-ack-error');
         }
-        if (next) show(next);
+        if (next) {
+          track('quote_booking_shown', { service: state.service });
+          show(next);
+        }
       });
     });
 
@@ -998,6 +1152,7 @@ const bookingSiteClient = '537';
         var errId = flow === 'puncture' ? 'qw-p-booking-error' : 'qw-l-booking-error';
         if (!state.sameDay && state.slots.length < 2) {
           showError(errId, 'Pick two time windows, or tick "I need this today".');
+          track('quote_booking_validation_failed', { service: flow, slots: state.slots.length });
           return;
         }
         showError(errId);
@@ -1022,6 +1177,14 @@ const bookingSiteClient = '537';
       });
     });
 
+    // Map the Netlify form name to a submission type for analytics.
+    var formTypeByName = {
+      'quote-puncture': 'booking',
+      'quote-lwnr': 'booking',
+      'quote-out-of-area': 'out-of-area',
+      'quote-emergency': 'emergency',
+    };
+
     // ---- Form submissions (Netlify, fetch-based) ------------------------
     function wireForm(formId) {
       var form = $(formId);
@@ -1034,6 +1197,11 @@ const bookingSiteClient = '537';
         if (btn) btn.disabled = true;
         if (label) label.style.display = 'none';
         if (sending) sending.style.display = '';
+        var formName = form.getAttribute('name') || '';
+        track('quote_submitted', {
+          service: state.service || formName,
+          type: formTypeByName[formName] || 'other',
+        });
         try {
           await fetch('/quote/', {
             method: 'POST',
@@ -1053,7 +1221,19 @@ const bookingSiteClient = '537';
     wireForm('qw-l-form');
     wireForm('qw-p-ooa-form');
     wireForm('qw-l-ooa-form');
+    wireForm('qw-mf-ooa-form');
     wireForm('qw-e-form');
+
+    // External booking-site link (mobile fitting + caravan share this)
+    var mfContinue = $('qw-mf-continue');
+    if (mfContinue) {
+      mfContinue.addEventListener('click', function () {
+        track('quote_redirect_external', {
+          service: state.service,
+          miles: Math.round(state.miles * 10) / 10,
+        });
+      });
+    }
 
     // ---- Emergency: share-my-location button ----------------------------
     var locateBtn = $('qw-e-locate');
@@ -1064,6 +1244,7 @@ const bookingSiteClient = '537';
         locateStatus.textContent = 'Locating…';
         locateStatus.className = 'qw-e-locate-status';
         navigator.geolocation.getCurrentPosition(async function (pos) {
+          track('quote_geolocation_used');
           var lat = pos.coords.latitude;
           var lon = pos.coords.longitude;
           var latEl = $('qw-e-lat');
@@ -1338,6 +1519,41 @@ const bookingSiteClient = '537';
     font-size: 0.92rem;
     line-height: 1.55;
     text-align: left;
+  }
+
+  /* Mobile fitting / caravan fee-info step */
+  .qw-mf-warn-distance {
+    margin: 0 0 1rem;
+    color: var(--color-text-muted-dark);
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.82rem;
+  }
+  .qw-mf-fee-table {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+    border-top: 1px solid var(--color-border-light);
+  }
+  .qw-mf-fee-table li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .qw-mf-fee-range {
+    color: var(--color-text-muted-dark);
+    font-size: 0.95rem;
+  }
+  .qw-mf-fee-amount {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--color-text-dark);
+    letter-spacing: 0.01em;
   }
 
   /* Slots */

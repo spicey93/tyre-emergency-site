@@ -98,9 +98,9 @@ const areas = [
       </ul>
     </nav>
 
-    <a class="header-phone" href={telHref}>
-      <span aria-hidden="true" class="phone-icon">&#9742;</span>
-      <span class="phone-number">{phone}</span>
+    <a class="header-call" href={telHref} data-call="header">
+      <span class="header-call-icon" aria-hidden="true">&#9742;</span>
+      <span class="header-call-number">{phone}</span>
     </a>
   </div>
 </header>
@@ -368,28 +368,31 @@ const areas = [
     grid-column: 1 / -1;
   }
 
-  .header-phone {
+  .header-call {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.6rem 1rem;
+    padding: 0.65rem 1rem;
     background-color: var(--color-accent);
     color: var(--color-text);
     border-radius: var(--radius);
     font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.04em;
     font-size: 1rem;
-    transition: background-color var(--transition);
+    transition: background-color var(--transition), transform var(--transition);
   }
 
-  .header-phone:hover {
+  .header-call:hover,
+  .header-call:focus-visible {
     background-color: var(--color-accent-dark);
     color: var(--color-text);
+    transform: translateY(-1px);
   }
 
-  .phone-icon {
+  .header-call-icon {
     font-size: 1.1rem;
+    line-height: 1;
   }
 
   @media (max-width: 900px) {
@@ -399,16 +402,10 @@ const areas = [
     .logo img {
       height: 44px;
     }
-    .header-phone .phone-number {
-      display: none;
-    }
-    .header-phone {
-      padding: 0.6rem 0.8rem;
-    }
     .nav-toggle {
       display: inline-flex;
     }
-    .header-phone {
+    .header-call {
       display: none;
     }
     .nav-menu {
