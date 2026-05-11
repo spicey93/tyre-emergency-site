@@ -34,7 +34,7 @@ const serviceJsonLd = {
     subtitle="We come to your van &mdash; not the other way round. Motor movers and Tyron bands handled with care."
     ctaPhone={phone}
     ctaCallLabel="Call for a price"
-    secondaryCta={{ label: 'Book online', href: 'https://garage-bookings.com/?clientID=537' }}
+    secondaryCta={{ label: 'Get an instant price', href: '/quote/?service=caravan' }}
     bgImage="/images/mobile-caravan-tyre-fitting.jpeg"
     bgImageAlt="Caravan tyre being changed by Tyre Emergency Ltd at the side of the customer's pitch"
     trustItems={[
@@ -98,20 +98,16 @@ const serviceJsonLd = {
   
   <ReviewsSection />
 
-  <section class="section section-light service-cta-section">
+  <section class="section section-white service-cta-section">
     <div class="container container-narrow text-center">
+      <span class="eyebrow">Instant price</span>
       <h2>Caravan or motorhome job?</h2>
-      <p class="text-muted-dark">Give us a call with the make, model and the tyre size from the sidewall and we&rsquo;ll quote on the spot &mdash; or book online and we&rsquo;ll be in touch to confirm. The &lsquo;van doesn&rsquo;t move either way.</p>
+      <p class="text-muted-dark">Get a price through the online booking system, or ring with the make, model and tyre size from the sidewall and we&rsquo;ll quote on the spot. The &lsquo;van doesn&rsquo;t move either way.</p>
       <div class="cta-row" style="justify-content: center;">
-        <a class="btn btn-primary btn-call" href={telHref}>
-          <span aria-hidden="true">&#9742;</span> Call {phone}
+        <a class="btn btn-primary" href="/quote/?service=caravan">Get an instant price</a>
+        <a class="btn btn-outline-dark btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Or call: {phone}
         </a>
-        <a
-          class="btn btn-outline-dark"
-          href="https://garage-bookings.com/?clientID=537"
-          target="_blank"
-          rel="noopener"
-        >Book online</a>
       </div>
     </div>
   </section>

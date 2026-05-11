@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import BookingForm from '../../components/BookingForm.astro';
 import HeroSection from '../../components/HeroSection.astro';
 import ReviewsSection from '../../components/ReviewsSection.astro';
 
@@ -35,13 +34,13 @@ const serviceJsonLd = {
     subtitle="Everything a tyre shop does, done on your driveway. No waiting room, no half-day off work."
     ctaPhone={phone}
     ctaCallLabel="Call for a price"
-    secondaryCta={{ label: 'Book online', href: 'https://garage-bookings.com/?clientID=537' }}
+    secondaryCta={{ label: 'Get an instant price', href: '/quote/?service=mobile-fitting' }}
     bgImage="/images/mobile-tyre-fitting.webp"
     bgImageAlt="Tyre being fitted on a car wheel by a mobile tyre fitter"
     trustItems={[
       { strong: '478', label: '★★★★★ Google reviews' },
       { strong: 'REACT', label: 'licensed & fully insured' },
-      { strong: 'We come', label: 'to you, fully equipped' },
+      { strong: 'We come to you', label: 'fully equipped' },
     ]}
   />
 
@@ -100,15 +99,16 @@ const serviceJsonLd = {
   
   <ReviewsSection />
 
-  <section class="section section-light service-cta-section">
+  <section class="section section-white service-cta-section">
     <div class="container container-narrow text-center">
+      <span class="eyebrow">Instant price</span>
       <h2>Want a price for your tyres?</h2>
-      <p class="text-muted-dark">Give us a call with your registration and address for an exact, all-in price on the spot &mdash; or pop your reg in below to see prices and slots online.</p>
+      <p class="text-muted-dark">Pop your reg in and we&rsquo;ll send you straight to the booking site &mdash; live prices and slots, no waiting on a callback.</p>
       <div class="cta-row" style="justify-content: center;">
-        <a class="btn btn-primary btn-call" href={telHref}>
-          <span aria-hidden="true">&#9742;</span> Call {phone}
+        <a class="btn btn-primary" href="/quote/?service=mobile-fitting">Get an instant price</a>
+        <a class="btn btn-outline-dark btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Or call: {phone}
         </a>
-        <BookingForm variant="light" buttonLabel="Book online" />
       </div>
     </div>
   </section>

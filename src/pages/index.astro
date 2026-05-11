@@ -4,9 +4,9 @@ import HeroSection from '../components/HeroSection.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import ReviewsSection from '../components/ReviewsSection.astro';
 import FAQAccordion from '../components/FAQAccordion.astro';
-import QuoteForm from '../components/QuoteForm.astro';
 
 const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
 
 const services = [
   {
@@ -143,6 +143,7 @@ const faqs = [
     subtitle="Mobile tyre fitting across Nottinghamshire. We come to you, day or night."
     ctaPhone={phone}
     ctaCallLabel="Call 24/7"
+    secondaryCta={{ label: 'Get an instant price', href: '/quote/' }}
     bgImage="/images/tyre-emergency-ltd.webp"
     bgImageAlt="Tyre Emergency Ltd service van open on a motorway hard shoulder with equipment ready"
   />
@@ -160,7 +161,7 @@ const faqs = [
         <li class="step">
           <span class="step-num">01</span>
           <h3>Pick up the phone</h3>
-          <p>Ring us 24/7 on <a href={`tel:${phone.replace(/\s+/g, '')}`}>{phone}</a> or use the quote form below if it&rsquo;s not urgent. A real person picks up &mdash; no menus, no callback queue.</p>
+          <p>Ring us 24/7 on <a href={telHref}>{phone}</a> or <a href="/quote/">get an instant price online</a> if it&rsquo;s not urgent. A real person picks up &mdash; no menus, no callback queue.</p>
         </li>
         <li class="step">
           <span class="step-num">02</span>
@@ -259,14 +260,18 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Section 8: Quote form -->
-  <section class="section section-light" id="quote">
-    <div class="container">
-      <div class="text-center">
-        <span class="eyebrow">Get a Quote</span>
-        <h2>Request a Quote</h2>
+  <!-- Section 8: Instant price CTA -->
+  <section class="section section-light service-cta-section" id="quote">
+    <div class="container container-narrow text-center">
+      <span class="eyebrow">Instant price</span>
+      <h2>Get a price for your job</h2>
+      <p class="text-muted-dark">Tell us what you need and where you are. A few quick questions and we&rsquo;ll show you a price &mdash; book a slot in the same flow.</p>
+      <div class="cta-row" style="justify-content: center;">
+        <a class="btn btn-primary" href="/quote/">Get an instant price</a>
+        <a class="btn btn-outline-dark btn-call" href={telHref}>
+          <span aria-hidden="true">&#9742;</span> Or call: {phone}
+        </a>
       </div>
-      <QuoteForm />
     </div>
   </section>
 </BaseLayout>

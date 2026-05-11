@@ -16,6 +16,15 @@ export interface Props {
   ctaPhone: string;
   ctaCallLabel?: string;
   secondaryCta?: SecondaryCta;
+  /**
+   * Visual priority of the two CTAs.
+   *   - 'price-primary' (default): secondary CTA gets the big red treatment,
+   *     phone CTA renders as a compact outlined link. Used on most pages.
+   *   - 'call-primary': phone CTA gets the big red treatment (the original look).
+   *     Use on landing pages or emergency pages where the goal is a call.
+   * If no secondaryCta is provided, falls back to 'call-primary' automatically.
+   */
+  ctaLayout?: 'call-primary' | 'price-primary';
   bgImage: string;
   bgImageAlt?: string;
   trustItems?: TrustItem[];
@@ -34,12 +43,14 @@ const {
   ctaPhone,
   ctaCallLabel = 'Call now',
   secondaryCta,
+  ctaLayout = 'price-primary',
   bgImage,
   bgImageAlt = 'Tyre Emergency Ltd service van working at the roadside',
   trustItems = defaultTrust,
 } = Astro.props as Props;
 
 const telHref = `tel:${ctaPhone.replace(/\s+/g, '')}`;
+const effectiveLayout: 'call-primary' | 'price-primary' = secondaryCta ? ctaLayout : 'call-primary';
 ---
 
 <section class="hero">
@@ -59,25 +70,43 @@ const telHref = `tel:${ctaPhone.replace(/\s+/g, '')}`;
     {subtitle && <p class="hero-sub" set:html={subtitle} />}
 
     <div class="hero-cta-row">
-      <a class="hero-call" href={telHref} data-call="hero">
-        <span class="hero-call-icon" aria-hidden="true">&#9742;</span>
-        <span class="hero-call-stack">
-          <small>{ctaCallLabel}</small>
-          <strong>{ctaPhone}</strong>
-        </span>
-      </a>
-      {secondaryCta && (
-        <a class="hero-secondary-btn" href={secondaryCta.href}>
-          <span class="hero-secondary-label">{secondaryCta.label}</span>
-          <span class="hero-secondary-arrow" aria-hidden="true">&rsaquo;</span>
-        </a>
+      {effectiveLayout === 'price-primary' && secondaryCta ? (
+        <>
+          <a class="hero-price-primary" href={secondaryCta.href}>
+            <span class="hero-price-primary-label">{secondaryCta.label}</span>
+            <span class="hero-price-primary-arrow" aria-hidden="true">&rsaquo;</span>
+          </a>
+          <a class="hero-call-outline" href={telHref} data-call="hero">
+            <span class="hero-call-icon" aria-hidden="true">&#9742;</span>
+            <span class="hero-call-outline-text">{ctaCallLabel} <strong>{ctaPhone}</strong></span>
+          </a>
+        </>
+      ) : (
+        <>
+          <a class="hero-call" href={telHref} data-call="hero">
+            <span class="hero-call-icon" aria-hidden="true">&#9742;</span>
+            <span class="hero-call-stack">
+              <small>{ctaCallLabel}</small>
+              <strong>{ctaPhone}</strong>
+            </span>
+          </a>
+          {secondaryCta && (
+            <a class="hero-secondary-btn" href={secondaryCta.href}>
+              <span class="hero-secondary-label">{secondaryCta.label}</span>
+              <span class="hero-secondary-arrow" aria-hidden="true">&rsaquo;</span>
+            </a>
+          )}
+        </>
       )}
     </div>
 
     {trustItems.length > 0 && (
       <ul class="hero-trust">
         {trustItems.map((t) => (
-          <li><strong>{t.strong}</strong> {t.label}</li>
+          <li>
+            <strong>{t.strong}</strong>
+            <span class="hero-trust-label">{t.label}</span>
+          </li>
         ))}
       </ul>
     )}
@@ -164,6 +193,7 @@ const telHref = `tel:${ctaPhone.replace(/\s+/g, '')}`;
     align-items: center;
   }
 
+  /* ---- Call-primary layout (original) ---- */
   .hero-call {
     display: inline-flex;
     align-items: center;
@@ -254,32 +284,132 @@ const telHref = `tel:${ctaPhone.replace(/\s+/g, '')}`;
     opacity: 0.85;
   }
 
+  /* ---- Price-primary layout ---- */
+  .hero-price-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 1rem 1.75rem;
+    background-color: var(--color-accent);
+    color: var(--color-text);
+    border-radius: var(--radius);
+    text-decoration: none;
+    box-shadow: 0 14px 32px -16px rgba(255, 45, 45, 0.7);
+    transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    min-height: 64px;
+  }
+
+  .hero-price-primary:hover,
+  .hero-price-primary:focus-visible {
+    background-color: var(--color-accent-dark);
+    color: var(--color-text);
+    transform: translateY(-1px);
+    box-shadow: 0 18px 38px -16px rgba(255, 45, 45, 0.8);
+  }
+
+  .hero-price-primary-label {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.05;
+  }
+
+  .hero-price-primary-arrow {
+    font-size: 1.5rem;
+    line-height: 1;
+    opacity: 0.9;
+    margin-top: -2px;
+  }
+
+  .hero-call-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 1rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.04);
+    color: var(--color-text);
+    border: 2px solid rgba(255, 255, 255, 0.55);
+    border-radius: var(--radius);
+    text-decoration: none;
+    min-height: 64px;
+    transition: background-color var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
+  }
+
+  .hero-call-outline:hover,
+  .hero-call-outline:focus-visible {
+    background-color: var(--color-text);
+    color: var(--color-text-dark);
+    border-color: var(--color-text);
+    transform: translateY(-1px);
+  }
+
+  .hero-call-outline .hero-call-icon {
+    font-size: 1.4rem;
+  }
+
+  .hero-call-outline-text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .hero-call-outline-text strong {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+    margin-left: 0.35rem;
+  }
+
   .hero-trust {
     list-style: none;
     padding: 0;
-    margin: 1.75rem 0 0;
+    margin: 2.25rem 0 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem;
-    color: var(--color-text-muted);
-    font-size: 0.9rem;
+    gap: 1.25rem 2.25rem;
   }
 
   .hero-trust li {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.5rem 0.95rem;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 999px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding-left: 0.95rem;
+    position: relative;
+  }
+
+  .hero-trust li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8%;
+    bottom: 8%;
+    width: 3px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
   }
 
   .hero-trust strong {
     color: var(--color-text);
     font-family: var(--font-display);
-    font-size: 1rem;
+    font-weight: 900;
+    font-size: 1.55rem;
     letter-spacing: 0.01em;
+    line-height: 1;
+  }
+
+  .hero-trust-label {
+    color: var(--color-text-muted);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.25;
   }
 
   @media (max-width: 768px) {
@@ -313,20 +443,22 @@ const telHref = `tel:${ctaPhone.replace(/\s+/g, '')}`;
       margin-bottom: 1.5rem;
     }
     .hero-call,
-    .hero-secondary-btn {
+    .hero-secondary-btn,
+    .hero-price-primary,
+    .hero-call-outline {
       width: 100%;
       justify-content: center;
     }
     .hero-trust {
-      margin-top: 1.5rem;
-      gap: 0.5rem;
-    }
-    .hero-trust li {
-      padding: 0.45rem 0.8rem;
-      font-size: 0.82rem;
+      margin-top: 1.75rem;
+      gap: 1rem 1.5rem;
     }
     .hero-trust strong {
-      font-size: 0.9rem;
+      font-size: 1.3rem;
+    }
+    .hero-trust-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
     }
   }
 </style>

@@ -1,0 +1,1543 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { blockedDates } from '../data/blocked-dates';
+
+const phone = '01623 325 123';
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+
+// HQ coords (NG22 8GA, Bilsthorpe) — verified via postcodes.io.
+const origin = { lat: 53.136909, lon: -1.033037 };
+
+// All prices are shown to the customer all-in (VAT included).
+const pricing = {
+  puncture: {
+    repair: 30,
+    callout: [
+      { maxMiles: 5, amount: 24 },
+      { maxMiles: 8, amount: 48 },
+    ],
+    maxMiles: 8,
+  },
+  lwnr: {
+    perLocker: 18,
+    callout: [
+      { maxMiles: 5, amount: 24 },
+      { maxMiles: 10, amount: 48 },
+      { maxMiles: 15, amount: 72 },
+    ],
+    maxMiles: 15,
+  },
+};
+
+const bookingDaysAhead = 7;
+
+// Online booking site (used for mobile fitting + caravan).
+const bookingSiteBase = 'https://garage-bookings.com/';
+const bookingSiteClient = '537';
+---
+
+<BaseLayout
+  title="Get an Instant Price | Tyre Emergency Ltd"
+  description="Tell us what you need and we'll give you a price on the spot. Puncture repairs, locking wheel nut removal, mobile tyre fitting and caravan tyres across Nottinghamshire."
+>
+  <section class="quote-page section section-light">
+    <div class="container container-narrow">
+      <header class="quote-header text-center">
+        <span class="eyebrow">Instant price</span>
+        <h1>Tell us what you need</h1>
+        <p class="quote-lede text-muted-dark">
+          Pick the service, answer a couple of questions, and we&rsquo;ll show you a price. Roadside emergencies are always faster on the phone &mdash; <a href={telHref}><strong>{phone}</strong></a>.
+        </p>
+      </header>
+
+      <div class="qw-wizard" id="qw-wizard">
+        <div class="qw-progress" aria-hidden="true">
+          <div class="qw-progress-bar" id="qw-progress-bar" style="width: 0%"></div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- Step: service select                                            -->
+        <!-- ============================================================== -->
+        <section class="qw-step is-active" data-step="service-select">
+          <p class="qw-step-num">Step 1</p>
+          <h2>What service do you need?</h2>
+          <p class="qw-step-help">Pick the closest match. If you&rsquo;re not sure, give us a ring &mdash; we&rsquo;ll point you the right way.</p>
+
+          <div class="qw-service-grid">
+            <button type="button" class="qw-service" data-service="emergency">
+              <span class="qw-service-title">Emergency tyre replacement</span>
+              <span class="qw-service-sub">Roadside, flat, blowout &mdash; today.</span>
+            </button>
+            <button type="button" class="qw-service" data-service="mobile-fitting">
+              <span class="qw-service-title">Mobile tyre fitting</span>
+              <span class="qw-service-sub">New tyres fitted on your driveway.</span>
+            </button>
+            <button type="button" class="qw-service" data-service="caravan">
+              <span class="qw-service-title">Caravan tyres</span>
+              <span class="qw-service-sub">Caravan and trailer tyres at home.</span>
+            </button>
+            <button type="button" class="qw-service" data-service="puncture">
+              <span class="qw-service-title">Puncture repair</span>
+              <span class="qw-service-sub">Plug-and-patch on your driveway.</span>
+            </button>
+            <button type="button" class="qw-service" data-service="lwnr">
+              <span class="qw-service-title">Locking wheel nut removal</span>
+              <span class="qw-service-sub">Lost key, stripped pattern, seized nut.</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- Emergency: text-back form                                       -->
+        <!-- ============================================================== -->
+        <section class="qw-step" data-step="e-form" hidden>
+          <p class="qw-step-num">Emergency tyre replacement</p>
+          <h2>Tell us where you are &mdash; we&rsquo;ll text a price</h2>
+          <p class="qw-step-help">Quickest way is still to ring &mdash; but if you&rsquo;d rather we text back with a price, fill this in and we&rsquo;ll be in touch in minutes.</p>
+
+          <form
+            class="qw-form qw-form--contact"
+            id="qw-e-form"
+            name="quote-emergency"
+            method="POST"
+            action="/thank-you/"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            netlify
+          >
+            <input type="hidden" name="form-name" value="quote-emergency" />
+            <p class="honeypot-field">
+              <label>Do not fill this out if you are human <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+            </p>
+
+            <input type="hidden" name="service" value="Emergency tyre replacement" />
+            <input type="hidden" name="latitude" id="qw-e-lat" />
+            <input type="hidden" name="longitude" id="qw-e-lon" />
+
+            <div class="qw-fields">
+              <div class="field"><label for="qw-e-reg">Vehicle registration</label><input id="qw-e-reg" name="registration" type="text" required autocomplete="off" placeholder="e.g. AB12 CDE" /></div>
+              <div class="field">
+                <label for="qw-e-qty">How many tyres?</label>
+                <select id="qw-e-qty" name="tyre_quantity" required>
+                  <option value="">Pick one</option>
+                  <option value="1">1 tyre</option>
+                  <option value="2">2 tyres</option>
+                  <option value="3">3 tyres</option>
+                  <option value="4">4 tyres</option>
+                </select>
+              </div>
+              <div class="field field-full"><label for="qw-e-size">Tyre size</label><input id="qw-e-size" name="tyre_size" type="text" required autocomplete="off" placeholder={'e.g. 205/55R16 — or "not sure"'} /></div>
+              <div class="field field-full">
+                <label for="qw-e-postcode">Postcode</label>
+                <input id="qw-e-postcode" name="postcode" type="text" required autocomplete="postal-code" placeholder="e.g. NG22 8GA" />
+                <div class="qw-e-locate-row">
+                  <button type="button" class="qw-e-locate-btn" id="qw-e-locate">
+                    <span aria-hidden="true">&#9678;</span> Don&rsquo;t know it? Share my exact location
+                  </button>
+                  <span class="qw-e-locate-status" id="qw-e-locate-status" aria-live="polite"></span>
+                </div>
+              </div>
+              <div class="field"><label for="qw-e-phone">Phone number</label><input id="qw-e-phone" name="phone" type="tel" required autocomplete="tel" /></div>
+              <div class="field"><label for="qw-e-name">Your name</label><input id="qw-e-name" name="name" type="text" required autocomplete="name" /></div>
+              <div class="field field-full"><label for="qw-e-notes">Anything else? (optional)</label><textarea id="qw-e-notes" name="notes" rows="3" placeholder="Happy to text photos of the tyre if it helps."></textarea></div>
+            </div>
+
+            <div class="qw-step-actions">
+              <button type="button" class="btn btn-outline-dark qw-back-to-start">Back</button>
+              <button type="submit" class="btn btn-primary">
+                <span class="btn-label">Text me a price</span>
+                <span class="btn-sending" aria-hidden="true" style="display:none">Sending&hellip;</span>
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- Mobile fitting: ask reg, redirect to garage-bookings            -->
+        <!-- ============================================================== -->
+        <section class="qw-step" data-step="mf-vrm" hidden>
+          <p class="qw-step-num">Mobile tyre fitting</p>
+          <h2>Pop in your registration</h2>
+          <p class="qw-step-help">We&rsquo;ll send you straight to our online booking system where you can see live prices and pick a slot.</p>
+          <form class="qw-form" id="qw-mf-form" novalidate>
+            <label class="visually-hidden" for="qw-mf-vrm">Vehicle registration</label>
+            <input
+              id="qw-mf-vrm"
+              class="qw-input qw-input--reg"
+              type="text"
+              autocomplete="off"
+              placeholder="e.g. AB12 CDE"
+              required
+            />
+            <p class="qw-error" id="qw-mf-error" hidden></p>
+            <div class="qw-step-actions">
+              <button type="button" class="btn btn-outline-dark qw-back-to-start">Back</button>
+              <button type="submit" class="btn btn-primary">Continue to booking</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- Caravan: confirm + redirect to garage-bookings                  -->
+        <!-- ============================================================== -->
+        <section class="qw-step" data-step="caravan-redirect" hidden>
+          <p class="qw-step-num">Caravan tyres</p>
+          <h2>Caravan tyres book through our online system</h2>
+          <p class="qw-step-help">Tyre sizes for caravans and trailers are listed in the same booking system as cars and vans &mdash; you&rsquo;ll see prices and slots once you&rsquo;re in.</p>
+          <div class="qw-step-actions">
+            <button type="button" class="btn btn-outline-dark qw-back-to-start">Back</button>
+            <a
+              class="btn btn-primary"
+              id="qw-caravan-link"
+              href={`${bookingSiteBase}?clientID=${bookingSiteClient}`}
+              target="_blank"
+              rel="noopener"
+            >
+              Open online booking
+            </a>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- PUNCTURE: postcode                                              -->
+        <!-- ============================================================== -->
+        <section class="qw-step" data-step="p-postcode" hidden>
+          <p class="qw-step-num">Puncture repair &middot; Step 1 of 3</p>
+          <h2>What&rsquo;s your postcode?</h2>
+          <p class="qw-step-help">We need the full postcode so we can work out the distance from us in Bilsthorpe.</p>
+          <form class="qw-form" id="qw-p-postcode-form" novalidate>
+            <label class="visually-hidden" for="qw-p-postcode">Your postcode</label>
+            <input
+              id="qw-p-postcode"
+              class="qw-input"
+              type="text"
+              autocomplete="postal-code"
+              inputmode="text"
+              required
+            />
+            <p class="qw-error" id="qw-p-postcode-error" hidden></p>
+            <div class="qw-step-actions">
+              <button type="button" class="btn btn-outline-dark qw-back-to-start">Back</button>
+              <button type="submit" class="btn btn-primary" id="qw-p-postcode-submit">Next</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- PUNCTURE: safety screening                                      -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- PUNCTURE: quote                                                 -->
+        <!-- ============================================================== -->
+        <section class="qw-step qw-step--quote" data-step="p-quote" hidden>
+          <p class="qw-step-num">Puncture repair &middot; Step 2 of 3</p>
+          <h2>Here&rsquo;s your price</h2>
+          <div class="qw-quote-card">
+            <ul class="qw-quote-breakdown" id="qw-p-breakdown"></ul>
+            <p class="qw-quote-total" id="qw-p-total">&pound;0</p>
+            <p class="qw-quote-caveat">
+              Price is all-in, VAT included. If the tyre turns out not to be repairable we can usually fit a replacement on the spot &mdash; just give us a ring on the day. The <strong id="qw-p-callout-caveat">callout fee</strong> is payable either way.
+            </p>
+          </div>
+
+          <div class="qw-ack">
+            <label class="qw-check qw-check--ack">
+              <input type="checkbox" id="qw-p-ack" />
+              <span>I understand &mdash; if the tyre can&rsquo;t be safely repaired, the <strong id="qw-p-callout-ack">callout fee</strong> is still payable.</span>
+            </label>
+            <details class="qw-ack-reasons">
+              <summary>What we can&rsquo;t safely repair</summary>
+              <ul>
+                <li>Run-flat tyres</li>
+                <li>Tyres that have been driven on while flat</li>
+                <li>Tyres with puncture-repair fluid or sealant in them</li>
+                <li>Damage near the sidewall (anywhere other than the central tread)</li>
+                <li>Holes bigger than about 6mm across</li>
+              </ul>
+              <p>If any of these apply, ring us instead &mdash; we&rsquo;ll usually fit a replacement on the spot.</p>
+            </details>
+          </div>
+
+          <p class="qw-error" id="qw-p-ack-error" hidden></p>
+          <div class="qw-step-actions">
+            <button type="button" class="btn btn-outline-dark qw-back" data-back="p-postcode">Back</button>
+            <button type="button" class="btn btn-primary qw-to-booking" data-next="p-booking" data-flow="puncture">Book this in</button>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- PUNCTURE: booking step (slots / same-day)                       -->
+        <!-- ============================================================== -->
+        <section class="qw-step" data-step="p-booking" hidden>
+          <p class="qw-step-num">Puncture repair &middot; Step 3 of 3</p>
+          <h2>When can we come?</h2>
+          <p class="qw-step-help">Pick two AM or PM windows that work for you. We&rsquo;ll ring to confirm one of them.</p>
+
+          <div class="qw-slots" id="qw-p-slots"></div>
+
+          <div class="qw-sameday-wrap" id="qw-p-sameday-wrap">
+            <p class="qw-or">&mdash; or &mdash;</p>
+            <label class="qw-check qw-check--sameday">
+              <input type="checkbox" id="qw-p-sameday" />
+              <span><strong>I need this today</strong> &mdash; leave my details and ring me to confirm if you can fit me in.</span>
+            </label>
+          </div>
+
+          <p class="qw-error" id="qw-p-booking-error" hidden></p>
+          <div class="qw-step-actions">
+            <button type="button" class="btn btn-outline-dark qw-back" data-back="p-quote">Back</button>
+            <button type="button" class="btn btn-primary qw-to-contact" data-next="p-contact" data-flow="puncture">Continue</button>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- PUNCTURE: contact + submit                                      -->
+        <!-- ============================================================== -->
+        <section class="qw-step" data-step="p-contact" hidden>
+          <p class="qw-step-num">Puncture repair &middot; Your details</p>
+          <h2>Last bit &mdash; where are we coming to?</h2>
+          <p class="qw-step-help">Pop in the rest of your details and we&rsquo;ll ring you back to confirm. We send everything you&rsquo;ve told us above so you don&rsquo;t have to repeat yourself.</p>
+
+          <form
+            class="qw-form qw-form--contact"
+            id="qw-p-form"
+            name="quote-puncture"
+            method="POST"
+            action="/thank-you/"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            netlify
+          >
+            <input type="hidden" name="form-name" value="quote-puncture" />
+            <p class="honeypot-field">
+              <label>Do not fill this out if you are human <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+            </p>
+
+            <input type="hidden" name="service" value="Puncture repair" />
+            <input type="hidden" name="postcode" id="qw-p-cb-postcode" />
+            <input type="hidden" name="distance_miles" id="qw-p-cb-miles" />
+            <input type="hidden" name="callout_acknowledged" id="qw-p-cb-ack" value="yes" />
+            <input type="hidden" name="quoted_price" id="qw-p-cb-price" />
+            <input type="hidden" name="quoted_breakdown" id="qw-p-cb-breakdown" />
+            <input type="hidden" name="booking_slots" id="qw-p-cb-slots" />
+            <input type="hidden" name="same_day_requested" id="qw-p-cb-sameday" value="no" />
+
+            <div class="qw-fields">
+              <div class="field"><label for="qw-p-name">Your name</label><input id="qw-p-name" name="name" type="text" required autocomplete="name" /></div>
+              <div class="field"><label for="qw-p-phone">Phone number</label><input id="qw-p-phone" name="phone" type="tel" required autocomplete="tel" /></div>
+              <div class="field"><label for="qw-p-email">Email</label><input id="qw-p-email" name="email" type="email" required autocomplete="email" /></div>
+              <div class="field"><label for="qw-p-reg">Vehicle registration</label><input id="qw-p-reg" name="registration" type="text" required autocomplete="off" placeholder="e.g. AB12 CDE" /></div>
+              <div class="field field-full"><label for="qw-p-address">Full address where the car is</label><textarea id="qw-p-address" name="address" rows="3" required></textarea></div>
+              <div class="field field-full"><label for="qw-p-notes">Anything else we should know? (optional)</label><textarea id="qw-p-notes" name="notes" rows="3"></textarea></div>
+            </div>
+
+            <div class="qw-step-actions">
+              <button type="button" class="btn btn-outline-dark qw-back" data-back="p-booking">Back</button>
+              <button type="submit" class="btn btn-primary">
+                <span class="btn-label">Send my booking request</span>
+                <span class="btn-sending" aria-hidden="true" style="display:none">Sending&hellip;</span>
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- PUNCTURE: out of area                                           -->
+        <!-- ============================================================== -->
+        <section class="qw-step" data-step="p-out-of-area" hidden>
+          <p class="qw-step-num qw-step-num--neutral">Outside our zone</p>
+          <h2>Sorry &mdash; that&rsquo;s a bit far for a puncture</h2>
+          <p class="qw-step-help">We keep puncture repairs within 8 miles of Bilsthorpe (NG22) so the price stays fair. If you leave your details, Dean will get back to you and let you know who to ring locally.</p>
+
+          <form
+            class="qw-form qw-form--contact"
+            id="qw-p-ooa-form"
+            name="quote-out-of-area"
+            method="POST"
+            action="/thank-you/"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            netlify
+          >
+            <input type="hidden" name="form-name" value="quote-out-of-area" />
+            <p class="honeypot-field">
+              <label>Do not fill this out if you are human <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+            </p>
+
+            <input type="hidden" name="service" value="Puncture repair (out of area)" />
+            <input type="hidden" name="postcode" id="qw-p-ooa-postcode" />
+            <input type="hidden" name="distance_miles" id="qw-p-ooa-miles" />
+
+            <div class="qw-fields">
+              <div class="field"><label for="qw-p-ooa-name">Your name</label><input id="qw-p-ooa-name" name="name" type="text" required autocomplete="name" /></div>
+              <div class="field"><label for="qw-p-ooa-phone">Phone number</label><input id="qw-p-ooa-phone" name="phone" type="tel" required autocomplete="tel" /></div>
+              <div class="field"><label for="qw-p-ooa-email">Email</label><input id="qw-p-ooa-email" name="email" type="email" required autocomplete="email" /></div>
+              <div class="field field-full"><label for="qw-p-ooa-notes">A bit about what&rsquo;s happening</label><textarea id="qw-p-ooa-notes" name="notes" rows="3" required></textarea></div>
+            </div>
+
+            <div class="qw-step-actions">
+              <button type="button" class="btn btn-outline-dark qw-back-to-start">Back</button>
+              <button type="submit" class="btn btn-primary">
+                <span class="btn-label">Send my details</span>
+                <span class="btn-sending" aria-hidden="true" style="display:none">Sending&hellip;</span>
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- LWNR: postcode                                                  -->
+        <!-- ============================================================== -->
+        <section class="qw-step" data-step="l-postcode" hidden>
+          <p class="qw-step-num">Locking wheel nut &middot; Step 1 of 4</p>
+          <h2>What&rsquo;s your postcode?</h2>
+          <p class="qw-step-help">We need the full postcode so we can work out the distance from us in Bilsthorpe.</p>
+          <form class="qw-form" id="qw-l-postcode-form" novalidate>
+            <label class="visually-hidden" for="qw-l-postcode">Your postcode</label>
+            <input
+              id="qw-l-postcode"
+              class="qw-input"
+              type="text"
+              autocomplete="postal-code"
+              inputmode="text"
+              required
+            />
+            <p class="qw-error" id="qw-l-postcode-error" hidden></p>
+            <div class="qw-step-actions">
+              <button type="button" class="btn btn-outline-dark qw-back-to-start">Back</button>
+              <button type="submit" class="btn btn-primary" id="qw-l-postcode-submit">Next</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- LWNR: lockers                                                   -->
+        <!-- ============================================================== -->
+        <section class="qw-step" data-step="l-lockers" hidden>
+          <p class="qw-step-num">Locking wheel nut &middot; Step 2 of 4</p>
+          <h2>How many lockers need removing?</h2>
+          <p class="qw-step-help">Most cars have one per wheel, so the answer is usually 1 or 4.</p>
+          <form class="qw-form qw-form--choices" id="qw-l-lockers-form" novalidate>
+            <label class="qw-choice"><input type="radio" name="lockers" value="1" required /><span>1 locker</span></label>
+            <label class="qw-choice"><input type="radio" name="lockers" value="2" /><span>2 lockers</span></label>
+            <label class="qw-choice"><input type="radio" name="lockers" value="3" /><span>3 lockers</span></label>
+            <label class="qw-choice"><input type="radio" name="lockers" value="4" /><span>4 lockers</span></label>
+            <div class="qw-step-actions">
+              <button type="button" class="btn btn-outline-dark qw-back" data-back="l-postcode">Back</button>
+              <button type="submit" class="btn btn-primary">Next</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- LWNR: quote                                                     -->
+        <!-- ============================================================== -->
+        <section class="qw-step qw-step--quote" data-step="l-quote" hidden>
+          <p class="qw-step-num">Locking wheel nut &middot; Step 3 of 4</p>
+          <h2>Here&rsquo;s your price</h2>
+          <div class="qw-quote-card">
+            <ul class="qw-quote-breakdown" id="qw-l-breakdown"></ul>
+            <p class="qw-quote-total" id="qw-l-total">&pound;0</p>
+            <p class="qw-quote-caveat">
+              Price is all-in, VAT included. If the locker turns out to be in a state we can&rsquo;t handle on the day, we&rsquo;ll tell you straight and the callout fee is still payable &mdash; we keep that one rare with the kit we carry.
+            </p>
+          </div>
+          <div class="qw-step-actions">
+            <button type="button" class="btn btn-outline-dark qw-back" data-back="l-lockers">Back</button>
+            <button type="button" class="btn btn-primary qw-to-booking" data-next="l-booking">Book this in</button>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- LWNR: booking step                                              -->
+        <!-- ============================================================== -->
+        <section class="qw-step" data-step="l-booking" hidden>
+          <p class="qw-step-num">Locking wheel nut &middot; Step 4 of 4</p>
+          <h2>When can we come?</h2>
+          <p class="qw-step-help">Pick two AM or PM windows that work for you. We&rsquo;ll ring to confirm one of them.</p>
+
+          <div class="qw-slots" id="qw-l-slots"></div>
+
+          <div class="qw-sameday-wrap" id="qw-l-sameday-wrap">
+            <p class="qw-or">&mdash; or &mdash;</p>
+            <label class="qw-check qw-check--sameday">
+              <input type="checkbox" id="qw-l-sameday" />
+              <span><strong>I need this today</strong> &mdash; leave my details and ring me to confirm if you can fit me in.</span>
+            </label>
+          </div>
+
+          <p class="qw-error" id="qw-l-booking-error" hidden></p>
+          <div class="qw-step-actions">
+            <button type="button" class="btn btn-outline-dark qw-back" data-back="l-quote">Back</button>
+            <button type="button" class="btn btn-primary qw-to-contact" data-next="l-contact" data-flow="lwnr">Continue</button>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- LWNR: contact + submit                                          -->
+        <!-- ============================================================== -->
+        <section class="qw-step" data-step="l-contact" hidden>
+          <p class="qw-step-num">Locking wheel nut &middot; Your details</p>
+          <h2>Last bit &mdash; where are we coming to?</h2>
+          <p class="qw-step-help">Pop in the rest of your details and we&rsquo;ll ring you back to confirm. We send everything you&rsquo;ve told us above so you don&rsquo;t have to repeat yourself.</p>
+
+          <form
+            class="qw-form qw-form--contact"
+            id="qw-l-form"
+            name="quote-lwnr"
+            method="POST"
+            action="/thank-you/"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            netlify
+          >
+            <input type="hidden" name="form-name" value="quote-lwnr" />
+            <p class="honeypot-field">
+              <label>Do not fill this out if you are human <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+            </p>
+
+            <input type="hidden" name="service" value="Locking wheel nut removal" />
+            <input type="hidden" name="postcode" id="qw-l-cb-postcode" />
+            <input type="hidden" name="distance_miles" id="qw-l-cb-miles" />
+            <input type="hidden" name="lockers" id="qw-l-cb-lockers" />
+            <input type="hidden" name="quoted_price" id="qw-l-cb-price" />
+            <input type="hidden" name="quoted_breakdown" id="qw-l-cb-breakdown" />
+            <input type="hidden" name="booking_slots" id="qw-l-cb-slots" />
+            <input type="hidden" name="same_day_requested" id="qw-l-cb-sameday" value="no" />
+
+            <div class="qw-fields">
+              <div class="field"><label for="qw-l-name">Your name</label><input id="qw-l-name" name="name" type="text" required autocomplete="name" /></div>
+              <div class="field"><label for="qw-l-phone">Phone number</label><input id="qw-l-phone" name="phone" type="tel" required autocomplete="tel" /></div>
+              <div class="field"><label for="qw-l-email">Email</label><input id="qw-l-email" name="email" type="email" required autocomplete="email" /></div>
+              <div class="field"><label for="qw-l-reg">Vehicle registration</label><input id="qw-l-reg" name="registration" type="text" required autocomplete="off" placeholder="e.g. AB12 CDE" /></div>
+              <div class="field field-full"><label for="qw-l-address">Full address where the car is</label><textarea id="qw-l-address" name="address" rows="3" required></textarea></div>
+              <div class="field field-full"><label for="qw-l-notes">Anything else we should know? (optional)</label><textarea id="qw-l-notes" name="notes" rows="3"></textarea></div>
+            </div>
+
+            <div class="qw-step-actions">
+              <button type="button" class="btn btn-outline-dark qw-back" data-back="l-booking">Back</button>
+              <button type="submit" class="btn btn-primary">
+                <span class="btn-label">Send my booking request</span>
+                <span class="btn-sending" aria-hidden="true" style="display:none">Sending&hellip;</span>
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- LWNR: out of area                                               -->
+        <!-- ============================================================== -->
+        <section class="qw-step" data-step="l-out-of-area" hidden>
+          <p class="qw-step-num qw-step-num--neutral">Outside our zone</p>
+          <h2>You&rsquo;re a bit far &mdash; but leave your details</h2>
+          <p class="qw-step-help">Locker jobs further out are doable but the price changes a fair bit with the travel. Pop your details in and Dean will ring back to tell you if it&rsquo;s something we can take on and what it&rsquo;d cost.</p>
+
+          <form
+            class="qw-form qw-form--contact"
+            id="qw-l-ooa-form"
+            name="quote-out-of-area"
+            method="POST"
+            action="/thank-you/"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            netlify
+          >
+            <input type="hidden" name="form-name" value="quote-out-of-area" />
+            <p class="honeypot-field">
+              <label>Do not fill this out if you are human <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+            </p>
+
+            <input type="hidden" name="service" value="Locking wheel nut removal (out of area)" />
+            <input type="hidden" name="postcode" id="qw-l-ooa-postcode" />
+            <input type="hidden" name="distance_miles" id="qw-l-ooa-miles" />
+
+            <div class="qw-fields">
+              <div class="field"><label for="qw-l-ooa-name">Your name</label><input id="qw-l-ooa-name" name="name" type="text" required autocomplete="name" /></div>
+              <div class="field"><label for="qw-l-ooa-phone">Phone number</label><input id="qw-l-ooa-phone" name="phone" type="tel" required autocomplete="tel" /></div>
+              <div class="field"><label for="qw-l-ooa-email">Email</label><input id="qw-l-ooa-email" name="email" type="email" required autocomplete="email" /></div>
+              <div class="field"><label for="qw-l-ooa-reg">Vehicle registration</label><input id="qw-l-ooa-reg" name="registration" type="text" required autocomplete="off" placeholder="e.g. AB12 CDE" /></div>
+              <div class="field field-full"><label for="qw-l-ooa-notes">A bit about what&rsquo;s happening with the locker</label><textarea id="qw-l-ooa-notes" name="notes" rows="3" required></textarea></div>
+            </div>
+
+            <div class="qw-step-actions">
+              <button type="button" class="btn btn-outline-dark qw-back-to-start">Back</button>
+              <button type="submit" class="btn btn-primary">
+                <span class="btn-label">Send my details</span>
+                <span class="btn-sending" aria-hidden="true" style="display:none">Sending&hellip;</span>
+              </button>
+            </div>
+          </form>
+        </section>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script
+  is:inline
+  define:vars={{
+    phone,
+    telHref,
+    origin,
+    pricing,
+    blockedDates,
+    bookingDaysAhead,
+    bookingSiteBase,
+    bookingSiteClient,
+  }}
+>
+  (function () {
+    var POSTCODE_RE = /^([A-Z]{1,2}\d{1,2}[A-Z]?)\s*(\d[A-Z]{2})$/i;
+    var OUTCODE_RE  = /^([A-Z]{1,2}\d{1,2}[A-Z]?)$/i;
+
+    var wiz = document.getElementById('qw-wizard');
+    if (!wiz) return;
+
+    var state = {
+      service: '',
+      postcode: '',
+      miles: 0,
+      vrm: '',
+      lockers: '',
+      total: 0,
+      breakdown: [],
+      slots: [],   // ['YYYY-MM-DD|AM', ...] max 2
+      sameDay: false,
+    };
+
+    function $(id) { return document.getElementById(id); }
+    function $$(sel, root) { return Array.prototype.slice.call((root || wiz).querySelectorAll(sel)); }
+
+    // ---- Step navigation -------------------------------------------------
+    var progressBar = $('qw-progress-bar');
+    var progressMap = {
+      'service-select': 5,
+      'e-form': 50,
+      'mf-vrm': 50,
+      'caravan-redirect': 50,
+      'p-postcode': 25,
+      'p-quote': 60,
+      'p-booking': 85,
+      'p-contact': 95,
+      'l-postcode': 20,
+      'l-lockers': 40,
+      'l-quote': 65,
+      'l-booking': 85,
+      'l-contact': 95,
+    };
+
+    function show(stepName) {
+      $$('.qw-step').forEach(function (el) {
+        var match = el.getAttribute('data-step') === stepName;
+        el.hidden = !match;
+        el.classList.toggle('is-active', match);
+      });
+      var pct = progressMap[stepName];
+      if (pct == null) pct = 100;
+      if (progressBar) progressBar.style.width = pct + '%';
+
+      // Move focus to first input/button on the active step.
+      var active = wiz.querySelector('.qw-step.is-active');
+      if (active) {
+        var first = active.querySelector('input, button[type="submit"], a.btn');
+        if (first) try { first.focus({ preventScroll: true }); } catch (e) {}
+      }
+
+      // Scroll the wizard top into view if user is well below it.
+      var rect = wiz.getBoundingClientRect();
+      if (rect.top < -20) {
+        wiz.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function showError(id, msg) {
+      var el = $(id);
+      if (!el) return;
+      if (msg) { el.textContent = msg; el.hidden = false; }
+      else { el.textContent = ''; el.hidden = true; }
+    }
+
+    // ---- Distance helper -------------------------------------------------
+    function milesBetween(lat1, lon1, lat2, lon2) {
+      var R = 3958.8;
+      var toRad = function (d) { return d * Math.PI / 180; };
+      var dLat = toRad(lat2 - lat1);
+      var dLon = toRad(lon2 - lon1);
+      var a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+            + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2))
+              * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    async function lookupPostcode(raw, errorElId, submitBtn) {
+      showError(errorElId);
+      raw = (raw || '').trim().toUpperCase().replace(/\s+/g, ' ');
+      if (!raw) { showError(errorElId, 'Please enter your postcode.'); return null; }
+      var m = raw.match(POSTCODE_RE);
+      if (!m) {
+        if (OUTCODE_RE.test(raw)) {
+          showError(errorElId, 'We need the full postcode (e.g. NG18 1AA), not just the first part.');
+        } else {
+          showError(errorElId, 'That doesn’t look like a UK postcode. Try something like NG18 1AA.');
+        }
+        return null;
+      }
+      var pretty = (m[1] + ' ' + m[2]).toUpperCase();
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Checking…'; }
+      try {
+        var res = await fetch('https://api.postcodes.io/postcodes/' + encodeURIComponent(pretty));
+        if (res.status === 404) { showError(errorElId, 'We couldn’t find that postcode — double-check the spelling.'); return null; }
+        if (!res.ok) { showError(errorElId, 'Couldn’t check your postcode just now. Try again, or ring us on ' + phone + '.'); return null; }
+        var data = await res.json();
+        var r = data && data.result;
+        if (!r || typeof r.latitude !== 'number') { showError(errorElId, 'We couldn’t find that postcode — double-check the spelling.'); return null; }
+        return { postcode: r.postcode || pretty, miles: milesBetween(origin.lat, origin.lon, r.latitude, r.longitude) };
+      } catch (err) {
+        showError(errorElId, 'Couldn’t check your postcode just now. Try again, or ring us on ' + phone + '.');
+        return null;
+      } finally {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Next'; }
+      }
+    }
+
+    // ---- Service select --------------------------------------------------
+    $$('.qw-service').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var svc = btn.getAttribute('data-service');
+        startService(svc);
+      });
+    });
+
+    function startService(svc) {
+      state.service = svc;
+      if (svc === 'emergency') return show('e-form');
+      if (svc === 'mobile-fitting') return show('mf-vrm');
+      if (svc === 'caravan') return show('caravan-redirect');
+      if (svc === 'puncture') return show('p-postcode');
+      if (svc === 'lwnr') return show('l-postcode');
+    }
+
+    // Honour ?service= deep-link, but only after the page has settled.
+    (function applyDeepLink() {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var svc = params.get('service');
+        var valid = ['emergency','mobile-fitting','caravan','puncture','lwnr'];
+        if (svc && valid.indexOf(svc) !== -1) startService(svc);
+      } catch (e) {}
+    })();
+
+    // ---- Back / start-again ---------------------------------------------
+    $$('.qw-back').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var to = btn.getAttribute('data-back');
+        if (to) show(to);
+      });
+    });
+
+    $$('.qw-back-to-start').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        resetState();
+        show('service-select');
+      });
+    });
+
+    function resetState() {
+      state = { service: '', postcode: '', miles: 0, vrm: '', lockers: '', total: 0, breakdown: [], slots: [], sameDay: false };
+      $$('input[type="text"], input[type="tel"], input[type="email"], textarea').forEach(function (i) { i.value = ''; });
+      $$('input[type="radio"], input[type="checkbox"]').forEach(function (i) { i.checked = false; });
+      $$('.qw-slot-btn.is-selected').forEach(function (b) { b.classList.remove('is-selected'); });
+    }
+
+    // ---- Mobile fitting: redirect with VRM ------------------------------
+    var mfForm = $('qw-mf-form');
+    if (mfForm) {
+      mfForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var v = ($('qw-mf-vrm').value || '').trim().toUpperCase().replace(/\s+/g, '');
+        if (v.length < 2) {
+          showError('qw-mf-error', 'Pop your reg in so the booking site knows what tyres to show.');
+          return;
+        }
+        showError('qw-mf-error');
+        var url = bookingSiteBase + '?clientID=' + encodeURIComponent(bookingSiteClient) + '&vrm=' + encodeURIComponent(v);
+        window.location.href = url;
+      });
+    }
+
+    // ---- Puncture: postcode ---------------------------------------------
+    var pPcForm = $('qw-p-postcode-form');
+    if (pPcForm) {
+      pPcForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var raw = $('qw-p-postcode').value;
+        var result = await lookupPostcode(raw, 'qw-p-postcode-error', $('qw-p-postcode-submit'));
+        if (!result) return;
+        state.postcode = result.postcode;
+        state.miles = result.miles;
+        if (state.miles > pricing.puncture.maxMiles) {
+          var pcEl = $('qw-p-ooa-postcode');
+          var mEl = $('qw-p-ooa-miles');
+          if (pcEl) pcEl.value = state.postcode;
+          if (mEl) mEl.value = state.miles.toFixed(2);
+          show('p-out-of-area');
+          return;
+        }
+        buildPunctureQuote();
+        show('p-quote');
+      });
+    }
+
+    // ---- Puncture: build quote -----------------------------------------
+    function calloutFor(miles, tiers) {
+      for (var i = 0; i < tiers.length; i++) {
+        if (miles <= tiers[i].maxMiles) return tiers[i];
+      }
+      return tiers[tiers.length - 1];
+    }
+
+    function fmt(n) {
+      return '£' + (Math.round(n * 100) / 100).toFixed(2).replace(/\.00$/, '');
+    }
+
+    function buildPunctureQuote() {
+      var repair = pricing.puncture.repair;
+      var co = calloutFor(state.miles, pricing.puncture.callout);
+      state.total = repair + co.amount;
+      state.breakdown = [
+        { label: 'Puncture repair', amount: repair },
+        { label: 'Callout (' + state.miles.toFixed(1) + ' miles)', amount: co.amount },
+      ];
+      renderBreakdown('qw-p-breakdown', state.breakdown);
+      var totalEl = $('qw-p-total');
+      if (totalEl) totalEl.textContent = fmt(state.total);
+      // Show the actual callout amount in the caveat + acknowledgment.
+      var caveatEl = $('qw-p-callout-caveat');
+      if (caveatEl) caveatEl.textContent = fmt(co.amount) + ' callout fee';
+      var ackEl = $('qw-p-callout-ack');
+      if (ackEl) ackEl.textContent = fmt(co.amount) + ' callout fee';
+    }
+
+    function renderBreakdown(id, lines) {
+      var el = $(id);
+      if (!el) return;
+      el.innerHTML = lines.map(function (l) {
+        return '<li><span>' + l.label + '</span><span class="qw-quote-amount">' + fmt(l.amount) + '</span></li>';
+      }).join('');
+    }
+
+    // ---- LWNR: postcode -------------------------------------------------
+    var lPcForm = $('qw-l-postcode-form');
+    if (lPcForm) {
+      lPcForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var raw = $('qw-l-postcode').value;
+        var result = await lookupPostcode(raw, 'qw-l-postcode-error', $('qw-l-postcode-submit'));
+        if (!result) return;
+        state.postcode = result.postcode;
+        state.miles = result.miles;
+        if (state.miles > pricing.lwnr.maxMiles) {
+          var pcEl = $('qw-l-ooa-postcode');
+          var mEl = $('qw-l-ooa-miles');
+          if (pcEl) pcEl.value = state.postcode;
+          if (mEl) mEl.value = state.miles.toFixed(2);
+          show('l-out-of-area');
+          return;
+        }
+        show('l-lockers');
+      });
+    }
+
+    // ---- LWNR: lockers + quote -----------------------------------------
+    var lLockersForm = $('qw-l-lockers-form');
+    if (lLockersForm) {
+      lLockersForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var checked = lLockersForm.querySelector('input[name="lockers"]:checked');
+        if (!checked) return;
+        state.lockers = checked.value;
+        buildLwnrQuote();
+        show('l-quote');
+      });
+    }
+
+    function buildLwnrQuote() {
+      var n = parseInt(state.lockers, 10) || 0;
+      var perLocker = pricing.lwnr.perLocker;
+      var lockerCost = n * perLocker;
+      var co = calloutFor(state.miles, pricing.lwnr.callout);
+      state.total = lockerCost + co.amount;
+      state.breakdown = [
+        { label: n + ' ' + (n === 1 ? 'locker' : 'lockers') + ' removed', amount: lockerCost },
+        { label: 'Callout (' + state.miles.toFixed(1) + ' miles)', amount: co.amount },
+      ];
+      renderBreakdown('qw-l-breakdown', state.breakdown);
+      var totalEl = $('qw-l-total');
+      if (totalEl) totalEl.textContent = fmt(state.total);
+    }
+
+    // ---- Booking step: build slot list & wire same-day -----------------
+    function isoDate(d) {
+      var y = d.getFullYear();
+      var m = String(d.getMonth() + 1).padStart(2, '0');
+      var day = String(d.getDate()).padStart(2, '0');
+      return y + '-' + m + '-' + day;
+    }
+    function dayLabel(d) {
+      var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return days[d.getDay()] + ' ' + d.getDate() + ' ' + months[d.getMonth()];
+    }
+
+    function nextWeekdays(n, blocked) {
+      var out = [];
+      var d = new Date();
+      d.setHours(0, 0, 0, 0);
+      // Start from tomorrow; weekend bookings aren't offered.
+      while (out.length < n) {
+        d.setDate(d.getDate() + 1);
+        var dow = d.getDay();
+        if (dow === 0 || dow === 6) continue;
+        var iso = isoDate(d);
+        if (blocked.indexOf(iso) !== -1) continue;
+        out.push({ iso: iso, label: dayLabel(d) });
+      }
+      return out;
+    }
+
+    function renderSlots(containerId, prefix) {
+      var c = $(containerId);
+      if (!c) return;
+      var days = nextWeekdays(bookingDaysAhead, blockedDates);
+      var rows = days.map(function (day) {
+        return ''
+          + '<div class="qw-slot-row">'
+          +   '<span class="qw-slot-date">' + day.label + '</span>'
+          +   '<button type="button" class="qw-slot-btn" data-slot="' + day.iso + '|AM">AM</button>'
+          +   '<button type="button" class="qw-slot-btn" data-slot="' + day.iso + '|PM">PM</button>'
+          + '</div>';
+      });
+      c.innerHTML = rows.join('');
+
+      $$('.qw-slot-btn', c).forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var slot = btn.getAttribute('data-slot');
+          var sameDayBox = $(prefix + '-sameday');
+          if (btn.classList.contains('is-selected')) {
+            btn.classList.remove('is-selected');
+            state.slots = state.slots.filter(function (s) { return s !== slot; });
+          } else {
+            if (state.slots.length >= 2) {
+              // Drop the oldest selection to make room.
+              var oldest = state.slots.shift();
+              var oldBtn = c.querySelector('.qw-slot-btn[data-slot="' + oldest + '"]');
+              if (oldBtn) oldBtn.classList.remove('is-selected');
+            }
+            btn.classList.add('is-selected');
+            state.slots.push(slot);
+            if (sameDayBox && sameDayBox.checked) {
+              sameDayBox.checked = false;
+              state.sameDay = false;
+            }
+          }
+        });
+      });
+    }
+
+    function isBlockedToday() {
+      var today = isoDate(new Date());
+      return blockedDates.indexOf(today) !== -1;
+    }
+
+    function setupSameDay(prefix, wrapId) {
+      var wrap = $(wrapId);
+      var box = $(prefix + '-sameday');
+      if (!wrap || !box) return;
+      if (isBlockedToday()) {
+        wrap.hidden = true;
+        return;
+      }
+      box.addEventListener('change', function () {
+        state.sameDay = box.checked;
+        if (box.checked) {
+          // Clear scheduled slots if user opts for same-day.
+          state.slots = [];
+          $$('.qw-slot-btn.is-selected').forEach(function (b) { b.classList.remove('is-selected'); });
+        }
+      });
+    }
+
+    renderSlots('qw-p-slots', 'qw-p');
+    renderSlots('qw-l-slots', 'qw-l');
+    setupSameDay('qw-p', 'qw-p-sameday-wrap');
+    setupSameDay('qw-l', 'qw-l-sameday-wrap');
+
+    // ---- Quote → booking transition -------------------------------------
+    $$('.qw-to-booking').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var next = btn.getAttribute('data-next');
+        var flow = btn.getAttribute('data-flow');
+        if (flow === 'puncture') {
+          var ack = $('qw-p-ack');
+          if (!ack || !ack.checked) {
+            showError('qw-p-ack-error', 'Please tick the box to confirm you understand the callout terms.');
+            return;
+          }
+          showError('qw-p-ack-error');
+        }
+        if (next) show(next);
+      });
+    });
+
+    // ---- Booking → contact transition -----------------------------------
+    $$('.qw-to-contact').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var flow = btn.getAttribute('data-flow');
+        var next = btn.getAttribute('data-next');
+        var errId = flow === 'puncture' ? 'qw-p-booking-error' : 'qw-l-booking-error';
+        if (!state.sameDay && state.slots.length < 2) {
+          showError(errId, 'Pick two time windows, or tick "I need this today".');
+          return;
+        }
+        showError(errId);
+        // Populate hidden fields for the contact form.
+        if (flow === 'puncture') {
+          $('qw-p-cb-postcode').value = state.postcode;
+          $('qw-p-cb-miles').value = state.miles.toFixed(2);
+          $('qw-p-cb-price').value = fmt(state.total);
+          $('qw-p-cb-breakdown').value = state.breakdown.map(function (l) { return l.label + ': ' + fmt(l.amount); }).join(' | ');
+          $('qw-p-cb-slots').value = state.slots.join(', ');
+          $('qw-p-cb-sameday').value = state.sameDay ? 'yes' : 'no';
+        } else {
+          $('qw-l-cb-postcode').value = state.postcode;
+          $('qw-l-cb-miles').value = state.miles.toFixed(2);
+          $('qw-l-cb-lockers').value = state.lockers;
+          $('qw-l-cb-price').value = fmt(state.total);
+          $('qw-l-cb-breakdown').value = state.breakdown.map(function (l) { return l.label + ': ' + fmt(l.amount); }).join(' | ');
+          $('qw-l-cb-slots').value = state.slots.join(', ');
+          $('qw-l-cb-sameday').value = state.sameDay ? 'yes' : 'no';
+        }
+        show(next);
+      });
+    });
+
+    // ---- Form submissions (Netlify, fetch-based) ------------------------
+    function wireForm(formId) {
+      var form = $(formId);
+      if (!form) return;
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var btn = form.querySelector('button[type="submit"]');
+        var label = btn ? btn.querySelector('.btn-label') : null;
+        var sending = btn ? btn.querySelector('.btn-sending') : null;
+        if (btn) btn.disabled = true;
+        if (label) label.style.display = 'none';
+        if (sending) sending.style.display = '';
+        try {
+          await fetch('/quote/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(new FormData(form)).toString(),
+          });
+          window.location.href = '/thank-you/';
+        } catch (err) {
+          if (btn) btn.disabled = false;
+          if (label) label.style.display = '';
+          if (sending) sending.style.display = 'none';
+          alert('Something went wrong sending that. Please ring us on ' + phone + ' or try again.');
+        }
+      });
+    }
+    wireForm('qw-p-form');
+    wireForm('qw-l-form');
+    wireForm('qw-p-ooa-form');
+    wireForm('qw-l-ooa-form');
+    wireForm('qw-e-form');
+
+    // ---- Emergency: share-my-location button ----------------------------
+    var locateBtn = $('qw-e-locate');
+    var locateStatus = $('qw-e-locate-status');
+    if (locateBtn && locateStatus && 'geolocation' in navigator) {
+      locateBtn.addEventListener('click', function () {
+        locateBtn.disabled = true;
+        locateStatus.textContent = 'Locating…';
+        locateStatus.className = 'qw-e-locate-status';
+        navigator.geolocation.getCurrentPosition(async function (pos) {
+          var lat = pos.coords.latitude;
+          var lon = pos.coords.longitude;
+          var latEl = $('qw-e-lat');
+          var lonEl = $('qw-e-lon');
+          if (latEl) latEl.value = lat.toFixed(6);
+          if (lonEl) lonEl.value = lon.toFixed(6);
+          // Reverse-geocode for a postcode label; fall back to lat,lon.
+          try {
+            var res = await fetch('https://api.postcodes.io/postcodes?lon=' + lon + '&lat=' + lat);
+            if (res.ok) {
+              var data = await res.json();
+              var first = data && data.result && data.result[0];
+              if (first && first.postcode) {
+                $('qw-e-postcode').value = first.postcode;
+                locateStatus.textContent = 'Got it — nearest postcode ' + first.postcode + '.';
+                locateBtn.disabled = false;
+                return;
+              }
+            }
+          } catch (e) {}
+          // No nearby postcode (or lookup failed) — put the coords in.
+          $('qw-e-postcode').value = lat.toFixed(5) + ', ' + lon.toFixed(5);
+          locateStatus.textContent = 'Got your coordinates. We&rsquo;ll work out the address from these.';
+          locateBtn.disabled = false;
+        }, function (err) {
+          locateBtn.disabled = false;
+          locateStatus.className = 'qw-e-locate-status qw-e-locate-status--err';
+          if (err && err.code === 1) {
+            locateStatus.textContent = 'Location permission was blocked — pop your postcode in instead.';
+          } else {
+            locateStatus.textContent = 'Couldn’t get your location — pop your postcode in instead.';
+          }
+        }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 30000 });
+      });
+    } else if (locateBtn) {
+      // No geolocation in this browser — hide the button entirely.
+      locateBtn.style.display = 'none';
+    }
+  })();
+</script>
+
+<style is:global>
+  .quote-page {
+    min-height: 70vh;
+  }
+  .quote-header {
+    margin-bottom: 2rem;
+  }
+  .quote-lede {
+    max-width: 60ch;
+    margin: 0.5rem auto 0;
+  }
+
+  .qw-wizard {
+    max-width: 720px;
+    margin: 0 auto;
+    background-color: var(--color-bg-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+    padding: 2rem 1.75rem;
+    box-shadow: 0 18px 36px -22px rgba(0, 0, 0, 0.18);
+  }
+  @media (max-width: 600px) {
+    .qw-wizard { padding: 1.5rem 1.25rem; }
+  }
+
+  .qw-progress {
+    height: 4px;
+    background-color: var(--color-border-light);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .qw-progress-bar {
+    height: 100%;
+    background-color: var(--color-text-dark);
+    transition: width 220ms ease-out;
+  }
+
+  .qw-step[hidden] { display: none; }
+
+  .qw-step-num {
+    margin: 0 0 0.5rem;
+    color: var(--color-text-muted-dark);
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.78rem;
+  }
+  .qw-step-num--neutral { color: var(--color-accent-dark); }
+
+  .qw-step h2 {
+    color: var(--color-text-dark);
+    margin: 0 0 0.5rem;
+    font-size: clamp(1.3rem, 2.8vw, 1.65rem);
+  }
+
+  .qw-step-help {
+    color: var(--color-text-muted-dark);
+    margin: 0 0 1.25rem;
+    line-height: 1.6;
+    font-size: 0.97rem;
+  }
+
+  .qw-form { display: flex; flex-direction: column; gap: 0.85rem; }
+
+  .qw-input {
+    padding: 0.85rem 1rem;
+    background-color: var(--color-bg-white);
+    color: var(--color-text-dark);
+    border: 2px solid var(--color-text-dark);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    min-height: 52px;
+  }
+  .qw-input--reg {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+  .qw-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(255, 45, 45, 0.18);
+  }
+
+  .qw-error {
+    margin: 0.75rem 0 0;
+    color: var(--color-accent-dark);
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  /* Service grid */
+  .qw-service-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+  .qw-service {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-items: flex-start;
+    padding: 1rem 1.1rem;
+    background-color: var(--color-bg-white);
+    border: 1.5px solid var(--color-border-light);
+    border-radius: var(--radius);
+    transition: border-color var(--transition), background-color var(--transition), transform var(--transition);
+  }
+  .qw-service:hover,
+  .qw-service:focus-visible {
+    border-color: var(--color-text-dark);
+    transform: translateY(-1px);
+    outline: none;
+  }
+  .qw-service-title {
+    color: var(--color-text-dark);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+  }
+  .qw-service-sub {
+    color: var(--color-text-muted-dark);
+    margin-top: 0.25rem;
+    font-size: 0.92rem;
+    line-height: 1.4;
+  }
+
+  /* Radio / check choices */
+  .qw-form--choices, .qw-form--checks { gap: 0.6rem; }
+
+  .qw-choice, .qw-check {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.95rem 1.1rem;
+    background-color: var(--color-bg-white);
+    border: 1.5px solid var(--color-border-light);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: border-color var(--transition), background-color var(--transition);
+  }
+  .qw-choice:hover, .qw-check:hover { border-color: var(--color-text-dark); }
+  .qw-choice input, .qw-check input {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    accent-color: var(--color-accent);
+  }
+  .qw-choice input:checked + span,
+  .qw-check input:checked + span { font-weight: 700; }
+  .qw-choice:has(input:checked),
+  .qw-check:has(input:checked) {
+    border-color: var(--color-accent);
+    background-color: rgba(255, 45, 45, 0.05);
+  }
+  .qw-choice span, .qw-check span {
+    color: var(--color-text-dark);
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  .qw-check--none { margin-top: 0.3rem; }
+  .qw-check--ack {
+    background-color: var(--color-bg-light);
+    align-items: flex-start;
+  }
+  .qw-check--ack span { line-height: 1.45; }
+  .qw-check--sameday {
+    background-color: var(--color-bg-light);
+    border-style: dashed;
+  }
+  .qw-check--sameday strong { color: var(--color-text-dark); }
+
+  /* Step actions */
+  .qw-step-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  .qw-step-actions .btn { flex: 1 1 auto; min-width: 120px; }
+
+  /* Quote card */
+  .qw-quote-card {
+    background-color: var(--color-bg-light);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.4rem;
+    text-align: center;
+  }
+  .qw-quote-breakdown {
+    list-style: none;
+    margin: 0 auto 1rem;
+    padding: 0 0 1rem;
+    border-bottom: 1px solid var(--color-border-light);
+    text-align: left;
+    max-width: 440px;
+  }
+  .qw-quote-breakdown li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.4rem 0;
+    color: var(--color-text-muted-dark);
+    font-size: 0.95rem;
+  }
+  .qw-quote-amount {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--color-text-dark);
+    white-space: nowrap;
+  }
+  .qw-quote-total {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(2.4rem, 7vw, 3.4rem);
+    color: var(--color-text-dark);
+    margin: 0.4rem 0 0.85rem;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .qw-quote-caveat {
+    margin: 0;
+    color: var(--color-text-muted-dark);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    text-align: left;
+  }
+
+  /* Slots */
+  .qw-slots {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .qw-slot-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.4rem 0.75rem 0.4rem 1rem;
+    background-color: var(--color-bg-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+  }
+  .qw-slot-date {
+    color: var(--color-text-dark);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+  }
+  .qw-slot-btn {
+    padding: 0.5rem 0.95rem;
+    background-color: var(--color-bg-light);
+    border: 1.5px solid var(--color-border-light);
+    border-radius: var(--radius);
+    color: var(--color-text-dark);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background-color var(--transition), border-color var(--transition), color var(--transition);
+  }
+  .qw-slot-btn:hover { border-color: var(--color-text-dark); }
+  .qw-slot-btn.is-selected {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-text);
+  }
+
+  .qw-or {
+    text-align: center;
+    color: var(--color-text-muted-dark);
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    margin: 1rem 0 0.6rem;
+  }
+  .qw-sameday-wrap { margin-top: 0.5rem; }
+
+  /* Contact form fields */
+  .qw-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .qw-fields .field { display: flex; flex-direction: column; }
+  .qw-fields .field label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-dark);
+    margin-bottom: 0.4rem;
+  }
+  .qw-fields .field input,
+  .qw-fields .field select,
+  .qw-fields .field textarea {
+    padding: 0.85rem 0.95rem;
+    background-color: var(--color-bg-white);
+    color: var(--color-text-dark);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-family: var(--font-body);
+    width: 100%;
+    min-height: 52px;
+  }
+  .qw-fields .field select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231a1a1d' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.95rem center;
+    background-size: 12px 8px;
+    padding-right: 2.4rem;
+  }
+  .qw-fields .field textarea {
+    resize: vertical;
+    min-height: 90px;
+  }
+  .qw-fields .field input:focus,
+  .qw-fields .field select:focus,
+  .qw-fields .field textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(255, 45, 45, 0.18);
+  }
+  .qw-fields .field-full { grid-column: 1 / -1; }
+  @media (max-width: 600px) {
+    .qw-fields { grid-template-columns: 1fr; gap: 0.85rem; }
+  }
+
+  /* CTA row for exit screens */
+  .qw-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .qw-cta-row .btn { flex: 1 1 auto; }
+
+  .qw-step--exit p {
+    color: var(--color-text-muted-dark);
+    line-height: 1.65;
+  }
+
+  /* Puncture quote: acknowledgment + reasons disclosure */
+  .qw-ack { margin: 1.25rem 0 0.5rem; }
+  .qw-ack-reasons {
+    margin-top: 0.75rem;
+    background-color: var(--color-bg-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+    padding: 0.4rem 1rem;
+  }
+  .qw-ack-reasons summary {
+    cursor: pointer;
+    padding: 0.5rem 0;
+    color: var(--color-text-dark);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.92rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    list-style: none;
+  }
+  .qw-ack-reasons summary::-webkit-details-marker { display: none; }
+  .qw-ack-reasons summary::before {
+    content: '+';
+    display: inline-block;
+    width: 1.1rem;
+    color: var(--color-accent-dark);
+    font-weight: 900;
+  }
+  .qw-ack-reasons[open] summary::before { content: '−'; }
+  .qw-ack-reasons ul {
+    margin: 0.25rem 0 0.75rem 1.25rem;
+    padding: 0;
+    color: var(--color-text-muted-dark);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .qw-ack-reasons p {
+    margin: 0 0 0.6rem;
+    color: var(--color-text-muted-dark);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* Emergency step: locate button */
+  .qw-e-locate-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.85rem;
+    margin-top: 0.55rem;
+  }
+  .qw-e-locate-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0;
+    background: none;
+    border: 0;
+    color: var(--color-accent-dark);
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  .qw-e-locate-btn:hover { color: var(--color-text-dark); }
+  .qw-e-locate-btn:disabled { opacity: 0.6; cursor: wait; }
+  .qw-e-locate-status {
+    color: var(--color-text-muted-dark);
+    font-size: 0.9rem;
+  }
+  .qw-e-locate-status--err {
+    color: var(--color-accent-dark);
+  }
+</style>
