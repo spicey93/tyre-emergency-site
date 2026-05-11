@@ -208,14 +208,6 @@ const jsonLd = {
     </div>
   </section>
 
-  <!-- STICKY MOBILE CALL BAR -->
-  <a class="lp-sticky-call" href={telHref} data-call="sticky">
-    <span class="lp-call-icon" aria-hidden="true">&#9742;</span>
-    <span class="lp-call-stack">
-      <small>Call us</small>
-      <strong>{phone}</strong>
-    </span>
-  </a>
 </LandingLayout>
 
 <style>
@@ -314,10 +306,10 @@ const jsonLd = {
     z-index: -1;
     background: linear-gradient(
       100deg,
-      rgba(26, 26, 29, 0.96) 0%,
-      rgba(26, 26, 29, 0.9) 30%,
-      rgba(26, 26, 29, 0.62) 60%,
-      rgba(26, 26, 29, 0.25) 90%
+      rgba(26, 26, 29, 0.97) 0%,
+      rgba(26, 26, 29, 0.92) 30%,
+      rgba(26, 26, 29, 0.78) 60%,
+      rgba(26, 26, 29, 0.5) 90%
     );
   }
 
@@ -702,41 +694,4 @@ const jsonLd = {
     opacity: 0.7;
   }
 
-  /* ============================================================
-     Sticky mobile call bar
-     ============================================================ */
-  .lp-sticky-call {
-    display: none;
-    position: fixed;
-    left: 0.75rem;
-    right: 0.75rem;
-    bottom: 0.75rem;
-    z-index: 80;
-    align-items: center;
-    justify-content: center;
-    gap: 0.85rem;
-    padding: 0.95rem 1.1rem;
-    background-color: var(--color-accent);
-    color: var(--color-text);
-    border-radius: var(--radius);
-    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.45), 0 12px 26px -10px rgba(255, 45, 45, 0.6);
-    text-decoration: none;
-    min-height: 60px;
-  }
-
-  .lp-sticky-call:hover,
-  .lp-sticky-call:focus-visible {
-    background-color: var(--color-accent-dark);
-    color: var(--color-text);
-  }
-
-  @media (max-width: 768px) {
-    .lp-sticky-call {
-      display: inline-flex;
-    }
-    /* Make sure final CTA is not hidden behind sticky bar */
-    .lp-cta {
-      padding-bottom: 6.5rem;
-    }
-  }
 </style>

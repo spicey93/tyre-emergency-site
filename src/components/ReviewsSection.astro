@@ -42,11 +42,10 @@ const sectionClass = variant === 'light' ? 'section section-light' : 'section se
       style={`--slide-count: ${reviews.length};`}
     >
       <div class="reviews-carousel-viewport">
-        <ul class="reviews-carousel-track" role="list">
+        <ul class="reviews-carousel-track">
           {reviews.map((r, i) => (
             <li
               class="reviews-carousel-slide"
-              role="group"
               aria-roledescription="slide"
               aria-label={`${i + 1} of ${reviews.length}`}
               aria-hidden={i === 0 ? 'false' : 'true'}
@@ -66,7 +65,7 @@ const sectionClass = variant === 'light' ? 'section section-light' : 'section se
         >
           <span aria-hidden="true">&#8249;</span>
         </button>
-        <ol class="reviews-carousel-dots" role="tablist" aria-label="Review navigation">
+        <ol class="reviews-carousel-dots" aria-label="Review navigation">
           {reviews.map((_, i) => (
             <li>
               <button
