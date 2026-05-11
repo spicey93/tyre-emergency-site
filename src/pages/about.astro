@@ -7,7 +7,7 @@ const telHref = `tel:${phone.replace(/\s+/g, '')}`;
 
 <BaseLayout
   title="About Tyre Emergency Ltd | Dean Spicer, REACT Licensed Mobile Tyre Fitter"
-  description="Tyre Emergency Ltd is a sole-operator mobile tyre service run by Dean Spicer from Bilsthorpe, Nottinghamshire. REACT licensed, in the tyre trade since his teens, and doing every job himself."
+  description="Run by Dean Spicer — two generations in the tyre trade, over a decade full-time, REACT licensed and built around fast-response mobile tyre fitting from Bilsthorpe, Nottinghamshire."
 >
   <section class="page-hero">
     <div class="container">
@@ -18,12 +18,51 @@ const telHref = `tel:${phone.replace(/\s+/g, '')}`;
   </section>
 
   <section class="section section-white">
+    <div class="container">
+      <div class="service-split">
+        <div class="service-split-image">
+          <img
+            src="/images/dean-tyre-fitter.webp"
+            alt="Dean Spicer working at the tyre changer inside his service van"
+            width="933"
+            height="700"
+            loading="lazy"
+          />
+        </div>
+        <div class="service-split-content">
+          <span class="eyebrow">The Story</span>
+          <h2>Two generations in the tyre trade</h2>
+          <p>Dean&rsquo;s been around tyres his whole life. His dad set up the UK&rsquo;s first mobile tyre service in August 1990, and Dean was on the van at weekends from his teens &mdash; learning the job hands-on from someone who&rsquo;d been doing it longer than most fitters had been alive.</p>
+          <p>Full-time in the trade from age twenty, starting at Protyre, then through independent garages and another national chain. Tyre fitter, mechanic, assistant manager, manager, operations manager &mdash; every role going. When his dad bought Freeway Tyres in 2017 and merged the original mobile business into it, Dean spent the next few years helping build it from a father-and-son setup into a seven-van fleet covering Dorset.</p>
+          <p>Moving up North to buy a house and start a family meant a clean start. Tyre Emergency Ltd was set up in December 2023 to focus on one thing properly: fast-response roadside tyre work. Plenty of companies offer book-in-advance fitting &mdash; we do that too &mdash; but the focus is the roadside, because modern cars rarely come with a spare any more, the roads keep getting worse, and what used to be an inconvenience is now a proper crisis.</p>
+          <p>Dean&rsquo;s thirty-three now, with over a decade of full-time experience on top of the early years on the van. Quick &mdash; one of the quickest in the area &mdash; and the operation is set up for it: hundreds of tyres in stock at the unit, the right one grabbed before he leaves. When you&rsquo;re stood at the roadside in the rain, the last thing you want is someone who&rsquo;s still learning. You won&rsquo;t get that here.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark video-section">
     <div class="container container-narrow">
-      <span class="eyebrow">The Story</span>
-      <h2>In the tyre trade since his teens</h2>
-      <p>Dean has been in the tyre game since he was a teenager &mdash; starting on the shop floor at a national chain, working through independent garages, spending time in management and ending up back on the tools because that&rsquo;s the bit he enjoys most. Tyres are what he knows best and it&rsquo;s what he keeps coming back to.</p>
-      <p>Tyre Emergency Ltd was set up in December 2023 to do it his way: an exact price on the phone before he goes anywhere, a realistic ETA he actually sticks to, and a phone answered round the clock by the same person who&rsquo;ll be turning up at your door. Because it&rsquo;s a one-man operation, you get the same experienced fitter whether you ring at noon or midnight. No rota, no agency cover, no &ldquo;we&rsquo;ll get someone out to you eventually&rdquo;.</p>
-      <p>The work covers cars, vans, SUVs, caravans, motorhomes and trailers, and there are over 450 five-star reviews on the back of it &mdash; every one earned by turning up when promised, doing the job right and being straight about what it costs.</p>
+      <span class="eyebrow">Watch us work</span>
+      <h2>Dean on the tools</h2>
+      <p>A clip from his time at Freeway Mobile Tyres in Dorset &mdash; same fitter, same standards, before the move up North.</p>
+      <button
+        type="button"
+        class="yt-facade"
+        data-yt-id="czX__fA_3zY"
+        aria-label="Play video of Dean fitting a tyre"
+      >
+        <img
+          src="https://i.ytimg.com/vi/czX__fA_3zY/maxresdefault.jpg"
+          alt=""
+          width="1280"
+          height="720"
+          loading="lazy"
+        />
+        <span class="yt-facade-play" aria-hidden="true">
+          <svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#f00"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+        </span>
+      </button>
     </div>
   </section>
 
@@ -89,10 +128,23 @@ const telHref = `tel:${phone.replace(/\s+/g, '')}`;
     color: var(--color-text-dark);
   }
 
+  /* Body paragraphs across the page: looser, slightly larger,
+     line-length capped for comfortable reading. */
+  .section .container-narrow p,
+  .service-split-content p {
+    font-size: 1.08rem;
+    line-height: 1.78;
+    margin-bottom: 1.1rem;
+  }
+  .section .container-narrow p {
+    max-width: 62ch;
+  }
+
   .page-hero-sub {
     color: var(--color-text-muted-dark);
     max-width: 60ch;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+    line-height: 1.7;
   }
 
   .values-grid {
@@ -122,4 +174,97 @@ const telHref = `tel:${phone.replace(/\s+/g, '')}`;
     margin-top: 1.5rem;
     justify-content: flex-start;
   }
+
+  /* YouTube facade: thumbnail + play button, replaced with iframe on click */
+  .video-section h2,
+  .video-section p {
+    text-align: center;
+  }
+  .video-section p {
+    color: var(--color-text-muted);
+    max-width: 60ch;
+    margin: 0 auto 1.5rem;
+  }
+  .video-section .eyebrow {
+    display: block;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .yt-facade {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    background: #000;
+    aspect-ratio: 16 / 9;
+    box-shadow: 0 18px 40px -20px rgba(0, 0, 0, 0.6);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  .yt-facade:hover,
+  .yt-facade:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 22px 48px -20px rgba(0, 0, 0, 0.75);
+  }
+  .yt-facade img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.9;
+    transition: opacity var(--transition);
+  }
+  .yt-facade:hover img,
+  .yt-facade:focus-visible img {
+    opacity: 1;
+  }
+  .yt-facade-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.45));
+    transition: transform var(--transition);
+  }
+  .yt-facade:hover .yt-facade-play,
+  .yt-facade:focus-visible .yt-facade-play {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+  .yt-facade iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.yt-facade').forEach((facade) => {
+    facade.addEventListener('click', () => {
+      const id = facade.dataset.ytId;
+      if (!id) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+      iframe.title = 'Dean fitting a tyre at Freeway Mobile Tyres';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      facade.replaceWith(iframe);
+      // Move classes onto the iframe so it inherits the rounded corners + size.
+      iframe.className = 'yt-facade-frame';
+      iframe.style.aspectRatio = '16 / 9';
+      iframe.style.width = '100%';
+      iframe.style.maxWidth = '880px';
+      iframe.style.margin = '0 auto';
+      iframe.style.display = 'block';
+      iframe.style.borderRadius = 'var(--radius)';
+      iframe.style.overflow = 'hidden';
+    });
+  });
+</script>
