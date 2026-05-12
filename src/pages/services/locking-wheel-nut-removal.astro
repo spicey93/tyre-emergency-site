@@ -2,9 +2,11 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroSection from '../../components/HeroSection.astro';
 import ReviewsSection from '../../components/ReviewsSection.astro';
+import { googleRating } from '../../data/reviews';
+import { defaultPhone, defaultTelHref, defaultPhoneIntl } from '../../data/business';
 
-const phone = '0330 133 9311';
-const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const phone = defaultPhone;
+const telHref = defaultTelHref;
 
 const serviceJsonLd = {
   '@context': 'https://schema.org',
@@ -14,7 +16,7 @@ const serviceJsonLd = {
   provider: {
     '@type': 'LocalBusiness',
     name: 'Tyre Emergency Ltd',
-    telephone: '+443301339311',
+    telephone: defaultPhoneIntl,
     url: 'https://tyreemergencyltd.co.uk/',
   },
   areaServed: 'Nottinghamshire, East Midlands',
@@ -25,7 +27,7 @@ const serviceJsonLd = {
 
 <BaseLayout
   title="Locking Wheel Nut Removal Nottinghamshire | Lost Key, Seized Nuts"
-  description="Mobile locking wheel nut removal across Nottinghamshire. Lost keys, stripped patterns, seized nuts &mdash; we deal with all of them, on your driveway or at the garage. Specialist extraction tools, minimal wheel damage, fast turnaround. Get an instant price online or call 0330 133 9311."
+  description={`Mobile locking wheel nut removal across Nottinghamshire. Lost keys, stripped patterns, seized nuts — we deal with all of them, on your driveway or at the garage. Specialist extraction tools, minimal wheel damage, fast turnaround. Get an instant price online or call ${phone}.`}
   jsonLd={JSON.stringify(serviceJsonLd)}
 >
   <HeroSection
@@ -38,9 +40,9 @@ const serviceJsonLd = {
     bgImage="/images/locking-wheel-nut-removal.webp"
     bgImageAlt="Close-up of a stripped locking wheel nut being extracted on an alloy wheel"
     trustItems={[
-      { strong: '478', label: '★★★★★ Google reviews' },
-      { strong: 'Specialist', label: 'extraction kit on the van' },
-      { strong: '15–30 min', label: 'typical job time' },
+      { strong: String(googleRating.reviewCount), label: '★★★★★ Google Reviews' },
+      { strong: 'Specialist', label: 'Extraction Kit on the Van' },
+      { strong: '15–30 min', label: 'Typical Job Time' },
     ]}
   />
   <section class="section section-white">

@@ -4,9 +4,11 @@ import HeroSection from '../components/HeroSection.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import ReviewsSection from '../components/ReviewsSection.astro';
 import FAQAccordion from '../components/FAQAccordion.astro';
+import { googleRating, businessStats } from '../data/reviews';
+import { defaultPhone, defaultTelHref, defaultPhoneIntl } from '../data/business';
 
-const phone = '0330 133 9311';
-const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const phone = defaultPhone;
+const telHref = defaultTelHref;
 
 const services = [
   {
@@ -69,7 +71,7 @@ const faqs = [
   },
   {
     question: 'How much does it cost?',
-    answer: 'The price depends on the tyre, your vehicle, where you are and how urgent it is. We\'re not the cheapest — we\'re built around speed, convenience and turning up when we say we will. You\'ll get an exact, all-in price on the phone before we set off, with no hidden extras when we arrive. As a rough guide, our average all-in price across 3,000+ jobs is around £177, but yours could be higher or lower depending on the factors above.',
+    answer: `The price depends on the tyre, your vehicle, where you are and how urgent it is. We're not the cheapest — we're built around speed, convenience and turning up when we say we will. You'll get an exact, all-in price on the phone before we set off, with no hidden extras when we arrive. As a rough guide, our average all-in price across ${businessStats.jobCount} jobs is around £${businessStats.averagePrice}, but yours could be higher or lower depending on the factors above.`,
   },
   {
     question: 'Do you cover my area?',
@@ -88,7 +90,7 @@ const faqs = [
 
 <BaseLayout
   title="Tyre Emergency Ltd | 24/7 Mobile Tyre Fitting Nottinghamshire"
-  description="Emergency mobile tyre fitting and repair across Nottinghamshire and the East Midlands. 30-minute average ETA, REACT licensed technicians, 5.0 stars on Google. Call 0330 133 9311."
+  description={`Emergency mobile tyre fitting and repair across Nottinghamshire and the East Midlands. 30-minute average ETA, REACT licensed technicians, 5.0 stars on Google. Call ${phone}.`}
   jsonLd={JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
@@ -96,7 +98,7 @@ const faqs = [
     name: 'Tyre Emergency Ltd',
     description: '24/7 emergency mobile tyre fitting, replacement and repair across Nottinghamshire and the wider East Midlands.',
     url: 'https://tyreemergencyltd.co.uk/',
-    telephone: '+443301339311',
+    telephone: defaultPhoneIntl,
     email: 'contact@tyreemergency.com',
     image: 'https://tyreemergencyltd.co.uk/og-image.jpg',
     priceRange: '££',
@@ -122,8 +124,8 @@ const faqs = [
     }],
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: '5.0',
-      reviewCount: '478',
+      ratingValue: googleRating.ratingValue,
+      reviewCount: String(googleRating.reviewCount),
       bestRating: '5',
       worstRating: '1',
     },
@@ -139,7 +141,7 @@ const faqs = [
 >
   <HeroSection
     eyebrow="24/7 Mobile Tyre Fitting · Nottinghamshire"
-    title="Flat Tyre?<br />We&rsquo;ll Be There In <span class='accent'>60 Minutes</span>."
+    title="Flat Tyre?<br />We&rsquo;ll Be There In <span class='accent'>30 Minutes</span>."
     subtitle="Mobile tyre fitting across Nottinghamshire. We come to you, day or night."
     ctaPhone={phone}
     ctaCallLabel="Call 24/7"
@@ -147,9 +149,9 @@ const faqs = [
     bgImage="/images/tyre-emergency-action.webp"
     bgImageAlt="Tyre Emergency Ltd service van pulled up next to a car with a flat tyre on a wet roadside"
     trustItems={[
-      { strong: '478', label: '★★★★★ Google reviews' },
-      { strong: 'REACT', label: 'licensed & fully insured' },
-      { strong: 'Cars, vans', label: 'caravans, motorhomes, trailers' },
+      { strong: String(googleRating.reviewCount), label: '★★★★★ Google Reviews' },
+      { strong: 'REACT', label: 'Licensed & Fully Insured' },
+      { strong: 'Cars, Vans', label: 'Caravans, Motorhomes, Trailers' },
     ]}
   />
 
@@ -230,7 +232,7 @@ const faqs = [
           <span class="eyebrow">About</span>
           <h2>Founded by Dean Spicer &mdash; A Decade of Roadside Experience</h2>
           <p class="about-bio">
-            Dean has been in the tyre trade since he was a teenager &mdash; national chains, independent garages, time in management, and back to being hands-on with the tools. Tyre Emergency Ltd was set up in December 2023 with a simple idea: build a business around speed, convenience and being properly straight with people. Because it&rsquo;s a sole-operator outfit, Dean answers every call, gives every quote and fits every tyre himself. No rota, no agency cover &mdash; the same experienced fitter whether you ring at noon or midnight. Over 450 five-star reviews in under two years say the rest.
+            Dean has been in the tyre trade since he was a teenager &mdash; national chains, independent garages, time in management, and back to being hands-on with the tools. Tyre Emergency Ltd was set up in December 2023 with a simple idea: build a business around speed, convenience and being properly straight with people. Because it&rsquo;s a sole-operator outfit, Dean answers every call, gives every quote and fits every tyre himself. No rota, no agency cover &mdash; the same experienced fitter whether you ring at noon or midnight. Hundreds of five-star reviews on Google say the rest.
           </p>
           <div class="badge-row about-badges">
             <span class="badge">REACT Licensed</span>
@@ -251,6 +253,20 @@ const faqs = [
     </div>
   </section>
 
+
+  <!-- Section: Recent jobs gallery -->
+  <section class="section section-white">
+    <div class="container">
+      <div class="text-center">
+        <span class="eyebrow">On the job</span>
+        <h2>What we&rsquo;ve been up to</h2>
+      </div>
+      <div class="gallery-wrap">
+        <script is:inline async src="https://elfsightcdn.com/platform.js"></script>
+        <div class="elfsight-app-2c14d44d-fbf3-47da-9bff-790f824a47a3" data-elfsight-app-lazy></div>
+      </div>
+    </div>
+  </section>
 
   <ReviewsSection variant="light" title="Five Stars. Hundreds of Drivers Rescued." lede="A few words from real customers we&rsquo;ve sorted out &mdash; on the roadside, on the driveway and in the office car park." />
 

@@ -2,9 +2,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroSection from '../../components/HeroSection.astro';
 import ReviewsSection from '../../components/ReviewsSection.astro';
+import { defaultPhone, defaultTelHref, defaultPhoneIntl } from '../../data/business';
 
-const phone = '0330 133 9311';
-const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const phone = defaultPhone;
+const telHref = defaultTelHref;
 
 const serviceJsonLd = {
   '@context': 'https://schema.org',
@@ -14,7 +15,7 @@ const serviceJsonLd = {
   provider: {
     '@type': 'LocalBusiness',
     name: 'Tyre Emergency Ltd',
-    telephone: '+443301339311',
+    telephone: defaultPhoneIntl,
     url: 'https://tyreemergencyltd.co.uk/',
   },
   areaServed: 'Nottinghamshire, East Midlands',
@@ -25,7 +26,7 @@ const serviceJsonLd = {
 
 <BaseLayout
   title="Emergency Tyre Replacement Nottinghamshire | 24/7 Mobile Service"
-  description="24/7 emergency mobile tyre replacement across Nottinghamshire. Exact price over the phone, realistic ETA, and everything on the van to get you back on the road first time. Call 0330 133 9311."
+  description={`24/7 emergency mobile tyre replacement across Nottinghamshire. Exact price over the phone, realistic ETA, and everything on the van to get you back on the road first time. Call ${phone}.`}
   jsonLd={JSON.stringify(serviceJsonLd)}
 >
   <HeroSection

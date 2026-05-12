@@ -1,13 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { defaultPhone, defaultTelHref } from '../data/business';
 
-const phone = '0330 133 9311';
-const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const phone = defaultPhone;
+const telHref = defaultTelHref;
 ---
 
 <BaseLayout
   title="Page Not Found | Tyre Emergency Ltd"
-  description="The page you're looking for doesn't exist. Call Tyre Emergency Ltd on 0330 133 9311 for 24/7 mobile tyre fitting across Nottinghamshire."
+  description={`The page you're looking for doesn't exist. Call Tyre Emergency Ltd on ${phone} for 24/7 mobile tyre fitting across Nottinghamshire.`}
 >
   <section class="notfound-hero">
     <div class="container">
@@ -19,7 +20,7 @@ const telHref = `tel:${phone.replace(/\s+/g, '')}`;
           <a class="btn btn-primary btn-call" href={telHref}>
             <span aria-hidden="true">&#9742;</span> Call Now: {phone}
           </a>
-          <a class="btn btn-outline" href="/">Back to Home</a>
+          <a class="btn btn-outline-dark" href="/">Back to Home</a>
         </div>
         <nav class="notfound-nav" aria-label="Helpful links">
           <p class="notfound-nav-label">Or go straight to:</p>
@@ -74,11 +75,11 @@ const telHref = `tel:${phone.replace(/\s+/g, '')}`;
   .notfound-nav {
     margin-top: 2.5rem;
     padding-top: 2rem;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-border-light);
   }
 
   .notfound-nav-label {
-    color: var(--color-text-muted);
+    color: var(--color-text-muted-dark);
     font-size: 0.9rem;
     margin-bottom: 0.75rem !important;
   }
@@ -93,7 +94,7 @@ const telHref = `tel:${phone.replace(/\s+/g, '')}`;
   }
 
   .notfound-nav a {
-    color: var(--color-text);
+    color: var(--color-text-dark);
     font-weight: 500;
   }
 

@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { defaultPhone, defaultTelHref } from '../data/business';
 
-const phone = '0330 133 9311';
-const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const phone = defaultPhone;
+const telHref = defaultTelHref;
 ---
 
 <BaseLayout

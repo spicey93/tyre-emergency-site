@@ -2,9 +2,11 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroSection from '../../components/HeroSection.astro';
 import ReviewsSection from '../../components/ReviewsSection.astro';
+import { googleRating } from '../../data/reviews';
+import { defaultPhone, defaultTelHref, defaultPhoneIntl } from '../../data/business';
 
-const phone = '0330 133 9311';
-const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const phone = defaultPhone;
+const telHref = defaultTelHref;
 
 const serviceJsonLd = {
   '@context': 'https://schema.org',
@@ -14,7 +16,7 @@ const serviceJsonLd = {
   provider: {
     '@type': 'LocalBusiness',
     name: 'Tyre Emergency Ltd',
-    telephone: '+443301339311',
+    telephone: defaultPhoneIntl,
     url: 'https://tyreemergencyltd.co.uk/',
   },
   areaServed: 'Nottinghamshire, East Midlands',
@@ -25,7 +27,7 @@ const serviceJsonLd = {
 
 <BaseLayout
   title="Mobile Tyre Repair Nottinghamshire | BS AU159 Puncture Repair"
-  description="Mobile puncture repair carried out to British Standard AU159 within 8 miles of Bilsthorpe, Nottinghamshire. A proper repair saves the cost of a new tyre and gets years more out of yours. Call 0330 133 9311."
+  description={`Mobile puncture repair carried out to British Standard AU159 within 8 miles of Bilsthorpe, Nottinghamshire. A proper repair saves the cost of a new tyre and gets years more out of yours. Call ${phone}.`}
   jsonLd={JSON.stringify(serviceJsonLd)}
 >
   <HeroSection
@@ -38,9 +40,9 @@ const serviceJsonLd = {
     bgImage="/images/tyre-emergency-van.webp"
     bgImageAlt="Tyre Emergency Ltd service van on the road with hazards flashing, heading to a callout"
     trustItems={[
-      { strong: '478', label: '★★★★★ Google reviews' },
-      { strong: 'Same-day', label: 'slots most days' },
-      { strong: 'Saves', label: 'the cost of a new tyre' },
+      { strong: String(googleRating.reviewCount), label: '★★★★★ Google Reviews' },
+      { strong: 'Same-day', label: 'Slots Most Days' },
+      { strong: 'Saves', label: 'The Cost of a New Tyre' },
     ]}
   />
   <section class="section section-white">

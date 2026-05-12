@@ -1,13 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { defaultPhone, defaultTelHref } from '../data/business';
 
-const phone = '0330 133 9311';
-const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const phone = defaultPhone;
+const telHref = defaultTelHref;
 ---
 
 <BaseLayout
   title="Contact Tyre Emergency Ltd | 24/7 Phone, Email & Address"
-  description="Get in touch with Tyre Emergency Ltd, Nottinghamshire's 24/7 mobile tyre service. Call 0330 133 9311 for emergencies. Email contact@tyreemergency.com for quotes and bookings."
+  description={`Get in touch with Tyre Emergency Ltd, Nottinghamshire's 24/7 mobile tyre service. Call ${phone} for emergencies. Email contact@tyreemergency.com for quotes and bookings.`}
 >
   <section class="page-hero">
     <div class="container">
@@ -115,7 +116,7 @@ const telHref = `tel:${phone.replace(/\s+/g, '')}`;
   </section>
 </BaseLayout>
 
-<script>
+<script define:vars={{ phone }}>
   const form = document.querySelector<HTMLFormElement>('.contact-form');
   if (form) {
     form.addEventListener('submit', async (e) => {
@@ -137,7 +138,7 @@ const telHref = `tel:${phone.replace(/\s+/g, '')}`;
         if (btn) btn.disabled = false;
         if (label) label.style.display = '';
         if (sending) sending.style.display = 'none';
-        alert('Something went wrong. Please call us on 0330 133 9311 or try again.');
+        alert(`Something went wrong. Please call us on ${phone} or try again.`);
       }
     });
   }

@@ -2,9 +2,11 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroSection from '../../components/HeroSection.astro';
 import ReviewsSection from '../../components/ReviewsSection.astro';
+import { googleRating } from '../../data/reviews';
+import { defaultPhone, defaultTelHref, defaultPhoneIntl } from '../../data/business';
 
-const phone = '0330 133 9311';
-const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const phone = defaultPhone;
+const telHref = defaultTelHref;
 
 const serviceJsonLd = {
   '@context': 'https://schema.org',
@@ -14,7 +16,7 @@ const serviceJsonLd = {
   provider: {
     '@type': 'LocalBusiness',
     name: 'Tyre Emergency Ltd',
-    telephone: '+443301339311',
+    telephone: defaultPhoneIntl,
     url: 'https://tyreemergencyltd.co.uk/',
   },
   areaServed: 'Nottinghamshire, East Midlands',
@@ -25,7 +27,7 @@ const serviceJsonLd = {
 
 <BaseLayout
   title="Mobile Tyre Fitting Nottinghamshire | We Come To You"
-  description="Mobile tyre fitting at your home or workplace across Nottinghamshire. Everything a tyre shop does &mdash; properly fitted, balanced and torqued &mdash; without you having to drive anywhere. Call 0330 133 9311."
+  description={`Mobile tyre fitting at your home or workplace across Nottinghamshire. Everything a tyre shop does — properly fitted, balanced and torqued — without you having to drive anywhere. Call ${phone}.`}
   jsonLd={JSON.stringify(serviceJsonLd)}
 >
   <HeroSection
@@ -38,9 +40,9 @@ const serviceJsonLd = {
     bgImage="/images/tyres-on-drive.webp"
     bgImageAlt="Tyre Emergency Ltd service van parked next to a customer's car on a residential driveway"
     trustItems={[
-      { strong: '478', label: '★★★★★ Google reviews' },
-      { strong: 'REACT', label: 'licensed & fully insured' },
-      { strong: 'We come to you', label: 'fully equipped' },
+      { strong: String(googleRating.reviewCount), label: '★★★★★ Google Reviews' },
+      { strong: 'REACT', label: 'Licensed & Fully Insured' },
+      { strong: 'We Come to You', label: 'Fully Equipped' },
     ]}
   />
 

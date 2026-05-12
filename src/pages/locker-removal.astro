@@ -1,8 +1,10 @@
 ---
 import LandingLayout from '../layouts/LandingLayout.astro';
+import { googleRating } from '../data/reviews';
+import { defaultPhone, defaultTelHref, defaultPhoneIntl } from '../data/business';
 
-const phone = '0330 133 9311';
-const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+const phone = defaultPhone;
+const telHref = defaultTelHref;
 
 const areas = [
   'Mansfield', 'Nottingham', 'Newark', 'Worksop', 'Chesterfield', 'Doncaster',
@@ -17,7 +19,7 @@ const jsonLd = {
   provider: {
     '@type': 'LocalBusiness',
     name: 'Tyre Emergency Ltd',
-    telephone: '+443301339311',
+    telephone: defaultPhoneIntl,
     url: 'https://tyreemergencyltd.co.uk/',
     address: {
       '@type': 'PostalAddress',
@@ -34,8 +36,8 @@ const jsonLd = {
   areaServed: areas.map((a) => ({ '@type': 'City', name: a })),
   aggregateRating: {
     '@type': 'AggregateRating',
-    ratingValue: '5.0',
-    reviewCount: '478',
+    ratingValue: googleRating.ratingValue,
+    reviewCount: String(googleRating.reviewCount),
     bestRating: '5',
     worstRating: '1',
   },
@@ -44,7 +46,7 @@ const jsonLd = {
 
 <LandingLayout
   title="Locking Wheel Nut Removal Nottinghamshire | Lost Key, Stripped Locker"
-  description="Lost the locker key, stripped the pattern, seized on the stud — we get them off. Mobile locking wheel nut removal across Nottinghamshire, same-day slots most days. Specialist extraction kit, hundreds of jobs done. Call 0330 133 9311."
+  description={`Lost the locker key, stripped the pattern, seized on the stud — we get them off. Mobile locking wheel nut removal across Nottinghamshire, same-day slots most days. Specialist extraction kit, hundreds of jobs done. Call ${phone}.`}
   jsonLd={JSON.stringify(jsonLd)}
 >
   <!-- Slim brand bar — no nav, just logo + click-to-call -->
@@ -89,9 +91,9 @@ const jsonLd = {
       </a>
 
       <ul class="lp-trust">
-        <li><strong>478</strong> &#9733;&#9733;&#9733;&#9733;&#9733; Google reviews</li>
-        <li><strong>Specialist</strong> extraction kit on the van</li>
-        <li><strong>15&ndash;30 min</strong> typical job time</li>
+        <li><strong>{googleRating.reviewCount}</strong> &#9733;&#9733;&#9733;&#9733;&#9733; Google Reviews</li>
+        <li><strong>Specialist</strong> Extraction Kit on the Van</li>
+        <li><strong>15&ndash;30 min</strong> Typical Job Time</li>
       </ul>
     </div>
   </section>
