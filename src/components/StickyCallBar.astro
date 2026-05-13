@@ -1,0 +1,122 @@
+---
+// Sticky bottom call-to-call bar. Slides up once the user scrolls past
+// the hero section, slides back down when they return to the top.
+// Mobile-only (desktop already has a permanent call button in the header
+// or landing-page brand bar).
+
+export interface Props {
+  /** Phone number to dial. Area pages pass their local number. */
+  phone: string;
+}
+
+const { phone } = Astro.props as Props;
+const telHref = `tel:${phone.replace(/\s+/g, '')}`;
+---
+
+<a
+  href={telHref}
+  class="sticky-call"
+  data-call="sticky-bottom"
+  aria-label={`Call ${phone}`}
+  hidden
+>
+  <span class="sticky-call-icon" aria-hidden="true">&#9742;</span>
+  <span class="sticky-call-label">Tap to call <strong>{phone}</strong></span>
+  <span class="sticky-call-arrow" aria-hidden="true">&rsaquo;</span>
+</a>
+
+<script is:inline>
+  (function () {
+    var btn = document.querySelector('.sticky-call');
+    if (!btn) return;
+
+    function show() { btn.classList.add('is-visible'); }
+    function hide() { btn.classList.remove('is-visible'); }
+
+    var hero = document.querySelector('.hero, .lp-hero, .page-hero, .notfound-hero');
+
+    if (hero && 'IntersectionObserver' in window) {
+      // Show the bar when the hero scrolls out of view, hide it again
+      // when the user scrolls back up to the top.
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) hide(); else show();
+        });
+      }, { threshold: 0 });
+      observer.observe(hero);
+    } else {
+      // Pages with no hero (or no IO support) — fall back to a scroll
+      // threshold so the bar still appears after a small scroll.
+      var threshold = 120;
+      var onScroll = function () {
+        if (window.scrollY > threshold) show(); else hide();
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    btn.hidden = false;
+  })();
+</script>
+
+<style>
+  .sticky-call {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 0.95rem 1.25rem;
+    padding-bottom: calc(0.95rem + env(safe-area-inset-bottom, 0px));
+    background-color: var(--color-accent);
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    z-index: 100;
+    min-height: 56px;
+    box-shadow: 0 -10px 28px -10px rgba(0, 0, 0, 0.32);
+    transform: translateY(100%);
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .sticky-call.is-visible {
+    transform: translateY(0);
+  }
+
+  .sticky-call:focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: -4px;
+  }
+
+  .sticky-call-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .sticky-call-label strong {
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    margin-left: 0.3rem;
+  }
+
+  .sticky-call-arrow {
+    font-size: 1.4rem;
+    line-height: 1;
+    margin-left: 0.2rem;
+    opacity: 0.85;
+  }
+
+  /* Desktop already has a permanent call button in the header / landing
+     brand bar — the sticky bar would just be visual clutter on big screens. */
+  @media (min-width: 769px) {
+    .sticky-call {
+      display: none;
+    }
+  }
+</style>

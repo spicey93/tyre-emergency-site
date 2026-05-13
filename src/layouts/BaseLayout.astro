@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import StickyCallBar from '../components/StickyCallBar.astro';
 import { defaultPhone } from '../data/business';
 
 export interface Props {
@@ -97,5 +98,7 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).toString(
     </main>
 
     <Footer phone={phone} />
+
+    <StickyCallBar phone={phone} />
   </body>
 </html>

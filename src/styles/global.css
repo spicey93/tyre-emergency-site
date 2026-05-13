@@ -430,15 +430,12 @@ a.tag:hover {
   }
 }
 
-main {
-  padding-bottom: 5rem;
-}
+/* Each .section provides its own vertical padding (5rem / 3.5rem on
+   mobile), so <main> doesn't need an extra padding-bottom — that would
+   render as a band of body-colour between the last section and the
+   footer. */
 
 @media (max-width: 768px) {
-  main {
-    padding-bottom: 90px;
-  }
-
   .section {
     padding: 3.5rem 0;
   }

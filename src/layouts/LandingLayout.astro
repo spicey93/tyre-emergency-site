@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import StickyCallBar from '../components/StickyCallBar.astro';
+import { defaultPhone } from '../data/business';
 
 export interface Props {
   title: string;
@@ -9,6 +11,8 @@ export interface Props {
   jsonLd?: string;
   /** Set to false on ads-only landing pages so it doesn't compete with the organic service page in search. */
   index?: boolean;
+  /** Phone number to dial from the sticky bottom call bar. Defaults to the central business number. */
+  phone?: string;
 }
 
 const {
@@ -18,6 +22,7 @@ const {
   ogImage = '/og-image.jpg',
   jsonLd,
   index = false,
+  phone = defaultPhone,
 } = Astro.props as Props;
 
 const siteUrl = 'https://tyreemergencyltd.co.uk';
@@ -94,6 +99,8 @@ const robots = index ? 'index, follow' : 'noindex, nofollow';
         });
       });
     </script>
+
+    <StickyCallBar phone={phone} />
   </body>
 </html>
 
