@@ -87,6 +87,20 @@ const jsonLd = {
         Pop your reg in, pick a slot, we turn up with the tyres &mdash; no driving anywhere, no waiting room.
       </p>
 
+      <div class="mt-offer" role="note" aria-label="Discount offer">
+        <span class="mt-offer-tag">Save 10%</span>
+        <span class="mt-offer-text">
+          Booking two or more tyres? Use code
+          <button
+            type="button"
+            class="mt-offer-code"
+            data-code="2TYRES10"
+            aria-label="Copy discount code 2TYRES10 to clipboard"
+          >2TYRES10</button>
+          at checkout.
+        </span>
+      </div>
+
       <form class="mt-reg-form" id="mt-reg-form" novalidate>
         <label for="mt-reg-input" class="visually-hidden">Vehicle registration</label>
         <div class="mt-plate">
@@ -227,6 +241,20 @@ const jsonLd = {
       <h2>Ready to book? Pop your reg in.</h2>
       <p>Live prices, live slots, on your driveway &mdash; the way buying tyres should&rsquo;ve always worked.</p>
 
+      <div class="mt-offer mt-offer--footer" role="note" aria-label="Discount offer">
+        <span class="mt-offer-tag">Save 10%</span>
+        <span class="mt-offer-text">
+          Two or more tyres? Use code
+          <button
+            type="button"
+            class="mt-offer-code"
+            data-code="2TYRES10"
+            aria-label="Copy discount code 2TYRES10 to clipboard"
+          >2TYRES10</button>
+          at checkout.
+        </span>
+      </div>
+
       <form class="mt-reg-form mt-reg-form--footer" id="mt-reg-form-footer" novalidate>
         <label for="mt-reg-input-footer" class="visually-hidden">Vehicle registration</label>
         <div class="mt-plate">
@@ -349,6 +377,49 @@ const jsonLd = {
           // Fall back to the plain booking URL if something weird happens
           // while assembling the URL.
           window.location.href = url || bookingFallbackUrl;
+        });
+      });
+
+      // ---- Discount-code copy-to-clipboard ----------------------------
+      var codeButtons = document.querySelectorAll('.mt-offer-code');
+      codeButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var code = btn.getAttribute('data-code') || btn.textContent.trim();
+          var flash = function (ok) {
+            var original = btn.dataset.label || btn.textContent;
+            if (!btn.dataset.label) btn.dataset.label = original;
+            btn.classList.add(ok ? 'is-copied' : 'is-copy-failed');
+            btn.textContent = ok ? 'Copied!' : 'Tap to copy: ' + code;
+            setTimeout(function () {
+              btn.classList.remove('is-copied', 'is-copy-failed');
+              btn.textContent = btn.dataset.label;
+            }, 1600);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(code).then(
+              function () { flash(true); },
+              function () { flash(false); }
+            );
+          } else {
+            // Fallback for older browsers.
+            var ta = document.createElement('textarea');
+            ta.value = code;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'absolute';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            var ok = false;
+            try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+            document.body.removeChild(ta);
+            flash(ok);
+          }
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'discount_code_copied',
+            discount_code: code,
+            page_path: window.location.pathname,
+          });
         });
       });
     })();
@@ -497,6 +568,96 @@ const jsonLd = {
     max-width: 56ch;
     margin: 0 0 2rem;
     line-height: 1.6;
+  }
+
+  /* ============================================================
+     Discount offer badge
+     ============================================================ */
+  .mt-offer {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem 0.85rem;
+    margin: 0 0 1.5rem;
+    padding: 0.65rem 0.9rem;
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius);
+    max-width: 560px;
+  }
+
+  .mt-offer-tag {
+    flex: 0 0 auto;
+    padding: 0.3rem 0.65rem;
+    background-color: var(--color-accent);
+    color: var(--color-text);
+    border-radius: var(--radius);
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .mt-offer-text {
+    flex: 1 1 200px;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .mt-offer-code {
+    display: inline-block;
+    margin: 0 0.15rem;
+    padding: 0.15rem 0.55rem;
+    background-color: #fdd700;
+    color: #1a1a1d;
+    border: 1px solid rgba(0, 0, 0, 0.85);
+    border-radius: 4px;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.05rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: transform var(--transition), background-color var(--transition);
+    vertical-align: baseline;
+    line-height: 1.15;
+  }
+
+  .mt-offer-code:hover,
+  .mt-offer-code:focus-visible {
+    transform: translateY(-1px);
+    background-color: #ffe34d;
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .mt-offer-code.is-copied {
+    background-color: #1e9d5b;
+    color: #fff;
+    border-color: #1e9d5b;
+  }
+
+  .mt-offer-code.is-copy-failed {
+    background-color: #fff;
+    color: #1a1a1d;
+  }
+
+  /* Footer variant — centred under the headline */
+  .mt-offer--footer {
+    margin: 0 auto 1.75rem;
+    justify-content: center;
+    text-align: left;
+  }
+
+  @media (max-width: 480px) {
+    .mt-offer {
+      width: 100%;
+    }
+    .mt-offer-text {
+      flex: 1 1 100%;
+    }
   }
 
   /* ============================================================
