@@ -1,0 +1,257 @@
+---
+import LandingLayout from '../layouts/LandingLayout.astro';
+import { defaultPhone, defaultTelHref } from '../data/business';
+
+const phone = defaultPhone;
+const telHref = defaultTelHref;
+---
+
+<LandingLayout
+  title="Booking Confirmed | Tyre Emergency Ltd"
+  description="Your tyre booking is confirmed. Dean will text you the morning of with an ETA."
+>
+  <!-- Slim brand bar — matches the rest of the ad funnel -->
+  <header class="lp-bar">
+    <div class="lp-bar-inner">
+      <a href="/" class="lp-logo" aria-label="Tyre Emergency Ltd home">
+        <img src="/logo.png" alt="Tyre Emergency Ltd" width="160" height="48" loading="eager" fetchpriority="high" />
+      </a>
+      <a class="lp-bar-call" href={telHref} data-call="bar">
+        <span aria-hidden="true">&#9742;</span>
+        <span class="lp-bar-call-number">{phone}</span>
+        <span class="lp-bar-call-short">Call now</span>
+      </a>
+    </div>
+  </header>
+
+  <section class="bc-hero">
+    <div class="container container-narrow bc-inner">
+      <span class="bc-icon" aria-hidden="true">&#10003;</span>
+      <h1>Booking confirmed.</h1>
+      <p class="bc-lede">
+        That&rsquo;s you sorted &mdash; the slot&rsquo;s in the diary. You&rsquo;ll get a confirmation email through any minute now.
+      </p>
+
+      <div class="bc-next">
+        <h2>What happens next</h2>
+        <ol class="bc-steps">
+          <li>
+            <strong>The morning of</strong> &mdash; Dean texts with a tighter ETA so you&rsquo;re not sat waiting all day.
+          </li>
+          <li>
+            <strong>On the day</strong> &mdash; the van pulls up at the address you gave. Leave the keys with someone or pop out for two minutes to point at the wheels.
+          </li>
+          <li>
+            <strong>When the job&rsquo;s done</strong> &mdash; tap your card, Apple Pay or Google Pay. Receipt emailed straight after.
+          </li>
+        </ol>
+      </div>
+
+      <div class="bc-changes">
+        <p>
+          <strong>Something changed?</strong> Give Dean a quick ring on <a href={telHref}><strong>{phone}</strong></a> and he&rsquo;ll shift the slot &mdash; no drama.
+        </p>
+      </div>
+
+      <a class="btn btn-outline-dark" href="/">Back to home</a>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      // Capture any params the booking site appended (order_id etc.) so we
+      // can attribute the booking inside GTM / GA.
+      var params = {};
+      try {
+        new URLSearchParams(window.location.search).forEach(function (v, k) {
+          params[k] = v;
+        });
+      } catch (e) {
+        /* ignore */
+      }
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'booking_completed',
+        page_path: window.location.pathname,
+        booking_params: params,
+      });
+    })();
+  </script>
+</LandingLayout>
+
+<style>
+  /* ============================================================
+     Slim brand bar (shared style — matches other landing pages)
+     ============================================================ */
+  .lp-bar {
+    background-color: var(--color-bg-dark);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .lp-bar-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0.6rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 60px;
+  }
+
+  .lp-logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+  }
+
+  .lp-bar-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.95rem;
+    background-color: var(--color-accent);
+    color: var(--color-text);
+    border-radius: var(--radius);
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    font-size: 1rem;
+    transition: background-color var(--transition);
+  }
+
+  .lp-bar-call:hover,
+  .lp-bar-call:focus-visible {
+    background-color: var(--color-accent-dark);
+    color: var(--color-text);
+  }
+
+  .lp-bar-call-short {
+    display: none;
+  }
+
+  @media (max-width: 480px) {
+    .lp-logo img {
+      height: 34px;
+    }
+    .lp-bar-call-number {
+      display: none;
+    }
+    .lp-bar-call-short {
+      display: inline;
+    }
+  }
+
+  /* ============================================================
+     Confirmation hero
+     ============================================================ */
+  .bc-hero {
+    background-color: var(--color-bg-white);
+    color: var(--color-text-dark);
+    padding: 4rem 0 5rem;
+    min-height: calc(100vh - 60px);
+  }
+
+  .bc-inner {
+    max-width: 640px;
+  }
+
+  .bc-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    color: var(--color-text);
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 12px 28px -14px rgba(219, 31, 36, 0.7);
+  }
+
+  .bc-inner h1 {
+    color: var(--color-text-dark);
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    margin: 0 0 0.75rem;
+  }
+
+  .bc-lede {
+    color: var(--color-text-muted-dark);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin: 0 0 2.5rem;
+    max-width: 56ch;
+  }
+
+  .bc-next h2 {
+    color: var(--color-text-dark);
+    font-size: clamp(1.4rem, 2.5vw, 1.7rem);
+    margin: 0 0 1rem;
+  }
+
+  .bc-steps {
+    list-style: none;
+    counter-reset: bc-step;
+    padding: 0;
+    margin: 0 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .bc-steps li {
+    counter-increment: bc-step;
+    position: relative;
+    padding: 1.1rem 1.25rem 1.1rem 3.4rem;
+    background-color: var(--color-bg-light);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+  }
+
+  .bc-steps li::before {
+    content: counter(bc-step);
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--color-text-dark);
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bc-changes {
+    padding: 1rem 1.25rem;
+    border-left: 3px solid var(--color-accent);
+    background-color: rgba(219, 31, 36, 0.06);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin: 0 0 2rem;
+  }
+
+  .bc-changes p {
+    margin: 0;
+    color: var(--color-text-dark);
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .bc-changes a {
+    color: var(--color-text-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .bc-changes a:hover {
+    color: var(--color-accent);
+  }
+</style>

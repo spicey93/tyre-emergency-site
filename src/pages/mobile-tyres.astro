@@ -8,10 +8,14 @@ const telHref = defaultTelHref;
 
 // Online booking portal — same one used by the main quote wizard for
 // mobile fitting & caravan flows. We tack on `vrm=` so the booking site
-// can pre-fill it where supported; if it isn't, no harm done.
+// can pre-fill it where supported, and `homeURL=` so the customer
+// lands back on our /booking-confirmed/ page after they finish — that
+// page fires the GTM `booking_completed` event used as the Google Ads
+// conversion.
 const bookingSiteBase = 'https://garage-bookings.com/';
 const bookingSiteClient = '537';
-const bookingFallbackUrl = `${bookingSiteBase}?clientID=${bookingSiteClient}`;
+const bookingHomeUrl = 'https://tyreemergencyltd.co.uk/booking-confirmed/';
+const bookingFallbackUrl = `${bookingSiteBase}?clientID=${bookingSiteClient}&homeURL=${encodeURIComponent(bookingHomeUrl)}&language=en`;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -260,7 +264,7 @@ const jsonLd = {
 
   <script
     is:inline
-    define:vars={{ bookingSiteBase, bookingSiteClient, bookingFallbackUrl }}
+    define:vars={{ bookingSiteBase, bookingSiteClient, bookingHomeUrl, bookingFallbackUrl }}
   >
     (function () {
       var forms = document.querySelectorAll('.mt-reg-form');
@@ -336,7 +340,12 @@ const jsonLd = {
             page_path: window.location.pathname,
           });
 
-          var url = bookingSiteBase + '?clientID=' + bookingSiteClient + '&vrm=' + encodeURIComponent(compact);
+          var url =
+            bookingSiteBase +
+            '?clientID=' + bookingSiteClient +
+            '&vrm=' + encodeURIComponent(compact) +
+            '&homeURL=' + encodeURIComponent(bookingHomeUrl) +
+            '&language=en';
           // Fall back to the plain booking URL if something weird happens
           // while assembling the URL.
           window.location.href = url || bookingFallbackUrl;
