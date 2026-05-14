@@ -1,0 +1,917 @@
+---
+import LandingLayout from '../layouts/LandingLayout.astro';
+import { googleRating } from '../data/reviews';
+import { defaultPhone, defaultTelHref, defaultPhoneIntl } from '../data/business';
+
+const phone = defaultPhone;
+const telHref = defaultTelHref;
+
+// Online booking portal — same one used by the main quote wizard for
+// mobile fitting & caravan flows. We tack on `vrm=` so the booking site
+// can pre-fill it where supported; if it isn't, no harm done.
+const bookingSiteBase = 'https://garage-bookings.com/';
+const bookingSiteClient = '537';
+const bookingFallbackUrl = `${bookingSiteBase}?clientID=${bookingSiteClient}`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Mobile Tyre Fitting',
+  serviceType: 'Pre-booked Mobile Tyre Fitting',
+  provider: {
+    '@type': 'LocalBusiness',
+    name: 'Tyre Emergency Ltd',
+    telephone: defaultPhoneIntl,
+    url: 'https://tyreemergencyltd.co.uk/',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Bilsthorpe',
+      addressLocality: 'Newark',
+      addressRegion: 'Nottinghamshire',
+      postalCode: 'NG22 8GA',
+      addressCountry: 'GB',
+    },
+  },
+  description: 'Mobile tyre fitting on your driveway around Bilsthorpe and the surrounding villages. Pop your reg in, pick a slot, we turn up with the tyres.',
+  url: 'https://tyreemergencyltd.co.uk/mobile-tyres/',
+  image: 'https://tyreemergencyltd.co.uk/images/mobile-tyre-fitting.webp',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: googleRating.ratingValue,
+    reviewCount: String(googleRating.reviewCount),
+    bestRating: '5',
+    worstRating: '1',
+  },
+};
+---
+
+<LandingLayout
+  title="Mobile Tyre Fitting On Your Driveway | Tyre Emergency Ltd"
+  description={`New tyres fitted on your driveway around Bilsthorpe. Pop your reg in, pick a slot, we turn up with the tyres. ${googleRating.reviewCount}+ five-star Google reviews. Call ${phone}.`}
+  jsonLd={JSON.stringify(jsonLd)}
+>
+  <!-- Slim brand bar — no nav, just logo + click-to-call -->
+  <header class="lp-bar">
+    <div class="lp-bar-inner">
+      <a href="/" class="lp-logo" aria-label="Tyre Emergency Ltd home">
+        <img src="/logo.png" alt="Tyre Emergency Ltd" width="160" height="48" loading="eager" fetchpriority="high" />
+      </a>
+      <a class="lp-bar-call" href={telHref} data-call="bar">
+        <span aria-hidden="true">&#9742;</span>
+        <span class="lp-bar-call-number">{phone}</span>
+        <span class="lp-bar-call-short">Call now</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="lp-hero mt-hero">
+    <img
+      class="lp-hero-bg"
+      src="/images/mobile-tyre-fitting.webp"
+      alt="Tyre Emergency Ltd service van parked next to a customer's car on a residential driveway, new tyre fitted"
+      width="1600"
+      height="1200"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="container lp-hero-inner">
+      <span class="lp-eyebrow">Mobile Tyre Fitting &middot; We Come To You</span>
+      <h1>New Tyres,<br />Fitted On Your <span class="lp-eta">Driveway</span>.</h1>
+      <p class="lp-sub">
+        Pop your reg in, pick a slot, we turn up with the tyres &mdash; no driving anywhere, no waiting room.
+      </p>
+
+      <form class="mt-reg-form" id="mt-reg-form" novalidate>
+        <label for="mt-reg-input" class="visually-hidden">Vehicle registration</label>
+        <div class="mt-plate">
+          <span class="mt-plate-gb" aria-hidden="true">
+            <span class="mt-plate-stars" aria-hidden="true"></span>
+            <span class="mt-plate-gb-text">GB</span>
+          </span>
+          <input
+            id="mt-reg-input"
+            class="mt-plate-input"
+            type="text"
+            inputmode="text"
+            autocomplete="off"
+            autocapitalize="characters"
+            spellcheck="false"
+            maxlength="8"
+            placeholder="YOUR REG"
+            aria-describedby="mt-reg-help"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary mt-reg-submit">
+          <span class="btn-label">Get a price</span>
+          <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+        <p class="mt-reg-help" id="mt-reg-help">Live prices and slots on the next screen. Or call <a href={telHref}><strong>{phone}</strong></a>.</p>
+        <p class="mt-reg-error" id="mt-reg-error" role="alert" hidden></p>
+      </form>
+
+      <ul class="lp-trust">
+        <li><strong>{googleRating.reviewCount}</strong> &#9733;&#9733;&#9733;&#9733;&#9733; Google Reviews</li>
+        <li><strong>Tyres fitted</strong> on your driveway</li>
+        <li><strong>Card, Apple &amp; Google Pay</strong> on the day</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="lp-block lp-light">
+    <div class="container container-narrow">
+      <h2 class="lp-block-title">How it works</h2>
+      <ol class="lp-steps">
+        <li>
+          <span class="lp-step-num" aria-hidden="true">1</span>
+          <div>
+            <h3>Reg in, slot picked</h3>
+            <p>Pop your reg in above and you&rsquo;ll land straight on the booking site &mdash; live prices, brand options and a slot that suits you. No callbacks, no waiting around.</p>
+          </div>
+        </li>
+        <li>
+          <span class="lp-step-num" aria-hidden="true">2</span>
+          <div>
+            <h3>We turn up with the tyres</h3>
+            <p>On the day, the van rolls up to your driveway with the tyres on board. Most jobs done inside the hour &mdash; you carry on with whatever you&rsquo;re doing.</p>
+          </div>
+        </li>
+        <li>
+          <span class="lp-step-num" aria-hidden="true">3</span>
+          <div>
+            <h3>Fitted properly, you tap your card</h3>
+            <p>New valves, calibrated balancing, manufacturer torque. Old tyres taken away. Card, Apple Pay or Google Pay when the job&rsquo;s done.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ONE STRONG REVIEW -->
+  <section class="lp-block lp-dark">
+    <div class="container container-narrow">
+      <figure class="lp-review">
+        <div class="lp-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>
+          <p>&ldquo;Booked online the night before, Dean turned up exactly when he said he would and had all four tyres on in no time. Easiest set of tyres I&rsquo;ve ever bought &mdash; never going back to sitting in a waiting room.&rdquo;</p>
+        </blockquote>
+        <figcaption>
+          <strong>Booked online</strong> &middot; one of {googleRating.reviewCount}+ five-star Google reviews
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="lp-block lp-light">
+    <div class="container container-narrow">
+      <span class="eyebrow">What you get</span>
+      <h2 class="lp-block-title">The full tyre-shop job, on your driveway</h2>
+      <ul class="check-list mt-checks">
+        <li><strong>An honest, all-in price up front</strong> &mdash; brand, model, size and the total you&rsquo;ll pay, shown on the booking site before you confirm.</li>
+        <li><strong>Tyres fitted to manufacturer spec</strong> &mdash; new valves, calibrated balancing and a torque-wrench finish on every wheel.</li>
+        <li><strong>Old tyres taken away</strong> and recycled at a licensed facility &mdash; no mess left on your drive, no disposal charge.</li>
+        <li><strong>An ETA you can plan around</strong> &mdash; we turn up when we say we will, which matters when you need the car for work or the school run later.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- COMMON REASONS -->
+  <section class="lp-block lp-dark">
+    <div class="container container-narrow">
+      <h2 class="lp-block-title">When people book us in</h2>
+      <div class="lp-scenarios">
+        <article class="lp-scenario">
+          <h3>MOT advisories to deal with</h3>
+          <p>The MOT&rsquo;s flagged a worn or perished tyre. We&rsquo;ll match the size, brand and load rating, fit them on the driveway and email the receipt across to file with the certificate.</p>
+        </article>
+        <article class="lp-scenario">
+          <h3>A full set before a long drive</h3>
+          <p>Holiday, road trip, motorway-heavy week ahead. Pick a slot, leave the keys, get on with your day &mdash; we&rsquo;ll text when we&rsquo;re done.</p>
+        </article>
+        <article class="lp-scenario">
+          <h3>Working from home anyway</h3>
+          <p>If you&rsquo;re in the house, you don&rsquo;t even need to step outside. We&rsquo;ll knock when we arrive and again when we&rsquo;re done &mdash; the rest happens on the drive.</p>
+        </article>
+        <article class="lp-scenario">
+          <h3>Don&rsquo;t want to lose half a day</h3>
+          <p>No driving to the tyre shop, no sitting in a waiting room with bad coffee, no taxi home. Book a slot, carry on with your morning.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- AREA REASSURANCE -->
+  <section class="lp-block lp-light">
+    <div class="container container-narrow">
+      <div class="lp-card">
+        <h2>Based in Bilsthorpe, NG22 &mdash; on your doorstep</h2>
+        <p>We&rsquo;re right in the middle of the patch &mdash; Edwinstowe, Ollerton, Farnsfield, Rainworth, Blidworth and the surrounding villages are minutes away. Slots most days of the week, often same or next day.</p>
+        <p class="lp-card-safety">
+          <strong>Already had a flat?</strong> If you&rsquo;re sat on a flat or a spare right now, call <a href={telHref}><strong>{phone}</strong></a> instead &mdash; we&rsquo;ll handle it the same day rather than waiting for an online slot.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="lp-block lp-cta">
+    <div class="container container-narrow text-center">
+      <h2>Ready to book? Pop your reg in.</h2>
+      <p>Live prices, live slots, on your driveway &mdash; the way buying tyres should&rsquo;ve always worked.</p>
+
+      <form class="mt-reg-form mt-reg-form--footer" id="mt-reg-form-footer" novalidate>
+        <label for="mt-reg-input-footer" class="visually-hidden">Vehicle registration</label>
+        <div class="mt-plate">
+          <span class="mt-plate-gb" aria-hidden="true">
+            <span class="mt-plate-stars" aria-hidden="true"></span>
+            <span class="mt-plate-gb-text">GB</span>
+          </span>
+          <input
+            id="mt-reg-input-footer"
+            class="mt-plate-input"
+            type="text"
+            inputmode="text"
+            autocomplete="off"
+            autocapitalize="characters"
+            spellcheck="false"
+            maxlength="8"
+            placeholder="YOUR REG"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary mt-reg-submit">
+          <span class="btn-label">Get a price</span>
+          <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+        <p class="mt-reg-error" id="mt-reg-error-footer" role="alert" hidden></p>
+      </form>
+
+      <p class="mt-or-call">
+        Or call <a href={telHref} data-call="footer"><strong>{phone}</strong></a>
+      </p>
+
+      <p class="lp-fineprint">Tyre Emergency Ltd &middot; Bilsthorpe NG22 8GA &middot; Company No. 15362025 &middot; VAT GB456597051</p>
+    </div>
+  </section>
+
+  <script
+    is:inline
+    define:vars={{ bookingSiteBase, bookingSiteClient, bookingFallbackUrl }}
+  >
+    (function () {
+      var forms = document.querySelectorAll('.mt-reg-form');
+      if (!forms.length) return;
+
+      // Strip down to plate chars; allow A-Z and 0-9 only (spaces will be re-added
+      // visually as the user types, but the value sent to the booking site is the
+      // compact form).
+      function normalise(value) {
+        return (value || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 8);
+      }
+
+      function prettyPlate(compact) {
+        // Best-effort UK plate spacing — current-style "AB12 CDE" (4+3),
+        // older "A123 BCD" (4+3), Northern Irish "ABC 1234" (3+4),
+        // dateless "XYZ 1234" (3+4). For 7-char plates we try 4+3 first.
+        var len = compact.length;
+        if (len <= 4) return compact;
+        if (len === 7) return compact.slice(0, 4) + ' ' + compact.slice(4);
+        if (len === 6) return compact.slice(0, 3) + ' ' + compact.slice(3);
+        if (len === 5) return compact.slice(0, 2) + ' ' + compact.slice(2);
+        return compact.slice(0, len - 4) + ' ' + compact.slice(len - 4);
+      }
+
+      forms.forEach(function (form) {
+        var input = form.querySelector('.mt-plate-input');
+        var errorEl = form.querySelector('.mt-reg-error');
+        if (!input) return;
+
+        // Restore prior entry if the user comes back to the page.
+        try {
+          var saved = sessionStorage.getItem('mt_reg');
+          if (saved && !input.value) input.value = saved;
+        } catch (e) {
+          /* ignore — private mode etc. */
+        }
+
+        input.addEventListener('input', function () {
+          var compact = normalise(input.value);
+          var pretty = prettyPlate(compact);
+          if (pretty !== input.value) {
+            input.value = pretty;
+          }
+          if (errorEl && !errorEl.hidden) {
+            errorEl.hidden = true;
+            errorEl.textContent = '';
+          }
+        });
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var compact = normalise(input.value);
+          if (compact.length < 2) {
+            if (errorEl) {
+              errorEl.textContent = 'Pop your reg in to carry on.';
+              errorEl.hidden = false;
+            }
+            input.focus();
+            return;
+          }
+
+          try {
+            sessionStorage.setItem('mt_reg', prettyPlate(compact));
+          } catch (e) {
+            /* ignore */
+          }
+
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'mobile_tyres_booking_redirect',
+            registration: compact,
+            source: 'mobile-tyres-landing',
+            page_path: window.location.pathname,
+          });
+
+          var url = bookingSiteBase + '?clientID=' + bookingSiteClient + '&vrm=' + encodeURIComponent(compact);
+          // Fall back to the plain booking URL if something weird happens
+          // while assembling the URL.
+          window.location.href = url || bookingFallbackUrl;
+        });
+      });
+    })();
+  </script>
+</LandingLayout>
+
+<style>
+  /* ============================================================
+     Slim brand bar (matches /emergency/ + /locker-removal/)
+     ============================================================ */
+  .lp-bar {
+    background-color: var(--color-bg-dark);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .lp-bar-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0.6rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 60px;
+  }
+
+  .lp-logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+  }
+
+  .lp-bar-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.95rem;
+    background-color: var(--color-accent);
+    color: var(--color-text);
+    border-radius: var(--radius);
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    font-size: 1rem;
+    transition: background-color var(--transition);
+  }
+
+  .lp-bar-call:hover,
+  .lp-bar-call:focus-visible {
+    background-color: var(--color-accent-dark);
+    color: var(--color-text);
+  }
+
+  .lp-bar-call-short {
+    display: none;
+  }
+
+  @media (max-width: 480px) {
+    .lp-logo img {
+      height: 34px;
+    }
+    .lp-bar-call-number {
+      display: none;
+    }
+    .lp-bar-call-short {
+      display: inline;
+    }
+  }
+
+  /* ============================================================
+     Hero
+     ============================================================ */
+  .lp-hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    padding: 3.5rem 0 4rem;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .lp-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center right;
+    z-index: -2;
+  }
+
+  @media (max-width: 768px) {
+    .lp-hero-bg {
+      object-position: 30% center;
+    }
+  }
+
+  .lp-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      100deg,
+      rgba(26, 26, 29, 0.97) 0%,
+      rgba(26, 26, 29, 0.92) 30%,
+      rgba(26, 26, 29, 0.78) 60%,
+      rgba(26, 26, 29, 0.5) 90%
+    );
+  }
+
+  .lp-hero-inner {
+    max-width: 880px;
+  }
+
+  .lp-eyebrow {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .lp-hero h1 {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    line-height: 0.98;
+    margin: 0 0 1.25rem;
+    max-width: 18ch;
+  }
+
+  .lp-eta {
+    color: var(--color-accent);
+    white-space: nowrap;
+  }
+
+  .lp-sub {
+    font-size: clamp(1rem, 1.7vw, 1.2rem);
+    color: var(--color-text-muted);
+    max-width: 56ch;
+    margin: 0 0 2rem;
+    line-height: 1.6;
+  }
+
+  /* ============================================================
+     Reg-plate hero form
+     ============================================================ */
+  .mt-reg-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0.75rem;
+    max-width: 560px;
+  }
+
+  .mt-plate {
+    flex: 1 1 280px;
+    display: flex;
+    align-items: stretch;
+    background-color: #fdd700;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #1a1a1d;
+    box-shadow: 0 10px 28px -14px rgba(0, 0, 0, 0.55);
+    min-height: 72px;
+  }
+
+  .mt-plate-gb {
+    flex: 0 0 auto;
+    background-color: #003399;
+    color: #ffd200;
+    padding: 0.45rem 0.7rem 0.55rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    font-family: var(--font-display);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    font-size: 1.05rem;
+    line-height: 1;
+    min-width: 44px;
+  }
+
+  /* Twelve EU-style gold stars in a ring — purely decorative. */
+  .mt-plate-stars {
+    width: 18px;
+    height: 18px;
+    position: relative;
+  }
+
+  .mt-plate-stars::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 8%, #ffd200 0 1.6px, transparent 2px),
+      radial-gradient(circle at 75% 16%, #ffd200 0 1.6px, transparent 2px),
+      radial-gradient(circle at 92% 38%, #ffd200 0 1.6px, transparent 2px),
+      radial-gradient(circle at 92% 62%, #ffd200 0 1.6px, transparent 2px),
+      radial-gradient(circle at 75% 84%, #ffd200 0 1.6px, transparent 2px),
+      radial-gradient(circle at 50% 92%, #ffd200 0 1.6px, transparent 2px),
+      radial-gradient(circle at 25% 84%, #ffd200 0 1.6px, transparent 2px),
+      radial-gradient(circle at 8% 62%, #ffd200 0 1.6px, transparent 2px),
+      radial-gradient(circle at 8% 38%, #ffd200 0 1.6px, transparent 2px),
+      radial-gradient(circle at 25% 16%, #ffd200 0 1.6px, transparent 2px);
+  }
+
+  .mt-plate-gb-text {
+    display: inline-block;
+  }
+
+  .mt-plate-input {
+    flex: 1 1 auto;
+    border: 0;
+    background: transparent;
+    color: #111;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    text-align: center;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .mt-plate-input::placeholder {
+    color: rgba(17, 17, 17, 0.4);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+
+  .mt-plate-input:focus {
+    outline: none;
+  }
+
+  .mt-plate:focus-within {
+    box-shadow:
+      0 0 0 3px var(--color-accent),
+      0 10px 28px -14px rgba(0, 0, 0, 0.55);
+  }
+
+  .mt-reg-submit {
+    flex: 0 0 auto;
+    min-height: 72px;
+    padding: 0 1.5rem;
+    font-size: 1.05rem;
+  }
+
+  .mt-reg-submit .btn-arrow {
+    font-size: 1.2rem;
+    margin-left: 0.2rem;
+    transition: transform var(--transition);
+  }
+
+  .mt-reg-submit:hover .btn-arrow,
+  .mt-reg-submit:focus-visible .btn-arrow {
+    transform: translateX(3px);
+  }
+
+  .mt-reg-help {
+    flex: 1 1 100%;
+    margin: 0.5rem 0 0;
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+  }
+
+  .mt-reg-help a {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .mt-reg-error {
+    flex: 1 1 100%;
+    margin: 0.4rem 0 0;
+    padding: 0.55rem 0.8rem;
+    background-color: rgba(219, 31, 36, 0.12);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    color: #ffd9d9;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 540px) {
+    .mt-reg-form {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .mt-plate {
+      flex: 1 1 auto;
+      min-height: 66px;
+    }
+    .mt-reg-submit {
+      width: 100%;
+      min-height: 60px;
+    }
+  }
+
+  /* ============================================================
+     Trust strip
+     ============================================================ */
+  .lp-trust {
+    list-style: none;
+    padding: 0;
+    margin: 1.75rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.25rem;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+
+  .lp-trust li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .lp-trust strong {
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    margin-right: 0.15rem;
+  }
+
+  /* ============================================================
+     Section blocks (shared with /emergency/, /locker-removal/)
+     ============================================================ */
+  .lp-block {
+    padding: 4rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .lp-block {
+      padding: 3rem 0;
+    }
+  }
+
+  .lp-light {
+    background-color: var(--color-bg-light);
+    color: var(--color-text-dark);
+  }
+
+  .lp-light h2,
+  .lp-light h3 {
+    color: var(--color-text-dark);
+  }
+
+  .lp-dark {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .lp-block-title {
+    font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+    margin: 0 0 1.5rem;
+  }
+
+  /* ============================================================
+     Steps
+     ============================================================ */
+  .lp-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .lp-steps li {
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+  }
+
+  .lp-step-num {
+    flex: 0 0 auto;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--color-text-dark);
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 1.15rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.15rem;
+  }
+
+  .lp-steps h3 {
+    font-size: 1.15rem;
+    margin: 0 0 0.4rem;
+  }
+
+  .lp-steps p {
+    margin: 0;
+    color: var(--color-text-muted-dark);
+    line-height: 1.65;
+    font-size: 1rem;
+  }
+
+  /* ============================================================
+     Review
+     ============================================================ */
+  .lp-review {
+    margin: 0;
+    padding: 2rem;
+    background-color: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    text-align: center;
+  }
+
+  .lp-stars {
+    color: var(--color-star);
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.85rem;
+  }
+
+  .lp-review blockquote {
+    margin: 0 0 1rem;
+  }
+
+  .lp-review p {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .lp-review figcaption {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+
+  .lp-review figcaption strong {
+    color: var(--color-text);
+  }
+
+  /* ============================================================
+     What you get (check list overrides for landing context)
+     ============================================================ */
+  .mt-checks {
+    margin-top: 1.5rem;
+  }
+
+  /* ============================================================
+     Scenarios (dark variant for "when people book us in")
+     ============================================================ */
+  .lp-scenarios {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 700px) {
+    .lp-scenarios {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .lp-scenario {
+    padding: 1.5rem;
+    background-color: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  .lp-scenario h3 {
+    font-size: 1.15rem;
+    color: var(--color-text);
+    margin-bottom: 0.55rem;
+  }
+
+  .lp-scenario p {
+    color: var(--color-text-muted);
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  /* ============================================================
+     Area reassurance card
+     ============================================================ */
+  .lp-card {
+    padding: 2rem;
+    background-color: var(--color-bg-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+  }
+
+  .lp-card h2 {
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    margin: 0 0 0.75rem;
+  }
+
+  .lp-card p {
+    color: var(--color-text-muted-dark);
+    line-height: 1.7;
+    margin: 0 0 0.85rem;
+  }
+
+  .lp-card-safety {
+    padding: 0.9rem 1.1rem;
+    border-left: 3px solid var(--color-accent);
+    background-color: rgba(255, 45, 45, 0.06);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 0.95rem;
+  }
+
+  /* ============================================================
+     Final CTA
+     ============================================================ */
+  .lp-cta {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text);
+    padding: 4.5rem 0 3.5rem;
+  }
+
+  .lp-cta h2 {
+    color: var(--color-text);
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    margin: 0 0 0.85rem;
+  }
+
+  .lp-cta p {
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    margin: 0 0 1.75rem;
+  }
+
+  .mt-reg-form--footer {
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .mt-or-call {
+    margin: 1.25rem 0 0;
+    color: var(--color-text-muted);
+    font-size: 1rem;
+  }
+
+  .mt-or-call a {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .mt-or-call a:hover {
+    color: var(--color-accent);
+  }
+
+  .lp-fineprint {
+    margin-top: 2rem !important;
+    font-size: 0.8rem !important;
+    color: var(--color-text-muted) !important;
+    opacity: 0.7;
+  }
+</style>
